@@ -62,31 +62,31 @@ for training_algorithm in training_algorithms:
             max_accuracy=accuracy_scoree
             max_model=model_file_name
             max_algorithm=training_algorithm
+    # plot confusion matrix and classification report
+
+    cm= confusion_matrix(testing_labels, predictions,labels=attack_classifier.classes_)
+    ax = plt.subplot()
+    sns.heatmap(cm, annot=True, fmt='g', ax=ax,cmap='Greens' )
+    ax.set_xlabel('Predicted labels')
+    ax.set_ylabel('True labels')
+    ax.set_title(training_algorithm)
+    ax.xaxis.set_ticklabels(['normal', 'sql injection','XSS','directory traversal'])
+    ax.yaxis.set_ticklabels(['normal', 'sql injection','XSS','directory traversal'])
+    plt.show()
+
+
+
+    visualizer = ClassificationReport(attack_classifier,cmap="Greens",colorbar=True, classes=['normal', 'sql injection','XSS','directory traversal'],support=True)
+    visualizer.fit(training_features.values, traning_labels.values)
+    visualizer.score(testing_features.values, testing_labels.values)
+    visualizer.show()
+
+
+# print(classification_report(testing_labels, predictions,target_names=['normal', 'sql injection','XSS','directory traversal']))
 
 print('---------------------------- BEST RESULTS ---------------------------')
-print('max accuracy = '+str(max_accuracy))
+print('Accuracy '+str(max_accuracy))
 print('model with max accuracy : '+ max_model)
-print('Algorithm with max accuracy : '+ max_algorithm)
+print('Algorithm : '+ max_algorithm)
 
 
-# plot confusion matrix and classification report
-'''
-cm= confusion_matrix(testing_labels, predictions,labels=attack_classifier.classes_)
-ax = plt.subplot()
-sns.heatmap(cm, annot=True, fmt='g', ax=ax,cmap='Greens' )
-ax.set_xlabel('Predicted labels')
-ax.set_ylabel('True labels')
-ax.set_title(training_algorithm)
-ax.xaxis.set_ticklabels(['normal', 'sql injection','XSS','directory traversal'])
-ax.yaxis.set_ticklabels(['normal', 'sql injection','XSS','directory traversal'])
-plt.show()
-
-
-
-visualizer = ClassificationReport(attack_classifier,cmap="Greens",colorbar=True, classes=['normal', 'sql injection','XSS','directory traversal'],support=True)
-visualizer.fit(training_features.values, traning_labels.values)
-visualizer.score(testing_features.values, testing_labels.values)
-visualizer.show()
-'''
-
-#print(classification_report(testing_labels, predictions,target_names=['normal', 'sql injection','XSS','directory traversal']))

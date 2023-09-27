@@ -27,21 +27,44 @@ SPECIAL_CHARS = "[$&+,:;=?@#|'<>.^*()%!-]"
 
 def encode_single_log_line(log_line):
     log_line = log_line.replace(',','_')
-    REGEX = '(\d+-\d+-\d+\w\d+:\d+:\d+.*\d+:\d+\s\w* \w+\:\s)([(\d\.)]+) - - \[(.*?)\] "(.*?)" (\d+) (.+) "(.*?)" "(.*?)"'
-    #REGEX = '([(\d\.)]+) - - \[(.*?)\] "(.*?)" (\d+) (.+) "(.*?)" "(.*?)"' # this regex is for logs without rsyslog prefix
+    # REGEX = '(\d+-\d+-\d+\w\d+:\d+:\d+.*\d+:\d+\s\w* \w+\:\s)([(\d\.)]+) - - \[(.*?)\] "(.*?)" (\d+) (.+) "(.*?)" "(.*?)"'
+    REGEX = '([(\d\.)]+) - - \[(.*?)\] "(.*?)" (\d+) (.+) "(.*?)" "(.*?)"' # this regex is for logs without rsyslog prefix
 
+
+    
     log_line = re.match(REGEX, log_line).groups()
-    url = log_line[3]
-    return_code = log_line[4]
+
+   
+    
+    url = log_line[2]
+    return_code = log_line[3]
+
+
+    # print(url)
+    # print(return_code)
+
     if url != "-":
-        url = log_line[3]
-        param_number = len(url.split('&'))
+        url = log_line[2]
+        param_number = len(url.split('&'))  
         url_length = len(url)
-        size = str(log_line[5]).rstrip('\n')
+        size = str(log_line[4]).rstrip('\n')
         depth = sum(1 for c in url if c == '/')
         upper_cases = sum(1 for c in url if c.isupper())
         lower_cases = sum(1 for c in url if c.islower())
         special_chars = sum(1 for c in url if c in SPECIAL_CHARS)
+
+        print("------------feature list-------------")
+        print("url",url)
+        print("param_number",param_number)
+        print("url_length",url_length)
+        print("size",size)
+        print("depth",depth)
+        print("lower_cases",lower_cases)
+        print("upper_cases",upper_cases)
+        print("special_chars",special_chars)
+        print("return_code",return_code)
+        print("--------end of feature list----------")
+
 
         if '-' in size:
             size = 0
@@ -57,6 +80,8 @@ def encode_single_log_line(log_line):
             log_line_data['lower_cases'] = int(lower_cases)
             log_line_data['special_chars'] = int(special_chars)
             log_line_data['depth'] = int(depth)
+
+            
 
         else:
             log_line_data = None

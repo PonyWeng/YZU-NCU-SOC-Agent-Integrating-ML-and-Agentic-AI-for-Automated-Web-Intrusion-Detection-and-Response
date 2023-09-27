@@ -27,14 +27,24 @@ for log_line in log_file:
     log_line=unquote_plus(log_line)
     url,encoded,return_code = encode_single_log_line(log_line)
 
+
+    # print(url)
+    # print(encoded)
+    # print(return_code)
+
     if encoded !=None:
         formatte_encoded = []
         for feature in FEATURES:
             formatte_encoded.append(encoded[feature])
         model = pickle.load(open(model_file, 'rb'))
+
+        print("---------------------------------------------------------------")
+
+        print("log_line:",log_line)
+        print("format:",[formatte_encoded])
         prediction = int(model.predict([formatte_encoded])[0])
 
-        print(prediction)
+        print("Result:",prediction)
         csv_file = open(r'regex_4_labels.csv', 'r')
         csv_reader = csv.reader(csv_file, delimiter=',')
         for row in csv_reader:
@@ -42,7 +52,10 @@ for log_line in log_file:
                 attack = row[0]
                 desc = row[1]
 
-        data_from_json.append({"attack_prediction": prediction, "URL": url,"description":desc,"return_code":return_code,"log_record":log_line})
+        print("--------------------------------------------------------------------------")
+        data_from_json.append({"attack_prediction": prediction, "URL": url,"description":desc,"return_code":return_code,"log_record":log_line,"Source":"Machine Learning Model"})
+        print({"attack_prediction": prediction, "URL": url,"description":desc,"return_code":return_code,"log_record":log_line,"Source":"Machine Learning Model"})
+        print("-------------------------------The End--------------------------------------")
 
 with open("prediction_output.json", "w") as write_file:
     json.dump(data_from_json, write_file, indent=2)
