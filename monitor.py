@@ -17,7 +17,7 @@ def files_to_timestamp(path):
 
 if __name__ == "__main__":
     path_to_watch = 'C:\\xampp\\apache\\logs' # directory monitoring
-    model_path = 'C:\\Users\\schoolproject\\Desktop\\on-going-projects\\webhawk-ids\\backend\\MODELS\\model_RandomForestClassifier.pkl'
+    model_path = '.\\MODELS\\model_RandomForestClassifier.pkl'
     print('Monitoring {}..'.format(path_to_watch))
     
     log_list = [] # record log
@@ -62,7 +62,7 @@ if __name__ == "__main__":
                 fp.close()
                 
             # call predict.py
-            os.system('python predict.py -l C:\\xampp\\apache\\logs\\store-logs\\access2.log -m {} '.format(model_path))
+            os.system('python predict_with_blockchain.py -l C:\\xampp\\apache\\logs\\store-logs\\access2.log -m {} '.format(model_path))
             
             # move log from access2.log to access3.log
             accessLog2 = open('C:\\xampp\\apache\logs\\store-logs\\access2.log', 'r')

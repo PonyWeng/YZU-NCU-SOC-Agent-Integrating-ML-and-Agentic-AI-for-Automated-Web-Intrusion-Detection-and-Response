@@ -1,0 +1,25 @@
+{
+  "name": "ethereum-demo",
+  "version": "1.0.0",
+  "description": "以太坊demo",
+  "main": "truffle-config.js",
+  "directories": {
+    "test": "test"
+  },
+
+  "scripts": {
+    "dev": "lite-server",
+    "test": "echo \"Error: no test specified\" && sexit 1"
+  },
+
+  "author": "pony71909@gmail.com",
+  "license": "ISC",
+  "devDependencies": {
+    "@truffle/contract": "^4.0.33",
+    "dotenv": "^8.1.0",
+    "lite-server": "^2.5.4",
+    "truffle-hdwallet-provider": "^1.0.17"
+
+  }
+
+}
