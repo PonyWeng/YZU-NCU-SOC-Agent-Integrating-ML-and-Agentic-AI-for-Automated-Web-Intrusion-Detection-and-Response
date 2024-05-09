@@ -27,11 +27,23 @@ dest_file =args['dest_file']
 def encode_log_file(log_file):
 	data = {}
 	log_file = open(log_file,'r')
+	lines_count = 0
+	count_log_line_data = 0
 	for log_line in log_file:
-		log_line=unquote_plus(log_line)
-		url,log_line_data,return_code=encode_single_log_line(log_line)
+		lines_count += 1
+		log_line=unquote_plus(log_line) # convert "+" to " "
+		url, log_line_data, return_code = encode_single_log_line(log_line)
+
 		if log_line_data != None:
-			data[url] = log_line_data
+
+			# new code
+			if url in data:
+				data[url].append(log_line_data)
+			elif url not in data:
+				log_line_data_list = []
+				log_line_data_list.append(log_line_data)
+				data[url] = log_line_data_list
+	
 	return data
 
 
@@ -42,20 +54,33 @@ def encode_single_line(single_line,features):
 	return encoded
 
 
-
 def save_encoded_data(data,encoded_data_file):
-	for w in data:
-		attack='0'
-		with open('regex_4_labels.csv') as csv_file:
-			csv_reader = csv.reader(csv_file, delimiter=',')
-			for row in csv_reader:
-				if re.search(row[2], w.lower()):
-					attack = row[0]
-		data_row = encode_single_line(data[w],FEATURES) + attack + ',' + w + '\n'
-		encoded_data_file.write(data_row)
+	count_1 = 0
+	count_2 = 0
+	count_3 = 0
+	for keys, values in data.items():
+		for inner_dict in values:
+			#determine category by using regular expression
+			attack='0'
+			with open('regex_4_labels.csv') as csv_file:
+				csv_reader = csv.reader(csv_file, delimiter=',')
+				for row in csv_reader:
+					if re.search(row[2], keys.lower()):
+						attack = row[0]
+			if attack == '1':
+				count_1 += 1
+			elif attack == '2':
+				count_2 += 1
+			elif attack == '3':
+				count_3 += 1
+			# attack = '3'
+			data_row = encode_single_line(inner_dict, FEATURES) + attack + ',' + keys + '\n'
+			encoded_data_file.write(data_row)
 	print (str(len(data)) + ' rows have successfully saved to ' + dest_file)
 
-save_encoded_data(encode_log_file(log_file),open(dest_file, 'w'))
+
+print(len(encode_log_file(log_file)))
+save_encoded_data(encode_log_file(log_file),open(dest_file, 'w', encoding='utf-8'))
 
 
 

