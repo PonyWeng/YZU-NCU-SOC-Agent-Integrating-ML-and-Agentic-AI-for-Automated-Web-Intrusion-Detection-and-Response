@@ -29,13 +29,13 @@ conda install -c conda-forge fastapi
 3. predict.py
 4. monitor.py
 
-* **訓練資料前處理指令：**
+* **訓練資料前處理指令  (需要手動改成自己的檔案路徑)：**
 `python process.py -l C:\Users\pony7\Desktop\IDS_yzu\yzu_nids_project\DATA\raw_data\access.log -d C:\Users\pony7\Desktop\IDS_yzu\yzu_nids_project\DATA\raw_data\0830.log`
 
-* **模型訓練指令**
+* **模型訓練指令 (需要手動改成自己的檔案路徑)**
 `python train.py -l C:\Users\pony7\Desktop\IDS_yzu\yzu_nids_project\DATA\labeled_data\dataset-data-imblance.csv`
 
-* **模型預測指令**
+* **模型預測指令 (需要手動改成自己的檔案路徑)**
 `python predict.py -l ./DATA/raw_data/predict.log -m ./MODELS/model_RandomForestClassifier.pkl`
 
 * **啟動API Server**
