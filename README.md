@@ -3,7 +3,7 @@
 
 * **本專案使用的環境與套件版本：**
     * Python 3.8.13
-        * scikit-learn 1.3.0
+        * scikit-learn 1.3.2  (本來是1.3.0改成1.3.2) 
         * yellowbrick 1.5
         * uvicorn 0.30.6
         * seaborn 0.13.2
