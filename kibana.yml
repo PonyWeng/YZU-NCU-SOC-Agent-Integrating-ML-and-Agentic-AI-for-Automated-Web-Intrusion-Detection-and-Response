@@ -1,0 +1,6 @@
+server.host: "0.0.0.0"
+elasticsearch.hosts: ["http://elasticsearch:9200"]
+elasticsearch.username: "kibana_system"
+#由系統生成 如果重啟要再要一次
+elasticsearch.password: "jwBBI_oLepp4Z1ydZPdc"
+xpack.encryptedSavedObjects.encryptionKey: "6ffa2827db06b1784f69e0a053af81fa"

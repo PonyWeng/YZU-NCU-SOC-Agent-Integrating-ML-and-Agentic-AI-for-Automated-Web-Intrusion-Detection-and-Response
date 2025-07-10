@@ -8,76 +8,73 @@
 # Step 4:Run server => python monitory.py for starting monitor
 # ===============================================================
 
-import os,sys,time
+import os, sys, time
+import psutil
 
-# get file and its modified time
-def files_to_timestamp(path):
-    files = [os.path.join(path, f) for f in os.listdir(path)]
-    return dict ([(f, os.path.getmtime(f)) for f in files])
+OFFSET_FILE = 'last_offset.txt'
+ACCESS_LOG = r'C:\xampp\apache\logs\access.log'
+ACCESS2_LOG = r'C:\xampp\apache\logs\store-logs\access2.log'
+ACCESS3_LOG = r'C:\xampp\apache\logs\store-logs\access3.log'
+MODEL_PATH = '.\\MODELS\\model_RandomForestClassifier.pkl'
+
+# 取得目前 offset
+if os.path.exists(OFFSET_FILE):
+    with open(OFFSET_FILE, 'r') as f:
+        last_offset = int(f.read())
+else:
+    last_offset = 0
+
+last_processed_lines = 0
+
+def is_predict_running():
+    for proc in psutil.process_iter(['name', 'cmdline']):
+        try:
+            if 'python' in proc.info['name'] and 'predict.py' in ' '.join(proc.info['cmdline']):
+                return True
+        except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
+            continue
+    return False
+
+def append_new_logs():
+    global last_offset, last_processed_lines
+    with open(ACCESS_LOG, 'r') as fp:
+        fp.seek(last_offset)
+        new_lines = fp.readlines()
+        new_offset = fp.tell()
+    if new_lines:
+        with open(ACCESS2_LOG, 'a') as f2:
+            for line in new_lines:
+                f2.write(line)
+        #print(f'Processed {len(new_lines)} new lines.')
+    last_processed_lines = len(new_lines)
+    last_offset = new_offset
+    with open(OFFSET_FILE, 'w') as f:
+        f.write(str(last_offset))
+
+def batch_predict():
+    if not os.path.exists(ACCESS2_LOG):
+        return
+    with open(ACCESS2_LOG, 'r') as f2:
+        lines = f2.readlines()
+    if lines:
+        if not is_predict_running():
+            print(f'[batch_predict] Predicting {len(lines)} lines...')
+            os.system(f'python predict.py -l "{ACCESS2_LOG}" -m "{MODEL_PATH}"')
+            with open(ACCESS2_LOG, 'r') as f2, open(ACCESS3_LOG, 'a') as f3:
+                for line in f2:
+                    f3.write(line)
+            open(ACCESS2_LOG, 'w').close()
+            print(f'[batch_predict] Done and cleared access2.log.')
+        else:
+            print("[batch_predict] predict.py is already running, skip this round.")
 
 if __name__ == "__main__":
-    path_to_watch = 'C:\\xampp\\apache\\logs' # directory monitoring
-    model_path = '.\\MODELS\\model_RandomForestClassifier.pkl'
-    print('Monitoring {}..'.format(path_to_watch))
-    
-    log_list = [] # record log
-
-    before = files_to_timestamp(path_to_watch) # dict
-
-    while 1:
-        time.sleep (2) # monitor every two seconds
-        after = files_to_timestamp(path_to_watch)
-        added = [f for f in after.keys() if not f in before.keys()]
-        removed = [f for f in before.keys() if not f in after.keys()]
-        modified = []
-
-        for f in before.keys():
-            if not f in removed:
-                if os.path.getmtime(f) != before.get(f):
-                    modified.append(f)
-
-        # if file or directory added
-        if added: 
-            print('Added: {}'.format(', '.join(added)))
-        # if file directory removed
-        if removed: 
-            print('Removed: {}'.format(', '.join(removed)))
-        # if file directory modified
-        if modified: 
-            with open(r'C:\\xampp\\apache\\logs\\access.log', "r") as fp:
-                lines = fp.readlines()
-                file_list = []
-                for line in lines:
-                    file_list.append(line)
-                
-                ## check if log exist in log list
-                for i in range(len(file_list)-1, 0, -1):
-                    if file_list[i] not in log_list:
-                        log_list.append(file_list[i])
-                        file1 = open('C:\\xampp\\apache\logs\\store-logs\\access2.log', 'a')
-                        file1.write(file_list[i])
-                        file1.close()
-                    else:
-                        break
-                fp.close()
-                
-            # call predict.py
-            os.system('python predict.py -l C:\\xampp\\apache\\logs\\store-logs\\access2.log -m {} '.format(model_path))
-            
-            # move log from access2.log to access3.log
-            accessLog2 = open('C:\\xampp\\apache\logs\\store-logs\\access2.log', 'r')
-            accessLog3 = open('C:\\xampp\\apache\logs\\store-logs\\access3.log', 'a')
-            for line in accessLog2:
-                accessLog3.write(line)
-            accessLog2.close()
-            accessLog3.close()
-            
-            # erase log in access2.log
-            open('C:\\xampp\\apache\logs\\store-logs\\access2.log', 'w').close()
-            
-            print('Modified: {}'.format(', '.join(modified)))
-
-        
-        
-
-        before = after
+    print(f'Monitoring {ACCESS_LOG}...')
+    while True:
+        try:
+            append_new_logs()
+            batch_predict()
+            time.sleep(0.5)
+        except Exception as e:
+            print(f"[monitor.py] Error: {e}")
+            time.sleep(1)

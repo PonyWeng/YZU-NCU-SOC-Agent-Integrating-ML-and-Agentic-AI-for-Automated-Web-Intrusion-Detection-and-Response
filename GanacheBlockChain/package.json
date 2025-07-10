@@ -6,12 +6,10 @@
   "directories": {
     "test": "test"
   },
-
   "scripts": {
     "dev": "lite-server",
     "test": "echo \"Error: no test specified\" && sexit 1"
   },
-
   "author": "pony71909@gmail.com",
   "license": "ISC",
   "devDependencies": {
@@ -19,7 +17,8 @@
     "dotenv": "^8.1.0",
     "lite-server": "^2.5.4",
     "truffle-hdwallet-provider": "^1.0.17"
-
+  },
+  "dependencies": {
+    "ethereum-demo": "file:"
   }
-
 }

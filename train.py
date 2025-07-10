@@ -4,7 +4,7 @@ from sklearn.neural_network import MLPClassifier
 from utilities import *
 import seaborn as sns
 import matplotlib.pyplot as plt
-from sklearn.metrics import confusion_matrix
+from sklearn.metrics import confusion_matrix #混淆矩陣
 from yellowbrick.classifier import ClassificationReport
 from matplotlib import pyplot
 import numpy as np
@@ -19,8 +19,7 @@ def get_args():
 args = get_args()
 
 csv_file = args['csv_file']
-# training_algorithms = ['ExtraTreeClassifier','DecisionTreeClassifier','RandomForestClassifier','KNeighborsClassifier']
-training_algorithms = ['RandomForestClassifier']
+training_algorithms = ['ExtraTreeClassifier','DecisionTreeClassifier','RandomForestClassifier','KNeighborsClassifier'] 
 max_accuracy=0
 max_model=''
 max_algorithm=''
@@ -49,6 +48,7 @@ for training_algorithm in training_algorithms:
 
     elif training_algorithm == 'RandomForestClassifier':
         attack_classifier = RandomForestClassifier(n_jobs=1) # n_jobs=1 means use single thread
+        
     else:
         print('{} is not recognized as a training algorithm')
     
@@ -57,7 +57,7 @@ for training_algorithm in training_algorithms:
     if attack_classifier != None:
         attack_classifier.fit(training_features.values, traning_labels.values)
         predictions = attack_classifier.predict(testing_features.values)
-        model_file_name = 'MODELS/model_{}.pkl'.format(training_algorithm)
+        model_file_name = 'MODELS/model_{}.pkl'.format(training_algorithm) ###自己生成 pickle
         pickle.dump(attack_classifier, open(model_file_name, 'wb'))
 
         accuracy_scoree=accuracy_score(testing_labels, predictions)
@@ -70,7 +70,7 @@ for training_algorithm in training_algorithms:
             max_algorithm=training_algorithm
     # plot confusion matrix and classification report
 
-    cm= confusion_matrix(testing_labels, predictions,labels=attack_classifier.classes_)
+    cm= confusion_matrix(testing_labels, predictions,labels=attack_classifier.classes_) ####
     ax = plt.subplot()
     sns.heatmap(cm, annot=True, fmt='g', ax=ax,cmap='Greens' )
     ax.set_xlabel('Predicted labels')
@@ -91,6 +91,7 @@ for training_algorithm in training_algorithms:
 
 # print(classification_report(testing_labels, predictions,target_names=['normal', 'sql injection','XSS','directory traversal']))
 
+
 print('---------------------------- BEST RESULTS ---------------------------')
 print('Accuracy '+str(max_accuracy))
 print('model with max accuracy : '+ max_model)
@@ -105,3 +106,6 @@ for i,v in enumerate(importance):
 # plot feature importance
 pyplot.bar([x for x in range(len(importance))], importance)
 pyplot.show()
+
+
+
