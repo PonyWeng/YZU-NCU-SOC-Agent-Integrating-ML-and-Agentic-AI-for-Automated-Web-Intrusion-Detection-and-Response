@@ -1,0 +1,7 @@
+什麼是SQL Injection？
+SQL Injection 是一種常見的網路攻擊手法，攻擊者透過惡意輸入操控資料庫查詢。
+
+如何防禦SQL Injection？
+1. 使用參數化查詢
+2. 避免直接拼接SQL字串
+3. 定期檢查程式碼安全

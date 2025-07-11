@@ -35881,5 +35881,41 @@
     "return_code": "200",
     "log_record": "127.0.0.1 - - [09/Jul/2025:16:36:39  0800] \"GET /?id=1' OR '1'='1 HTTP/1.1\" 200 1850 \"-\" \"python-requests/2.32.3\"\n",
     "Source": "Machine Learning Model"
+  },
+  {
+    "id": "85ec8c040901c46737bf4a311259df3e796b8e657021f4f4ca657e02535cc761",
+    "attack_prediction": 0,
+    "URL": "GET /?name=o HTTP/1.1",
+    "description": "Detects JavaScript object properties and methods",
+    "return_code": "200",
+    "log_record": "127.0.0.1 - - [10/Jul/2025:10:21:26  0800] \"GET /?name=o HTTP/1.1\" 200 1850 \"http://testing.com/?name=<;IMG SRC=\\\";mocha:[code]\\\";>;\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36\"\n",
+    "Source": "Machine Learning Model"
+  },
+  {
+    "id": "ad5d2856fe93496e7c530b71a8afff556d2687026299da43ffe25ff723a9f910",
+    "attack_prediction": 0,
+    "URL": "GET /favicon.ico HTTP/1.1",
+    "description": "there is no attack to be described",
+    "return_code": "404",
+    "log_record": "127.0.0.1 - - [10/Jul/2025:10:21:26  0800] \"GET /favicon.ico HTTP/1.1\" 404 297 \"http://testing.com/?name=o\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36\"\n",
+    "Source": "Machine Learning Model"
+  },
+  {
+    "id": "3fd4db4029a7a79258c29c5e492ca78712236a5d172d474094d126f469b4f12b",
+    "attack_prediction": 0,
+    "URL": "GET /?name=Hello HTTP/1.1",
+    "description": "Detects JavaScript object properties and methods",
+    "return_code": "200",
+    "log_record": "127.0.0.1 - - [10/Jul/2025:10:21:32  0800] \"GET /?name=Hello HTTP/1.1\" 200 1850 \"http://testing.com/?name=o\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36\"\n",
+    "Source": "Machine Learning Model"
+  },
+  {
+    "id": "9dfb03d6bc8889477cb68bf61ce4abbeb4e7477cfdcdb4aba2e69e5bc036e41f",
+    "attack_prediction": 0,
+    "URL": "GET /?name=Hello HTTP/1.1",
+    "description": "Detects JavaScript object properties and methods",
+    "return_code": "200",
+    "log_record": "127.0.0.1 - - [10/Jul/2025:16:51:23  0800] \"GET /?name=Hello HTTP/1.1\" 200 1850 \"http://testing.com/?name=Hello\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36\"\n",
+    "Source": "Machine Learning Model"
   }
 ]

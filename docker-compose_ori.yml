@@ -5,7 +5,8 @@ services:
     environment:
       - discovery.type=single-node
       - xpack.security.enabled=true
-      - ES_JAVA_OPTS=-Xms1g -Xmx1g
+      #- xpack.security.transport.ssl.enabled=true
+      #- ELASTIC_PASSWORD=123456  # 設定 elastic 密碼
     ports:
       - "9200:9200"
     volumes:
@@ -29,19 +30,5 @@ services:
     depends_on:
       - elasticsearch
 
-  rag:
-    build: ./RAG
-    ports:
-      - "8001:8000"
-    volumes:
-      - ./RAG/knowledge:/app/knowledge
-      - ./RAG/db:/app/db
-    stdin_open: true
-    tty: true
-    depends_on:
-      - elasticsearch
-    environment:
-      - OLLAMA_BASE_URL=http://host.docker.internal:11434
-
 volumes:
-  esdata: 
+  esdata:
