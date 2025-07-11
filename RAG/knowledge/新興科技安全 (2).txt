@@ -1,0 +1,85 @@
+﻿考古題：
+46. 智慧手機APP開發過程中，為了避免惡意程式的竊取或入侵，應該採用以下列何項方法？
+(A) 使用明文儲存使用者的所有資料
+(B) 定期更新和維護第三方程式庫
+(C) 允許APP自動接受所有未經驗證的SSL憑證
+(D) 為確保最佳的使用者體驗，故開放APP所有權限
+
+
+114-1 技術 答案B
+為了降低惡意程式碼侵入或遭竊取風險，最合適的做法是 定期更新並維護使用的第三方程式庫，確保修補已知漏洞並使用最新、安全的版本。
+
+
+47. 在台灣，行動裝置的App要送「行動應用App基本資安檢測實驗室」檢測時，如果有金流及會員資料的，是屬於下列何項等級？
+(A) L1
+(B) L2
+(C) L3
+(D) L4
+
+
+114-1 技術 答案C
+
+
+根據 「行動應用 App 基本資安檢測基準」（現行 V4.0）對送測等級的劃分：官方條文明確指出：
+  
+
+L3 類：具備身分認證鑑別且具有金流交易功能之行動應用程式
+因此，同時處理「會員資料」(需登入) 與「金流交易」的 App 必須歸為 L3。
+答案： (C) L3
+
+
+  
+
+
+
+
+
+48. 在行動裝置安全機制中，下列何種技術可有效防止惡意應用程式竊取其他程式中的使用者資料？
+(A) APP沙盒（Application Sandbox）
+(B) DNS解析（DNS Resolution）
+(C) 網路位址轉譯（Network Address Translation）
+(D) 藍牙配對（Bluetooth Pairing）
+
+
+114-1 技術 答案A
+在行動裝置（如 iOS、Android）中，每個 App 都被執行在獨立的沙盒環境，擁有自己的檔案系統區域與執行權限，其他程式無法直接存取其資料。這種「程式級隔離」正是防止惡意應用程式竊取別的 App 中使用者資料的核心機制。
+
+
+49. 在物聯網安全中，下列何種技術可有效防止設備與伺服器之間的通訊被竊聽或篡改
+(A) Telnet
+(B) HTTPS
+(C) FTP
+(D) SNMPv1
+
+
+114-1 技術 答案B
+為確保裝置與伺服器之間的通訊內容具備加密與完整性驗證，應使用以 TLS 為基礎的協定；在選項中只有 HTTPS 符合此條件，其餘 Telnet、FTP 與 SNMPv1 均為明文傳輸或缺乏現代加密保護。
+
+50. 下列何項「不」是物聯網設備常見的問題？
+(A) 預設密碼或使用弱密碼
+(B) 缺乏安全的更新機制
+(C) 缺乏設備管理
+(D) 加密機制失效
+
+
+技術 114-1 答案D
+在常見的 IoT 風險清單（如 OWASP IoT Top 10）裡，經常被點名的問題包含：
+* 預設／弱密碼（A）(I1 – Weak, Guessable, or Hard-coded Passwords)
+* 缺乏安全的更新機制（B）(I4 – Lack of Secure Update Mechanism)
+* 缺乏設備管理功能（C）(I8 – Lack of Device Management)
+而 「加密機制失效」（D）並非最常出現的典型弱點；IoT 設備更普遍的情況是根本 沒有 加密或使用明文傳輸，而非加密機制本身故障。因此，相較之下 (D) 較「不」屬於 IoT 設備的常見問題。
+
+
+答案： (D) 加密機制失效
+
+
+I1 Weak, Guessable, or Hard-coded Passwords (弱、可猜測或硬編碼的密碼)
+I2 Insecure Network Services（不安全的網路服務）
+I3 Insecure Ecosystem Interfaces（不安全的生態系介面）
+I4 Lack of Secure Update Mechanism（缺乏安全的更新機制）
+I5 Use of Insecure or Outdated Components（使用不安全或過時的元件）
+I6 Insufficient Privacy Protection（隱私保護不足）
+I7 Insecure Data Transfer and Storage（資料傳輸與儲存不安全）
+I8 Lack of Device Management（缺乏裝置管理）
+I9 Insecure Default Settings（不安全的預設設定）
+I10 Lack of Physical Hardening（缺乏實體強化）

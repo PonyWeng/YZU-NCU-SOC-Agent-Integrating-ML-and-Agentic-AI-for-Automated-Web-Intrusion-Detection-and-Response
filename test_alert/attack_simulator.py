@@ -4,7 +4,7 @@ from time import sleep
 import time
 
 TARGET_URL = "http://testing.com/"   # 目標網址
-FLOOD_COUNT = 220                    # Flood 請求次數
+FLOOD_COUNT = 510                    # Flood 請求次數
 SQLI_COUNT = 100                     # SQLi 請求次數
 XSS_COUNT = 35                       # XSS 請求次數
 DS_COUNT = 30                        # DS 請求次數
@@ -15,6 +15,7 @@ def http_flood(url, count):
     for i in range(count):
         try:
             requests.get(url, timeout=2)
+            time.sleep(0.1)
         except Exception as e:
             print(f"[Flood] Request {i+1} failed: {e}")
 

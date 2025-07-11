@@ -1,23 +1,36 @@
 from fastapi import FastAPI, Request
 import uvicorn
 from langchain_community.llms import Ollama
-from langchain_community.document_loaders import TextLoader
+from langchain_community.document_loaders import TextLoader, PyPDFLoader
 from langchain_community.embeddings import OllamaEmbeddings
 from langchain_community.vectorstores import Chroma
 from langchain_core.prompts import ChatPromptTemplate
 from langchain.chains.combine_documents import create_stuff_documents_chain
 from langchain.chains import create_retrieval_chain
 import os
+import glob # 可以讀多個檔案
 
 OLLAMA_BASE_URL = os.getenv("OLLAMA_BASE_URL", "http://host.docker.internal:11434")
 embeddings = OllamaEmbeddings(model="nomic-embed-text", base_url=OLLAMA_BASE_URL)
 
 llm = Ollama(model="mistral", base_url=OLLAMA_BASE_URL)
-loader = TextLoader("knowledge/test.txt")  # 你的知識庫檔案
-splited_docs = loader.load_and_split()
+#loaders = TextLoader("knowledge/*.txt")  # 你的知識庫檔案
+#splited_docs = loaders.load_and_split()
+
+all_files = glob.glob("knowledge/*")
+all_docs = []
+for file in all_files:
+    if file.endswith(".txt"):
+        loader = TextLoader(file)
+    elif file.endswith(".pdf"):
+        loader = PyPDFLoader(file)
+    # 你也可以加 md、docx 等 loader
+    else:
+        continue
+    all_docs.extend(loader.load_and_split())
 
 vector_db = Chroma.from_documents(
-    documents=splited_docs,
+    documents=all_docs,
     embedding=embeddings,
     persist_directory="db",
     collection_name="interview",
@@ -25,7 +38,11 @@ vector_db = Chroma.from_documents(
 
 retriever = vector_db.as_retriever(search_kwargs={"k": 3})
 
-system_prompt = "你是資安專家，請根據下列情境回答問題，只能用繁體中文，不要有簡體字。如果不知道答案就說不知道。情境如下:\n\n{context}"
+system_prompt = (
+    "You are a cybersecurity expert. Please summarize the attack in one sentence (no more than 50 words), "
+    "and provide up to 3 short suggestions. Use Traditional Chinese or English only, no Simplified Chinese. "
+    "If you don't know the answer, say you don't know. Here is the knowledge:\n\n{context}"
+)
 prompt_template = ChatPromptTemplate.from_messages(
     [
         ("system", system_prompt),

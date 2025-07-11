@@ -1,0 +1,541 @@
+﻿網路通訊協定基礎
+* OSI七層參考模型
+   * 應用層 (Application Layer)：跟TCP/IP相同。
+   * 表現層 (Presentation Layer)：TCP/IP沒有，將資料進行壓縮與解壓縮以提高傳輸效率。
+   * 會議層 (Session Layer)：TCP/IP沒有，主要的功能是負責管理和控制不同應用程式之間的對話。
+   * 傳輸層 (Transport Layer)：跟TCP/IP相同 。
+   * 網路層 (Network Layer)：跟TCP/IP網際網路層 (Internet layer) 相同。
+   * 資料連結層 (Data Link Layer)：跟TCP/IP網路存取層 (Netwrok Access Layer) 相同。
+   * 實體層 (Physical Layer)：TCP/IP沒有，但與實體(電波、銅線、光纖)相關，設備有中繼器 (Repeater) 和集線器 (Hub) ，主要只是放大訊號。
+
+
+分層功能
+	TCP/IP 模型
+	OSI 模型
+	應用程式協議
+(應用程式)
+	應用層(Application)
+	應用層、表示層、會話層
+	端到端傳輸(Port)
+	傳輸層(Transport)
+	傳輸層
+	邏輯定址與路由(IP)
+	網路層(Internet)
+	網路層
+	實體定址與訊號傳輸(MAC)
+	網路接入層
+(Network Access)
+	資料鏈路層 + 實體層
+	
+
+  
+
+* IP就像是來源和目的，永遠都不會變，MAC Address就像是下一站，過程一直會變，實體層像是交通工具，不管是摩托車、火車、飛機、貨車(光纖、網路線、Cable)，只是傳輸性質發生變化，實際上傳輸的還是封包。
+* TCP/IP協定架構
+   * 應用層 (Application Layer)
+      * 常見協定：HTTPS、DNS。
+      * 應用防護：Web 應用程式防火牆 (Web Application Firewall，WAF)、代理伺服器 (Proxy)。
+   * 傳輸層 (Transport Layer)
+      * TCP (傳輸控制協定) ：可靠，三項交握協定 (SYN、SYN-ACK、ACK) 。  
+(資料來源：網際網路)
+
+
+   * UDP (使用者資料報協定) ：不可靠，適用於即時性高的通訊。
+   * 應用防護：傳統防火牆 (Firewall)。
+   * 網際網路層 (Internet layer)
+   * 常見協定：IP (網際網路協定)、ICMP (網際網路控制訊息協定) 、IPSec (網際網路安全協定) 。
+   * 設備：路由器 (Router)。
+   * 網路存取層 (Netwrok Access Layer)
+   * 常見協定：ARP (位址解析協定)：以 IP位址查詢其相對應之媒體存取控制 (MAC Address) 位址。
+   * 設備：橋接器 (Bridge) 、交換器 (Switch) 。
+
+
+  
+
+(資料來源：網際網路，ARP範例)
+
+
+階層
+	常見協議
+	主要關注點
+	相關設備
+	應用層 (L7)
+	HTTPS、DNS、FTP、SMTP、SSH
+	應用程式協定、
+實際字串或資料內容
+	WAF、Proxy
+	傳輸層 (L4)
+	TCP、UDP
+	來源埠、目的埠
+	Firewall
+	網路層 (L3)
+	IP、ICMP、IPSec
+	來源 IP、目的 IP
+	Router
+	資料鏈結層(L2)
+	ARP
+	MAC Address
+	Bridge、Switch
+	實體層 (L1)
+	–
+	電波、銅線、光纖
+電波／電訊號放大
+	Repeater、Hub
+	(資料來源：筆者整理，考試使用簡表)
+
+
+
+
+  
+(筆者自行整理)
+   * 常見通訊埠 (Port) 服務
+   * FTP：TCP 21
+   * SSH、SFTP：TCP 22
+   * TELNET：TCP 23
+   * SMTP：TCP 25；加密SMTPS TCP 587
+   * HTTP：TCP 80
+   * NTP：UDP 123
+   * HTTPS：TCP 443
+   * SMB：UDP 137、138；TCP 139、445
+   * DNS：UDP 53 (查詢) ；TCP 53 (Zone Transfer)
+   * LDAP：TCP 389
+   * POP3：TCP 110；加密POP3S TCP 995
+   * Syslog：UDP 514
+   * Microsoft SQL：TCP 1433
+   * PPTP：TCP 1723
+   * RADIUS：UDP 1812
+   * RDP：TCP 3389
+   * 常見有無加密傳輸協定
+   * 有加密：HTTPS、SSH、FTPS、SMTPS。
+   * 沒加密：HTTP、Telnet、FTP、SMTP。
+   * 安全和不安全的技術
+   * Wi-Fi 加密協議 
+   * 不安全：WEP、WPA、WPA2              
+   * 安全： WPA3
+   * 檔案分享協議
+   * 不安全：SMBv1、SMBv2
+   * 安全：SMBv3
+   * 網路管理協議
+   * 不安全：SNMPv1、SNMPv2
+   * 安全：SNMPv3
+   * HTTPS加密協議：
+   * 不安全：SSL1.0、SSL2.0、SSL3.0、TLS1.0、TLS1.1
+   * 安全：TLS1.2、TLS1.3
+   * 雜湊演算法
+   * 不安全： MD5、SHA1
+   * 安全：SHA2、SHA3
+   * 資料加密演算法
+   * 不安全：DES、3DES、RC4
+   * 安全：AES
+   * 私有網路位置 (Private IP)
+   * 10.0.0.0/8
+   * 172.16.0.0/12
+   * 192.168.0.0/16
+   * 網路位址轉換(Network Address Translation, NAT)
+   * 定義：將內部私有 IP 位址轉換為外部公有 IP 位址，允許內部設備與網際網路通信。
+   * 功能：
+   * 減少公有 IP 使用數量。
+   * 隱藏內部 IP 位址，提升內部網路安全性。
+   * 支援內部網路使用私有 IP 位址。
+   * 限制：NAT 不是防禦技術，無法防止暴力攻擊 (Brute Force Attack) 。
+   * 連接埠映射 (Port Mapping)
+   * 定義：將外部網路的連接埠對應到內部網路的特定 IP 和連接埠，允許外部存取內部服務。
+   * 功能：
+   * 使外部使用者能存取內部網路服務。
+   * 將外部請求導向指定的內部伺服器。
+   * 支援遠端管理和服務提供(如遠端桌面、網站伺服器)。
+   * 限制：開放連接埠可能增加安全風險，需謹慎設定存取控制。
+________________
+
+
+IPSec 傳輸模式
+   * Transport Mode (傳輸模式) ：
+   * 定義：僅保護封包的資料部分 (Payload) ，不加密 IP 標頭。
+   * 特性：適用於端到端的通訊 (如兩台主機之間的加密通訊) 。
+   * 加密範圍：
+   * AH：驗證封包完整性，但不加密資料。
+   * ESP：加密資料本身 (Payload) 。
+   * 適用場景：內部網路的安全通訊。
+   * Tunnel Mode (隧道模式) ：
+   * 定義：對整個 IP 封包 (標頭和資料) 進行加密，並封裝進新的封包。
+   * 特性：適用於網路設備間的通訊 (如 VPN 伺服器間的加密通訊) 。
+   * 加密範圍：
+   * AH：驗證整個封包的完整性。
+   * ESP：加密整個封包 (標頭和資料) 。
+   * 適用場景：跨網路的安全通訊 (如遠端分公司 VPN)。
+________________
+
+
+TLS 傳輸模式 (Transport Layer Security)
+   * 用途：保護網路傳輸，提供加密和完整性保護。
+   * 技術結合：
+   * 非對稱加密：交換對稱密鑰 (Session Key) 。
+   * 對稱加密：使用 Session Key 加密資料傳輸。
+   * Session Key：支援動態更新，定期重新產生密鑰以提高安全性。
+   * 版本建議：建議使用 TLS 1.2 以上，舊版本存在資安風險。
+   * 流程簡述：
+   * TCP 三次握手 → 建立連線。
+   * TLS 握手 → 交換憑證與密鑰，建立安全通道。
+  
+
+(資料來源：網際網路)
+________________
+
+
+
+
+
+
+________________
+
+
+考古題：
+4. 在SSL/TLS 通訊協定中，客戶端與伺服器會在握手階段（Handshake）交換金鑰與協定版本資訊。下列何項最能説明為什麼在握手過程中要同時交換「隨機數（Random Values）」與「Session ID」等資訊？
+(A) 為了減少握手所需的封包傳輸次數，提升傳輸速率
+(B) 為了確保金鑰獲取（Key Derivation）具有多樣性與不可預測性
+(C) 為了讓伺服器能夠在握手過程中壓縮客戶端的傳輸內容
+(D) 為了讓客戶端在握手後能夠複用過去的憑證（Certificate）而不再驗證
+
+
+技術 114-1 答案B
+在SSL/TLS握手過程中，客戶端和伺服器交換隨機數（Random Values）以及Session ID，這主要是為了在產生對稱金鑰時增加不可預測性和安全性，避免金鑰被重複或預測。所以選項(B)正確。
+
+
+12. 關於通訊安全的敘述，下列何者錯誤?
+(A) 當兩個系統進行通訊時，務必確保系統透過安全通道進行通訊，獲授權存取雙方使用共用資源
+(B) 安全通訊端層（SSL）是對網際網路通訊提供隱私、驗證和整合性的安全性通訊協定
+(C) SSL是通道加密，資料也加密保護
+(D) 傳輸層安全標準（TLS）是標準網際網路通訊協定，可以加密處理電子郵件，確保郵件在傳輸過程中安全不外洩
+
+
+技術 114-1 答案C
+SSL/TLS 提供的是「通道（連線）加密」——也就是在客戶端與伺服器之間建立一條加密的傳輸隧道，確保往返封包在這條通道內不被竊聽或竄改。
+一旦資料離開這條通道（例如被寫入磁碟或轉送到下一站），除非另外採用 S/MIME、PGP 等「資料／內容層」的加密機制，資料本身並不會持續保持加密狀態。因此說「SSL 是通道加密，資料也加密保護」容易讓人誤解為資料本體另行加密，與事實不符，故為錯誤敘述。
+
+
+
+
+
+
+9. 有關OSI模型中會議層（Session Layer）之敘述，下列何者正確？
+(A) 主要的功能是負責管理和控制不同應用程式之間的對話 (會議層)
+(B) 確保資料傳輸的可靠，並處理錯誤復原 (傳輸層)
+(C) 處理封包的路由與轉發 (網路層)
+(D) 將資料進行壓縮與解壓縮以提高傳輸效率 (表現層)
+
+
+技術 113-2 答案A
+
+
+10. 下列哪一種攻擊行為屬於OSI第七層（應用層）的DDoS攻擊手法？
+(A) SYN Flood Attack (傳輸層)
+(B) Fragmentation Attack (網路層)
+(C) HTTP Flood Attack (應用層)
+(D) UDP Flood Attack (傳輸層)
+
+
+技術 113-2 答案C
+
+
+14. 當電腦A位於防火牆B後面，只想要開放電腦A上的遠端桌面服務，供外部使用者可以從網際網路連線進入時，防火牆B應該設定下列何種功能最合適？
+(A) Port Mapping
+(B) Virtual Server
+(C) DHCP
+(D) DNS
+
+
+技術 113-2 答案A
+(NAT是由內而外，而Port Mapping是由外向內)
+
+
+17. 在網路中，路由器（Router）是一種常見的網路硬體設備。下列何項是路由器的主要功能？
+(A) 分配IP位址給網路中的裝置 (DHCP)
+(B) 在區域網路（LAN）中將資料封包轉送到正確的裝置 (交換器)
+(C) 為網路中的所有資料封包加密 (VPN)
+(D) 負責將資料封包從一個網路轉送到另一個網路
+
+
+技術 113-2 答案D
+
+
+5. 在 OSI（Open System Interconnection Model）的參考模型中諸如 Chrome、 Firefox等瀏覽器軟體應該屬於下列何項層次？
+(A) 應用層（Application Layer）
+(B) 網路層（Network Layer）
+(C) 資料連結層（Data Link Layer）
+(D) 傳輸層（Transport Layer）
+
+
+技術 113-1 答案A
+(應用程式都在應用層)
+
+
+6. 下列何項網路設備可以找出傳送封包的最佳路徑？
+(A) 中繼器 (實體層)
+(B) 橋接器 (資料連結層)
+(C) 路由器 (網路層)
+(D) 集線器 (實體層)
+
+
+技術 113-1 答案C
+
+
+9. 關於通訊埠（Port）預設端口的敘述，下列何項錯誤？
+(A) SFTP，通訊埠 21 (通訊埠 22)
+(B) RDP為遠端桌面，通訊埠 3389
+(C) HTTP，通訊埠 80
+(D) DNS，通訊埠 53
+
+
+技術 113-1 答案A
+
+
+11. 有關 TCP/IP（DoD）模型之敘述，下列何者有誤？
+(A) 包含應用層（Application Layer）
+(B) 包含會談層（Session Layer） (TCP/IP沒有)
+(C) 包含網際網路層（Internet Layer）
+(D) 包含網路存取層（Network Access Layer）
+
+
+技術 113-1 答案B
+
+
+12. 當企業有大量的內部網址時，會自行架設 DNS Server，如果
+DNS Server的需求量較高，可能需要建置多台 DNS Server互相備援，並且使用一個特定功能來傳輸各台 DNS Server彼此的 DNS Record，讓每一台 DNS Server的紀錄都保持一致。但是如果該功能沒有限制存取來源，可能會導致任意使用者都可以透過該功能直接跟企業的 DNS Server索取該企業全部的 DNS Record，造成內部的網址外流。請問下列何項就是上述的特定功能？
+(A) DNS Tunneling
+(B) DNS Amplification
+(C) DNS Zone Transfer
+(D) DNS Spoofing
+
+
+技術 113-1 答案C
+(企業架設多台 DNS Server 並需要保持紀錄一致時，會使用 DNS 區域傳輸（Zone Transfer） 來同步各伺服器之間的 DNS 紀錄。若此功能未限制存取來源，攻擊者可能透過區域傳輸取得企業全部 DNS 紀錄，導致內部資訊外流)
+
+
+  
+
+
+
+13. 下列哪一個通訊協定沒有經過加密傳輸，直接採用明文的方式傳輸，有機會被攻擊者竊聽？
+(A) TELNET
+(B) FTPS
+(C) HTTPS
+(D) SSH
+
+
+技術 113-1 答案A
+(TELNET是明文傳遞)
+
+
+  
+
+
+
+18. 下列何者是微軟網路芳鄰會使用到的port？
+(A) TCP 248
+(B) TCP 445
+(C) TCP 80
+(D) TCP 20
+
+
+技術 113-1 答案B
+(網路芳鄰是使用 SMB協定來發現和連接到網路上的共享資源的。當你在網路芳鄰中看到其他電腦和共享資料夾時，實際上是 Windows 在背後使用了 SMB協定來進行通訊。)
+
+
+10. 下列何項技術可以讓組織在公開網路上共用一個外部 IP位址，與外部只有一個接點有效隱藏內部網路，並能監控進入組織的資料兼具防火牆過濾功能？
+(A) NAT
+(B) DMZ
+(C) VPN
+(D) VLAN
+
+
+技術 112-2 答案A
+
+
+11. 有關位址解析協定（Address Resolution Protocol, ARP）功能之敘述，下列何者正確？
+(A) 以IP位址查詢其相對應之媒體存取控制（MAC）位址
+(B) 管理網路流量並決定封包路徑
+(C) 對網路流量進行加密與解密，確保安全的通訊
+(D) 控制網路流量以防止分段與碎片產生
+
+
+技術 112-2 答案A
+
+
+13. 中間人攻擊（Man-in-the-Middle Attack，又稱為 MITM Attack）是一種用來竊聽、竄改流量的攻擊行為。以下列舉了幾種用來防範中間人攻擊的防禦機制，請問哪一種防範機制已經被驗證有明顯的弱點並且 已被建議棄用？
+(A) 將位址解析協定設定為靜態（Static ARP），避免ARP位址被污染
+(B) 在 HTTPS或 SMTPS使用 SSLv2協定來保護傳輸資料，避免被看到明文內容
+(C) 使用 DNSSEC來驗證 DNS的安全性，避免存取假冒的網域名稱
+(D) 只使用家中自行設定的 Wi-Fi或 4G網路，並且連上網路之後全程使用公司 VPN，確保網路環境在掌控範圍之內
+
+
+技術 112-2 答案B
+(SSL或TLS建議使用TLSv1.2以上)
+
+
+3. 請問在關於開放式系統互聯模型（Open System Interconnection Model, OSI）中，下列哪一層負責 IP之間的傳輸？
+(A) 應用層（Application Layer）
+(B) 表達層（Presentation Layer）
+(C) 傳輸層（Transport Layer）
+(D) 網路層（Network Layer）
+
+
+技術 112-1 答案D
+
+
+10. 以下關於TCP與UDP協定的特性，下列敘述何者較「不」正確？
+(A) 兩者均屬於OSI模型中的傳輸層
+(B) 兩者皆需進行三向式的握手程序
+(C) TCP速度較慢、UDP速度較快
+(D) TCP穩定性高、UDP穩定性低
+
+
+技術 112-1 答案B
+(只有TCP需要三向式的握手程序)
+
+
+11. 關於通訊安全的敘述，下列何者錯誤？
+(A) 當兩個系統進行通訊時，務必確保系統透過安全通道進行通訊，獲授權存取雙方使用共用資源
+(B) 安全通訊端層（SSL）是對網際網路通訊提供隱私、驗證和整合性的安全性通訊協定
+(C) SSL是通道加密，資料也加密保護
+(D) 傳輸層安全標準（TLS）是標準網際網路通訊協定可以加密處理電子郵件，確保郵件在傳輸過程中安全不外洩
+
+
+技術 112-1 答案C
+(SSL僅加密傳輸資料，但資料本身需要透過額外的方式，例如7-zip或WINRAR軟體加密)
+
+
+18. 當某 Windows電腦，想要開放遠端桌面服務供其他電腦連入時，而該服務採用預設設定，請問防火牆應該開放下列哪一個通訊埠（Port）？
+(A) 53 (DNS)
+(B) 23 (Telnet)
+(C) 443 (HTTPS)
+(D) 3389
+
+
+技術 112-1 答案D
+(遠端桌面連線Port為3389)
+
+
+31. 請問 DNS快取污染 (DNS Cache Poisoning)是針對開放式系統互聯模型（OSI Model Open System Interconnection Model）的哪一層的攻擊？
+(A) Layer 2資料連接層（Data-Link Layerl）
+(B) Layer 3網路層（Network Layerl）
+(C) Layer 4傳送層（Transport Layerl）
+(D) Layer 7應用層（Application Layerl）
+
+
+技術 112-1 答案D
+(DNS就是屬於第七層應用層，因此是屬於應用層攻擊)
+
+
+4. 下列何者為遠端使用者撥入驗證服務（Remote Authentication Dial In User Service,RADIUS）常使用之通訊埠（Port）？
+(A) 1812
+(B) 123
+(C) 389
+(D) 390
+
+
+技術 111-2 答案A
+
+
+5. 在網際網路的世界中，每台主機都需要使用 IP位址協定，才能相互溝通並傳送資料。請問下列哪一個 IP位址為公用 IP位址（非私人 IP）？
+(A) 10.10.10.10
+(B) 100.100.100.100
+(C) 172.16.172.16
+(D) 192.168.192.168
+
+
+技術 111-2 答案B
+(虛擬IP為10.0.0.0/8、172.16.0.0/12、192.168.0.0/16)
+
+
+6. 通訊埠（Port）是應用層每種服務皆有的唯一埠號碼，其範圍介於 0~65536。其中 1024之前為公認通訊埠（Well-Known Port）關於通訊埠用途的敘述，下列何項錯誤？
+(A) Port:53/TCP用途：DNS域名解析服務
+(B) Port:123/UDP用途：LDAP輕型目錄存取協定 (TCP 389)
+(C) Port:445/UDP用途：Microsoft-DS SMB檔案分享 (TCP 445)
+(D) Port:995/TCP用途：基於SSL的 POP3收發電子郵件加密傳輸
+
+
+技術 111-2 答案B、C皆送分
+
+
+9. 請問可以將網際網路封包加密的是下列何項通訊協定？
+(A) SMTP
+(B) HTTP
+(C) HTTPS
+(D) FTP
+
+
+技術 111-2 答案C
+
+
+10. TCP三向交握（Three-way Handshake）的順序為下列何項？
+(A) SYN，SYN/ACK，ACK
+(B) SYN，ACK，SYN
+(C) SYN，SYN，SYN
+(D) ACK，SYN，SYN
+
+
+技術 111-2 答案A
+
+
+1. 下列 OSI模型層次，何者定義 IPSec協定？
+(A) 資料鏈結層（Data Link Layer）
+(B) 傳輸層（Transport Layer）
+(C) 會議層（Session Layer）
+(D) 網路層（Network Layer）
+
+
+技術 111-1 答案D
+
+
+6. 下列何者為輕型目錄存取協定（Lightweight Directory Access Protocol, LDAP）較常使用之通訊埠（Port）？
+(A) 311
+(B) 123
+(C) 389
+(D) 390
+
+
+技術 111-1 答案C
+
+
+7. 有心人士將電腦網卡設定為混雜模式，再加上由網路上下載網路監看
+Sniffing）工具（如 Wireshark），就可以側錄到下列何種應用協定的密碼封包？
+(A) IPSec
+(B) PGP
+(C) HTTPS
+(D) Telnet
+
+
+技術 111-1 答案D
+(有加密：HTTPS、SSH、FTPS、SMTPS
+沒加密：HTTP、Telnet、FTP、SMTP)
+
+
+16. 開放式系統互聯模型（Open System Interconnection Model, OSI）中，下列哪些「不」是在傳輸層（Transport Layer）的攻擊手法？（複選）
+(A) Smurf Attack (網路層， 使用icmp封包淹沒目標伺服器 所以是傳輸層)
+(B) DNS Poisoning (應用層)
+(C) SYN Flood (傳輸層)
+(D) Ping of Death (網路層)
+
+
+防護 111-1 答案ABD
+
+
+44. 下列何者攻擊「不」屬於第七層攻擊？
+(A) SQL Injection
+(B) Command Injection
+(C) Cross Site Scripting
+(D) SSL Hijacking (傳輸層)
+
+
+技術 111-1 答案D
+
+
+49. 下列何者為超文本傳輸安全協定（HTTPS）較常使用之通訊埠
+（Port）？
+(A) 22
+(B) 25
+(C) 80
+(D) 443
+
+
+技術 111-1 答案D

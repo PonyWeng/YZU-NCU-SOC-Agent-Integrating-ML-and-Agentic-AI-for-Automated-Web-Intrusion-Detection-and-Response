@@ -81,15 +81,15 @@ while True:
                     
                 full_message = f"""[Warning] NIDS Alert\n\n[Event Name]: {message}\n[Risk Level]: {risk}\n[Desciption]: {desc}\n[Source IP]: {ip}\n[Starting Time]: {ts}\n\nThe observed behavior has triggered an alert and requires further investigation."""
                 
-                rag_api_url = "http://localhost:8001/summary"  # 你的 RAG API 端點
+                rag_api_url = "http://localhost:8001/summary"  # RAG API 端點
                 try:
-                    rag_response = requests.post(rag_api_url, json={"text": full_message}, timeout=10)
+                    rag_response = requests.post(rag_api_url, json={"text": full_message}, timeout=60)
                     summary = rag_response.json().get("summary", "（AI摘要失敗）")
                 except Exception as e:
                     summary = f"（AI摘要失敗: {e}）"
 
                 # 組合要推播的訊息
-                line_message = f"{full_message}\n\n【AI摘要】\n{summary}"
+                line_message = f"{full_message}\n\n【AI Summary】\n{summary}"
                 
                 # 發送 LINE
                 for user_id in USER_ID:
