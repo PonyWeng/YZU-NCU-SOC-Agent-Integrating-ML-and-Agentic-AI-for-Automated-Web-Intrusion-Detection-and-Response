@@ -1,7 +1,7 @@
+from fastapi import FastAPI, Request
+import uvicorn
 from langchain_community.llms import Ollama
-from langchain_community.document_loaders import PyPDFLoader
 from langchain_community.document_loaders import TextLoader
-import glob
 from langchain_community.embeddings import OllamaEmbeddings
 from langchain_community.vectorstores import Chroma
 from langchain_core.prompts import ChatPromptTemplate
@@ -12,12 +12,8 @@ import os
 OLLAMA_BASE_URL = os.getenv("OLLAMA_BASE_URL", "http://host.docker.internal:11434")
 embeddings = OllamaEmbeddings(model="nomic-embed-text", base_url=OLLAMA_BASE_URL)
 
-# 設定知識文件路徑
-#pdf_path = "knowledge/your_docs.pdf"  # 請將你的知識 PDF 放在 knowledge 資料夾，並改名
-
-llm = Ollama(model="mistral", base_url=OLLAMA_BASE_URL)  # 你也可以換成 llama2、phi 等
-#loader = PyPDFLoader(pdf_path)
-loader = TextLoader("knowledge/test.txt")  # 如果你有其他格式的文件，可以使用相應的 loader
+llm = Ollama(model="mistral", base_url=OLLAMA_BASE_URL)
+loader = TextLoader("knowledge/test.txt")  # 你的知識庫檔案
 splited_docs = loader.load_and_split()
 
 vector_db = Chroma.from_documents(
@@ -40,12 +36,18 @@ prompt_template = ChatPromptTemplate.from_messages(
 document_chain = create_stuff_documents_chain(llm, prompt_template)
 retrieval_chain = create_retrieval_chain(retriever, document_chain)
 
-context = []
-input_text = input("您想問什麼問題？\n>>> ")
+app = FastAPI()
 
-while input_text.lower() != "bye":
-    response = retrieval_chain.invoke({"input": input_text, "context": context})
-    context = response["context"]
-    print(response["answer"])
-    input_text = input(">>> ") 
+@app.post("/summary")
+async def summary(request: Request):
+    data = await request.json()
+    text = data.get("text", "")
+    if not text:
+        return {"summary": "（未提供要摘要的內容）"}
+    response = retrieval_chain.invoke({"input": text, "context": []})
+    summary = response.get("answer", "（AI無法產生摘要）")
+    return {"summary": summary}
+
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8000) 
     

@@ -80,6 +80,17 @@ while True:
                     ts = utc_to_tw(ts)
                     
                 full_message = f"""[Warning] NIDS Alert\n\n[Event Name]: {message}\n[Risk Level]: {risk}\n[Desciption]: {desc}\n[Source IP]: {ip}\n[Starting Time]: {ts}\n\nThe observed behavior has triggered an alert and requires further investigation."""
+                
+                rag_api_url = "http://localhost:8001/summary"  # 你的 RAG API 端點
+                try:
+                    rag_response = requests.post(rag_api_url, json={"text": full_message}, timeout=10)
+                    summary = rag_response.json().get("summary", "（AI摘要失敗）")
+                except Exception as e:
+                    summary = f"（AI摘要失敗: {e}）"
+
+                # 組合要推播的訊息
+                line_message = f"{full_message}\n\n【AI摘要】\n{summary}"
+                
                 # 發送 LINE
                 for user_id in USER_ID:
                     headers = {
@@ -88,7 +99,7 @@ while True:
                     }
                     data = {
                         "to": user_id,
-                        "messages": [{"type": "text", "text": full_message}]
+                        "messages": [{"type": "text", "text": line_message}]
                     }
                     r = requests.post(
                         "https://api.line.me/v2/bot/message/push",

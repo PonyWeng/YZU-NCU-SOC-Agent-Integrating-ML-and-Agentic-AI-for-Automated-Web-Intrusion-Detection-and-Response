@@ -35917,5 +35917,725 @@
     "return_code": "200",
     "log_record": "127.0.0.1 - - [10/Jul/2025:16:51:23  0800] \"GET /?name=Hello HTTP/1.1\" 200 1850 \"http://testing.com/?name=Hello\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36\"\n",
     "Source": "Machine Learning Model"
+  },
+  {
+    "id": "ae3b95ad717f927107ad3c919522363b33d42a01cc5ff1146c25baf3de87f3cb",
+    "attack_prediction": 0,
+    "URL": "GET / HTTP/1.1",
+    "description": "there is no attack to be described",
+    "return_code": "200",
+    "log_record": "127.0.0.1 - - [11/Jul/2025:14:49:56  0800] \"GET / HTTP/1.1\" 200 1850 \"-\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36\"\n",
+    "Source": "Machine Learning Model"
+  },
+  {
+    "id": "3325220d23b0c0c8253bd6a48edf0c3da120c1fc63759253ecb91915c9d39135",
+    "attack_prediction": 0,
+    "URL": "GET /favicon.ico HTTP/1.1",
+    "description": "there is no attack to be described",
+    "return_code": "404",
+    "log_record": "127.0.0.1 - - [11/Jul/2025:14:49:56  0800] \"GET /favicon.ico HTTP/1.1\" 404 297 \"http://testing.com/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36\"\n",
+    "Source": "Machine Learning Model"
+  },
+  {
+    "id": "411afa3bd915cb32f6801cbe7b970c20e88f2d90b69f75eed81c0cd767364c72",
+    "attack_prediction": 0,
+    "URL": "GET /?name=hi HTTP/1.1",
+    "description": "Detects JavaScript object properties and methods",
+    "return_code": "200",
+    "log_record": "127.0.0.1 - - [11/Jul/2025:14:50:23  0800] \"GET /?name=hi HTTP/1.1\" 200 1850 \"http://testing.com/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36\"\n",
+    "Source": "Machine Learning Model"
+  },
+  {
+    "id": "62800b6501d85c40b333f0dd3562153f0e0f232beabc53f6c024fca7333e7a60",
+    "attack_prediction": 1,
+    "URL": "GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1",
+    "description": "Detects possibly malicious html elements including some attributes",
+    "return_code": "200",
+    "log_record": "127.0.0.1 - - [11/Jul/2025:14:50:47  0800] \"GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1\" 200 1850 \"http://testing.com/?name=hi\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36\"\n",
+    "Source": "Machine Learning Model"
+  },
+  {
+    "id": "edacc00635dd0654a4cd5c5ec19000c0004f3be48493df0139bc5a2b616bfe59",
+    "attack_prediction": 1,
+    "URL": "GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1",
+    "description": "Detects possibly malicious html elements including some attributes",
+    "return_code": "200",
+    "log_record": "127.0.0.1 - - [11/Jul/2025:14:50:48  0800] \"GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1\" 200 1850 \"http://testing.com/?name=<script>alert(\"xss test\")<script>\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36\"\n",
+    "Source": "Machine Learning Model"
+  },
+  {
+    "id": "136b565baf631aa7543b4a031fc0b734aa2a00cc14a02553c5ade376de320722",
+    "attack_prediction": 1,
+    "URL": "GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1",
+    "description": "Detects possibly malicious html elements including some attributes",
+    "return_code": "200",
+    "log_record": "127.0.0.1 - - [11/Jul/2025:14:50:48  0800] \"GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1\" 200 1850 \"http://testing.com/?name=<script>alert(\"xss test\")<script>\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36\"\n",
+    "Source": "Machine Learning Model"
+  },
+  {
+    "id": "e9fce053fca9ef970ea5d033214bdd57a42f45460dc5b704d3c6420a16ffc50f",
+    "attack_prediction": 1,
+    "URL": "GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1",
+    "description": "Detects possibly malicious html elements including some attributes",
+    "return_code": "200",
+    "log_record": "127.0.0.1 - - [11/Jul/2025:14:50:48  0800] \"GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1\" 200 1850 \"http://testing.com/?name=<script>alert(\"xss test\")<script>\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36\"\n",
+    "Source": "Machine Learning Model"
+  },
+  {
+    "id": "0d184f858215e7d622384a304a7188aaef119ff7458d0c304064f855e255a52f",
+    "attack_prediction": 1,
+    "URL": "GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1",
+    "description": "Detects possibly malicious html elements including some attributes",
+    "return_code": "200",
+    "log_record": "127.0.0.1 - - [11/Jul/2025:14:50:49  0800] \"GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1\" 200 1850 \"http://testing.com/?name=<script>alert(\"xss test\")<script>\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36\"\n",
+    "Source": "Machine Learning Model"
+  },
+  {
+    "id": "1af7c2535b1bbb9f52ea35d742a3f34a4156ce0260b6c2d0f5bb4636d849d5b2",
+    "attack_prediction": 1,
+    "URL": "GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1",
+    "description": "Detects possibly malicious html elements including some attributes",
+    "return_code": "200",
+    "log_record": "127.0.0.1 - - [11/Jul/2025:14:50:49  0800] \"GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1\" 200 1850 \"http://testing.com/?name=<script>alert(\"xss test\")<script>\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36\"\n",
+    "Source": "Machine Learning Model"
+  },
+  {
+    "id": "2a6d4b516e2acdb9a163a398e5890e12b4e526f819a6066510b861f88f3e07bb",
+    "attack_prediction": 1,
+    "URL": "GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1",
+    "description": "Detects possibly malicious html elements including some attributes",
+    "return_code": "200",
+    "log_record": "127.0.0.1 - - [11/Jul/2025:14:50:50  0800] \"GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1\" 200 1850 \"http://testing.com/?name=<script>alert(\"xss test\")<script>\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36\"\n",
+    "Source": "Machine Learning Model"
+  },
+  {
+    "id": "46debf076f0f4a8c7abe1b6be2b7bf6fd70ed569e6cdd0010b3d3aad80b36853",
+    "attack_prediction": 1,
+    "URL": "GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1",
+    "description": "Detects possibly malicious html elements including some attributes",
+    "return_code": "200",
+    "log_record": "127.0.0.1 - - [11/Jul/2025:14:50:50  0800] \"GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1\" 200 1850 \"http://testing.com/?name=<script>alert(\"xss test\")<script>\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36\"\n",
+    "Source": "Machine Learning Model"
+  },
+  {
+    "id": "01bc7e462a5ed8fc718931d9111ba8a1f01ea8aa3471d901f32846f9ba6428f8",
+    "attack_prediction": 1,
+    "URL": "GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1",
+    "description": "Detects possibly malicious html elements including some attributes",
+    "return_code": "200",
+    "log_record": "127.0.0.1 - - [11/Jul/2025:14:50:50  0800] \"GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1\" 200 1850 \"http://testing.com/?name=<script>alert(\"xss test\")<script>\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36\"\n",
+    "Source": "Machine Learning Model"
+  },
+  {
+    "id": "c38d0fc3b791fba4b9b16b3a4faa36667e7226ce7579553e2dbe0679ea5a16d3",
+    "attack_prediction": 1,
+    "URL": "GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1",
+    "description": "Detects possibly malicious html elements including some attributes",
+    "return_code": "200",
+    "log_record": "127.0.0.1 - - [11/Jul/2025:14:50:51  0800] \"GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1\" 200 1850 \"http://testing.com/?name=<script>alert(\"xss test\")<script>\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36\"\n",
+    "Source": "Machine Learning Model"
+  },
+  {
+    "id": "3305cbfaa33ed10af10aaa668ed2bf2d04e0dafed2838eb963074253bc456446",
+    "attack_prediction": 1,
+    "URL": "GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1",
+    "description": "Detects possibly malicious html elements including some attributes",
+    "return_code": "200",
+    "log_record": "127.0.0.1 - - [11/Jul/2025:14:50:51  0800] \"GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1\" 200 1850 \"http://testing.com/?name=<script>alert(\"xss test\")<script>\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36\"\n",
+    "Source": "Machine Learning Model"
+  },
+  {
+    "id": "d0bb98a5bb79a94d92b8dfdbdc1d5a6eb4a6b110269e404d601791903e9e4c30",
+    "attack_prediction": 1,
+    "URL": "GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1",
+    "description": "Detects possibly malicious html elements including some attributes",
+    "return_code": "200",
+    "log_record": "127.0.0.1 - - [11/Jul/2025:14:50:52  0800] \"GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1\" 200 1850 \"http://testing.com/?name=<script>alert(\"xss test\")<script>\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36\"\n",
+    "Source": "Machine Learning Model"
+  },
+  {
+    "id": "ef6171d9a340fc8a9a13fc16b91e9888fea2f4978cc29f066490027de27a8268",
+    "attack_prediction": 1,
+    "URL": "GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1",
+    "description": "Detects possibly malicious html elements including some attributes",
+    "return_code": "200",
+    "log_record": "127.0.0.1 - - [11/Jul/2025:14:50:52  0800] \"GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1\" 200 1850 \"http://testing.com/?name=<script>alert(\"xss test\")<script>\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36\"\n",
+    "Source": "Machine Learning Model"
+  },
+  {
+    "id": "204ffd3c901c821a020d940cd9ed4b70166dd2906ec2533a033581f632677e2c",
+    "attack_prediction": 1,
+    "URL": "GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1",
+    "description": "Detects possibly malicious html elements including some attributes",
+    "return_code": "200",
+    "log_record": "127.0.0.1 - - [11/Jul/2025:14:50:52  0800] \"GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1\" 200 1850 \"http://testing.com/?name=<script>alert(\"xss test\")<script>\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36\"\n",
+    "Source": "Machine Learning Model"
+  },
+  {
+    "id": "9eb7f5450f4e57c114026ccf947c700d3df40e30f45c045f0520a12ecec2da26",
+    "attack_prediction": 1,
+    "URL": "GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1",
+    "description": "Detects possibly malicious html elements including some attributes",
+    "return_code": "200",
+    "log_record": "127.0.0.1 - - [11/Jul/2025:14:50:53  0800] \"GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1\" 200 1850 \"http://testing.com/?name=<script>alert(\"xss test\")<script>\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36\"\n",
+    "Source": "Machine Learning Model"
+  },
+  {
+    "id": "3fe6e8fd060271340bef7ddadb0de1f55ee7bc9beca5df01b0bb07674e20b167",
+    "attack_prediction": 1,
+    "URL": "GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1",
+    "description": "Detects possibly malicious html elements including some attributes",
+    "return_code": "200",
+    "log_record": "127.0.0.1 - - [11/Jul/2025:14:52:36  0800] \"GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1\" 200 1850 \"http://testing.com/?name=<script>alert(\"xss test\")<script>\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36\"\n",
+    "Source": "Machine Learning Model"
+  },
+  {
+    "id": "c4795203ad60df1362db21c9598c6e155cd3960d54223d915bdc5a8f9689329f",
+    "attack_prediction": 1,
+    "URL": "GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1",
+    "description": "Detects possibly malicious html elements including some attributes",
+    "return_code": "200",
+    "log_record": "127.0.0.1 - - [11/Jul/2025:14:52:36  0800] \"GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1\" 200 1850 \"http://testing.com/?name=<script>alert(\"xss test\")<script>\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36\"\n",
+    "Source": "Machine Learning Model"
+  },
+  {
+    "id": "d4bf82bb05166fdc4f3c7e357aa7a1b6c14e83579ff7dfebe8dec556110a4bfd",
+    "attack_prediction": 1,
+    "URL": "GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1",
+    "description": "Detects possibly malicious html elements including some attributes",
+    "return_code": "200",
+    "log_record": "127.0.0.1 - - [11/Jul/2025:14:52:37  0800] \"GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1\" 200 1850 \"http://testing.com/?name=<script>alert(\"xss test\")<script>\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36\"\n",
+    "Source": "Machine Learning Model"
+  },
+  {
+    "id": "87f33f8d8c964bd442546276c1c700bf5171edc61e6237236ce733e603213719",
+    "attack_prediction": 1,
+    "URL": "GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1",
+    "description": "Detects possibly malicious html elements including some attributes",
+    "return_code": "200",
+    "log_record": "127.0.0.1 - - [11/Jul/2025:14:52:37  0800] \"GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1\" 200 1850 \"http://testing.com/?name=<script>alert(\"xss test\")<script>\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36\"\n",
+    "Source": "Machine Learning Model"
+  },
+  {
+    "id": "9f7e70750798858474eff999aa54a0465bea8bd8580c42160977dc3ec1313fb5",
+    "attack_prediction": 1,
+    "URL": "GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1",
+    "description": "Detects possibly malicious html elements including some attributes",
+    "return_code": "200",
+    "log_record": "127.0.0.1 - - [11/Jul/2025:14:52:37  0800] \"GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1\" 200 1850 \"http://testing.com/?name=<script>alert(\"xss test\")<script>\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36\"\n",
+    "Source": "Machine Learning Model"
+  },
+  {
+    "id": "3ab7c2673bb7b54c3ad1424b339569053343577cf265b759e12a16b26df627b9",
+    "attack_prediction": 1,
+    "URL": "GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1",
+    "description": "Detects possibly malicious html elements including some attributes",
+    "return_code": "200",
+    "log_record": "127.0.0.1 - - [11/Jul/2025:14:52:38  0800] \"GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1\" 200 1850 \"http://testing.com/?name=<script>alert(\"xss test\")<script>\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36\"\n",
+    "Source": "Machine Learning Model"
+  },
+  {
+    "id": "26d1de9dbcf53834fc8072fe7bc01b11812882be02abc791e7418450b659270c",
+    "attack_prediction": 1,
+    "URL": "GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1",
+    "description": "Detects possibly malicious html elements including some attributes",
+    "return_code": "200",
+    "log_record": "127.0.0.1 - - [11/Jul/2025:14:52:38  0800] \"GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1\" 200 1850 \"http://testing.com/?name=<script>alert(\"xss test\")<script>\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36\"\n",
+    "Source": "Machine Learning Model"
+  },
+  {
+    "id": "6aa734e85dce308913adb1127b16cac06901b5c8fd9595ed03c488171642f257",
+    "attack_prediction": 1,
+    "URL": "GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1",
+    "description": "Detects possibly malicious html elements including some attributes",
+    "return_code": "200",
+    "log_record": "127.0.0.1 - - [11/Jul/2025:14:52:38  0800] \"GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1\" 200 1850 \"http://testing.com/?name=<script>alert(\"xss test\")<script>\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36\"\n",
+    "Source": "Machine Learning Model"
+  },
+  {
+    "id": "5cd50ca2c136ba32f5bf870ff5b179b11b03d27dcacfa20f95562845803dc159",
+    "attack_prediction": 1,
+    "URL": "GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1",
+    "description": "Detects possibly malicious html elements including some attributes",
+    "return_code": "200",
+    "log_record": "127.0.0.1 - - [11/Jul/2025:14:52:39  0800] \"GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1\" 200 1850 \"http://testing.com/?name=<script>alert(\"xss test\")<script>\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36\"\n",
+    "Source": "Machine Learning Model"
+  },
+  {
+    "id": "8550717a150527469adac7d894e2cba94f1f63dab3393e033cd8ead4b74ec67a",
+    "attack_prediction": 1,
+    "URL": "GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1",
+    "description": "Detects possibly malicious html elements including some attributes",
+    "return_code": "200",
+    "log_record": "127.0.0.1 - - [11/Jul/2025:14:52:39  0800] \"GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1\" 200 1850 \"http://testing.com/?name=<script>alert(\"xss test\")<script>\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36\"\n",
+    "Source": "Machine Learning Model"
+  },
+  {
+    "id": "b6771b1b4365bdeb07a1e4b20e52fdd646c9180a7d15001529380523ec095caf",
+    "attack_prediction": 1,
+    "URL": "GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1",
+    "description": "Detects possibly malicious html elements including some attributes",
+    "return_code": "200",
+    "log_record": "127.0.0.1 - - [11/Jul/2025:14:52:39  0800] \"GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1\" 200 1850 \"http://testing.com/?name=<script>alert(\"xss test\")<script>\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36\"\n",
+    "Source": "Machine Learning Model"
+  },
+  {
+    "id": "b8fdd9ee6fad2314c41befbd503f6e3efe2b8d61995c692fe2669f020152f09b",
+    "attack_prediction": 1,
+    "URL": "GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1",
+    "description": "Detects possibly malicious html elements including some attributes",
+    "return_code": "200",
+    "log_record": "127.0.0.1 - - [11/Jul/2025:14:54:29  0800] \"GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1\" 200 1850 \"http://testing.com/?name=<script>alert(\"xss test\")<script>\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36\"\n",
+    "Source": "Machine Learning Model"
+  },
+  {
+    "id": "a5fb957e3b57e2d674369496b0445ee40c06baa7942f5554b41ff1b7881557e0",
+    "attack_prediction": 1,
+    "URL": "GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1",
+    "description": "Detects possibly malicious html elements including some attributes",
+    "return_code": "200",
+    "log_record": "127.0.0.1 - - [11/Jul/2025:14:54:29  0800] \"GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1\" 200 1850 \"http://testing.com/?name=<script>alert(\"xss test\")<script>\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36\"\n",
+    "Source": "Machine Learning Model"
+  },
+  {
+    "id": "d68b8ee17d7d2d0ca472fc1e89f0ddf30b653e831a84c3b515b8dcb48979f180",
+    "attack_prediction": 1,
+    "URL": "GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1",
+    "description": "Detects possibly malicious html elements including some attributes",
+    "return_code": "200",
+    "log_record": "127.0.0.1 - - [11/Jul/2025:14:54:30  0800] \"GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1\" 200 1850 \"http://testing.com/?name=<script>alert(\"xss test\")<script>\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36\"\n",
+    "Source": "Machine Learning Model"
+  },
+  {
+    "id": "b66a71446edbca300983e908429da1910bca69038f901dbea0274fd92d02c42c",
+    "attack_prediction": 1,
+    "URL": "GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1",
+    "description": "Detects possibly malicious html elements including some attributes",
+    "return_code": "200",
+    "log_record": "127.0.0.1 - - [11/Jul/2025:14:54:30  0800] \"GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1\" 200 1850 \"http://testing.com/?name=<script>alert(\"xss test\")<script>\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36\"\n",
+    "Source": "Machine Learning Model"
+  },
+  {
+    "id": "1542dcea8ddb7b7e67778c8fc0dae141639e75a77715c6eafb803b52267ec166",
+    "attack_prediction": 1,
+    "URL": "GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1",
+    "description": "Detects possibly malicious html elements including some attributes",
+    "return_code": "200",
+    "log_record": "127.0.0.1 - - [11/Jul/2025:14:54:31  0800] \"GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1\" 200 1850 \"http://testing.com/?name=<script>alert(\"xss test\")<script>\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36\"\n",
+    "Source": "Machine Learning Model"
+  },
+  {
+    "id": "48229397ffde9e8c8af4a455507a3dc1f92a55cbaf3f8c70509a726d486318a3",
+    "attack_prediction": 1,
+    "URL": "GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1",
+    "description": "Detects possibly malicious html elements including some attributes",
+    "return_code": "200",
+    "log_record": "127.0.0.1 - - [11/Jul/2025:14:54:31  0800] \"GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1\" 200 1850 \"http://testing.com/?name=<script>alert(\"xss test\")<script>\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36\"\n",
+    "Source": "Machine Learning Model"
+  },
+  {
+    "id": "99dc13611d35c9ded3d9bd2a690b90ea291ff86aeb11ac888ef863fbe0693d9a",
+    "attack_prediction": 1,
+    "URL": "GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1",
+    "description": "Detects possibly malicious html elements including some attributes",
+    "return_code": "200",
+    "log_record": "127.0.0.1 - - [11/Jul/2025:14:54:31  0800] \"GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1\" 200 1850 \"http://testing.com/?name=<script>alert(\"xss test\")<script>\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36\"\n",
+    "Source": "Machine Learning Model"
+  },
+  {
+    "id": "4c0551274b95cac89412da6d92b3b2aecf39113f56a82d552acd70d09766e0a7",
+    "attack_prediction": 1,
+    "URL": "GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1",
+    "description": "Detects possibly malicious html elements including some attributes",
+    "return_code": "200",
+    "log_record": "127.0.0.1 - - [11/Jul/2025:14:54:32  0800] \"GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1\" 200 1850 \"http://testing.com/?name=<script>alert(\"xss test\")<script>\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36\"\n",
+    "Source": "Machine Learning Model"
+  },
+  {
+    "id": "8d838b9a7be4b5c0a84b088e98b51de654702814ea3c382ec4482c624fd16b86",
+    "attack_prediction": 1,
+    "URL": "GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1",
+    "description": "Detects possibly malicious html elements including some attributes",
+    "return_code": "200",
+    "log_record": "127.0.0.1 - - [11/Jul/2025:14:54:32  0800] \"GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1\" 200 1850 \"http://testing.com/?name=<script>alert(\"xss test\")<script>\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36\"\n",
+    "Source": "Machine Learning Model"
+  },
+  {
+    "id": "1e181e8bd2b0dc4d43a603287dffee0245391ab2f2309a4b5e579a7e4723d0a9",
+    "attack_prediction": 1,
+    "URL": "GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1",
+    "description": "Detects possibly malicious html elements including some attributes",
+    "return_code": "200",
+    "log_record": "127.0.0.1 - - [11/Jul/2025:14:54:33  0800] \"GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1\" 200 1850 \"http://testing.com/?name=<script>alert(\"xss test\")<script>\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36\"\n",
+    "Source": "Machine Learning Model"
+  },
+  {
+    "id": "058448f8f8c57ba689adc97d9adcac5266657f3568c86ca256f80eca7f261846",
+    "attack_prediction": 1,
+    "URL": "GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1",
+    "description": "Detects possibly malicious html elements including some attributes",
+    "return_code": "200",
+    "log_record": "127.0.0.1 - - [11/Jul/2025:14:54:33  0800] \"GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1\" 200 1850 \"http://testing.com/?name=<script>alert(\"xss test\")<script>\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36\"\n",
+    "Source": "Machine Learning Model"
+  },
+  {
+    "id": "8feb7db6a4184001bdb34bbae74bb7e6824c061376d794be73bbdca2b807baf8",
+    "attack_prediction": 1,
+    "URL": "GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1",
+    "description": "Detects possibly malicious html elements including some attributes",
+    "return_code": "200",
+    "log_record": "127.0.0.1 - - [11/Jul/2025:14:54:33  0800] \"GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1\" 200 1850 \"http://testing.com/?name=<script>alert(\"xss test\")<script>\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36\"\n",
+    "Source": "Machine Learning Model"
+  },
+  {
+    "id": "a0ce87c86a9bb6d675e6d9f29a3e5e85b65a1717205529b622ca38751e8c8faa",
+    "attack_prediction": 1,
+    "URL": "GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1",
+    "description": "Detects possibly malicious html elements including some attributes",
+    "return_code": "200",
+    "log_record": "127.0.0.1 - - [11/Jul/2025:14:54:34  0800] \"GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1\" 200 1850 \"http://testing.com/?name=<script>alert(\"xss test\")<script>\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36\"\n",
+    "Source": "Machine Learning Model"
+  },
+  {
+    "id": "456ab1925a847161cce25f4834715ac7af76a8693ecdaf841f7707f773c06548",
+    "attack_prediction": 1,
+    "URL": "GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1",
+    "description": "Detects possibly malicious html elements including some attributes",
+    "return_code": "200",
+    "log_record": "127.0.0.1 - - [11/Jul/2025:14:54:34  0800] \"GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1\" 200 1850 \"http://testing.com/?name=<script>alert(\"xss test\")<script>\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36\"\n",
+    "Source": "Machine Learning Model"
+  },
+  {
+    "id": "85194e065302b5ce9daf8c06c4feaba95efb0c80262e44a707abc38f5b3d9f59",
+    "attack_prediction": 1,
+    "URL": "GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1",
+    "description": "Detects possibly malicious html elements including some attributes",
+    "return_code": "200",
+    "log_record": "127.0.0.1 - - [11/Jul/2025:14:54:35  0800] \"GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1\" 200 1850 \"http://testing.com/?name=<script>alert(\"xss test\")<script>\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36\"\n",
+    "Source": "Machine Learning Model"
+  },
+  {
+    "id": "f201d080d0c3a73e2ab1b4abcba6f784925271814ad26e5ef1be60f5a7e4b53a",
+    "attack_prediction": 1,
+    "URL": "GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1",
+    "description": "Detects possibly malicious html elements including some attributes",
+    "return_code": "200",
+    "log_record": "127.0.0.1 - - [11/Jul/2025:14:54:35  0800] \"GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1\" 200 1850 \"http://testing.com/?name=<script>alert(\"xss test\")<script>\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36\"\n",
+    "Source": "Machine Learning Model"
+  },
+  {
+    "id": "ebaf55165d35a0031f4492536847363e4d46228038b2ebbcc6cbf511370e7250",
+    "attack_prediction": 1,
+    "URL": "GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1",
+    "description": "Detects possibly malicious html elements including some attributes",
+    "return_code": "200",
+    "log_record": "127.0.0.1 - - [11/Jul/2025:14:54:36  0800] \"GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1\" 200 1850 \"http://testing.com/?name=<script>alert(\"xss test\")<script>\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36\"\n",
+    "Source": "Machine Learning Model"
+  },
+  {
+    "id": "83361ec27c1fbfbe468a6784a601402e6093b330b03d30c6befe3a48be86bb6c",
+    "attack_prediction": 1,
+    "URL": "GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1",
+    "description": "Detects possibly malicious html elements including some attributes",
+    "return_code": "200",
+    "log_record": "127.0.0.1 - - [11/Jul/2025:14:54:37  0800] \"GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1\" 200 1850 \"http://testing.com/?name=<script>alert(\"xss test\")<script>\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36\"\n",
+    "Source": "Machine Learning Model"
+  },
+  {
+    "id": "01a7c6d877696ee866a14195522c7cb7bba1169922960c3aeae6af94dc5e1c08",
+    "attack_prediction": 1,
+    "URL": "GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1",
+    "description": "Detects possibly malicious html elements including some attributes",
+    "return_code": "200",
+    "log_record": "127.0.0.1 - - [11/Jul/2025:14:54:37  0800] \"GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1\" 200 1850 \"http://testing.com/?name=<script>alert(\"xss test\")<script>\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36\"\n",
+    "Source": "Machine Learning Model"
+  },
+  {
+    "id": "e8b4514788fdb8e60ed440f049cc340cb339247b25f0790df669889acfb6ea82",
+    "attack_prediction": 1,
+    "URL": "GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1",
+    "description": "Detects possibly malicious html elements including some attributes",
+    "return_code": "200",
+    "log_record": "127.0.0.1 - - [11/Jul/2025:14:54:37  0800] \"GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1\" 200 1850 \"http://testing.com/?name=<script>alert(\"xss test\")<script>\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36\"\n",
+    "Source": "Machine Learning Model"
+  },
+  {
+    "id": "a0597c25858268074311b0e1961de5ecb3a758d8ed2f46a71ba47e1fb4ccb608",
+    "attack_prediction": 1,
+    "URL": "GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1",
+    "description": "Detects possibly malicious html elements including some attributes",
+    "return_code": "200",
+    "log_record": "127.0.0.1 - - [11/Jul/2025:14:54:39  0800] \"GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1\" 200 1850 \"http://testing.com/?name=<script>alert(\"xss test\")<script>\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36\"\n",
+    "Source": "Machine Learning Model"
+  },
+  {
+    "id": "21d59ad75ec0845e1fef0cda2e7159c45520724f851ec78be616c953739e6edf",
+    "attack_prediction": 1,
+    "URL": "GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1",
+    "description": "Detects possibly malicious html elements including some attributes",
+    "return_code": "200",
+    "log_record": "127.0.0.1 - - [11/Jul/2025:14:54:39  0800] \"GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1\" 200 1850 \"http://testing.com/?name=<script>alert(\"xss test\")<script>\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36\"\n",
+    "Source": "Machine Learning Model"
+  },
+  {
+    "id": "0e16246d8fd7e116882d97d081fd6535c54482cef569bbef8c83806f0d930d12",
+    "attack_prediction": 1,
+    "URL": "GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1",
+    "description": "Detects possibly malicious html elements including some attributes",
+    "return_code": "200",
+    "log_record": "127.0.0.1 - - [11/Jul/2025:14:54:39  0800] \"GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1\" 200 1850 \"http://testing.com/?name=<script>alert(\"xss test\")<script>\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36\"\n",
+    "Source": "Machine Learning Model"
+  },
+  {
+    "id": "85dd786ed8f1d5ed22653c36f2962eb91e9c52203b90ee94593d89e38fd4d6f3",
+    "attack_prediction": 1,
+    "URL": "GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1",
+    "description": "Detects possibly malicious html elements including some attributes",
+    "return_code": "200",
+    "log_record": "127.0.0.1 - - [11/Jul/2025:14:54:40  0800] \"GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1\" 200 1850 \"http://testing.com/?name=<script>alert(\"xss test\")<script>\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36\"\n",
+    "Source": "Machine Learning Model"
+  },
+  {
+    "id": "cbf6e91ade8e8adc126ecac2e590eb6e71dedfcb96cd80ed78c60ae5bf94ce2a",
+    "attack_prediction": 1,
+    "URL": "GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1",
+    "description": "Detects possibly malicious html elements including some attributes",
+    "return_code": "200",
+    "log_record": "127.0.0.1 - - [11/Jul/2025:14:54:40  0800] \"GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1\" 200 1850 \"http://testing.com/?name=<script>alert(\"xss test\")<script>\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36\"\n",
+    "Source": "Machine Learning Model"
+  },
+  {
+    "id": "646ec6ee7634213eab982566ec106ceba2da432d5227fdeb2d0a53c0b02b6fed",
+    "attack_prediction": 1,
+    "URL": "GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1",
+    "description": "Detects possibly malicious html elements including some attributes",
+    "return_code": "200",
+    "log_record": "127.0.0.1 - - [11/Jul/2025:15:14:10  0800] \"GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1\" 200 1850 \"http://testing.com/?name=<script>alert(\"xss test\")<script>\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36\"\n",
+    "Source": "Machine Learning Model"
+  },
+  {
+    "id": "5271b217036c4ea8e47ddf933fd2fecf1903faec06ab7224c28e79c00b4c295c",
+    "attack_prediction": 2,
+    "URL": "GET /?name=<script>alert(\"xss test\")<script><script>alert(\"xss test\")<script> HTTP/1.1",
+    "description": "Detects possibly malicious html elements including some attributes",
+    "return_code": "200",
+    "log_record": "127.0.0.1 - - [11/Jul/2025:15:14:12  0800] \"GET /?name=<script>alert(\"xss test\")<script><script>alert(\"xss test\")<script> HTTP/1.1\" 200 1850 \"http://testing.com/?name=<script>alert(\"xss test\")<script>\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36\"\n",
+    "Source": "Machine Learning Model"
+  },
+  {
+    "id": "e38462cfc5a447b365ca014209f8e44bc77c9dc519d19c2bf0efc17b2323fb09",
+    "attack_prediction": 1,
+    "URL": "GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1",
+    "description": "Detects possibly malicious html elements including some attributes",
+    "return_code": "200",
+    "log_record": "127.0.0.1 - - [11/Jul/2025:15:14:13  0800] \"GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1\" 200 1850 \"http://testing.com/?name=<script>alert(\"xss test\")<script><script>alert(\"xss test\")<script>\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36\"\n",
+    "Source": "Machine Learning Model"
+  },
+  {
+    "id": "80ee8aff627eef9a046e6783184ac84a4026e900550b89aef69b90bac7ad8d9f",
+    "attack_prediction": 1,
+    "URL": "GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1",
+    "description": "Detects possibly malicious html elements including some attributes",
+    "return_code": "200",
+    "log_record": "127.0.0.1 - - [11/Jul/2025:15:14:13  0800] \"GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1\" 200 1850 \"http://testing.com/?name=<script>alert(\"xss test\")<script>\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36\"\n",
+    "Source": "Machine Learning Model"
+  },
+  {
+    "id": "8d3427f7013fb56e27a738241e93ab9ea940183794fdf1b90e2afffa92fd49d5",
+    "attack_prediction": 1,
+    "URL": "GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1",
+    "description": "Detects possibly malicious html elements including some attributes",
+    "return_code": "200",
+    "log_record": "127.0.0.1 - - [11/Jul/2025:15:14:14  0800] \"GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1\" 200 1850 \"http://testing.com/?name=<script>alert(\"xss test\")<script>\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36\"\n",
+    "Source": "Machine Learning Model"
+  },
+  {
+    "id": "1640e4ee37a5b2bf6418738b31a1c925376fbca9395964afa676724c289be8d5",
+    "attack_prediction": 1,
+    "URL": "GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1",
+    "description": "Detects possibly malicious html elements including some attributes",
+    "return_code": "200",
+    "log_record": "127.0.0.1 - - [11/Jul/2025:15:14:15  0800] \"GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1\" 200 1850 \"http://testing.com/?name=<script>alert(\"xss test\")<script>\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36\"\n",
+    "Source": "Machine Learning Model"
+  },
+  {
+    "id": "79c5c4be78cbfd2ac1d568386061294b638ed00da0941e38cc42d48836bb90f1",
+    "attack_prediction": 1,
+    "URL": "GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1",
+    "description": "Detects possibly malicious html elements including some attributes",
+    "return_code": "200",
+    "log_record": "127.0.0.1 - - [11/Jul/2025:15:14:15  0800] \"GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1\" 200 1850 \"http://testing.com/?name=<script>alert(\"xss test\")<script>\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36\"\n",
+    "Source": "Machine Learning Model"
+  },
+  {
+    "id": "84a7b8cffa915dc812c07543db5fe96c350a6c4601b22056ffeaa7d62a4edad5",
+    "attack_prediction": 1,
+    "URL": "GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1",
+    "description": "Detects possibly malicious html elements including some attributes",
+    "return_code": "200",
+    "log_record": "127.0.0.1 - - [11/Jul/2025:15:14:16  0800] \"GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1\" 200 1850 \"http://testing.com/?name=<script>alert(\"xss test\")<script>\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36\"\n",
+    "Source": "Machine Learning Model"
+  },
+  {
+    "id": "5cf9450b6589b6d080619d40c2080fa1ec6c0296667c7b6ee59ef0a121cf197a",
+    "attack_prediction": 1,
+    "URL": "GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1",
+    "description": "Detects possibly malicious html elements including some attributes",
+    "return_code": "200",
+    "log_record": "127.0.0.1 - - [11/Jul/2025:15:14:17  0800] \"GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1\" 200 1850 \"http://testing.com/?name=<script>alert(\"xss test\")<script>\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36\"\n",
+    "Source": "Machine Learning Model"
+  },
+  {
+    "id": "4e2e1688621adab0dc3662a82427f50df0fda8d4f3a2d8c50c59f89af94f99dd",
+    "attack_prediction": 1,
+    "URL": "GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1",
+    "description": "Detects possibly malicious html elements including some attributes",
+    "return_code": "200",
+    "log_record": "127.0.0.1 - - [11/Jul/2025:15:14:17  0800] \"GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1\" 200 1850 \"http://testing.com/?name=<script>alert(\"xss test\")<script>\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36\"\n",
+    "Source": "Machine Learning Model"
+  },
+  {
+    "id": "0acabb57f292aa532fc56c14a60c69c5adf810e6c3da36976da7e3bee571fcd7",
+    "attack_prediction": 1,
+    "URL": "GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1",
+    "description": "Detects possibly malicious html elements including some attributes",
+    "return_code": "200",
+    "log_record": "127.0.0.1 - - [11/Jul/2025:15:14:18  0800] \"GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1\" 200 1850 \"http://testing.com/?name=<script>alert(\"xss test\")<script>\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36\"\n",
+    "Source": "Machine Learning Model"
+  },
+  {
+    "id": "8662a22da862049999028f7553d9111ad04dd4e54ad6ae1a7aa78623a4e79207",
+    "attack_prediction": 1,
+    "URL": "GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1",
+    "description": "Detects possibly malicious html elements including some attributes",
+    "return_code": "200",
+    "log_record": "127.0.0.1 - - [11/Jul/2025:15:14:18  0800] \"GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1\" 200 1850 \"http://testing.com/?name=<script>alert(\"xss test\")<script>\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36\"\n",
+    "Source": "Machine Learning Model"
+  },
+  {
+    "id": "94d0a21b0c8ded9b64ca5c5daa2355d9595ec158b42c2d90db578b20205d3758",
+    "attack_prediction": 1,
+    "URL": "GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1",
+    "description": "Detects possibly malicious html elements including some attributes",
+    "return_code": "200",
+    "log_record": "127.0.0.1 - - [11/Jul/2025:15:14:19  0800] \"GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1\" 200 1850 \"http://testing.com/?name=<script>alert(\"xss test\")<script>\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36\"\n",
+    "Source": "Machine Learning Model"
+  },
+  {
+    "id": "ec393fe041264ae44de03846c51d11685ff5a8de01d269fc34e4f454c061880a",
+    "attack_prediction": 1,
+    "URL": "GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1",
+    "description": "Detects possibly malicious html elements including some attributes",
+    "return_code": "200",
+    "log_record": "127.0.0.1 - - [11/Jul/2025:15:14:20  0800] \"GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1\" 200 1850 \"http://testing.com/?name=<script>alert(\"xss test\")<script>\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36\"\n",
+    "Source": "Machine Learning Model"
+  },
+  {
+    "id": "ba7fc25fa5926ee78659fdf3d69cb6080b2de7df773cf53468bd2b678c2660c4",
+    "attack_prediction": 1,
+    "URL": "GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1",
+    "description": "Detects possibly malicious html elements including some attributes",
+    "return_code": "200",
+    "log_record": "127.0.0.1 - - [11/Jul/2025:15:14:20  0800] \"GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1\" 200 1850 \"http://testing.com/?name=<script>alert(\"xss test\")<script>\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36\"\n",
+    "Source": "Machine Learning Model"
+  },
+  {
+    "id": "313edf704417a42341d152497edacbbf0d61ebf992b21bcb20bc72ccec29cc1d",
+    "attack_prediction": 1,
+    "URL": "GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1",
+    "description": "Detects possibly malicious html elements including some attributes",
+    "return_code": "200",
+    "log_record": "127.0.0.1 - - [11/Jul/2025:15:14:21  0800] \"GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1\" 200 1850 \"http://testing.com/?name=<script>alert(\"xss test\")<script>\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36\"\n",
+    "Source": "Machine Learning Model"
+  },
+  {
+    "id": "02a7a2d98770520feb69049622a4e0383eb77e40e9344f1209f5b2cbbdf13a55",
+    "attack_prediction": 1,
+    "URL": "GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1",
+    "description": "Detects possibly malicious html elements including some attributes",
+    "return_code": "200",
+    "log_record": "127.0.0.1 - - [11/Jul/2025:15:14:22  0800] \"GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1\" 200 1850 \"http://testing.com/?name=<script>alert(\"xss test\")<script>\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36\"\n",
+    "Source": "Machine Learning Model"
+  },
+  {
+    "id": "8f458737b0d3b213df6385d4a064950e149704c3b55f24d6492fe9d39b7b0238",
+    "attack_prediction": 1,
+    "URL": "GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1",
+    "description": "Detects possibly malicious html elements including some attributes",
+    "return_code": "200",
+    "log_record": "127.0.0.1 - - [11/Jul/2025:15:14:22  0800] \"GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1\" 200 1850 \"http://testing.com/?name=<script>alert(\"xss test\")<script>\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36\"\n",
+    "Source": "Machine Learning Model"
+  },
+  {
+    "id": "d2bc524a69e4ae3cd99f214e48297ca6de336a07b48ba9ac82babcba827ace8b",
+    "attack_prediction": 1,
+    "URL": "GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1",
+    "description": "Detects possibly malicious html elements including some attributes",
+    "return_code": "200",
+    "log_record": "127.0.0.1 - - [11/Jul/2025:15:14:23  0800] \"GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1\" 200 1850 \"http://testing.com/?name=<script>alert(\"xss test\")<script>\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36\"\n",
+    "Source": "Machine Learning Model"
+  },
+  {
+    "id": "522766e433d34ebe296628d00d126ea3f6dc13733cab1c457ab66ceb832daa50",
+    "attack_prediction": 1,
+    "URL": "GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1",
+    "description": "Detects possibly malicious html elements including some attributes",
+    "return_code": "200",
+    "log_record": "127.0.0.1 - - [11/Jul/2025:15:14:23  0800] \"GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1\" 200 1850 \"http://testing.com/?name=<script>alert(\"xss test\")<script>\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36\"\n",
+    "Source": "Machine Learning Model"
+  },
+  {
+    "id": "0dedef67bb6e17f22b1d953c98fc92c754d3b19191b689659f80afda9cbcbdec",
+    "attack_prediction": 1,
+    "URL": "GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1",
+    "description": "Detects possibly malicious html elements including some attributes",
+    "return_code": "200",
+    "log_record": "127.0.0.1 - - [11/Jul/2025:15:14:24  0800] \"GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1\" 200 1850 \"http://testing.com/?name=<script>alert(\"xss test\")<script>\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36\"\n",
+    "Source": "Machine Learning Model"
+  },
+  {
+    "id": "523ddd9a4ad2d29d90c6c9f8936146280a3f9038c3274776f5e0e69e061597b3",
+    "attack_prediction": 1,
+    "URL": "GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1",
+    "description": "Detects possibly malicious html elements including some attributes",
+    "return_code": "200",
+    "log_record": "127.0.0.1 - - [11/Jul/2025:15:14:24  0800] \"GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1\" 200 1850 \"http://testing.com/?name=<script>alert(\"xss test\")<script>\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36\"\n",
+    "Source": "Machine Learning Model"
+  },
+  {
+    "id": "2b7a7155db76cf27b2cc540ebef0de3c2fcec5c20ec9061baff0cff6ff51cb7c",
+    "attack_prediction": 1,
+    "URL": "GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1",
+    "description": "Detects possibly malicious html elements including some attributes",
+    "return_code": "200",
+    "log_record": "127.0.0.1 - - [11/Jul/2025:15:14:25  0800] \"GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1\" 200 1850 \"http://testing.com/?name=<script>alert(\"xss test\")<script>\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36\"\n",
+    "Source": "Machine Learning Model"
+  },
+  {
+    "id": "2ff25fe015ed0808a1990b68e81c3ab53991d0d187fadee54e82b592c416411c",
+    "attack_prediction": 1,
+    "URL": "GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1",
+    "description": "Detects possibly malicious html elements including some attributes",
+    "return_code": "200",
+    "log_record": "127.0.0.1 - - [11/Jul/2025:15:14:25  0800] \"GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1\" 200 1850 \"http://testing.com/?name=<script>alert(\"xss test\")<script>\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36\"\n",
+    "Source": "Machine Learning Model"
+  },
+  {
+    "id": "4b2a981c3caf026be48e5b8de2ad494adb0df5d870ebf33149aa6ea3b7a91512",
+    "attack_prediction": 1,
+    "URL": "GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1",
+    "description": "Detects possibly malicious html elements including some attributes",
+    "return_code": "200",
+    "log_record": "127.0.0.1 - - [11/Jul/2025:15:14:26  0800] \"GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1\" 200 1850 \"http://testing.com/?name=<script>alert(\"xss test\")<script>\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36\"\n",
+    "Source": "Machine Learning Model"
+  },
+  {
+    "id": "be28327b761bc9a7fb46c30ca49c7236d630f84ca05ef5026e2823650752bc0a",
+    "attack_prediction": 1,
+    "URL": "GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1",
+    "description": "Detects possibly malicious html elements including some attributes",
+    "return_code": "200",
+    "log_record": "127.0.0.1 - - [11/Jul/2025:15:14:26  0800] \"GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1\" 200 1850 \"http://testing.com/?name=<script>alert(\"xss test\")<script>\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36\"\n",
+    "Source": "Machine Learning Model"
   }
 ]
