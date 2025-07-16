@@ -31,7 +31,7 @@ def encode_log_file(log_file):
 	count_log_line_data = 0
 	for log_line in log_file:
 		lines_count += 1
-		log_line=unquote_plus(log_line) # convert "+" to " "
+		log_line=unquote_plus(log_line) # convert "+" to " "    # urllib.parse 從 utilities.py import
 		url, log_line_data, return_code = encode_single_log_line(log_line)
 
 		if log_line_data != None:
@@ -46,7 +46,9 @@ def encode_log_file(log_file):
 	
 	return data
 
-
+# 把每一筆 log 的特徵資料，轉成像這樣的格式: 589,1,49,404,0,10,2,3,
+# 方便直接寫進 CSV 檔案，讓後續訓練模型或分析時可以直接讀取
+# 就是把一筆 log 的特徵字典，依照欄位順序轉成一行 CSV 字串
 def encode_single_line(single_line,features):
 	encoded = ""
 	for feature in features:
@@ -55,12 +57,16 @@ def encode_single_line(single_line,features):
 
 
 def save_encoded_data(data,encoded_data_file):
+	# 統計不同攻擊類型（1、2、3）的數量
 	count_1 = 0
 	count_2 = 0
 	count_3 = 0
+
+	# 自動標註攻擊類型
+	# 用正則表達式比對 URL，自動決定 label
 	for keys, values in data.items():
 		for inner_dict in values:
-			#determine category by using regular expression
+			#determine category by using regular expression (判斷攻擊類型)
 			attack='0'
 			with open('regex_4_labels.csv') as csv_file:
 				csv_reader = csv.reader(csv_file, delimiter=',')
@@ -74,11 +80,13 @@ def save_encoded_data(data,encoded_data_file):
 			elif attack == '3':
 				count_3 += 1
 			# attack = '3'
+
+			# 組合成一行資料並寫入檔案
 			data_row = encode_single_line(inner_dict, FEATURES) + attack + ',' + keys + '\n'
 			encoded_data_file.write(data_row)
 	print (str(len(data)) + ' rows have successfully saved to ' + dest_file)
 
-
+# 把剛剛判斷出來的 attack（label）加到每一行資料裡，寫進 CSV (我這邊是放 0830.log)
 print(len(encode_log_file(log_file)))
 save_encoded_data(encode_log_file(log_file),open(dest_file, 'w', encoding='utf-8'))
 

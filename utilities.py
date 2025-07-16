@@ -71,7 +71,7 @@ def encode_single_log_line(log_line):
             size = 0
         else:
             size = int(size)
-        if (int(return_code) > 0):
+        if (int(return_code) > 0): # 這裡的dict 會是 process.py 的 inner_dict
             log_line_data = {}
             log_line_data['size'] = int(size)
             log_line_data['param_number'] = int(param_number)

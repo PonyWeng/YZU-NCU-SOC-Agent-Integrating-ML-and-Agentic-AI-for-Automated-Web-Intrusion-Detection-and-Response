@@ -40,17 +40,50 @@ while True:
             # 提取所有相關欄位
             source = doc['_source']
             # print("🔍 來源文件：", json.dumps(source, indent=2, ensure_ascii=False))
-            attack_prediction = source.get('attack_prediction', 'Unknown')
-            description = source.get('description', 'No description')
-            timestamp = source.get('@timestamp', 'Unknown')
-            debug = source.get('debug', 'No debug info')
+            
+            # 支援新舊兩種資料格式
+            if 'message' in source:
+                # 新格式：從 message 解析攻擊類型
+                message = source.get('message', '')
+                risk = source.get('risk', 'Unknown Risk')
+                timestamp = source.get('@timestamp', 'Unknown')
+                date_start = source.get('dateStart', 'Unknown')
+                date_end = source.get('dateEnd', 'Unknown')
+                
+                # 從 message 解析攻擊類型
+                attack_type = 'Unknown Attack'
+                if 'XSS Attack' in message:
+                    attack_type = 'XSS Attack'
+                elif 'SQL Injection' in message:
+                    attack_type = 'SQL Injection'
+                elif 'DS Attack' in message:
+                    attack_type = 'DS Attack'
+                elif 'HTTP Flood' in message:
+                    attack_type = 'HTTP Flood Attack'
+                
+                # 組合完整的警報訊息
+                full_message = f"""🚨 網路攻擊警報 🚨
 
-            # 需要深入取得 nested 欄位（event.original、host.ip）
-            event_original = source.get('event', {}).get('original', 'No event')
-            host_ip = source.get('host', {}).get('ip', 'Unknown')
+攻擊類型: {attack_type}
+風險等級: {risk}
+事件摘要: {message}
+開始時間: {date_start}
+結束時間: {date_end}
+偵測時間: {timestamp}
+"""
+            else:
+                # 舊格式：使用原本的欄位
+                attack_prediction = source.get('attack_prediction', 'Unknown')
+                description = source.get('description', 'No description')
+                timestamp = source.get('@timestamp', 'Unknown')
+                debug = source.get('debug', 'No debug info')
 
-            # 組合完整的警報訊息
-            full_message = f"""🚨 網路攻擊警報 🚨
+                # 需要深入取得 nested 欄位（event.original、host.ip）
+                event_original = source.get('event', {}).get('original', 'No event')
+                host_ip = source.get('host', {}).get('ip', 'Unknown')
+
+                # 組合完整的警報訊息
+                full_message = f"""🚨 網路攻擊警報 🚨
 
 攻擊類型: SQL Injection
 事件摘要: {event_original}

