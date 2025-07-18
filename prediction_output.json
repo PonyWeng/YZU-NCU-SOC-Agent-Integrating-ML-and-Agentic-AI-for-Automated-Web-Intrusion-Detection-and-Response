@@ -61846,5 +61846,23 @@
     "return_code": "403",
     "log_record": "127.0.0.1 - - [16/Jul/2025:11:32:21  0800] \"GET /<;IMG SRC=\";mocha:[code]\";>; HTTP/1.1\" 403 300 \"-\" \"python-requests/2.32.3\"\n",
     "Source": "Machine Learning Model"
+  },
+  {
+    "id": "6cd84a54ba839fa956636ba76a3fed52fa27f7fa07361c19da18c32a57d01675",
+    "attack_prediction": 0,
+    "URL": "GET /?name=Hello HTTP/1.1",
+    "description": "Detects JavaScript object properties and methods",
+    "return_code": "200",
+    "log_record": "127.0.0.1 - - [17/Jul/2025:20:21:42  0800] \"GET /?name=Hello HTTP/1.1\" 200 1850 \"http://testing.com/?name=Hello\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36\"\n",
+    "Source": "Machine Learning Model"
+  },
+  {
+    "id": "286ed3ea5d82c8bf3c852a019997178a503a1c77a283d290ec17c191b21a92c4",
+    "attack_prediction": 1,
+    "URL": "GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1",
+    "description": "Detects possibly malicious html elements including some attributes",
+    "return_code": "200",
+    "log_record": "127.0.0.1 - - [17/Jul/2025:20:23:43  0800] \"GET /?name=<script>alert(\"xss test\")<script> HTTP/1.1\" 200 1850 \"http://testing.com/?name=Hello\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36\"\n",
+    "Source": "Machine Learning Model"
   }
 ]

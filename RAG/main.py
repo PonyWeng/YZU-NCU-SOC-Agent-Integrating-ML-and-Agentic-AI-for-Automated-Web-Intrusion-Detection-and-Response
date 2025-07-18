@@ -14,7 +14,7 @@ OLLAMA_BASE_URL = os.getenv("OLLAMA_BASE_URL", "http://host.docker.internal:1143
 embeddings = OllamaEmbeddings(model="nomic-embed-text", base_url=OLLAMA_BASE_URL)
 
 llm = Ollama(model="llama3", base_url=OLLAMA_BASE_URL)
-#loaders = TextLoader("knowledge/*.txt")  # 你的知識庫檔案
+#loaders = TextLoader("knowledge/*.txt")  # 知識庫檔案
 #splited_docs = loaders.load_and_split()
 
 all_files = glob.glob("knowledge/*")
@@ -36,7 +36,7 @@ vector_db = Chroma.from_documents(
     collection_name="interview",
 )
 
-retriever = vector_db.as_retriever(search_kwargs={"k": 3})
+retriever = vector_db.as_retriever(search_kwargs={"k": 3}) #檢索最相關的 3 個片段
 
 system_prompt = (
     "You are a cybersecurity expert.\n"
