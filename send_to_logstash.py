@@ -1,73 +1,79 @@
-import time
+# Watches prediction_output.json for changes and forwards new records to Logstash.
+# Run: python send_to_logstash.py
+
 import json
-import requests
 import os
+import time
+
+import requests
+from watchdog.events import FileSystemEventHandler
 from watchdog.observers import Observer
-from watchdog.events import FileSystemEventHandler 
 
-# 用來記錄已經處理過的log的ID
-processed_ids_file = "processed_ids.txt"
-processed_ids = set()
+PREDICTION_FILE = "prediction_output.json"
+PROCESSED_IDS_FILE = "processed_ids.txt"
+LOGSTASH_URL = "http://localhost:5044"
 
-def load_processed_ids():
-    """載入已經處理過的ID"""
+processed_ids: set[str] = set()
+
+
+def load_processed_ids() -> None:
     global processed_ids
-    if os.path.exists(processed_ids_file):
+    if os.path.exists(PROCESSED_IDS_FILE):
         try:
-            with open(processed_ids_file, "r") as f:
-                for line in f:
-                    processed_ids.add(line.strip())
-        except:
+            with open(PROCESSED_IDS_FILE, "r") as fh:
+                processed_ids = {line.strip() for line in fh if line.strip()}
+        except OSError:
             processed_ids = set()
-    else:
-        processed_ids = set()
 
-def save_processed_ids():
-    """儲存已處理的ID到檔案"""
-    with open(processed_ids_file, "w") as f:
-        for id in processed_ids:
-            f.write(f"{id}\n")
+
+def save_processed_ids() -> None:
+    with open(PROCESSED_IDS_FILE, "w") as fh:
+        fh.write('\n'.join(processed_ids))
+
 
 class FileChangeHandler(FileSystemEventHandler):
-    def on_modified(self, event):
-        # 只監控 prediction_output.json 檔案
-        if event.src_path.endswith("prediction_output.json"):
-            try:
-                with open("prediction_output.json", "r") as file:
-                    data = json.load(file)
-                
-                # 過濾掉已經處理過的資料
-                new_data = [item for item in data if item['id'] not in processed_ids]
-                
-                # 如果有新的資料，就發送給 Logstash
-                if new_data:
-                    response = requests.post('http://localhost:5044', json=new_data)
-                    if response.status_code == 200:
-                        print(f"成功發送 {len(new_data)} 筆新資料到 Logstash")
-                        # 記錄已處理過的 ID
-                        for item in new_data:
-                            processed_ids.add(item['id'])
-                        # 儲存到檔案
-                        save_processed_ids()
-                    else:
-                        print("發送失敗:", response.text)
+    def on_modified(self, event) -> None:
+        if not event.src_path.endswith(PREDICTION_FILE):
+            return
+        try:
+            with open(PREDICTION_FILE, "r") as fh:
+                data: list[dict] = json.load(fh)
+
+            new_data = [item for item in data if item['id'] not in processed_ids]
+            if not new_data:
+                return
+
+            # Send in batches of 50 to avoid Logstash body size limits
+            BATCH = 50
+            sent = 0
+            for i in range(0, len(new_data), BATCH):
+                batch = new_data[i:i + BATCH]
+                resp = requests.post(LOGSTASH_URL, json=batch, timeout=30)
+                if resp.status_code == 200:
+                    for item in batch:
+                        processed_ids.add(item['id'])
+                    sent += len(batch)
                 else:
-                    print("沒有新資料需要發送。")
-            
-            except Exception as e:
-                print("讀取或發送過程中發生錯誤:", e)
+                    print(f"Logstash returned {resp.status_code}: {resp.text}")
+                    break
+            if sent:
+                save_processed_ids()
+                print(f"Sent {sent} new record(s) to Logstash.")
+
+        except Exception as exc:
+            print(f"Error while sending to Logstash: {exc}")
+
 
 if __name__ == "__main__":
-    # 載入已經處理過的ID
     load_processed_ids()
-    print(f"已載入 {len(processed_ids)} 個已處理的ID")
-    
-    event_handler = FileChangeHandler()
+    print(f"Loaded {len(processed_ids)} already-processed IDs.")
+
+    handler = FileChangeHandler()
     observer = Observer()
-    observer.schedule(event_handler, path='.', recursive=False)
+    observer.schedule(handler, path='.', recursive=False)
     observer.start()
-    print("開始監控 prediction_output.json ...")
-    
+    print(f"Watching {PREDICTION_FILE} for changes...")
+
     try:
         while True:
             time.sleep(1)

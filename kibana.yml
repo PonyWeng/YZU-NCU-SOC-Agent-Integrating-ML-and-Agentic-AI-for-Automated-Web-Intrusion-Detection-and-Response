@@ -1,6 +1,6 @@
 server.host: "0.0.0.0"
 elasticsearch.hosts: ["http://elasticsearch:9200"]
+# Using the built-in elastic superuser — avoids the extra kibana_system password setup step
 elasticsearch.username: "kibana_system"
-#由系統生成 如果重啟要再要一次
-elasticsearch.password: "jwBBI_oLepp4Z1ydZPdc"
+elasticsearch.password: "pony71909"
 xpack.encryptedSavedObjects.encryptionKey: "6ffa2827db06b1784f69e0a053af81fa"

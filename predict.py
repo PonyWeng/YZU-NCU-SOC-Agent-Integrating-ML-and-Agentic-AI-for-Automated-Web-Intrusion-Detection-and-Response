@@ -1,87 +1,77 @@
 # About: predict.py
-# Author: walid.daboubi@gmail.com
-# Version: 1.3 - 2021/10/30
-#python3 predict.py -l DATA/raw_data/predict.log -m MODELS/model_RandomForestClassifier.pkl
-import json
+# Author: walid.daboubi@gmail.com  (refactored for Python 3.10)
+# Usage: python predict.py -l DATA/raw_data/predict.log -m MODELS/model_RandomForestClassifier.pkl
+
+import csv
 import hashlib
-#import datetime
+import json
 import os
-from filelock import FileLock, Timeout ##沒用到
+import pickle
+import re
+import time
 
-from utilities import * 
+from urllib.parse import unquote_plus
 
-parser = argparse.ArgumentParser()
-parser.add_argument('-l', '--log_file', help = 'The log file  you want to access',  required=True)
-parser.add_argument('-m', '--model', help = 'The trained model',required=True )
+from utilities import FEATURES, _LOG_REGEX, encode_single_log_line
 
+parser = __import__('argparse').ArgumentParser()
+parser.add_argument('-l', '--log_file', help='The log file to process', required=True)
+parser.add_argument('-m', '--model', help='The trained model (.pkl)', required=True)
 args = vars(parser.parse_args())
 
-log_file_name = args['log_file']
-model_file=args['model']
+log_file_name: str = args['log_file']
+model_file: str = args['model']
 
-# 讀檔
+# Load existing predictions (append-mode across runs)
 if os.path.exists("prediction_output.json"):
-    with open("prediction_output.json", "r") as read_file:
-        data_from_json = json.load(read_file)
+    with open("prediction_output.json", "r") as fh:
+        data_from_json: list[dict] = json.load(fh)
 else:
     data_from_json = []
 
-log_file = open(log_file_name,'r')
-index=0
+# Load model once — not per line
+model = pickle.load(open(model_file, 'rb'))
 
-for log_line in log_file:
-    index += 1
-    desc='there is no attack to be described'
-    log_line=unquote_plus(log_line)
-    url,encoded,return_code = encode_single_log_line(log_line)
+# Load regex rules once — not inside the loop
+with open('regex_4_labels.csv', 'r') as fh:
+    regex_rules: list[list[str]] = list(csv.reader(fh))
 
+with open(log_file_name, 'r') as log_file:
+    for log_line in log_file:
+        desc = 'there is no attack to be described'
+        log_line = unquote_plus(log_line)
+        url, encoded, return_code = encode_single_log_line(log_line)
 
-    # print(url)
-    # print(encoded)
-    # print(return_code)
+        if encoded is None:
+            continue
 
-    if encoded !=None:
-        formatte_encoded = []
-        for feature in FEATURES:
-            formatte_encoded.append(encoded[feature])
-        model = pickle.load(open(model_file, 'rb')) #載入模型
+        formatted = [encoded[feature] for feature in FEATURES]
+        prediction: int = int(model.predict([formatted])[0])
 
-        print("---------------------------------------------------------------")
-
-        print("log_line:",log_line)
-        print("format:",[formatte_encoded])
-        prediction = int(model.predict([formatte_encoded])[0]) #模型判斷攻擊類型
-
-        print("Result:",prediction)
-        csv_file = open(r'regex_4_labels.csv', 'r')
-        csv_reader = csv.reader(csv_file, delimiter=',')
-        for row in csv_reader:
+        for row in regex_rules:
             if re.search(row[2], url):
-                attack = row[0]
                 desc = row[1]
 
-        print("--------------------------------------------------------------------------")
-        # 產生唯一 id：log_line + 高精度時間
         unique_str = log_line + str(time.time())
         log_id = hashlib.sha256(unique_str.encode('utf-8')).hexdigest()
-        #current_time = datetime.datetime.now().isoformat()
+
+        # Extract source IP from the log line (first capture group of the regex)
+        m = _LOG_REGEX.match(log_line)
+        src_ip = m.group(1) if m else "unknown"
+
         new_result = {
             "id": log_id,
-            #"timestamp": current_time,
             "attack_prediction": prediction,
             "URL": url,
             "description": desc,
             "return_code": return_code,
+            "src_ip": src_ip,
             "log_record": log_line,
-            "Source": "Machine Learning Model"
+            "Source": "Machine Learning Model",
         }
         data_from_json.append(new_result)
-        print({"id": log_id, "attack_prediction": prediction, "URL": url,"description":desc,"return_code":return_code,"log_record":log_line,"Source":"Machine Learning Model"})
-        print("-------------------------------The End--------------------------------------")
-        import time
-        time.sleep(0.1)
+        print(new_result)
 
-# for 迴圈結束後一次性寫檔
-with open("prediction_output.json", "w") as write_file:
-    json.dump(data_from_json, write_file, indent=2)
-
+# Write all results at once after the loop
+with open("prediction_output.json", "w") as fh:
+    json.dump(data_from_json, fh, indent=2)

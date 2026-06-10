@@ -1,0 +1,27 @@
+# Credentials — never commit
+.env
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Runtime state (auto-generated, not source)
+last_offset.txt
+processed_ids.txt
+prediction_output.json
+blacklist.json
+*_out.txt
+
+# Apache logs (can be large, generated at runtime)
+apache-logs/
+
+# RAG vector database (rebuilt on container start)
+RAG/db/
+
+# Claude Code memory
+.claude/
+
+# OS
+.DS_Store
+Thumbs.db

@@ -1,0 +1,14 @@
+# Managed by YZU NIDS Platform - DO NOT EDIT MANUALLY
+
+# Clean URL: /search -> /search.html (preserves ?q= params)
+RewriteEngine On
+RewriteRule ^search$ /search.html [QSA,L]
+
+# IP Blacklist - banned IPs receive 403 Forbidden
+<RequireAll>
+    Require all granted
+    Require not ip 45.142.212.100
+    Require not ip 185.220.101.47
+    Require not ip 194.165.16.11
+    Require not ip 192.168.0.97
+</RequireAll>

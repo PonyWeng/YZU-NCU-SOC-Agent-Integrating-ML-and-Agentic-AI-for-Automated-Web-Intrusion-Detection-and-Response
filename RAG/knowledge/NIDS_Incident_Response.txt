@@ -1,0 +1,189 @@
+Network Intrusion Detection Systems (NIDS) and Incident Response
+
+This document covers IDS/IPS fundamentals, alert handling, and incident response procedures relevant to web application security monitoring.
+
+
+Intrusion Detection System (IDS) Fundamentals
+* Definition: A system that monitors network or system activities for malicious activities or policy violations and produces reports.
+* IDS vs IPS:
+   * IDS (Intrusion Detection System): Passive - detects and alerts, does not block
+   * IPS (Intrusion Prevention System): Active - detects and automatically blocks
+   * This NIDS platform functions as both: detects via ML, actively blocks via .htaccess
+* Types of IDS:
+   * Network-based IDS (NIDS): Monitors network traffic at strategic points
+   * Host-based IDS (HIDS): Monitors individual host or endpoint for suspicious activity
+   * Signature-based: Matches known attack patterns (fast, low false positives)
+   * Anomaly-based: Learns normal behaviour, flags deviations (catches novel attacks, higher false positives)
+   * Hybrid: Combines signature and anomaly detection
+* This platform uses: Machine learning (anomaly/signature hybrid) on Apache access logs (HIDS + NIDS approach)
+
+
+Alert Classification
+* True Positive (TP): Attack detected correctly - legitimate alert
+* False Positive (FP): Normal traffic flagged as attack - alert but no real attack
+* True Negative (TN): Normal traffic correctly identified as normal - no alert
+* False Negative (FN): Attack not detected - missed alert (most dangerous)
+* Precision = TP / (TP + FP): How many alerts are real attacks
+* Recall = TP / (TP + FN): How many real attacks are detected
+* This platform's RandomForest model achieves 98.86% accuracy
+
+* Risk levels used in this platform:
+   * Critical (🔴): SQL Injection - triggers automatic IP ban
+   * High (🟠): Cross-Site Scripting (XSS) - alert only
+   * Medium (🟡): Directory Traversal - alert only
+
+
+Incident Response (IR) Framework
+* NIST IR Framework phases:
+   1. Preparation
+   2. Detection and Analysis
+   3. Containment, Eradication, and Recovery
+   4. Post-Incident Activity
+
+* Phase 1 - Preparation:
+   * Establish and train an incident response team
+   * Deploy monitoring tools (IDS, SIEM, log management)
+   * Define communication plans and escalation procedures
+   * Identify critical assets and data
+   * Maintain an up-to-date asset inventory
+
+* Phase 2 - Detection and Analysis:
+   * Monitor alerts from IDS/SIEM continuously
+   * Validate alerts to reduce false positives
+   * Classify the severity and type of incident
+   * Document timeline and scope of the incident
+   * Preserve evidence (logs, memory dumps, network captures)
+   * This platform automates detection via Kibana alerts + poller.py
+
+* Phase 3 - Containment, Eradication, and Recovery:
+   * Short-term containment: Isolate affected systems, block attacker IPs
+   * Long-term containment: Patch vulnerabilities, update firewall rules
+   * Eradication: Remove malware, malicious code, unauthorised accounts
+   * Recovery: Restore systems from clean backups, monitor for re-infection
+   * This platform automates containment: Critical alerts → auto-ban source IP via .htaccess
+
+* Phase 4 - Post-Incident Activity:
+   * Conduct lessons-learned meeting
+   * Document what happened and how it was handled
+   * Update security policies and procedures
+   * Share information with relevant stakeholders
+   * Update detection rules to catch similar attacks faster
+
+
+IP Reputation and Threat Intelligence
+* AbuseIPDB: Community-driven database of reported abusive IP addresses
+   * Score 0-100: Higher score = more reports of abuse
+   * Score > 25: Consider the IP malicious
+   * Score 75-100: Highly likely malicious; block immediately
+   * Reports include: attack type, date, reporter
+* IPinfo: Geolocation and ASN data for IP addresses
+   * City, region, country
+   * Organisation / ASN (Autonomous System Number)
+   * Hostname, timezone
+* Threat intelligence use:
+   * Cross-reference detected source IPs against threat feeds
+   * Enrich alerts with geolocation to understand attack origin
+   * Share IOCs (Indicators of Compromise) with the security community
+* This platform integrates AbuseIPDB + IPinfo via /check <IP> command
+
+
+Log Analysis for Security
+* Apache Combined Log Format fields:
+   * %h - Client IP address (source of the request)
+   * %t - Time of request
+   * %r - First line of HTTP request (method, URL, protocol)
+   * %s - HTTP status code returned to client
+   * %b - Size of response in bytes
+   * %{Referer}i - Referer header
+   * %{User-Agent}i - User-Agent header
+* Key fields for attack detection: source IP, URL (contains payloads), status code
+* HTTP status codes relevant to security:
+   * 200 OK: Request succeeded (attack may have succeeded)
+   * 302 Found: Redirect (may indicate successful injection)
+   * 400 Bad Request: Malformed request
+   * 403 Forbidden: Access denied (IP ban working)
+   * 404 Not Found: Resource not found (directory traversal attempt)
+   * 500 Internal Server Error: May indicate successful injection causing server error
+
+
+SIEM (Security Information and Event Management)
+* Definition: Provides real-time analysis of security alerts generated by applications and network hardware
+* Core functions:
+   * Log collection and aggregation from multiple sources
+   * Correlation of events across sources
+   * Alerting based on rules and thresholds
+   * Forensic analysis and reporting
+* ELK Stack as SIEM:
+   * Elasticsearch: Log storage and search engine
+   * Logstash: Log collection, parsing, and enrichment
+   * Kibana: Visualisation, dashboards, and alerting
+* This platform uses ELK as a lightweight SIEM specifically for web attack detection
+
+
+Blacklisting and IP Blocking
+* Definition: Maintaining a list of IP addresses known to be malicious and blocking their traffic
+* Apache IP blocking using mod_authz_host:
+   * Require not ip <address>: Block specific IP address
+   * Applied via .htaccess file for per-directory control
+   * AllowOverride All must be set in httpd.conf
+   * Changes take effect immediately - no server restart required
+* Blacklist management best practices:
+   * Automate blocking on confirmed attacks (as done in this platform)
+   * Include timestamp and reason for each blocked IP
+   * Implement expiry to unban IPs after a defined period
+   * Never block your own management IPs
+   * Maintain a whitelist of trusted IPs that should never be blocked
+* This platform's blacklist workflow:
+   1. Attack detected by ML model → indexed in Elasticsearch
+   2. Kibana rule triggers → poller.py notified
+   3. If Critical (SQL Injection): source IP added to blacklist.json
+   4. enforcer.py writes Require not ip rules to htdocs/.htaccess
+   5. Apache immediately returns 403 to banned IP
+   6. LINE alert includes ban notice
+   7. Analyst can /unban <IP> via LINE chatbot when safe
+
+
+Defence in Depth
+* Definition: Security strategy that uses multiple layers of defence so that if one layer fails, others still provide protection
+* Layers relevant to web application security:
+   * Network layer: Firewall, DDoS protection, network segmentation
+   * Host layer: OS hardening, patch management, host-based IDS
+   * Application layer: Secure coding, WAF, input validation
+   * Data layer: Encryption at rest and in transit, access control
+   * Detection layer: NIDS, SIEM, log monitoring (this platform)
+   * Response layer: Incident response plan, automatic blocking
+* This NIDS platform contributes to: Detection layer + Response layer (automatic blocking)
+
+
+Common Security Metrics
+* Mean Time to Detect (MTTD): Average time to detect a security incident
+* Mean Time to Respond (MTTR): Average time to respond and contain an incident
+* Mean Time to Recover: Average time to restore normal operations
+* False Positive Rate: Ratio of false alerts to total alerts
+* This platform targets low MTTD (poll every 15 seconds) and automatic MTTR for Critical alerts (immediate IP block)
+
+
+Attacker TTPs (Tactics, Techniques, and Procedures)
+* MITRE ATT&CK Framework: Knowledge base of adversary tactics and techniques
+* Relevant tactics for web attacks:
+   * Initial Access (TA0001): Exploit public-facing application (T1190)
+   * Discovery (TA0007): File and directory discovery (T1083)
+   * Collection (TA0009): Data from information repositories
+   * Exfiltration (TA0010): Exfiltration via web service
+* Mapping to this platform's detections:
+   * SQL Injection → T1190 (Exploit Public-Facing Application) → Critical
+   * Directory Traversal → T1083 (File and Directory Discovery) → Medium
+   * XSS → T1190 variant, credential/session theft → High
+
+
+Vulnerability Scanning and Penetration Testing
+* Vulnerability scanning: Automated identification of known vulnerabilities
+   * Tools: Nessus, OpenVAS, Nikto (web-specific)
+   * Should be run regularly and after major changes
+* Penetration testing: Simulated attack to find exploitable vulnerabilities
+   * Types: Black box, white box, grey box
+   * Web app tools: Burp Suite, OWASP ZAP, SQLMap
+   * Should be performed by qualified professionals
+* Bug bounty programs: Crowdsourced security testing
+   * Platforms: HackerOne, Bugcrowd, Intigriti
+* Security testing generates logs that trigger NIDS alerts - ensure testers are whitelisted

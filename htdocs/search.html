@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Search Results – TechMart</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #f4f6f9;
+      color: #1a1a2e;
+    }
+    nav {
+      background: #ffffff;
+      border-bottom: 1px solid #e0e4ef;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .nav-inner {
+      max-width: 1200px; margin: auto;
+      display: flex; align-items: center; gap: 24px; padding: 14px 24px;
+    }
+    .logo { font-size: 1.45rem; font-weight: 800; color: #1a1a2e; text-decoration: none; }
+    .logo span { color: #3b82f6; }
+    .nav-search {
+      flex: 1; display: flex;
+      border: 1.5px solid #d1d5db; border-radius: 8px; overflow: hidden; max-width: 520px;
+    }
+    .nav-search input {
+      flex: 1; padding: 8px 12px; border: none; outline: none; font-size: 0.88rem;
+    }
+    .nav-search button {
+      background: #3b82f6; border: none; padding: 0 16px; color: white; cursor: pointer;
+    }
+    .nav-search button:hover { background: #2563eb; }
+    .btn-login {
+      background: #1a1a2e; color: white; padding: 8px 18px; border-radius: 6px;
+      font-size: 0.85rem; font-weight: 600; text-decoration: none; margin-left: auto;
+    }
+
+    .search-header {
+      background: white; border-bottom: 1px solid #e0e4ef;
+      padding: 16px 24px;
+    }
+    .search-header-inner {
+      max-width: 1200px; margin: auto;
+      display: flex; align-items: center; gap: 16px; font-size: 0.88rem; color: #6b7280;
+    }
+    .search-header-inner strong { color: #1a1a2e; }
+
+    .main { max-width: 1200px; margin: 32px auto; padding: 0 24px; display: flex; gap: 28px; }
+
+    /* Sidebar filters */
+    .sidebar { width: 220px; flex-shrink: 0; }
+    .filter-box {
+      background: white; border: 1px solid #e5e7eb; border-radius: 10px;
+      padding: 18px; margin-bottom: 16px;
+    }
+    .filter-box h4 { font-size: 0.88rem; font-weight: 700; margin-bottom: 12px; }
+    .filter-option { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; font-size: 0.84rem; color: #374151; cursor: pointer; }
+    .filter-option input { cursor: pointer; }
+    .price-range { width: 100%; margin-top: 8px; }
+
+    /* Results */
+    .results { flex: 1; }
+    .results-meta {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 20px; font-size: 0.85rem; color: #6b7280;
+    }
+    .sort-select {
+      padding: 6px 10px; border: 1px solid #d1d5db; border-radius: 6px;
+      font-size: 0.84rem; outline: none;
+    }
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 18px;
+    }
+    .product-card {
+      background: white; border-radius: 10px; overflow: hidden;
+      border: 1px solid #e5e7eb; transition: box-shadow .2s, transform .2s; cursor: pointer;
+    }
+    .product-card:hover { box-shadow: 0 6px 20px rgba(0,0,0,0.1); transform: translateY(-2px); }
+    .product-img {
+      background: #f3f4f6; height: 160px;
+      display: flex; align-items: center; justify-content: center; font-size: 3.8rem;
+      border-bottom: 1px solid #e5e7eb;
+    }
+    .product-body { padding: 12px; }
+    .product-brand { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.5px; color: #6b7280; margin-bottom: 3px; }
+    .product-name { font-size: 0.88rem; font-weight: 600; margin-bottom: 6px; line-height: 1.3; }
+    .product-price { font-size: 1rem; font-weight: 700; color: #1e40af; }
+    .product-old { font-size: 0.75rem; color: #9ca3af; text-decoration: line-through; margin-left: 5px; }
+    .product-rating { font-size: 0.73rem; color: #f59e0b; margin-top: 3px; }
+
+    /* No results message */
+    .no-results {
+      background: white; border: 1px solid #e5e7eb; border-radius: 10px;
+      padding: 60px 40px; text-align: center; color: #6b7280;
+    }
+    .no-results .icon { font-size: 3rem; margin-bottom: 16px; }
+    .no-results h3 { font-size: 1.1rem; color: #374151; margin-bottom: 8px; }
+    .no-results p { font-size: 0.88rem; }
+
+    footer {
+      background: #0a0f2c; color: #8892a4;
+      text-align: center; padding: 20px; font-size: 0.8rem; margin-top: 48px;
+    }
+    footer a { color: #3b82f6; text-decoration: none; margin: 0 8px; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">Tech<span>Mart</span></a>
+    <form class="nav-search" action="/search" method="GET">
+      <input name="q" id="navQ" type="text" placeholder="Search products…" autocomplete="off" />
+      <button type="submit">🔍</button>
+    </form>
+    <a href="/login" class="btn-login">Sign In</a>
+  </div>
+</nav>
+
+<div class="search-header">
+  <div class="search-header-inner">
+    <span>Results for: <strong id="queryDisplay"></strong></span>
+    <span id="resultCount"></span>
+  </div>
+</div>
+
+<div class="main">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="filter-box">
+      <h4>Category</h4>
+      <label class="filter-option"><input type="checkbox" checked /> All Categories</label>
+      <label class="filter-option"><input type="checkbox" /> Laptops</label>
+      <label class="filter-option"><input type="checkbox" /> Smartphones</label>
+      <label class="filter-option"><input type="checkbox" /> Audio</label>
+      <label class="filter-option"><input type="checkbox" /> Gaming</label>
+    </div>
+    <div class="filter-box">
+      <h4>Price Range</h4>
+      <input class="price-range" type="range" min="0" max="2000" value="2000" />
+      <div style="font-size:0.82rem;color:#6b7280;margin-top:6px;">Up to $<span id="priceVal">2000</span></div>
+    </div>
+    <div class="filter-box">
+      <h4>Brand</h4>
+      <label class="filter-option"><input type="checkbox" checked /> All Brands</label>
+      <label class="filter-option"><input type="checkbox" /> Apple</label>
+      <label class="filter-option"><input type="checkbox" /> Samsung</label>
+      <label class="filter-option"><input type="checkbox" /> Sony</label>
+      <label class="filter-option"><input type="checkbox" /> NVIDIA</label>
+    </div>
+    <div class="filter-box">
+      <h4>Rating</h4>
+      <label class="filter-option"><input type="radio" name="r" checked /> ⭐ Any</label>
+      <label class="filter-option"><input type="radio" name="r" /> ★★★★☆ & up</label>
+      <label class="filter-option"><input type="radio" name="r" /> ★★★★★ only</label>
+    </div>
+  </aside>
+
+  <!-- Results -->
+  <section class="results">
+    <div class="results-meta">
+      <span id="metaText">Showing results</span>
+      <select class="sort-select">
+        <option>Best Match</option>
+        <option>Price: Low to High</option>
+        <option>Price: High to Low</option>
+        <option>Newest First</option>
+        <option>Customer Rating</option>
+      </select>
+    </div>
+    <div id="productGrid" class="product-grid"></div>
+  </section>
+</div>
+
+<footer>
+  © 2026 TechMart Inc. &nbsp;|&nbsp;
+  <a href="/">Home</a>
+  <a href="#">Privacy</a>
+  <a href="#">Terms</a>
+  <a href="#">Contact</a>
+</footer>
+
+<script>
+  // Read ?q= from URL
+  const params = new URLSearchParams(window.location.search);
+  const query  = params.get('q') || '';
+
+  document.getElementById('queryDisplay').textContent = query || '(empty)';
+  document.getElementById('navQ').value = query;
+
+  // Price range display
+  const slider = document.querySelector('.price-range');
+  slider.addEventListener('input', () => {
+    document.getElementById('priceVal').textContent = slider.value;
+  });
+
+  // Static product catalogue — shown as "results"
+  const catalogue = [
+    { emoji:'💻', brand:'Apple',    name:'MacBook Air M2 13"',           price:'$1,099', old:'$1,299', rating:'★★★★★ (2.4k)' },
+    { emoji:'📱', brand:'Samsung',  name:'Galaxy S24 Ultra 256GB',        price:'$1,199', old:'',       rating:'★★★★☆ (1.8k)' },
+    { emoji:'🎧', brand:'Sony',     name:'WH-1000XM5 Wireless',           price:'$279',   old:'$399',   rating:'★★★★★ (5.1k)' },
+    { emoji:'🖥️', brand:'LG',       name:'27" 4K UHD IPS Monitor',        price:'$449',   old:'$549',   rating:'★★★★☆ (987)'  },
+    { emoji:'⌨️', brand:'Keychron', name:'Q3 Mechanical Keyboard',        price:'$169',   old:'',       rating:'★★★★★ (3.2k)' },
+    { emoji:'🖱️', brand:'Logitech', name:'MX Master 3S Wireless Mouse',   price:'$99',    old:'$119',   rating:'★★★★★ (7.6k)' },
+    { emoji:'🎮', brand:'NVIDIA',   name:'RTX 4070 Ti Super 16GB',        price:'$799',   old:'',       rating:'★★★★★ (1.1k)' },
+    { emoji:'💾', brand:'Samsung',  name:'990 Pro 2TB NVMe SSD',          price:'$149',   old:'$269',   rating:'★★★★★ (4.3k)' },
+    { emoji:'📡', brand:'TP-Link',  name:'Archer AXE300 WiFi 6E Router',  price:'$249',   old:'',       rating:'★★★★☆ (634)'  },
+    { emoji:'🔋', brand:'Anker',    name:'PowerCore 26800mAh Power Bank', price:'$69',    old:'$89',    rating:'★★★★★ (12k)'  },
+  ];
+
+  const grid = document.getElementById('productGrid');
+
+  // Filter by query (simple keyword match — always show ≥ 1 result for demo)
+  const lower = query.toLowerCase();
+  let shown = catalogue.filter(p =>
+    !query ||
+    p.name.toLowerCase().includes(lower) ||
+    p.brand.toLowerCase().includes(lower)
+  );
+  if (shown.length === 0) shown = catalogue;   // fallback: show all
+
+  document.getElementById('resultCount').textContent = `${shown.length} item${shown.length !== 1 ? 's' : ''} found`;
+  document.getElementById('metaText').textContent = `Showing ${shown.length} result${shown.length !== 1 ? 's' : ''} for "${query}"`;
+
+  shown.forEach(p => {
+    grid.innerHTML += `
+      <div class="product-card">
+        <div class="product-img">${p.emoji}</div>
+        <div class="product-body">
+          <div class="product-brand">${p.brand}</div>
+          <div class="product-name">${p.name}</div>
+          <div>
+            <span class="product-price">${p.price}</span>
+            ${p.old ? `<span class="product-old">${p.old}</span>` : ''}
+          </div>
+          <div class="product-rating">${p.rating}</div>
+        </div>
+      </div>`;
+  });
+</script>
+</body>
+</html>

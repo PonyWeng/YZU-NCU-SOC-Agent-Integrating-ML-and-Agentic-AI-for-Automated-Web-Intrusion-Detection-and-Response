@@ -1,238 +1,578 @@
-# YZU_NIDS_project
+# YZU-NCU-SOC Agent: Integrating Machine Learning and Agentic LLM for Automated Web Intrusion Detection and Response
 
+A Security Operations Center (SOC) platform that monitors Apache web server logs, classifies attacks using Machine Learning, visualises results in an ELK Stack, and provides an Agentic LLM assistant (LangGraph + Ollama) for natural-language-driven incident response — including real-time LINE alerts and automated IP banning.
 
-* **本專案使用的環境與套件版本：**
-    * Python 3.8.13
-        * scikit-learn 1.3.2  (本來是1.3.0改成1.3.2) 
-        * yellowbrick 1.5
-        * uvicorn 0.30.6
-        * seaborn 0.13.2
-        * fastapi 0.112.2
+**Author:** Pony Weng / 翁浩宇 — Yuan Ze University / National Central University
 
-* **建立Anaconda 虛擬環境**
-`conda create -n YZU_IDS python==3.8.13`
+---
 
-## 本專案所需Python 套件
-* **安裝Dependencies**
-```
-conda install scikit-learn
-conda install seaborn
-conda install -c conda-forge yellowbrick
-conda install -c conda-forge uvicorn
-conda install -c conda-forge fastapi
-```
-
-### 或直接用 pip 安裝所有需要的套件：
-```
-pip install scikit-learn==1.3.2
-pip install seaborn==0.13.2
-pip install yellowbrick==1.5
-pip install uvicorn==0.30.6
-pip install fastapi==0.112.2
-pip install elasticsearch
-pip install requests
-pip install python-dateutil
-pip install pandas
-pip install psutil
-pip install flask
-```
-
-> **說明：**
-> - `psutil`：監控系統程序（monitor.py 會用到）
-> - `flask`：LINE webhook 服務（webhook_line/webhook.py 會用到）
-> - 其餘套件依各程式需求安裝
-
-## 本專案所使用的幾個程式 (機器學習、監控部分)
-
-1. process.py
-2. train.py
-3. predict.py
-4. monitor.py
-
-* **訓練資料前處理指令  (需要手動改成自己的檔案路徑)：**
-`python process.py -l C:\Users\sensh\Desktop\學長的\yzu_nids_project\DATA\raw_data\access.log -d C:\Users\sensh\Desktop\學長的\yzu_nids_project\DATA\raw_data\0830.log`
-
-* **模型訓練指令 (需要手動改成自己的檔案路徑)**
-`python train.py -l C:\Users\sensh\Desktop\學長的\yzu_nids_project\DATA\labeled_data\dataset-data-imblance.csv`
-
-* **模型預測指令 (需要手動改成自己的檔案路徑) -> 這個是批次處理，動態監測可以不用管**
-`python predict.py -l ./DATA/raw_data/predict.log -m ./MODELS/model_RandomForestClassifier.pkl`
-
-* **啟動API Server**
-`python -m uvicorn api:app --reload --host 0.0.0.0 --port 8000`
-此步驟須完成，前端畫面才會顯示得出攻擊的Log Data。
-
-* **啟用攻擊監控器**
-`python monitor.py`
-
-## 啟動與建立Apache Server 測試靶機網站
-
-* 請參照下列教學，來部署測試靶機的Apache Server
-https://medium.com/@sui16783/%E6%95%99%E5%AD%B8-%E5%A6%82%E4%BD%95%E7%94%A8-xampp-%E5%9C%A8%E8%87%AA%E5%B7%B1%E7%9A%84%E9%9B%BB%E8%85%A6%E6%9E%B6%E8%A8%AD%E7%AC%AC%E4%B8%80%E5%80%8B%E7%B6%B2%E7%AB%99-d131ca1bd9e9
-
-* 靶機測試網頁：將以下php程式碼用儲存為index.php，作為測試用的靶機頁面，請按照上述教學來建立。
+## System Architecture
 
 ```
-<html>
-
-<head>
-  <title>IDS Testing</title>
-</head>
-<style>
-  /* @import "bourbon"; */
-
-  body {
-    background: #eee !important;
-  }
-
-  .wrapper {
-    margin-top: 80px;
-    margin-bottom: 80px;
-  }
-
-  .form-signin {
-    max-width: 380px;
-    padding: 15px 35px 45px;
-    margin: 0 auto;
-    background-color: #fff;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-
-    .form-signin-heading,
-    .checkbox {
-      margin-bottom: 30px;
-    }
-
-    .checkbox {
-      font-weight: normal;
-    }
-
-    .form-control {
-      position: relative;
-      font-size: 16px;
-      height: auto;
-      padding: 10px;
-      @include box-sizing(border-box);
-
-      &:focus {
-        z-index: 2;
-      }
-    }
-
-    input[type="text"] {
-      margin-bottom: -1px;
-      border-bottom-left-radius: 0;
-      border-bottom-right-radius: 0;
-    }
-
-    input[type="password"] {
-      margin-bottom: 20px;
-      border-top-left-radius: 0;
-      border-top-right-radius: 0;
-    }
-  }
-</style>
-
-<body>
-  <!-- 這裡是 HTML 語法的 主要資料區 -->
-  <!-- <?php echo "IDS Testing System"; ?> -->
-  <h1 style="text-align:center; margin-top:50px; margin-bottom:-50px">IDS Testing System</h1>
-  <div class="wrapper">
-    <form class="form-signin" method="GET">
-      <h2 class="form-signin-heading">Search Items</h2>
-      <input type="text" class="form-control" name="name" placeholder="Username" required="" autofocus="" />
-      <!-- <input type="password" class="form-control" name="password" placeholder="Password" required=""/>       -->
-      <label class="checkbox">
-        <!-- <input type="checkbox" value="remember-me" id="rememberMe" name="rememberMe"> Remember me -->
-      </label>
-      <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
-
-    </form>
-  </div>
-</body>
-
-</html>
+Browser / Attack Script
+        │
+        ▼
+  Apache (Docker)          ← target website: TechMart (htdocs/)
+        │ access.log
+        ▼
+  monitor.py               ← tails log, triggers predict.py on new lines
+        │
+        ▼
+  predict.py               ← RandomForest ML model (98.86% accuracy)
+        │ prediction_output.json
+        ▼
+  send_to_logstash.py      ← forwards new records to Logstash via HTTP
+        │
+        ▼
+  Logstash (Docker)        ← parses & indexes into Elasticsearch
+        │
+        ▼
+  Elasticsearch (Docker)   ← stores prediction-logs-* index
+        │
+        ▼
+  Kibana (Docker)          ← dashboards + alerting rule
+        │ fires rule → writes to nids-kibana-alerts index
+        ▼
+  poller.py                ← detects new Kibana trigger
+        │ Critical alert?
+        ├─ YES → auto-ban source IPs → htdocs/.htaccess (HTTP 403)
+        │
+        ▼
+  OpenAI GPT-3.5           ← generates remediation suggestions
+        │
+        ▼
+  LINE Messaging API       ← push alert + ban notice to user
+        │
+        ▼
+  api.py (FastAPI)         ← LINE webhook: receives user messages
+        │
+        ▼
+  LangGraph ReAct Agent    ← LLM orchestrator (Ollama llama3.1, local GPU)
+        │  understands natural language, decides which tool to call
+        │
+        ├── check_ip_reputation  →  threat_intel.py  (AbuseIPDB + IPinfo)
+        ├── ban_ip_address       →  enforcer.py      (htdocs/.htaccess)
+        ├── unban_ip_address     →  enforcer.py
+        ├── list_blocked_ips     →  blacklist.json
+        ├── get_recent_attacks   →  Elasticsearch
+        ├── get_system_status    →  Elasticsearch + system
+        └── search_knowledge     →  RAG service (port 8001)
 ```
 
-## 部署 ELK Stack 動態監測log資訊
+**Attack types detected:** SQL Injection (1) · XSS (2) · Directory Traversal (3)
+**ML model accuracy:** RandomForest 98.86%
 
-跟這部分有關連的程式:
-1. docker-compose.yml
-2. logstash.conf
-3. kibana.yml
-4. send_to_logstash.py
+---
 
-### 安裝docker
-* **啟動容器 (含有Elastic、Logstash、Kibana)：**
-`docker-compose up -d`
+## Features
 
-* **查看運作狀況：**
-`docker-compose ps -a`
+### Core Pipeline
+- Real-time Apache log monitoring and ML-based attack classification
+- ELK Stack integration for log storage, search, and dashboards
+- Kibana alerting rule triggers LINE push notification on attack detection
 
-#### 其他補充
-* **使容器停止運行：**
-`docker-compose down`
+### LINE Alerts
+- Structured alert with risk level, source IP, payload, and attack breakdown
+- AI-generated remediation steps via OpenAI GPT-3.5
+- RAG knowledge base (LangChain + Ollama) for additional context
 
-* **刪除容器：**
-`docker-compose down -v`
+### Auto IP Banning (Critical alerts only)
+- When a **Critical** (SQL Injection) alert fires, source IPs are automatically banned
+- Ban is enforced by writing `Require not ip` rules to `htdocs/.htaccess`
+- Apache reads `.htaccess` per-request — no container restart needed
+- Banned IPs receive **HTTP 403 Forbidden** immediately
+- LINE alert includes: `x.x.x.x was banned automatically.`
 
-### 機器學習模型與ELK Stack之間的橋樑
-* **動態偵測prediction_output.json，若有更新會將資料推上Logstash**
-`python send_to_logstash.py`
+### Security Assistant (LINE Chatbot — LangGraph Agent)
 
+Interact with the NIDS via LINE using **natural language** — no fixed commands required.
+A LangGraph ReAct agent (Ollama llama3.1, local GPU) reads your message, selects the appropriate tool, and synthesises a plain-text reply.
 
-## 告警系統 (LINE BOT推播)
+#### Available Tools
 
-跟這部分有關連的程式：
-1. alert_log_to_line.py
-2. ./webhook_line/webhook.py
-3. ./test_alert/attack_simulator.py
+| Tool | What it does | Example queries |
+|---|---|---|
+| `check_ip_reputation` | AbuseIPDB abuse score + IPinfo geolocation/ASN + local blacklist status | "幫我查 1.2.3.4 的 IP 資料" · "check ip 45.142.212.100" |
+| `ban_ip_address` | Adds IP to `blacklist.json`, writes `Require not ip` to `.htaccess` (immediate HTTP 403) | "封鎖 1.2.3.4" · "ban this ip 192.168.1.50" |
+| `unban_ip_address` | Removes IP from blacklist, updates `.htaccess` | "解除封鎖 1.2.3.4" · "unban 192.168.1.50" |
+| `list_blocked_ips` | Lists all currently blacklisted IPs with ban date and reason | "目前封鎖了哪些 IP？" · "show blacklist" |
+| `get_recent_attack_logs` | Last 5 attack detections from Elasticsearch (type, timestamp, payload) | "最近的攻擊紀錄" · "show recent attacks" |
+| `get_system_status` | ES cluster health, total records, attack count, blacklist size, log file size | "系統狀態" · "system status" |
+| `search_security_knowledge` | Queries local RAG knowledge base (OWASP, CVEs, incident response) | "什麼是 XSS？" · "how to prevent SQL injection?" |
 
-* **動態偵測ELK Stack，若告警產生，啟動並發送推播至LINE BOT**
-`python alert_log_to_line.py`
-該程式需替換`CHANNEL_ACCESS_TOKEN`及`USER_ID`。
-`CHANNEL_ACCESS_TOKEN`請至https://developers.line.biz/console/ 後臺取得。
-
-* **取得`USER_ID`流程**
-下載：https://ngrok.com/ 並註冊取得金鑰
-
-* **開啟ngrok終端：**
-`.\ngrok.exe http 5000`
-複製ngrok回應的連結，在連結結尾加上/callback，放至https://developers.line.biz/console/ 的 Webhook。
-
-* **取得`USER_ID`：**
-`python webhook.py`
-傳任意訊息給LINE BOT，會得到`USER_ID`，請將其複製。
-
-* **測試告警系統：**
-`python attack_simulator.py`
-自動化攻擊腳本，測試告警系統是否作用。
-
-## 專案資料夾結構說明
+#### Example Conversations
 
 ```
-學長的/
-├── yzu_nids_project/         # 主體程式與ELK設定
-│   ├── MODELS/               # 儲存訓練好的機器學習模型
-│   ├── DATA/
-│   │   ├── raw_data/         # 原始日誌檔案
-│   │   └── labeled_data/     # 標記過的訓練資料
-|   |
-|   ├── webhook_line/             # LINE webhook 相關程式
-│   │   ├── webhook.py            # 取得userId的Flask服務
-│   │   └── ReadMe.md             # webhook簡易說明
-│   │
-│   ├── test_alert/               # 攻擊模擬腳本
-│   │   └── attack_simulator.py   # 自動化攻擊腳本
-│   │
-│   ├── GanacheBlockChain/    # 區塊鏈相關（如有）
-│   ├── ...                   # 其他Python程式、設定檔
-│   ├── docker-compose.yml    # ELK Stack 容器設定
-│   ├── logstash.conf         # Logstash 設定
-│   ├── kibana.yml            # Kibana 設定
-│   └── README.md             # 使用說明文件
+User:   目前系統狀態？
+Agent:  Elasticsearch 狀態正常，共有 7,373 筆紀錄，其中 4,672 筆為攻擊事件。
+        目前封鎖 5 個 IP，日誌大小 423 KB。
+
+User:   幫我查 45.142.212.100
+Agent:  IP 聲譽報告：45.142.212.100
+        - 濫用分數：100/100（惡意）
+        - 國家：DE（德國）
+        - ISP：Contabo GmbH
+        - 此 IP 已列入本地封鎖名單
+
+User:   ban 192.168.1.100
+Agent:  IP 192.168.1.100 has been added to the blacklist.
+        Total blacklisted IPs: 6
+        Apache enforcement: active (403 Forbidden)
+
+User:   What is a Directory Traversal attack?
+Agent:  Directory Traversal (also called Path Traversal) is an attack that
+        exploits insufficient input validation to access files outside the
+        web root. Attackers use sequences like ../../../etc/passwd to
+        read sensitive system files...
+```
+
+---
+
+## Prerequisites
+
+| Requirement | Version |
+|---|---|
+| Windows 10/11 | — |
+| Docker Desktop | Latest |
+| Anaconda | Latest |
+| Python (conda env) | 3.10.13 |
+| Ollama | Latest (for RAG) |
+
+---
+
+## Installation
+
+### 1. Clone the repository
+
+```bash
+git clone <repo-url>
+cd YZU_NIDS_Alert_Platform_claude
+```
+
+### 2. Create conda environment
+
+```bash
+conda create -n PonyNIDS python=3.10.13
+conda activate PonyNIDS
+pip install -r requirements.txt
+```
+
+### 3. Configure credentials
+
+Edit `.env` and fill in your keys:
+
+```env
+# Elasticsearch
+ES_HOST=http://localhost:9200
+ES_USER=elastic
+ES_PASSWORD=<your-password>
+
+# LINE Bot — https://developers.line.biz/console/
+LINE_CHANNEL_ACCESS_TOKEN=<your-token>
+LINE_CHANNEL_SECRET=<your-secret>
+LINE_USER_IDS=<your-user-id>
+
+# OpenAI — https://platform.openai.com/
+OPENAI_API_KEY=<your-key>
+
+# AbuseIPDB (free) — https://www.abuseipdb.com/register
+ABUSEIPDB_API_KEY=<your-key>
+
+# ngrok (free) — https://dashboard.ngrok.com/signup
+NGROK_AUTHTOKEN=<your-token>
+
+# Protected server info (shown in alert messages)
+PROTECTED_SERVER_PORT=80
+PROTECTED_SERVER_SERVICE=Apache Web Server (TechMart)
+
+# Ollama (local LLM agent) — defaults shown, change if needed
+OLLAMA_BASE_URL=http://localhost:11434
+OLLAMA_MODEL=llama3.1
+```
+
+**Getting LINE credentials:**
+1. Go to [LINE Developers Console](https://developers.line.biz/console/)
+2. Create a Messaging API channel
+3. Issue a Channel Access Token
+4. Add the bot and get your User ID by sending it a message
+
+### 4. Start Docker services
+
+```bash
+docker compose up -d
+```
+
+Wait ~60 seconds for Elasticsearch to become healthy, then verify:
+
+```bash
+docker ps
+# Should show: elasticsearch, logstash, kibana, apache, rag — all Up
+```
+
+### 5. Set up Kibana (one-time)
+
+**a. Create Data View**
+- Kibana → Stack Management → Data Views → Create
+- Index pattern: `prediction-logs-*`
+- Timestamp: `@timestamp`
+
+**b. Create Index Connector**
+- Stack Management → Connectors → Create connector → **Index**
+- Name: `NIDS Alert Index`
+- Index: `nids-kibana-alerts`
+
+**c. Create Alerting Rule**
+- Stack Management → Rules → Create rule
+- Name: `NIDS Attack Detection`
+- Type: `Elasticsearch query`
+- Data view: `NIDS Predictions`
+- KQL: `attack_prediction > 0`
+- Threshold: `IS ABOVE 0` · For the last: `3 minutes`
+- Check every: `1 minute` · Notify: `On check intervals`
+- Action: `NIDS Alert Index` → Document body:
+  ```json
+  {"rule":"{{rule.name}}","triggered_at":"{{date}}"}
+  ```
+
+### 6. Set up LINE webhook
+
+After starting the platform (step 7), copy the ngrok URL printed in the console:
+
+```
+>>> LINE Webhook URL: https://xxxx.ngrok-free.app/webhook
+```
+
+Then in LINE Developers Console → your channel → **Messaging API**:
+- Paste the URL into **Webhook URL**
+- Click **Verify**
+- Toggle **Use webhook** ON
+
+> The ngrok URL changes on every restart (free tier). Re-paste after each `python start.py`.
+> If ngrok is already running from a previous session, `start.py` reuses the existing tunnel automatically.
+
+### 7. Start the platform
+
+```bash
+conda activate PonyNIDS
+python start.py
+```
+
+---
+
+## Usage
+
+### start.py output
+
+```
+====================================================
+  YZU NIDS Alert Platform — Startup
+====================================================
+
+[1/4] Infrastructure checks
+  [OK]  Docker containers
+  [OK]  Elasticsearch
+  [OK]  Kibana
+  [OK]  Logstash
+  [OK]  Apache (port 80)
+
+[2/4] Config & file checks
+  [OK]  .env credentials
+  [OK]  ML model (RandomForest)
+  [OK]  Apache access.log
+  [OK]  Kibana NIDS rule
+  [OK]  Log archived → apache-logs/archive/access_20260329_060000.log
+  [OK]  Log offset OK (0 / 34391 bytes)
+
+[3/4] Starting Python services
+  [OK]  monitor.py          started  (PID ...)
+  [OK]  send_to_logstash.py started  (PID ...)
+  [OK]  poller.py           started  (PID ...)
+  [OK]  api.py (webhook)    started  (PID ...)
+
+[4/4] Starting ngrok tunnel (LINE webhook)
+  [OK]  Reusing existing ngrok tunnel
+
+  >>> LINE Webhook URL:
+  https://xxxx.ngrok-free.app/webhook
+```
+
+### Run attack simulation
+
+```bash
+python attack_scripts.py
+```
+
+Sends SQL Injection, XSS, and Directory Traversal payloads to `http://localhost`.
+
+### LINE alert format (Critical)
+
+```
+🛡️ NIDS 網路攻擊警報
+────────────────────────────────
+[Event Name]     : SQL Injection Detected
+                   (3 times within 2 min)
+[Risk Level]     : 🔴 Critical
+[Timestamp]      : 2026-03-29 06:07:53
+[Source IP]      : 203.0.113.42
+[Destination]    : 192.168.0.125:80 (Apache Web Server (TechMart))
+[Attack Payload] : GET /search?q=admin'+OR+1=1-- HTTP/1.1
+[Prediction Code]: 1 — SQL Injection
+[Total Alerts]   : 3 attack(s) in this batch
+[Breakdown]      : SQL Injection: 3
+────────────────────────────────
+⚠️  This event has been flagged as suspicious,
+    please investigate.
+💡 Database compromise possible — act immediately.
+
+【AI Security Analysis】
+...remediation steps from GPT-3.5...
+
+[ Top 3 Detections ]
+  1. [SQL Injection]
+     Src: 203.0.113.42  HTTP: 200
+     /search?q=admin'+OR+1=1--
+
+────────────────────────────────
+🚫 Auto-Ban Activated
+   203.0.113.42 was banned automatically.
+   Server access blocked — HTTP 403 Forbidden.
+────────────────────────────────
+🔒 YZU NIDS Platform | Auto-generated Alert
+```
+
+### Auto-ban behaviour
+
+| Risk Level | Attack Type | Auto-ban |
+|---|---|---|
+| 🔴 Critical | SQL Injection | Yes — source IP banned, Apache returns 403 |
+| 🟠 High | XSS | No — alert only |
+| 🟡 Medium | Directory Traversal | No — alert only |
+
+To unban after testing:
+```
+/unban <IP>    ← send via LINE chatbot
+```
+
+### IP reputation check
+
+The agent understands natural language — just describe what you want:
+
+```
+User:  查一下 203.0.113.42
+```
+```
+Agent: IP 聲譽報告：203.0.113.42
+       ────────────────────────────
+       濫用分數   : 87/100（惡意）
+       回報次數   : 142
+       最後回報   : 2026-03-28
+       國家       : CN
+       ISP        : Some ISP
+       位置       : Beijing, Beijing, CN
+       ASN        : AS12345 Some Network
+       * 此 IP 已列入本地封鎖名單
+```
+
+Data sources (same as before):
+- **AbuseIPDB** (`api.abuseipdb.com/api/v2/check`) — abuse confidence score, report history
+- **IPinfo** (`ipinfo.io/{ip}/json`) — geolocation, ASN, hostname (no key required)
+
+---
+
+## Project Structure
+
+```
+YZU_NIDS_Alert_Platform_claude/
 │
-├── testing.com/              # 靶機測試網頁
-│   └── index.php             # 靶機用PHP頁面
+├── start.py                  # One-command startup + health checks
+├── config.py                 # Centralised config — reads from .env
+├── .env                      # Credentials (not committed)
+│
+├── Core pipeline
+│   ├── monitor.py            # Tails access.log → triggers predict.py
+│   ├── predict.py            # ML inference on log lines
+│   ├── send_to_logstash.py   # Forwards predictions to Logstash
+│   └── poller.py             # Kibana alert → auto-ban → OpenAI → LINE
+│
+├── Security Assistant
+│   ├── api.py                # FastAPI server — LINE webhook endpoint
+│   └── assistant/
+│       ├── line_handler.py   # Signature verification → routes to agent
+│       ├── agent.py          # LangGraph ReAct agent (Ollama llama3.1)
+│       ├── tools.py          # LangChain tool definitions (7 tools)
+│       ├── command_handler.py# Internal helpers called by tools
+│       ├── ai_handler.py     # OpenAI + RAG (legacy, still available)
+│       ├── threat_intel.py   # AbuseIPDB + IPinfo IP reputation
+│       └── enforcer.py       # Writes htdocs/.htaccess ban rules
+│
+├── IP Blacklist
+│   └── blacklist.json        # Persistent banned IP list
+│
+├── ML
+│   ├── train.py              # Train classifiers on labeled data
+│   ├── retrain.py            # Quick retrain script
+│   ├── utilities.py          # Feature extraction / log parsing
+│   ├── regex_4_labels.csv    # Attack regex rules for labeling
+│   ├── MODELS/               # Trained .pkl model files
+│   └── DATA/                 # Raw and labeled training data
+│
+├── Infrastructure
+│   ├── docker-compose.yml    # ELK Stack + Apache + RAG containers
+│   ├── logstash.conf         # Logstash HTTP input pipeline
+│   └── kibana.yml            # Kibana authentication config
+│
+├── Target website
+│   └── htdocs/               # TechMart e-commerce site (Apache root)
+│       ├── index.html        # Homepage with search
+│       ├── search.html       # Search results page
+│       └── .htaccess         # Auto-managed: IP bans + URL rewrites
+│
+├── RAG/                      # LangChain + Ollama RAG service (port 8001)
+│
+├── Testing
+│   └── attack_scripts.py     # Automated attack traffic generator
+│
+└── Runtime state (auto-generated)
+    ├── apache-logs/          # Apache access.log (Docker bind mount)
+    │   └── archive/          # Timestamped log archives per restart
+    ├── prediction_output.json
+    ├── last_offset.txt
+    └── *_out.txt             # Per-service stdout logs
 ```
 
-> 各資料夾請依實際需求放置對應檔案，詳細用途請參考上方說明。
+---
+
+## Docker Commands
+
+```bash
+# Start all containers
+docker compose up -d
+
+# Check status
+docker compose ps
+
+# View Logstash logs
+docker compose logs logstash
+
+# Stop all
+docker compose down
+
+# Stop and delete volumes (resets Elasticsearch data)
+docker compose down -v
+```
+
+---
+
+## RAG Knowledge Base
+
+The Security Assistant uses Retrieval-Augmented Generation (RAG) to answer questions. When you ask a question via LINE, the system:
+1. Queries the RAG service (port 8001) with your question
+2. RAG retrieves the most relevant chunks from the knowledge base using Ollama embeddings
+3. Retrieved context is prepended to the OpenAI GPT-3.5 prompt
+4. If RAG returns nothing useful, falls back to plain GPT-3.5
+
+### Knowledge Base Files (`RAG/knowledge/`)
+
+| File | Language | Coverage |
+|---|---|---|
+| `OWASP_Top10_2021.txt` | English | OWASP Top 10 (2021) — A01 to A10 with attack examples and defenses |
+| `Web_Attack_Defense.txt` | English | SQLi, XSS, Directory Traversal, CSRF, Brute Force — detailed payloads and mitigations |
+| `NIDS_Incident_Response.txt` | English | IDS/IPS concepts, incident response (NIST), IP blocking, SIEM, MITRE ATT&CK |
+| `作業系統與應用程式安全.txt` | Chinese | OS & application security |
+| `新興科技安全.txt` | Chinese | Emerging technology security |
+| `網路與通訊安全.txt` | Chinese | Network & communication security |
+| `資安維運技術.txt` | Chinese | Security operations & techniques |
+
+### Adding New Knowledge
+
+Drop any `.txt` file into `RAG/knowledge/` and restart the RAG container:
+
+```bash
+docker compose restart rag
+```
+
+The RAG service re-indexes all files on startup. Ollama must be running for embeddings to work.
+
+### RAG Service Requirements
+
+- **Ollama** must be running on the host (`ollama serve`) with the required models pulled
+- RAG container connects to Ollama at `host.docker.internal:11434`
+- If Ollama is not running, the RAG container will restart-loop — the assistant falls back to plain GPT-3.5
+
+```bash
+# Start Ollama (if not running)
+ollama serve
+
+# Pull models (first time only)
+ollama pull nomic-embed-text   # embeddings for RAG
+ollama pull llama3.1           # LINE chatbot agent (tool calling)
+ollama pull llama3             # kept for RAG summarisation (optional)
+```
+
+> **Note:** The LINE chatbot agent requires `llama3.1` (or later) because it uses
+> Ollama's native tool-calling API. The base `llama3` model does not support tools.
+
+---
+
+## Retrain the ML Model
+
+```bash
+python retrain.py
+```
+
+Results (current models, sklearn 1.3.2):
+
+| Model | Accuracy |
+|---|---|
+| RandomForest | 98.86% |
+| DecisionTree | 98.76% |
+| ExtraTree | 98.56% |
+| MLP | 93.14% |
+| KNN | 86.96% |
+
+---
+
+## Troubleshooting
+
+**No LINE notification received**
+- Check `poller_out.txt` for errors
+- Verify Kibana rule has the Index connector action saved
+- Ensure `nids-kibana-alerts` index exists:
+  ```bash
+  curl -u elastic:<pw> http://localhost:9200/nids-kibana-alerts/_count
+  ```
+
+**LINE chatbot not responding**
+- Check `api_out.txt` for errors
+- Verify ngrok URL is set in LINE Developers Console → Webhook URL
+- Run `start.py` and copy the new `>>> LINE Webhook URL`
+
+**api.py crashes immediately (exit 1)**
+- Port 8000 is already occupied — `start.py` kills it automatically on next run
+- Manual fix: `powershell -Command "Stop-Process -Id (Get-NetTCPConnection -LocalPort 8000).OwningProcess -Force"`
+
+**ngrok ERR_NGROK_108 (session limit)**
+- `start.py` reuses an existing ngrok session automatically
+- If the error persists, kill all ngrok processes and restart
+
+**Attacks not appearing in Kibana**
+- Check `monitor_out.txt` — should show `[monitor] Predicting N new lines...`
+- Check `logstash_out.txt` — should show `Sent N new record(s) to Logstash`
+
+**Website shows 403 after attack**
+- Source IP was auto-banned (Critical attack detected)
+- Send `/unban <IP>` via LINE chatbot to restore access
+- Check current blacklist: `/blacklist list`
+
+**Website shows 404 on /search**
+- `.htaccess` rewrite rule may be missing — run:
+  ```bash
+  python -c "import sys; sys.path.insert(0,'.'); from assistant.enforcer import apply_blacklist; apply_blacklist()"
+  ```
+
+**Elasticsearch connection refused**
+- Wait 60s after `docker compose up -d`
+- Check: `curl -u elastic:<pw> http://localhost:9200/_cluster/health`
+
+**Stale log offset after restart**
+- `start.py` detects and resets this automatically

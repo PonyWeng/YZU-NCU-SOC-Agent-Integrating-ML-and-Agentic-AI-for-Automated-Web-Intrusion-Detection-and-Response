@@ -1,111 +1,127 @@
-from sklearn import neighbors
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.neural_network import MLPClassifier
-from utilities import *
+# About: Train multiple classifiers on labelled HTTP log data and save models.
+# Usage: python train.py -l DATA/labeled_data/dataset.csv
+
+import argparse
+import pickle
+
+import numpy as np
+import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
-from sklearn.metrics import confusion_matrix #混淆矩陣
-from yellowbrick.classifier import ClassificationReport
 from matplotlib import pyplot
-import numpy as np
-import random
+from sklearn import tree, neighbors
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import confusion_matrix, accuracy_score
+from sklearn.model_selection import train_test_split
+from sklearn.neural_network import MLPClassifier
+from yellowbrick.classifier import ClassificationReport
 
 
-def get_args():
+TRAINING_ALGORITHMS = [
+    'ExtraTreeClassifier',
+    'DecisionTreeClassifier',
+    'RandomForestClassifier',
+    'KNeighborsClassifier',
+    'MLPClassifier',
+]
+
+CLASS_NAMES = ['normal', 'sql injection', 'XSS', 'directory traversal']
+
+
+def get_args() -> dict:
     parser = argparse.ArgumentParser()
-    parser.add_argument('-l', '--csv_file', help = 'labeled csv file', required = True)
+    parser.add_argument('-l', '--csv_file', help='Labeled CSV file', required=True)
     return vars(parser.parse_args())
 
-args = get_args()
 
-csv_file = args['csv_file']
-training_algorithms = ['ExtraTreeClassifier','DecisionTreeClassifier','RandomForestClassifier','KNeighborsClassifier'] 
-max_accuracy=0
-max_model=''
-max_algorithm=''
-
-df = pd.read_csv(csv_file, encoding='latin-1')
-df.to_numpy()
-X = df.iloc[:, :-2]
-y = df.iloc[:, -2]
-df.to_numpy()
-
-training_features,testing_features, traning_labels,  testing_labels = train_test_split(X, y, test_size=0.2, random_state=0)
-
-for training_algorithm in training_algorithms:
-    print(" --- "+training_algorithm+" --- ")
-    if training_algorithm == 'ExtraTreeClassifier':
-        attack_classifier = tree.ExtraTreeClassifier()
-
-    elif training_algorithm == 'DecisionTreeClassifier':
-        attack_classifier = tree.DecisionTreeClassifier()
-
-    elif training_algorithm == 'KNeighborsClassifier':
-        attack_classifier = neighbors.KNeighborsClassifier(n_neighbors = 7)
-
-    elif training_algorithm == 'MLPClassifier':
-        attack_classifier = MLPClassifier(max_iter=300)
-
-    elif training_algorithm == 'RandomForestClassifier':
-        attack_classifier = RandomForestClassifier(n_jobs=1) # n_jobs=1 means use single thread
-        
-    else:
-        print('{} is not recognized as a training algorithm')
-    
-    np.random.seed(1234) # set same seed for reproducibility
-
-    if attack_classifier != None:
-        attack_classifier.fit(training_features.values, traning_labels.values)
-        predictions = attack_classifier.predict(testing_features.values)
-        model_file_name = 'MODELS/model_{}.pkl'.format(training_algorithm) ###自己生成 pickle
-        pickle.dump(attack_classifier, open(model_file_name, 'wb'))
-
-        accuracy_scoree=accuracy_score(testing_labels, predictions)
-        print('accuracy score = ' + str(accuracy_scoree))
-        print(model_file_name)
-
-        if max_accuracy < accuracy_scoree:
-            max_accuracy=accuracy_scoree
-            max_model=model_file_name
-            max_algorithm=training_algorithm
-    # plot confusion matrix and classification report
-
-    cm= confusion_matrix(testing_labels, predictions,labels=attack_classifier.classes_) ####
-    ax = plt.subplot()
-    sns.heatmap(cm, annot=True, fmt='g', ax=ax,cmap='Greens' )
-    ax.set_xlabel('Predicted labels')
-    ax.set_ylabel('True labels')
-    ax.set_title(training_algorithm)
-    ax.xaxis.set_ticklabels(['normal', 'sql injection','XSS','directory traversal'])
-    ax.yaxis.set_ticklabels(['normal', 'sql injection','XSS','directory traversal'])
-    plt.savefig('confusion_matrix.png')
-    plt.show()
+def build_classifier(algorithm: str):
+    """Return an unfitted classifier instance for the given algorithm name."""
+    match algorithm:
+        case 'ExtraTreeClassifier':
+            return tree.ExtraTreeClassifier()
+        case 'DecisionTreeClassifier':
+            return tree.DecisionTreeClassifier()
+        case 'RandomForestClassifier':
+            return RandomForestClassifier(n_jobs=1)
+        case 'KNeighborsClassifier':
+            return neighbors.KNeighborsClassifier(n_neighbors=7)
+        case 'MLPClassifier':
+            return MLPClassifier(max_iter=300)
+        case _:
+            raise ValueError(f'Unknown algorithm: {algorithm}')
 
 
+def main() -> None:
+    args = get_args()
+    df = pd.read_csv(args['csv_file'], encoding='latin-1')
+    X = df.iloc[:, :-2]
+    y = df.iloc[:, -2]
 
-    visualizer = ClassificationReport(attack_classifier,cmap="Greens",colorbar=True, classes=['normal', 'sql injection','XSS','directory traversal'],support=True)
-    visualizer.fit(training_features.values, traning_labels.values)
-    visualizer.score(testing_features.values, testing_labels.values)
-    visualizer.show()
+    X_train, X_test, y_train, y_test = train_test_split(
+        X, y, test_size=0.2, random_state=0
+    )
+
+    best_accuracy = 0.0
+    best_model_path = ''
+    best_algorithm = ''
+    last_classifier = None
+
+    for algorithm in TRAINING_ALGORITHMS:
+        print(f'\n--- {algorithm} ---')
+        np.random.seed(1234)
+
+        classifier = build_classifier(algorithm)
+        classifier.fit(X_train.values, y_train.values)
+        predictions = classifier.predict(X_test.values)
+
+        model_path = f'MODELS/model_{algorithm}.pkl'
+        with open(model_path, 'wb') as fh:
+            pickle.dump(classifier, fh)
+
+        acc = accuracy_score(y_test, predictions)
+        print(f'Accuracy: {acc:.4f}  →  saved to {model_path}')
+
+        if acc > best_accuracy:
+            best_accuracy = acc
+            best_model_path = model_path
+            best_algorithm = algorithm
+
+        # Confusion matrix
+        cm = confusion_matrix(y_test, predictions, labels=classifier.classes_)
+        ax = plt.subplot()
+        sns.heatmap(cm, annot=True, fmt='g', ax=ax, cmap='Greens')
+        ax.set_xlabel('Predicted labels')
+        ax.set_ylabel('True labels')
+        ax.set_title(algorithm)
+        ax.xaxis.set_ticklabels(CLASS_NAMES)
+        ax.yaxis.set_ticklabels(CLASS_NAMES)
+        plt.savefig('confusion_matrix.png')
+        plt.show()
+
+        # Classification report
+        visualizer = ClassificationReport(
+            classifier, cmap='Greens', colorbar=True,
+            classes=CLASS_NAMES, support=True,
+        )
+        visualizer.fit(X_train.values, y_train.values)
+        visualizer.score(X_test.values, y_test.values)
+        visualizer.show()
+
+        last_classifier = classifier
+
+    print('\n========== BEST RESULTS ==========')
+    print(f'Accuracy  : {best_accuracy:.4f}')
+    print(f'Model     : {best_model_path}')
+    print(f'Algorithm : {best_algorithm}')
+
+    # Feature importances for the last tree-based model
+    if last_classifier is not None and hasattr(last_classifier, 'feature_importances_'):
+        importance = last_classifier.feature_importances_
+        for i, v in enumerate(importance):
+            print(f'Feature {i}: {v:.5f}')
+        pyplot.bar(range(len(importance)), importance)
+        pyplot.show()
 
 
-# print(classification_report(testing_labels, predictions,target_names=['normal', 'sql injection','XSS','directory traversal']))
-
-
-print('---------------------------- BEST RESULTS ---------------------------')
-print('Accuracy '+str(max_accuracy))
-print('model with max accuracy : '+ max_model)
-print('Algorithm : '+ max_algorithm)
-
-
-# get importance
-importance = attack_classifier.feature_importances_
-# summarize feature importance
-for i,v in enumerate(importance):
- print('Feature: %0d, Score: %.5f' % (i,v))
-# plot feature importance
-pyplot.bar([x for x in range(len(importance))], importance)
-pyplot.show()
-
-
-
+if __name__ == '__main__':
+    main()

@@ -1,15 +1,22 @@
-version: '3'
 services:
+
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:8.5.0
     environment:
       - discovery.type=single-node
       - xpack.security.enabled=true
       - ES_JAVA_OPTS=-Xms1g -Xmx1g
+      - ELASTIC_PASSWORD=vEo4PSW2yMiHIMMTxAHk
     ports:
       - "9200:9200"
     volumes:
       - esdata:/usr/share/elasticsearch/data
+    healthcheck:
+      test: ["CMD-SHELL", "curl -sf -u elastic:vEo4PSW2yMiHIMMTxAHk http://localhost:9200/_cluster/health"]
+      interval: 20s
+      timeout: 10s
+      retries: 15
+      start_period: 60s
 
   logstash:
     image: docker.elastic.co/logstash/logstash:8.5.0
@@ -17,8 +24,12 @@ services:
       - ./logstash.conf:/usr/share/logstash/pipeline/logstash.conf
     ports:
       - "5044:5044"
+    environment:
+      - "xpack.monitoring.enabled=false"
     depends_on:
-      - elasticsearch
+      elasticsearch:
+        condition: service_healthy
+    restart: on-failure
 
   kibana:
     image: docker.elastic.co/kibana/kibana:8.5.0
@@ -27,7 +38,29 @@ services:
     ports:
       - "5601:5601"
     depends_on:
-      - elasticsearch
+      elasticsearch:
+        condition: service_healthy
+
+  apache:
+    image: httpd:2.4
+    ports:
+      - "80:80"
+    volumes:
+      - ./htdocs:/usr/local/apache2/htdocs
+      - ./apache-logs:/usr/local/apache2/logs
+    # Switch log format from 'common' to 'combined' and write to a file
+    # (combined = includes Referer + User-Agent, which the ML regex expects)
+    command: >
+      /bin/sh -c "
+      sed -i 's|CustomLog /proc/self/fd/1 common|CustomLog /usr/local/apache2/logs/access.log realip|g' /usr/local/apache2/conf/httpd.conf &&
+      sed -i 's|#LoadModule rewrite_module|LoadModule rewrite_module|g' /usr/local/apache2/conf/httpd.conf &&
+      sed -i 's|#LoadModule remoteip_module|LoadModule remoteip_module|g' /usr/local/apache2/conf/httpd.conf &&
+      sed -i 's|AllowOverride None|AllowOverride All|g' /usr/local/apache2/conf/httpd.conf &&
+      echo 'RemoteIPHeader X-Real-IP' >> /usr/local/apache2/conf/httpd.conf &&
+      echo 'RemoteIPTrustedProxy 172.18.0.1' >> /usr/local/apache2/conf/httpd.conf &&
+      echo 'LogFormat \"%a %l %u %t \\\"%r\\\" %>s %b \\\"%{Referer}i\\\" \\\"%{User-Agent}i\\\"\" realip' >> /usr/local/apache2/conf/httpd.conf &&
+      httpd-foreground
+      "
 
   rag:
     build: ./RAG
@@ -36,12 +69,13 @@ services:
     volumes:
       - ./RAG/knowledge:/app/knowledge
       - ./RAG/db:/app/db
-    stdin_open: true
-    tty: true
-    depends_on:
-      - elasticsearch
     environment:
       - OLLAMA_BASE_URL=http://host.docker.internal:11434
+      - OLLAMA_LLM_MODEL=llama3.1
+    depends_on:
+      elasticsearch:
+        condition: service_healthy
+    restart: on-failure
 
 volumes:
-  esdata: 
+  esdata:

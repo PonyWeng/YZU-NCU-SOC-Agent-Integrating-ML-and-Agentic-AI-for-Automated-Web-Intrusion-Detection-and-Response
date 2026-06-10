@@ -1,80 +1,104 @@
-# Warning:
-# log will be reload when server restart since list can't store permanently 
-# ===============================================================
-# Procedure description:
-# Step 1:add a new dircectory named "store-logs" as same as Apache log directory
-# Step 2:Then, add two files named "access2.log" and "access3.log" in "store-logs" respectively
-# Step 3: Modify model_path to your model path
-# Step 4:Run server => python monitory.py for starting monitor
-# ===============================================================
+# Continuously tails ACCESS_LOG and runs batch predictions on new lines.
+#
+# Setup (one-time):
+#   1. Create a "store-logs" directory alongside the Apache log directory.
+#   2. Create empty access2.log and access3.log inside store-logs/.
+#   3. Copy .env.example to .env and set ACCESS_LOG / ACCESS2_LOG / ACCESS3_LOG.
+#   4. Run: python monitor.py
 
-import os, sys, time
+import os
+import subprocess
+import sys
+import time
+
 import psutil
 
+from config import ACCESS_LOG, ACCESS2_LOG, ACCESS3_LOG, MODEL_PATH
+
+PYTHON = sys.executable  # always use the same interpreter that launched monitor.py
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+
 OFFSET_FILE = 'last_offset.txt'
-ACCESS_LOG = r'C:\xampp\apache\logs\access.log'
-ACCESS2_LOG = r'C:\xampp\apache\logs\store-logs\access2.log'
-ACCESS3_LOG = r'C:\xampp\apache\logs\store-logs\access3.log'
-MODEL_PATH = '.\\MODELS\\model_RandomForestClassifier.pkl'
 
-# 取得目前 offset
+# Load persisted offset so we resume after a restart
+last_offset: int = 0
 if os.path.exists(OFFSET_FILE):
-    with open(OFFSET_FILE, 'r') as f:
-        last_offset = int(f.read())
-else:
-    last_offset = 0
+    try:
+        with open(OFFSET_FILE, 'r') as _f:
+            raw = _f.read().strip().strip('\x00')
+        if raw:
+            last_offset = int(raw)
+    except (ValueError, OSError):
+        last_offset = 0
 
-last_processed_lines = 0
 
-def is_predict_running():
+def _is_predict_running() -> bool:
     for proc in psutil.process_iter(['name', 'cmdline']):
         try:
-            if 'python' in proc.info['name'] and 'predict.py' in ' '.join(proc.info['cmdline']):
+            if (
+                proc.info['name'] and 'python' in proc.info['name'].lower()
+                and 'predict.py' in ' '.join(proc.info['cmdline'] or [])
+            ):
                 return True
         except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
             continue
     return False
 
-def append_new_logs():
-    global last_offset, last_processed_lines
-    with open(ACCESS_LOG, 'r') as fp:
+
+def _append_new_logs() -> None:
+    global last_offset
+
+    # Detect log rotation / truncation (file smaller than saved offset)
+    current_size = os.path.getsize(ACCESS_LOG)
+    if current_size < last_offset:
+        print(f'[monitor] Log file truncated ({last_offset} → {current_size}). Resetting offset.')
+        last_offset = 0
+
+    with open(ACCESS_LOG, 'r', encoding='utf-8', errors='replace') as fp:
         fp.seek(last_offset)
         new_lines = fp.readlines()
-        new_offset = fp.tell()
+        last_offset = fp.tell()
+
     if new_lines:
         with open(ACCESS2_LOG, 'a') as f2:
-            for line in new_lines:
-                f2.write(line)
-        #print(f'Processed {len(new_lines)} new lines.')
-    last_processed_lines = len(new_lines)
-    last_offset = new_offset
+            f2.writelines(new_lines)
+
     with open(OFFSET_FILE, 'w') as f:
         f.write(str(last_offset))
 
-def batch_predict():
+
+def _batch_predict() -> None:
     if not os.path.exists(ACCESS2_LOG):
         return
     with open(ACCESS2_LOG, 'r') as f2:
         lines = f2.readlines()
-    if lines:
-        if not is_predict_running():
-            print(f'[batch_predict] Predicting {len(lines)} lines...')
-            os.system(f'python predict.py -l "{ACCESS2_LOG}" -m "{MODEL_PATH}"')
-            with open(ACCESS2_LOG, 'r') as f2, open(ACCESS3_LOG, 'a') as f3:
-                for line in f2:
-                    f3.write(line)
-            open(ACCESS2_LOG, 'w').close()
-            print(f'[batch_predict] Done and cleared access2.log.')
-        else:
-            print("[batch_predict] predict.py is already running, skip this round.")
+    if not lines:
+        return
 
-if __name__ == "__main__":
-    print(f'Monitoring {ACCESS_LOG}...')
+    if _is_predict_running():
+        print('[monitor] predict.py already running — skipping this round.')
+        return
+
+    print(f'[monitor] Predicting {len(lines)} new lines...')
+    subprocess.run(
+        [PYTHON, "predict.py", "-l", ACCESS2_LOG, "-m", MODEL_PATH],
+        cwd=SCRIPT_DIR,
+    )
+
+    # Archive processed lines then clear the buffer
+    with open(ACCESS2_LOG, 'r') as f2, open(ACCESS3_LOG, 'a') as f3:
+        f3.writelines(f2.readlines())
+    open(ACCESS2_LOG, 'w').close()
+    print('[monitor] Done — access2.log cleared.')
+
+
+if __name__ == '__main__':
+    print(f'[monitor] Watching {ACCESS_LOG}')
     while True:
         try:
-            append_new_logs()
-            batch_predict()
+            _append_new_logs()
+            _batch_predict()
             time.sleep(0.5)
-        except Exception as e:
-            print(f"[monitor.py] Error: {e}")
+        except Exception as exc:
+            print(f'[monitor] Error: {exc}', file=sys.stderr)
             time.sleep(1)
