@@ -1,0 +1,99 @@
+@startuml YZU-NCU-SOC-Agent
+
+!theme plain
+skinparam backgroundColor #FEFEFE
+skinparam defaultFontSize 12
+skinparam ArrowColor #444444
+skinparam ComponentBorderColor #666666
+skinparam PackageBorderColor #999999
+skinparam PackageBackgroundColor #F7F7F7
+skinparam ComponentBackgroundColor #D6EAF8
+skinparam DatabaseBackgroundColor #FAE5D3
+
+title YZU-NCU-SOC Agent\n<size:10>ML-based NIDS with Agentic LLM for Automated Web Intrusion Detection and Response</size>
+
+' ── Actors ──
+actor "Attacker" as atk #FADBD8
+actor "Security Analyst\n(LINE)" as analyst #D6EAF8
+
+' ── Docker: Apache ──
+package "Docker | Apache :80" as d_apache #FFE8E8 {
+  component "Apache HTTP Server" as apache
+  file ".htaccess (IP Ban)" as htaccess
+}
+
+' ── Detection Pipeline ──
+package "Host | Detection Pipeline" as d_pipe #E8F4FD {
+  component "monitor.py" as monitor
+  component "predict.py\nRandomForest 98.86%" as predict
+  component "send_to_logstash.py" as send_ls
+}
+
+' ── ELK Stack ──
+package "Docker | ELK Stack" as d_elk #FEF9E7 {
+  component "Logstash :5044" as logstash
+  database "Elasticsearch :9200" as es
+  component "Kibana :5601" as kibana
+}
+
+' ── Alert & Response ──
+package "Host | Alert & Auto-Response" as d_alert #F5EEF8 {
+  component "poller.py" as poller
+  component "enforcer.py" as enforcer
+  cloud "OpenAI GPT-3.5" as openai
+}
+
+' ── FastAPI + Agent ──
+package "Host | FastAPI :8000 + ngrok" as d_api #E9F7EF {
+  component "api.py" as api
+  component "line_handler.py" as lh
+
+  package "LangGraph ReAct Agent" as agent_box #D5F5E3 {
+    component "Ollama llama3.1\n(Orchestrator)" as llm
+    component "7 Tools\ncheck_ip / ban / unban\nlogs / status / RAG / blacklist" as tools
+  }
+}
+
+' ── RAG Service ──
+package "Docker | RAG Service :8001" as d_rag #F3E5F5 {
+  component "FastAPI RAG API" as rag_api
+  database "ChromaDB" as chromadb
+  component "llama3.1 + nomic-embed-text\n(Ollama)" as rag_llm
+}
+
+' ── External ──
+cloud "LINE Platform" as line_svc
+cloud "AbuseIPDB / IPinfo" as threat_api
+
+' ══ Flow A: Attack Detection ══
+atk -right-> apache : HTTP attack
+apache ..> monitor : access.log
+monitor --> predict
+predict --> send_ls
+send_ls --> logstash
+logstash --> es
+es --> kibana
+
+' ══ Flow B: Auto-Alert & Ban ══
+kibana -down-> poller : nids-kibana-alerts
+poller --> enforcer : auto-ban IP
+enforcer -up-> htaccess : Require not ip
+poller --> openai : remediation
+poller -right-> line_svc : push alert
+
+' ══ Flow C: LINE Interaction ══
+analyst --> line_svc
+line_svc --> api : POST /webhook
+api --> lh
+lh --> llm : natural language
+lh --> line_svc : /help (static)
+llm --> tools
+tools --> es : logs / status
+tools --> enforcer : ban / unban
+tools -down-> rag_api : search knowledge
+tools --> threat_api : check IP
+rag_api --> chromadb
+chromadb --> rag_llm
+llm --> line_svc : reply
+
+@enduml

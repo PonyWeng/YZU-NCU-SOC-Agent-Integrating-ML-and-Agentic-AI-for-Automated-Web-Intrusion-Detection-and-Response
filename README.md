@@ -8,6 +8,8 @@ A Security Operations Center (SOC) platform that monitors Apache web server logs
 
 ## System Architecture
 
+![System Architecture](Images/System%20Architecture.png)
+
 ```
 Browser / Attack Script
         │
