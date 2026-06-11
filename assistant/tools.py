@@ -100,7 +100,7 @@ def search_security_knowledge(query: str) -> str:
     Use to answer general cybersecurity questions with grounded knowledge.
     """
     try:
-        resp = requests.post(RAG_API_URL, json={"text": query}, timeout=15)
+        resp = requests.post(RAG_API_URL, json={"text": query}, timeout=60)
         if resp.status_code == 200:
             result = resp.json().get("summary", "").strip()
             if result and "don't know" not in result.lower():

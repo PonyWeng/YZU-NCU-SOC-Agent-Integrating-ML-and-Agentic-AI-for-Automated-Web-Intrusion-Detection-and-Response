@@ -32,22 +32,28 @@ class SmartOllamaEmbeddings(Embeddings):
         self.model = model
         self.base_url = base_url.rstrip("/")
 
-    def _embed(self, text: str, keep_alive: str = "5m") -> List[float]:
+    def _embed(self, text: str, keep_alive: str = "5m", num_gpu: int = -1) -> List[float]:
+        payload = {
+            "model": self.model,
+            "prompt": text,
+            "keep_alive": keep_alive,
+            "options": {"num_gpu": num_gpu},
+        }
         resp = requests.post(
             f"{self.base_url}/api/embeddings",
-            json={"model": self.model, "prompt": text, "keep_alive": keep_alive},
+            json=payload,
             timeout=120,
         )
         resp.raise_for_status()
         return resp.json()["embedding"]
 
     def embed_documents(self, texts: List[str]) -> List[List[float]]:
-        # Batch indexing: keep model loaded for speed
-        return [self._embed(t, keep_alive="5m") for t in texts]
+        # Batch indexing: keep on GPU (first run only, then DB is persisted)
+        return [self._embed(t, keep_alive="5m", num_gpu=-1) for t in texts]
 
     def embed_query(self, text: str) -> List[float]:
-        # Query time: unload immediately so llama3 can use VRAM
-        return self._embed(text, keep_alive="0")
+        # Query time: run on CPU (num_gpu=0) so llama3.1 can keep its VRAM
+        return self._embed(text, keep_alive="0", num_gpu=0)
 
 
 embeddings = SmartOllamaEmbeddings(model="nomic-embed-text", base_url=OLLAMA_BASE_URL)
@@ -145,7 +151,7 @@ async def summary(request: Request):
     text: str = data.get("text", "").strip()
     if not text:
         return {"summary": "(No input text provided)"}
-    result = retrieval_chain.invoke({"input": text, "context": []})
+    result = retrieval_chain.invoke({"input": text})
     return {"summary": result.get("answer", "(AI could not generate a summary)")}
 
 
