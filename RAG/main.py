@@ -76,23 +76,35 @@ for file_path in glob.glob(f"{KNOWLEDGE_DIR}/*"):
     except Exception as e:
         print(f"[RAG] Skipped {file_path}: {e}")
 
-vector_db = Chroma.from_documents(
-    documents=all_docs,
-    embedding=embeddings,
-    persist_directory=CHROMA_DB_DIR,
-    collection_name="nids_knowledge",
-)
+_db_ready = os.path.exists(os.path.join(CHROMA_DB_DIR, "chroma.sqlite3"))
 
-# Force-unload nomic-embed-text after indexing so llama3 can use full VRAM
-try:
-    requests.post(
-        f"{OLLAMA_BASE_URL}/api/embeddings",
-        json={"model": "nomic-embed-text", "prompt": "", "keep_alive": 0},
-        timeout=10,
+if _db_ready:
+    # Load existing vector store — Ollama not needed at startup
+    vector_db = Chroma(
+        persist_directory=CHROMA_DB_DIR,
+        embedding_function=embeddings,
+        collection_name="nids_knowledge",
     )
-    print("[RAG] nomic-embed-text unloaded from VRAM")
-except Exception:
-    pass
+    print("[RAG] Loaded existing ChromaDB — skipping re-index")
+else:
+    # First run: build from knowledge files (requires Ollama)
+    vector_db = Chroma.from_documents(
+        documents=all_docs,
+        embedding=embeddings,
+        persist_directory=CHROMA_DB_DIR,
+        collection_name="nids_knowledge",
+    )
+    print(f"[RAG] Built ChromaDB from {len(all_docs)} document chunks")
+    # Unload embedding model so llama3.1 can use full VRAM
+    try:
+        requests.post(
+            f"{OLLAMA_BASE_URL}/api/embeddings",
+            json={"model": "nomic-embed-text", "prompt": "", "keep_alive": 0},
+            timeout=10,
+        )
+        print("[RAG] nomic-embed-text unloaded from VRAM")
+    except Exception:
+        pass
 
 retriever = vector_db.as_retriever(search_kwargs={"k": 3})
 

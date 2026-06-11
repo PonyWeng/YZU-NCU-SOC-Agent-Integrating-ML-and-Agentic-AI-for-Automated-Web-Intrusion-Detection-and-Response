@@ -101,16 +101,25 @@ def check_apache():
 def check_ollama():
     r = requests.get("http://localhost:11434/api/tags", timeout=5)
     models = [m["name"] for m in r.json().get("models", [])]
-    missing = [m for m in ("llama3", "nomic-embed-text") if not any(m in x for x in models)]
+    missing = [m for m in ("llama3.1", "nomic-embed-text") if not any(m in x for x in models)]
     if missing:
         return f"Models not pulled: {', '.join(missing)} — run: ollama pull <model>"
     return True
 
 def check_rag():
-    r = requests.get("http://localhost:8001/docs", timeout=8)
-    if r.status_code == 200:
-        return True
-    return f"HTTP {r.status_code}"
+    # RAG runs module-level init (ChromaDB load) before Uvicorn starts;
+    # retry for up to ~32s to avoid false failures on container restart.
+    last_err = "not started"
+    for _ in range(4):
+        try:
+            r = requests.get("http://localhost:8001/docs", timeout=8)
+            if r.status_code == 200:
+                return True
+            return f"HTTP {r.status_code}"
+        except Exception as e:
+            last_err = str(e)
+            time.sleep(8)
+    return last_err
 
 def check_models():
     path = os.path.join(SCRIPT_DIR, "MODELS", "model_RandomForestClassifier.pkl")
