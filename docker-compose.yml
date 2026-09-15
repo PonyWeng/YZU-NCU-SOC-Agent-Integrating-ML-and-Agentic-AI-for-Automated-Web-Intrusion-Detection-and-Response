@@ -1,3 +1,5 @@
+name: ncu-pdclab-mini-siem
+
 x-waf-common: &waf-common
   image: ghcr.io/coreruleset/modsecurity-crs:4.25-apache-lts
   restart: unless-stopped
@@ -16,12 +18,42 @@ x-waf-common: &waf-common
     REMOTEIP_HEADER: X-Real-IP
 
 services:
+  siem:
+    build: .
+    image: ncu-pdclab-mini-siem:local
+    restart: unless-stopped
+    env_file:
+      - path: secrets.env
+        required: false
+    environment:
+      SIEM_DB_PATH: /app/runtime/siem.sqlite3
+      MODEL_PATH: /app/MODELS/model_RandomForestClassifier.pkl
+      ACCESS_LOG: /app/apache-logs/access.log
+      SIEM_BLACKLIST_PATH: /app/runtime/blacklist.json
+      SIEM_HTACCESS_PATH: /app/htdocs/.htaccess
+      SIEM_ALLOW_REMOTE: "true"
+      SIEM_ALLOWED_HOSTS: "*"
+    ports:
+      - "${SIEM_PORT:-8000}:8000"
+      - "${LINE_PORT:-8002}:8002"
+    volumes:
+      - siem-runtime:/app/runtime
+      - apache-logs:/app/apache-logs
+      - flask-logs:/app/protected_services/logs/flask
+      - django-logs:/app/protected_services/logs/django
+      - waf-apache-logs:/app/protected_services/logs/waf/apache
+      - waf-flask-logs:/app/protected_services/logs/waf/flask
+      - waf-django-logs:/app/protected_services/logs/waf/django
+      - ./htdocs:/app/htdocs
+    depends_on: [apache, flask-target, django-target]
+
   apache:
     image: httpd:2.4
+    restart: unless-stopped
     expose: ["80"]
     volumes:
       - ./htdocs:/usr/local/apache2/htdocs:ro
-      - ./apache-logs:/usr/local/apache2/logs
+      - apache-logs:/usr/local/apache2/logs
     command: >
       /bin/sh -c "
       sed -i 's|CustomLog /proc/self/fd/1 common|CustomLog /usr/local/apache2/logs/access.log realip|g' /usr/local/apache2/conf/httpd.conf &&
@@ -35,56 +67,66 @@ services:
 
   flask-target:
     image: python:3.12-slim
+    restart: unless-stopped
     working_dir: /app
     command: sh -c "pip install --no-cache-dir -r requirements.txt && python app.py"
     expose: ["8081"]
     volumes:
       - ./protected_services/flask_target:/app:ro
-      - ./protected_services/logs/flask:/logs
+      - flask-logs:/logs
 
   django-target:
     image: python:3.12-slim
+    restart: unless-stopped
     working_dir: /app
-    environment:
-      DJANGO_SETTINGS_MODULE: demo_site.settings
+    environment: {DJANGO_SETTINGS_MODULE: demo_site.settings}
     command: sh -c "pip install --no-cache-dir -r requirements.txt && python -m django runserver 0.0.0.0:8082"
     expose: ["8082"]
     volumes:
       - ./protected_services/django_target:/app:ro
-      - ./protected_services/logs/django:/logs
+      - django-logs:/logs
 
   waf-apache:
     <<: *waf-common
     depends_on: [apache]
-    ports: ["80:8080"]
+    ports: ["${APACHE_WAF_PORT:-80}:8080"]
     environment:
       <<: *waf-environment
       SERVER_NAME: apache.local
       BACKEND: http://apache:80
     volumes:
-      - ./protected_services/logs/waf/apache:/var/log/modsecurity
+      - waf-apache-logs:/var/log/modsecurity
       - ./protected_services/waf/RESPONSE-999-EXCLUSION-RULES-AFTER-CRS.conf:/etc/modsecurity.d/owasp-crs/rules/RESPONSE-999-EXCLUSION-RULES-AFTER-CRS.conf:ro
 
   waf-flask:
     <<: *waf-common
     depends_on: [flask-target]
-    ports: ["8081:8080"]
+    ports: ["${FLASK_WAF_PORT:-8081}:8080"]
     environment:
       <<: *waf-environment
       SERVER_NAME: flask.local
       BACKEND: http://flask-target:8081
     volumes:
-      - ./protected_services/logs/waf/flask:/var/log/modsecurity
+      - waf-flask-logs:/var/log/modsecurity
       - ./protected_services/waf/RESPONSE-999-EXCLUSION-RULES-AFTER-CRS.conf:/etc/modsecurity.d/owasp-crs/rules/RESPONSE-999-EXCLUSION-RULES-AFTER-CRS.conf:ro
 
   waf-django:
     <<: *waf-common
     depends_on: [django-target]
-    ports: ["8082:8080"]
+    ports: ["${DJANGO_WAF_PORT:-8082}:8080"]
     environment:
       <<: *waf-environment
       SERVER_NAME: django.local
       BACKEND: http://django-target:8082
     volumes:
-      - ./protected_services/logs/waf/django:/var/log/modsecurity
+      - waf-django-logs:/var/log/modsecurity
       - ./protected_services/waf/RESPONSE-999-EXCLUSION-RULES-AFTER-CRS.conf:/etc/modsecurity.d/owasp-crs/rules/RESPONSE-999-EXCLUSION-RULES-AFTER-CRS.conf:ro
+
+volumes:
+  siem-runtime:
+  apache-logs:
+  flask-logs:
+  django-logs:
+  waf-apache-logs:
+  waf-flask-logs:
+  waf-django-logs:

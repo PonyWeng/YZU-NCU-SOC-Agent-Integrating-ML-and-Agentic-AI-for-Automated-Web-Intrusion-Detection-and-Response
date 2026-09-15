@@ -1,6 +1,7 @@
 """Local SIEM dashboard and separate LINE-only ASGI app."""
 from contextlib import asynccontextmanager
 from pathlib import Path
+import os
 from fastapi import FastAPI, Header, HTTPException, Request
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
@@ -15,13 +16,15 @@ async def lifespan(app):
     yield
 
 app = FastAPI(title='NCU-PDCLAB mini SIEM',lifespan=lifespan)
-app.add_middleware(TrustedHostMiddleware,allowed_hosts=['localhost','127.0.0.1','[::1]','testserver'])
+allow_remote = os.getenv('SIEM_ALLOW_REMOTE','').lower() in ('1','true','yes')
+allowed_hosts = [h.strip() for h in os.getenv('SIEM_ALLOWED_HOSTS','localhost,127.0.0.1,[::1],testserver').split(',') if h.strip()]
+app.add_middleware(TrustedHostMiddleware,allowed_hosts=allowed_hosts)
 
 @app.middleware('http')
 async def local_access(request: Request,call_next):
-    if request.client and request.client.host not in ('127.0.0.1','::1','testclient'):
+    if not allow_remote and request.client and request.client.host not in ('127.0.0.1','::1','testclient'):
         return JSONResponse({'detail':'Local access only'},status_code=403)
-    if request.headers.get('x-forwarded-for') or request.headers.get('forwarded'):
+    if not allow_remote and (request.headers.get('x-forwarded-for') or request.headers.get('forwarded')):
         return JSONResponse({'detail':'Open the dashboard locally'},status_code=403)
     if request.method not in ('GET','HEAD','OPTIONS'):
         origin = request.headers.get('origin')

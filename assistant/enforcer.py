@@ -7,8 +7,8 @@ from pathlib import Path
 from filelock import FileLock
 
 ROOT = Path(__file__).resolve().parents[1]
-BLACKLIST_FILE = ROOT / 'blacklist.json'
-HTACCESS_PATH = ROOT / 'htdocs' / '.htaccess'
+BLACKLIST_FILE = Path(os.getenv('SIEM_BLACKLIST_PATH',str(ROOT / 'blacklist.json')))
+HTACCESS_PATH = Path(os.getenv('SIEM_HTACCESS_PATH',str(ROOT / 'htdocs' / '.htaccess')))
 
 def _load():
     if not BLACKLIST_FILE.exists():

@@ -1,5 +1,7 @@
 # Credentials — never commit
 .env
+secrets.env
+*.secrets.env
 runtime/
 .pytest_cache/
 

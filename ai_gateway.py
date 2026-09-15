@@ -4,14 +4,19 @@ The key is kept in the local SQLite settings store and is never returned by
 the API. The dashboard is local-only, so configuring it does not expose the
 key to a public web page.
 """
-import json, re, time, requests
+import json, os, re, time, requests
 from datetime import datetime, timezone
 from siem import store
 
 def settings(mask=True):
     with store.connection() as db:
         row=db.execute('SELECT provider,model,api_key,updated_at FROM ai_settings WHERE id=1').fetchone()
-    if not row: return {'configured':False,'provider':'gemini','model':'','api_key_masked':'','updated_at':''}
+    if not row:
+        provider=os.getenv('AI_PROVIDER','gemini')
+        model=os.getenv('AI_MODEL','gemini-3.5-flash-lite')
+        key=os.getenv('AI_API_KEY') or (os.getenv('OPENAI_API_KEY','') if provider=='openai' else '')
+        return {'configured':bool(key),'provider':provider,'model':model,
+                'api_key_masked':('*'*max(0,len(key)-4)+key[-4:] if mask and key else ''),'updated_at':'environment'}
     key=row['api_key']; return {'configured':bool(key),'provider':row['provider'],'model':row['model'],'api_key_masked':('*'*max(0,len(key)-4)+key[-4:] if mask and key else ''),'updated_at':row['updated_at']}
 
 def save(provider,model,api_key):
@@ -30,7 +35,11 @@ def save(provider,model,api_key):
 def _key():
     with store.connection() as db:
         row=db.execute('SELECT provider,model,api_key FROM ai_settings WHERE id=1').fetchone()
-    if not row or not row['api_key']: raise RuntimeError('尚未設定外部 AI Provider，請先到 AI 設定頁保存 API key。')
+    if not row or not row['api_key']:
+        provider=os.getenv('AI_PROVIDER','gemini')
+        key=os.getenv('AI_API_KEY') or (os.getenv('OPENAI_API_KEY','') if provider=='openai' else '')
+        if key: return {'provider':provider,'model':os.getenv('AI_MODEL','gemini-3.5-flash-lite'),'api_key':key}
+        raise RuntimeError('尚未設定外部 AI Provider，請先到 AI 設定頁保存 API key。')
     return dict(row)
 
 def context(hours=1):

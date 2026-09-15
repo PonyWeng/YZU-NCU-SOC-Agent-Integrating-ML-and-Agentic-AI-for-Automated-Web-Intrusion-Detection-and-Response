@@ -1,0 +1,15 @@
+.git
+.env
+secrets.env
+*.secrets.env
+runtime
+apache-logs
+protected_services/logs
+__pycache__
+*.pyc
+.pytest_cache
+DATA
+temp_files
+RAG/db
+MODELS/*
+!MODELS/model_RandomForestClassifier.pkl

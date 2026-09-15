@@ -35,6 +35,27 @@ LINE → ngrok（選用）→ LINE 專用 webhook（127.0.0.1:8002）
 
 ## 啟動
 
+### Docker Compose（建議用於搬移與比賽 Demo）
+
+新設備只需安裝 Docker Desktop，將專案與私下保存的 `secrets.env` 放在同一目錄後執行：
+
+```bash
+docker compose up -d --build
+docker compose ps
+```
+
+開啟 `http://localhost:8000`。三個 WAF 入口分別為 `80`、`8081`、`8082`；LINE webhook 使用 `8002`。第一次啟動會建立全新的 SQLite、帳號、事件、IOC 與日誌資料。停止服務使用 `docker compose down`；若要連同新設備產生的所有資料一起清空，使用 `docker compose down -v`。
+
+敏感設定不放入映像或 Git。原設備可執行：
+
+```bash
+python tools/export_secrets.py
+```
+
+這會將 `.env` 內的 LINE、ngrok、情資金鑰，以及資料庫內目前使用的 AI Provider／模型／API Key，整理成單一 `secrets.env`。只需透過安全方式把此檔搬到新設備的專案根目錄。若 LINE 或 ngrok 欄位完整，匯出工具會自動開啟對應容器功能。
+
+Compose 使用具名 volume 保存新設備產生的日誌與 SQLite；這些資料不會包進原始碼或 Docker image。`htdocs` 保留 bind mount，讓 SIEM 寫入的 Apache 封鎖規則能立即套用到測試靶機。
+
 使用既有的 Python 3.10 PonyNIDS 環境：
 
 一按鍵啟動完整服務（Git Bash / WSL）：
