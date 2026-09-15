@@ -16,9 +16,13 @@ from urllib.parse import quote
 if sys.stdout.encoding and sys.stdout.encoding.lower() not in ("utf-8", "utf8"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
-parser = argparse.ArgumentParser(description='Generate demo traffic for one protected service')
+parser = argparse.ArgumentParser(description='Generate SQLi, XSS and traversal demo traffic')
 parser.add_argument('--target', default='http://localhost', help='Target base URL, e.g. http://127.0.0.1:8081')
-TARGET = parser.parse_args().target.rstrip('/')
+parser.add_argument('--count',type=int,default=5,help='Requests per attack type (default: 5)')
+args = parser.parse_args()
+if args.count < 1: parser.error('--count must be at least 1')
+TARGET = args.target.rstrip('/')
+ATTACK_COUNT = args.count
 DELAY  = 0.3   # seconds between requests
 
 # Simulated attacker IPs — injected as X-Real-IP so Apache logs the real source
@@ -193,27 +197,27 @@ def phase_normal(n: int = 5) -> None:
         path = random.choice(NORMAL_TRAFFIC)
         send("normal", f"{TARGET}{path}", G, ATTACKER_IPS["normal"])
 
-def phase_sqli() -> None:
+def phase_sqli(n: int = ATTACK_COUNT) -> None:
     ip = ATTACKER_IPS["sqli"]
-    print(f"\n{R}{BOLD}--- SQL Injection ({len(SQLI_PAYLOADS)} payloads) [src: {ip}] ---{W}")
-    random.shuffle(SQLI_PAYLOADS)
-    for payload, path in SQLI_PAYLOADS:
+    selected=random.sample(SQLI_PAYLOADS,k=min(n,len(SQLI_PAYLOADS)))
+    print(f"\n{R}{BOLD}--- SQL Injection ({len(selected)} requests) [src: {ip}] ---{W}")
+    for payload, path in selected:
         url = f"{TARGET}{path}{quote(payload, safe='')}"
         send("SQLi", url, R, ip)
 
-def phase_xss() -> None:
+def phase_xss(n: int = ATTACK_COUNT) -> None:
     ip = ATTACKER_IPS["xss"]
-    print(f"\n{Y}{BOLD}--- XSS ({len(XSS_PAYLOADS)} payloads) [src: {ip}] ---{W}")
-    random.shuffle(XSS_PAYLOADS)
-    for payload, path in XSS_PAYLOADS:
+    selected=random.sample(XSS_PAYLOADS,k=min(n,len(XSS_PAYLOADS)))
+    print(f"\n{Y}{BOLD}--- XSS ({len(selected)} requests) [src: {ip}] ---{W}")
+    for payload, path in selected:
         url = f"{TARGET}{path}{quote(payload, safe='')}"
         send("XSS", url, Y, ip)
 
-def phase_dir_traversal() -> None:
+def phase_dir_traversal(n: int = ATTACK_COUNT) -> None:
     ip = ATTACKER_IPS["dir"]
-    print(f"\n{C}{BOLD}--- Directory Traversal ({len(DIR_TRAVERSAL_PAYLOADS)} payloads) [src: {ip}] ---{W}")
-    random.shuffle(DIR_TRAVERSAL_PAYLOADS)
-    for payload, path in DIR_TRAVERSAL_PAYLOADS:
+    selected=random.sample(DIR_TRAVERSAL_PAYLOADS,k=min(n,len(DIR_TRAVERSAL_PAYLOADS)))
+    print(f"\n{C}{BOLD}--- Directory Traversal ({len(selected)} requests) [src: {ip}] ---{W}")
+    for payload, path in selected:
         url = f"{TARGET}{path}{quote(payload, safe='')}"
         send("DirTrav", url, C, ip)
 
@@ -238,15 +242,13 @@ def main() -> None:
     print(f"""
 {BOLD}============== Summary =============={W}
   Total requests  : {total}
-  {R}SQL Injection   : {len(SQLI_PAYLOADS)}{W}
-  {Y}XSS             : {len(XSS_PAYLOADS)}{W}
-  {C}Dir Traversal   : {len(DIR_TRAVERSAL_PAYLOADS)}{W}
+  {R}SQL Injection   : {sent_count.get('sqli', 0)}{W}
+  {Y}XSS             : {sent_count.get('xss', 0)}{W}
+  {C}Dir Traversal   : {sent_count.get('dirtrav', 0)}{W}
   {G}Normal traffic  : {sent_count.get('normal', 0)}{W}
   Errors          : {sent_count.get('error', 0)}
 {BOLD}====================================={W}
-All requests logged to apache-logs/access.log
-Run the pipeline to push results to ELK:
-  python predict.py -l apache-logs/access.log -m MODELS/model_RandomForestClassifier.pkl
+Requests are sent through the selected WAF endpoint and collected by the SIEM.
 """)
 
 if __name__ == "__main__":

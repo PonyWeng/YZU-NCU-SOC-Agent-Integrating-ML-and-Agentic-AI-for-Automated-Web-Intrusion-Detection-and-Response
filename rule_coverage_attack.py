@@ -2,6 +2,7 @@
 import argparse
 import concurrent.futures
 import json
+import os
 import sys
 import time
 from datetime import datetime, timezone
@@ -9,8 +10,6 @@ from urllib.parse import quote
 
 import requests
 
-SERVICES=('http://127.0.0.1','http://127.0.0.1:8081','http://127.0.0.1:8082')
-SIEM='http://127.0.0.1:8000/api'
 HEADERS={'X-SIEM-Request':'dashboard','Content-Type':'application/json'}
 
 CASES={
@@ -39,47 +38,64 @@ def attack_path(payload): return '/search?q='+quote(payload,safe='')
 def main():
     args=argparse.ArgumentParser(description='Trigger all local SIEM demo rules')
     args.add_argument('--wait',type=int,default=12,help='Seconds to wait for collector evaluation')
-    opts=args.parse_args(); started=datetime.now(timezone.utc).isoformat(timespec='seconds')
+    args.add_argument('--host',default='127.0.0.1',help='Docker host or Ubuntu server IP')
+    args.add_argument('--siem-port',type=int,default=8000)
+    args.add_argument('--username',default=os.getenv('SIEM_TEST_USERNAME','admin'))
+    args.add_argument('--password',default=os.getenv('SIEM_TEST_PASSWORD',''))
+    args.add_argument('--attack-count',type=int,default=5,help='Requests for each ML attack class')
+    opts=args.parse_args()
+    if opts.attack_count < 5: args.error('--attack-count must be at least 5')
+    if not opts.password: args.error('set SIEM_TEST_PASSWORD or pass --password for the authenticated SIEM API')
+    services=(f'http://{opts.host}',f'http://{opts.host}:8081',f'http://{opts.host}:8082')
+    siem=f'http://{opts.host}:{opts.siem_port}/api'
+    session=requests.Session();session.headers.update(HEADERS)
+    if opts.password:
+        login=session.post(siem+'/auth/login',json={'username':opts.username,'password':opts.password},timeout=8)
+        login.raise_for_status()
+    started=datetime.now(timezone.utc).isoformat(timespec='seconds')
     print('NCU-PDCLAB mini SIEM — rule coverage test')
-    for base in SERVICES:
+    for base in services:
         if request(base,'/health') == 0: raise SystemExit(f'Service unavailable: {base}')
 
-    print('[1/9] ML classes and WAF/ML correlation')
-    request(SERVICES[0],attack_path("' OR 1=1--"),CASES['SQLI'])
-    request(SERVICES[1],attack_path('<iframe src="javascript:alert(\'XSS\')">'),CASES['XSS'])
-    request(SERVICES[2],attack_path('../../../etc/passwd'),CASES['TRAVERSAL'])
-    request(SERVICES[0],attack_path("' UNION SELECT password FROM users--"),CASES['DUAL_DETECTOR'])
+    print(f'[1/9] ML classes: {opts.attack_count} SQLi + {opts.attack_count} XSS + {opts.attack_count} traversal')
+    payloads=((services[0],"' OR 1=1--",CASES['SQLI'],'SQLi'),
+              (services[1],'<iframe src="javascript:alert(1)">',CASES['XSS'],'XSS'),
+              (services[2],'../../../etc/passwd',CASES['TRAVERSAL'],'Traversal'))
+    for base,payload,ip,label in payloads:
+        for index in range(opts.attack_count): request(base,attack_path(f'{payload} demo-{index}'),ip)
+        print(f'  {label}: {opts.attack_count} requests -> {base}')
+    request(services[0],attack_path("' UNION SELECT password FROM users--"),CASES['DUAL_DETECTOR'])
 
     print('[2/9] 300-request burst (50/min, 300/5min, 100/10sec)')
-    burst(SERVICES[1],'/search?q=load-test',CASES['FLOOD'],300,32)
+    burst(services[1],'/search?q=load-test',CASES['FLOOD'],300,32)
     print('[3/9] Same source across three protected services')
-    for base in SERVICES: request(base,attack_path("' OR 1=1-- multi-service"),CASES['MULTI_SERVICE'])
+    for base in services: request(base,attack_path("' OR 1=1-- multi-service"),CASES['MULTI_SERVICE'])
     print('[4/9] 30 distinct paths')
-    for i in range(30): request(SERVICES[2],f'/scan-{i}?coverage=path',CASES['PATH_SCAN'])
+    for i in range(30): request(services[2],f'/scan-{i}?coverage=path',CASES['PATH_SCAN'])
     print('[5/9] 30 requests with at least 70% HTTP 404')
-    for i in range(30): request(SERVICES[1],f'/missing-{i}',CASES['404_SCAN'])
+    for i in range(30): request(services[1],f'/missing-{i}',CASES['404_SCAN'])
     print('[6/9] 10 server errors')
-    for _ in range(10): request(SERVICES[1],'/demo-error',CASES['SERVER_ERROR'])
+    for _ in range(10): request(services[1],'/demo-error',CASES['SERVER_ERROR'])
     print('[7/9] Suspicious method, sensitive path, and scanner User-Agent')
-    request(SERVICES[0],'/',CASES['METHOD'],'TRACE')
-    request(SERVICES[1],'/.env',CASES['SENSITIVE'])
-    request(SERVICES[2],'/search?q=inventory',CASES['TOOL_UA'],ua='sqlmap/1.8 demo')
+    request(services[0],'/',CASES['METHOD'],'TRACE')
+    request(services[1],'/.env',CASES['SENSITIVE'])
+    request(services[2],'/search?q=inventory',CASES['TOOL_UA'],ua='sqlmap/1.8 demo')
     print('[8/9] Multiple attack types from one source')
-    request(SERVICES[0],attack_path("' OR 1=1--"),CASES['MULTI_ATTACK'])
-    request(SERVICES[0],attack_path('<svg/onload=alert(1)>'),CASES['MULTI_ATTACK'])
+    request(services[0],attack_path("' OR 1=1--"),CASES['MULTI_ATTACK'])
+    request(services[0],attack_path('<svg/onload=alert(1)>'),CASES['MULTI_ATTACK'])
     print('[9/9] Threat-intelligence source hit')
     intel={'kind':'ip','value':CASES['INTEL'],'source':'rule-coverage-test','confidence':95,
            'verdict':'malicious','tags':['demo','coverage'],'notes':'Local rule coverage test'}
-    response=requests.post(SIEM+'/intel',headers=HEADERS,data=json.dumps(intel),timeout=5)
+    response=session.post(siem+'/intel',data=json.dumps(intel),timeout=5)
     if response.status_code not in (200,409): response.raise_for_status()
-    request(SERVICES[2],'/?coverage=intel',CASES['INTEL'])
+    request(services[2],'/?coverage=intel',CASES['INTEL'])
 
     print(f'Waiting {opts.wait}s for collection and rule evaluation...')
     time.sleep(opts.wait)
-    incidents=requests.get(SIEM+'/incidents?page=1',timeout=5).json()['items']
+    incidents=session.get(siem+'/incidents?page=1',timeout=5).json()['items']
     relevant=[row for row in incidents if row['created_at']>=started or row['src_ip'] in CASES.values()]
     seen={row['rule_id'] for row in relevant}
-    rules=requests.get(SIEM+'/rules',timeout=5).json()
+    rules=session.get(siem+'/rules',timeout=5).json()
     enabled=[r for r in rules if r['enabled']]
     print('\nCoverage result')
     for rule in enabled:

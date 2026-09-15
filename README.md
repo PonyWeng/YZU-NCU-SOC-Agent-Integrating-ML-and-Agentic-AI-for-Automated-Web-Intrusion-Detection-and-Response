@@ -56,6 +56,21 @@ python tools/export_secrets.py
 
 Compose 使用具名 volume 保存新設備產生的日誌與 SQLite；這些資料不會包進原始碼或 Docker image。`htdocs` 保留 bind mount，讓 SIEM 寫入的 Apache 封鎖規則能立即套用到測試靶機。
 
+在 Ubuntu 主機執行攻擊示範時，基本腳本預設會對 SQL Injection、XSS、Directory Traversal 各送 5 筆：
+
+```bash
+python attack_scripts.py --target http://127.0.0.1 --count 5
+```
+
+完整規則覆蓋測試還會觸發流量暴增、多服務探測、404、5xx 與情資命中等行為規則。密碼建議透過環境變數提供，避免留在 shell history：
+
+```bash
+export SIEM_TEST_PASSWORD='你的管理員密碼'
+python rule_coverage_attack.py --host 127.0.0.1 --attack-count 5
+```
+
+若從另一台電腦對 Ubuntu 伺服器執行，將 `--host` 改為該伺服器 IP。
+
 使用既有的 Python 3.10 PonyNIDS 環境：
 
 一按鍵啟動完整服務（Git Bash / WSL）：
