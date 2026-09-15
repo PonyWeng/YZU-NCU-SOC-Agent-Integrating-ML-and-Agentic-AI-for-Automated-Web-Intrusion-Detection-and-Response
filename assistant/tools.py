@@ -4,7 +4,9 @@ LangChain tool definitions for the NIDS agent.
 Each tool wraps existing logic — no duplicate implementation.
 """
 
+import json
 import re
+from urllib.parse import urlparse
 
 import requests
 from langchain_core.tools import tool
@@ -109,6 +111,81 @@ def search_security_knowledge(query: str) -> str:
     return "本機 RAG/Ollama 已移除；請先在 AI 設定中配置外部 AI Provider。"
 
 
+@tool
+def list_security_news(query: str = "") -> str:
+    """List at most 10 cached security-news items, optionally filtered by keyword."""
+    from siem import store
+    cached=store.get_state('intel_news_cache',{'items':[]}).get('items',[])
+    q=query.strip().lower()
+    tokens=[x for x in re.findall(r'[\w\u4e00-\u9fff]{2,}',q) if x not in {'新聞','資安','最近','近期','查看','細節','企業','事件','目前'}]
+    ranked=[]
+    for index,item in enumerate(cached):
+        haystack=(item.get('title','')+' '+item.get('source','')).lower()
+        score=sum(1 for token in tokens if token in haystack)
+        if not q or score: ranked.append((score,-index,item))
+    rows=[x[2] for x in sorted(ranked,reverse=True)[:10]]
+    return json.dumps({'count':len(rows),'items':[{'id':cached.index(x)+1,'title':x.get('title'),'source':x.get('source'),'published':x.get('published')} for x in rows]},ensure_ascii=False)
+
+
+@tool
+def read_security_news(news_id: int) -> str:
+    """Read one cached news item by ID and fetch a bounded plain-text excerpt from its known URL."""
+    from siem import store
+    rows=store.get_state('intel_news_cache',{'items':[]}).get('items',[])
+    if news_id<1 or news_id>len(rows): return '找不到指定新聞 ID。'
+    item=rows[news_id-1]; result={'id':news_id,'title':item.get('title'),'source':item.get('source'),'published':item.get('published'),'url':item.get('url'),'excerpt':item.get('summary','')}
+    host=(urlparse(item.get('url','')).hostname or '').lower()
+    if host and host!='news.google.com':
+        try:
+            response=requests.get(item.get('url',''),headers={'User-Agent':'NCU-PDCLAB-mini-SIEM/1.0'},timeout=12,allow_redirects=True)
+            response.raise_for_status(); text=re.sub(r'(?is)<(script|style|svg).*?>.*?</\1>',' ',response.text[:250000]); text=re.sub(r'(?s)<[^>]+>',' ',text); text=re.sub(r'\s+',' ',text).strip()
+            if text and not re.search(r'body\s*\{|font-family|--[a-z-]+:',text[:500],re.I): result['excerpt']=text[:2500]
+        except Exception:
+            pass
+    if not result['excerpt']: result['excerpt']='目前只有新聞標題、來源與日期，尚未取得可用正文。'
+    return json.dumps(result,ensure_ascii=False)
+
+
+@tool
+def list_risk_ips(query: str = "") -> str:
+    """List at most 20 locally cached Tor/FireHOL risk IPs, optionally matching an IP fragment."""
+    from siem import store
+    q=query.strip(); params=[]; where="kind='ip' AND source IN ('Tor Exit Nodes','FireHOL Level 1')"
+    if q: where+=' AND value LIKE ?'; params.append('%'+q+'%')
+    with store.connection() as db: rows=[dict(r) for r in db.execute(f'SELECT value,source,confidence,notes,last_seen FROM intelligence WHERE {where} ORDER BY last_seen DESC LIMIT 20',params)]
+    return json.dumps({'count':len(rows),'items':rows},ensure_ascii=False)
+
+
+@tool
+def list_phishing_sites(query: str = "") -> str:
+    """List at most 20 cached OpenPhish URLs with a local heuristic category; never visits the URLs."""
+    from siem import store
+    q=query.strip(); params=[]; where="kind='url' AND source='OpenPhish'"
+    if q: where+=' AND (value LIKE ? OR notes LIKE ?)'; params.extend(['%'+q+'%','%'+q+'%'])
+    with store.connection() as db: rows=[dict(r) for r in db.execute(f'SELECT value,source,confidence,notes,last_seen FROM intelligence WHERE {where} ORDER BY last_seen DESC LIMIT 20',params)]
+    def category(url):
+        s=url.lower()
+        if any(x in s for x in ('microsoft','office','outlook','login','signin')): return '帳號／憑證竊取'
+        if any(x in s for x in ('bank','pay','wallet','invoice')): return '金融／付款詐騙'
+        if any(x in s for x in ('dhl','fedex','post','delivery')): return '物流冒用'
+        return '未分類釣魚網站'
+    items=[{'masked_url':r['value'].replace('://','[://]').replace('/','／'),'host':urlparse(r['value']).hostname,'category':category(r['value']),'source':r['source'],'confidence':r['confidence'],'last_seen':r['last_seen']} for r in rows]
+    return json.dumps({'count':len(items),'items':items,'notice':'分類為本機 URL 特徵初判，未連線至釣魚網站。'},ensure_ascii=False)
+
+
+@tool
+def correlate_intel_with_siem(query: str = "") -> str:
+    """Correlate local risk-IP intelligence with SIEM events and incidents; returns at most 20 matches."""
+    from siem import store
+    with store.connection() as db:
+        rows=[dict(r) for r in db.execute('''SELECT i.value src_ip,i.source,i.confidence,count(e.id) event_count,
+          max(e.timestamp) last_event,group_concat(DISTINCT e.service_name) services
+          FROM intelligence i JOIN events e ON i.kind='ip' AND i.value=e.src_ip
+          WHERE i.verdict IN ('malicious','suspicious') GROUP BY i.value,i.source,i.confidence
+          ORDER BY event_count DESC,last_event DESC LIMIT 20''')]
+    return json.dumps({'count':len(rows),'items':rows},ensure_ascii=False)
+
+
 NIDS_TOOLS = [
     check_ip_reputation,
     ban_ip_address,
@@ -117,6 +194,11 @@ NIDS_TOOLS = [
     get_recent_attack_logs,
     get_system_status,
     search_security_knowledge,
+    list_security_news,
+    read_security_news,
+    list_risk_ips,
+    list_phishing_sites,
+    correlate_intel_with_siem,
 ]
 
 SEP = "─" * 34
@@ -160,6 +242,15 @@ HELP_TEXT = "\n".join([
     "    查詢本地資安知識庫（OWASP / 攻擊手法）",
     "    例：「什麼是 XSS？」",
     "        \"how to prevent SQL injection?\"",
+    "",
+    "[8] list_security_news / read_security_news",
+    "    查詢近期資安新聞，或依新聞 ID 讀取指定內容",
+    "",
+    "[9] list_risk_ips / list_phishing_sites",
+    "    查詢本機風險 IP 與近期釣魚網站情資",
+    "",
+    "[10] correlate_intel_with_siem",
+    "    將外部情資與本機日誌、事件及受保護服務交叉比對",
     "",
     SEP,
     "也可複合描述，例：",

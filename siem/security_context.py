@@ -71,6 +71,9 @@ def suggestions(hours=1):
     if data['top_attacks']:
         top=data['top_attacks'][0]
         add('threat','主要攻擊調查',f'分析最近 {hours:g} 小時的 {top["type"]} 攻擊來源、受影響服務與風險。',f'{top["type"]} 共 {top["count"]} 筆，為當前主要攻擊',82)
+    news_cache=store.get_state('intel_news_cache',{'items':[],'updated_at':''})
+    if news_cache.get('items'):
+        add('news','近期資安新聞','列出近期最值得關注的資安新聞，保留新聞 ID，並說明各自的關注重點。',f'已同步 {len(news_cache["items"])} 則新聞 · {news_cache.get("updated_at","")[:16]} 更新',79)
     if data['affected_services']:
         svc=data['affected_services'][0]
         add('service','受影響服務',f'為什麼 {svc["service_name"]} 是目前受攻擊最多的服務？請列出證據與建議。',f'{svc["service_name"]} 有 {svc["attacks"]} 筆攻擊流量',76)
@@ -130,6 +133,14 @@ def followup_suggestions(message='', answer='', hours=1, history=None):
     if re.search(r'事件|incident|未處理|critical',text,re.I):
         add('incident-next','事件處置順序','依嚴重度、時間與影響範圍，下一筆最應優先處理的事件是哪一筆？',
             '延續事件工作佇列的調查',105)
+    if re.search(r'新聞|資安動態|security news',text,re.I):
+        news_ids=re.findall(r'#(\d+)',answer or '')
+        add('news-next','查看其他新聞','近期還有哪些值得關注的資安新聞？請保留新聞 ID 並依風險排序。','延續外部資安新聞調查',114)
+        detail_question=f'查看新聞 #{news_ids[0]}，整理受影響對象、攻擊手法與一般防禦建議。' if news_ids else '選擇一則近期新聞，整理受影響對象、攻擊手法與一般防禦建議。'
+        add('news-detail','新聞影響分析',detail_question,'僅分析外部新聞，不推定本機已受影響',110)
+        add('news-correlation','核對本機關聯','剛才的新聞與目前 SIEM 日誌或受保護服務是否有實際關聯證據？','分開核對外部情資與本機證據',108)
+    if re.search(r'釣魚|phishing',text,re.I):
+        add('phishing-list','近期釣魚趨勢','整理近期釣魚網站的主要類型與常見冒用手法。','使用 OpenPhish 本機快取，網址維持遮罩',113)
     merged=[]
     for item in sorted(focused,key=lambda x:x['priority'],reverse=True)+base['items']:
         if item['question'] not in asked and item['question'] not in {x['question'] for x in merged}: merged.append(item)

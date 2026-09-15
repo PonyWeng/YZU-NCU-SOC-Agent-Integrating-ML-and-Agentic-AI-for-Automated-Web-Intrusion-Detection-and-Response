@@ -148,6 +148,7 @@ def main():
                 webhook = f'{tunnel.public_url}/webhook'
                 print(f'LINE webhook URL: {webhook}', flush=True)
             update_line_webhook(webhook)
+            store.set_state('line_webhook',{'url':webhook,'status':'registered','updated_at':store.now()})
         print(f'NCU-PDCLAB mini SIEM: http://127.0.0.1:{args.port}',flush=True)
         if args.demo:
             print('WAF targets: Apache http://127.0.0.1:80 | Flask :8081 | Django :8082',flush=True)

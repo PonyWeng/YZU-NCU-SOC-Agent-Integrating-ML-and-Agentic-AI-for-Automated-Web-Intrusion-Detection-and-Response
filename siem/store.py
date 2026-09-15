@@ -56,7 +56,8 @@ def init_db():
           src_ip TEXT NOT NULL, attack INTEGER NOT NULL, severity TEXT NOT NULL,
           count INTEGER NOT NULL, created_at TEXT NOT NULL, first_seen TEXT NOT NULL,
           last_seen TEXT NOT NULL, status TEXT NOT NULL DEFAULT 'new',
-          note TEXT NOT NULL DEFAULT '', evidence TEXT NOT NULL);
+          note TEXT NOT NULL DEFAULT '', evidence TEXT NOT NULL,
+          handled_by TEXT NOT NULL DEFAULT '', handled_at TEXT NOT NULL DEFAULT '');
         CREATE INDEX IF NOT EXISTS incident_source ON incidents(rule_id,src_ip,created_at);
         CREATE TABLE IF NOT EXISTS audit (
           id INTEGER PRIMARY KEY, timestamp TEXT NOT NULL, actor TEXT NOT NULL,
@@ -91,7 +92,22 @@ def init_db():
           log_path TEXT NOT NULL, parser_format TEXT NOT NULL,
           waf_enabled INTEGER NOT NULL DEFAULT 0, waf_log_path TEXT NOT NULL DEFAULT '',
           enabled INTEGER NOT NULL DEFAULT 1, created_at TEXT NOT NULL, updated_at TEXT NOT NULL);
+        CREATE TABLE IF NOT EXISTS users (
+          id INTEGER PRIMARY KEY, username TEXT NOT NULL UNIQUE COLLATE NOCASE,
+          display_name TEXT NOT NULL, password_hash TEXT NOT NULL,
+          role TEXT NOT NULL CHECK(role IN ('admin','analyst')), enabled INTEGER NOT NULL DEFAULT 1,
+          created_at TEXT NOT NULL, updated_at TEXT NOT NULL);
+        CREATE TABLE IF NOT EXISTS user_sessions (
+          token_hash TEXT PRIMARY KEY, user_id INTEGER NOT NULL, created_at TEXT NOT NULL,
+          expires_at TEXT NOT NULL, user_agent TEXT NOT NULL DEFAULT '',
+          FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE);
+        CREATE INDEX IF NOT EXISTS session_expiry ON user_sessions(expires_at);
+        CREATE TABLE IF NOT EXISTS system_settings (
+          key TEXT PRIMARY KEY, value TEXT NOT NULL, updated_at TEXT NOT NULL,
+          updated_by TEXT NOT NULL);
         ''')
+        from siem.auth import bootstrap_admin
+        bootstrap_admin(db)
         for col, definition in [('service_name',"TEXT NOT NULL DEFAULT 'Apache Web Server'"),('service_host',"TEXT NOT NULL DEFAULT '127.0.0.1'"),('service_port','INTEGER NOT NULL DEFAULT 80'),
                                 ('src_port','INTEGER'),('dst_ip',"TEXT NOT NULL DEFAULT '127.0.0.1'"),('transport',"TEXT NOT NULL DEFAULT 'tcp'"),
                                 ('protocol',"TEXT NOT NULL DEFAULT 'http'"),('http_version',"TEXT NOT NULL DEFAULT ''"),('response_bytes','INTEGER NOT NULL DEFAULT 0'),
@@ -103,6 +119,10 @@ def init_db():
                                 ('description',"TEXT NOT NULL DEFAULT ''"),('metric',"TEXT NOT NULL DEFAULT 'attack_count'"),
                                 ('settings',"TEXT NOT NULL DEFAULT '{}'"),('readonly','INTEGER NOT NULL DEFAULT 0')]:
             try: db.execute(f'ALTER TABLE rules ADD COLUMN {col} {definition}')
+            except sqlite3.OperationalError:
+                pass
+        for col, definition in [('handled_by',"TEXT NOT NULL DEFAULT ''"),('handled_at',"TEXT NOT NULL DEFAULT ''")]:
+            try: db.execute(f'ALTER TABLE incidents ADD COLUMN {col} {definition}')
             except sqlite3.OperationalError:
                 pass
         for code, name, severity in [(1, '重複 SQLi 偵測', 'high'), (2, '重複 XSS 偵測', 'medium'), (3, '重複路徑穿越偵測', 'medium')]:

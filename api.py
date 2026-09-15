@@ -29,6 +29,12 @@ async def local_access(request: Request,call_next):
             return JSONResponse({'detail':'Cross-origin operation rejected'},status_code=403)
         if request.headers.get('x-siem-request') != 'dashboard':
             return JSONResponse({'detail':'Missing operation header'},status_code=403)
+    if request.url.path.startswith('/api/'):
+        from siem.auth import SESSION_COOKIE, user_from_token
+        public = request.url.path in ('/api/auth/login',)
+        request.state.user = user_from_token(request.cookies.get(SESSION_COOKIE))
+        if not public and not request.state.user:
+            return JSONResponse({'detail':'請先登入'},status_code=401)
     response = await call_next(request)
     response.headers['X-Content-Type-Options'] = 'nosniff'
     response.headers['Content-Security-Policy'] = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; frame-ancestors 'none'"
