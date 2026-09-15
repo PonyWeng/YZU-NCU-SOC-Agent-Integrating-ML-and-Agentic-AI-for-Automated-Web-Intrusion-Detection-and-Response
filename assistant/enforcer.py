@@ -1,102 +1,87 @@
-"""
-assistant/enforcer.py
-Syncs blacklist.json → htdocs/.htaccess to block banned IPs at the Apache layer.
-
-Apache 2.4 reads .htaccess on every request (AllowOverride All is set in
-docker-compose.yml), so no container restart or reload is required.
-Banned IPs receive HTTP 403 Forbidden.
-"""
-
+"""Shared, locked IP enforcement for dashboard and LINE."""
+import ipaddress
 import json
 import os
-import re
+import tempfile
+from pathlib import Path
+from filelock import FileLock
 
-_BASE = os.path.dirname(os.path.dirname(__file__))
-HTDOCS_DIR     = os.path.join(_BASE, "htdocs")
-HTACCESS_PATH  = os.path.join(HTDOCS_DIR, ".htaccess")
-BLACKLIST_FILE = os.path.join(_BASE, "blacklist.json")
+ROOT = Path(__file__).resolve().parents[1]
+BLACKLIST_FILE = ROOT / 'blacklist.json'
+HTACCESS_PATH = ROOT / 'htdocs' / '.htaccess'
 
-# Never block these — would lock out the server itself
-_PROTECTED = {"127.0.0.1", "::1", "0.0.0.0"}
-_IP_RE = re.compile(r"^\d{1,3}(\.\d{1,3}){3}$")
+def _load():
+    if not BLACKLIST_FILE.exists():
+        return {'ips': []}
+    data = json.loads(BLACKLIST_FILE.read_text(encoding='utf-8'))
+    entries = data if isinstance(data,list) else data.get('ips',[])
+    return {'ips': [{'ip': e, 'reason':'Legacy entry'} if isinstance(e,str) else e for e in entries]}
 
+def _validate(ip):
+    try:
+        addr = ipaddress.ip_address(ip.strip())
+    except ValueError:
+        raise ValueError('Invalid IP address')
+    if addr.is_loopback or addr.is_unspecified or addr.is_multicast:
+        raise ValueError('Loopback, unspecified and multicast addresses cannot be blocked')
+    return str(addr)
 
-def _load_banned_ips() -> list[str]:
-    if not os.path.exists(BLACKLIST_FILE):
-        return []
-    with open(BLACKLIST_FILE, "r", encoding="utf-8") as f:
-        data = json.load(f)
-    if isinstance(data, list):
-        entries = data
-    else:
-        entries = [e["ip"] for e in data.get("ips", [])]
-    return [ip for ip in entries if _IP_RE.match(ip) and ip not in _PROTECTED]
+def _rules(data):
+    ips = [_validate(e['ip']) for e in data['ips']]
+    text = '# Managed by NCU-PDCLAB mini SIEM - DO NOT EDIT MANUALLY\n\nRewriteEngine On\nRewriteRule ^search$ /search.html [QSA,L]\n\n'
+    if ips:
+        text += '<RequireAll>\n    Require all granted\n'
+        text += ''.join(f'    Require not ip {ip}\n' for ip in ips)
+        text += '</RequireAll>\n'
+    return text
 
+def _atomic(path, text):
+    path.parent.mkdir(parents=True,exist_ok=True)
+    fd, temp = tempfile.mkstemp(dir=path.parent,suffix='.tmp')
+    try:
+        with os.fdopen(fd,'w',encoding='utf-8',newline='\n') as f:
+            f.write(text)
+            f.flush()
+            os.fsync(f.fileno())
+        os.replace(temp,path)
+    finally:
+        if os.path.exists(temp):
+            os.unlink(temp)
 
-def _write_htaccess(banned_ips: list[str]) -> None:
-    os.makedirs(HTDOCS_DIR, exist_ok=True)
-    lines = [
-        "# Managed by YZU NIDS Platform - DO NOT EDIT MANUALLY",
-        "",
-        "# Clean URL: /search -> /search.html (preserves ?q= params)",
-        "RewriteEngine On",
-        "RewriteRule ^search$ /search.html [QSA,L]",
-        "",
-        "# IP Blacklist - banned IPs receive 403 Forbidden",
-    ]
-    if banned_ips:
-        lines += ["<RequireAll>", "    Require all granted"]
-        for ip in banned_ips:
-            lines.append(f"    Require not ip {ip}")
-        lines.append("</RequireAll>")
-    else:
-        lines.append("# No IPs currently blacklisted - all traffic allowed.")
-    lines.append("")
-    with open(HTACCESS_PATH, "w", encoding="utf-8", newline="\n") as f:
-        f.write("\n".join(lines))
+def apply_blacklist():
+    with FileLock(str(BLACKLIST_FILE)+'.lock'):
+        data = _load()
+        _atomic(HTACCESS_PATH,_rules(data))
+        return [e['ip'] for e in data['ips']]
 
+def change_ban(ip, blocked, reason, actor='line'):
+    from siem import store
+    ip = _validate(ip)
+    store.init_db()
+    with FileLock(str(BLACKLIST_FILE)+'.lock'):
+        data = _load()
+        exists = any(e['ip']==ip for e in data['ips'])
+        if blocked and not exists:
+            data['ips'].append({'ip':ip,'added_at':store.now(),'reason':reason})
+        elif not blocked:
+            data['ips'] = [e for e in data['ips'] if e['ip']!=ip]
+        original = HTACCESS_PATH.read_text(encoding='utf-8') if HTACCESS_PATH.exists() else None
+        _atomic(HTACCESS_PATH,_rules(data))
+        try:
+            _atomic(BLACKLIST_FILE,json.dumps(data,ensure_ascii=False,indent=2))
+        except Exception:
+            if original is not None:
+                _atomic(HTACCESS_PATH,original)
+            else:
+                HTACCESS_PATH.unlink(missing_ok=True)
+            raise
+    store.audit('ip.ban' if blocked else 'ip.unban',f'{ip}: {reason}',actor)
+    return {'ok':True,'ip':ip,'blocked':blocked,'enforcement':'Apache rules written'}
 
-def apply_blacklist() -> list[str]:
-    """
-    Read blacklist.json, write .htaccess, return the list of currently blocked IPs.
-    Call this after any ban/unban operation.
-    """
-    banned = _load_banned_ips()
-    _write_htaccess(banned)
-    return banned
-
-
-def ban_ips(new_ips: list[str], reason: str = "Auto-ban by NIDS") -> list[str]:
-    """
-    Add new_ips to blacklist.json (skipping duplicates and protected IPs),
-    then sync .htaccess.  Returns only the IPs that were newly added.
-    """
-    from datetime import datetime, timezone
-
-    valid = [ip for ip in new_ips if _IP_RE.match(ip) and ip not in _PROTECTED]
-    if not valid:
-        return []
-
-    if not os.path.exists(BLACKLIST_FILE):
-        data = {"ips": []}
-    else:
-        with open(BLACKLIST_FILE, "r", encoding="utf-8") as f:
-            raw = json.load(f)
-        data = raw if isinstance(raw, dict) else {"ips": raw}
-
-    existing = {e["ip"] for e in data["ips"]}
-    newly_added = []
-    for ip in valid:
-        if ip not in existing:
-            data["ips"].append({
-                "ip": ip,
-                "added_at": datetime.now(timezone.utc).isoformat(),
-                "reason": reason,
-            })
-            newly_added.append(ip)
-
-    with open(BLACKLIST_FILE, "w", encoding="utf-8") as f:
-        json.dump(data, f, indent=2)
-
-    _write_htaccess(_load_banned_ips())
-    return newly_added
+def ban_ips(new_ips, reason='Manual ban'):
+    added=[]
+    for ip in new_ips:
+        if ip not in [e['ip'] for e in _load()['ips']]:
+            change_ban(ip,True,reason,'system')
+            added.append(ip)
+    return added

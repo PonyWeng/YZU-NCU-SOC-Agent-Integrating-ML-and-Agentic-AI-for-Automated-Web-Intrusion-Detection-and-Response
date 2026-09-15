@@ -9,7 +9,7 @@ Output: plain text — no Markdown (LINE does not render it).
 import requests
 import openai
 
-from config import OPENAI_API_KEY, RAG_API_URL
+from config import OPENAI_API_KEY
 
 _client = openai.OpenAI(api_key=OPENAI_API_KEY)
 
@@ -56,7 +56,7 @@ def _query_rag(question: str) -> str:
     """Call the existing RAG service for context. Returns empty string on failure."""
     try:
         resp = requests.post(
-            RAG_API_URL,
+            "",
             json={"text": question},
             timeout=12,
         )

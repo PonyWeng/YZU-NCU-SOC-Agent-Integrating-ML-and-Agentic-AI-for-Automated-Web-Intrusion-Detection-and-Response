@@ -1,5 +1,7 @@
 # Credentials — never commit
 .env
+runtime/
+.pytest_cache/
 
 # Python cache
 __pycache__/
@@ -15,9 +17,13 @@ blacklist.json
 
 # Apache logs (can be large, generated at runtime)
 apache-logs/
+protected_services/logs/
 
 # RAG vector database (rebuilt on container start)
 RAG/db/
+
+# Legacy scratch and local experiments
+temp_files/
 
 # Claude Code memory
 .claude/

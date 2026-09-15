@@ -5,6 +5,7 @@ Attacks: SQL Injection / XSS / Directory Traversal  +  normal traffic
 """
 
 import random
+import argparse
 import sys
 import time
 
@@ -15,7 +16,9 @@ from urllib.parse import quote
 if sys.stdout.encoding and sys.stdout.encoding.lower() not in ("utf-8", "utf8"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
-TARGET = "http://localhost"
+parser = argparse.ArgumentParser(description='Generate demo traffic for one protected service')
+parser.add_argument('--target', default='http://localhost', help='Target base URL, e.g. http://127.0.0.1:8081')
+TARGET = parser.parse_args().target.rstrip('/')
 DELAY  = 0.3   # seconds between requests
 
 # Simulated attacker IPs — injected as X-Real-IP so Apache logs the real source

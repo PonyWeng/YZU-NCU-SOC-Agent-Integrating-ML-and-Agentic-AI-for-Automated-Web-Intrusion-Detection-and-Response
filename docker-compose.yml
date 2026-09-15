@@ -1,81 +1,90 @@
+x-waf-common: &waf-common
+  image: ghcr.io/coreruleset/modsecurity-crs:4.25-apache-lts
+  restart: unless-stopped
+  environment: &waf-environment
+    PORT: "8080"
+    MODSEC_RULE_ENGINE: DetectionOnly
+    MODSEC_AUDIT_ENGINE: RelevantOnly
+    MODSEC_AUDIT_LOG_FORMAT: JSON
+    MODSEC_AUDIT_LOG: /var/log/modsecurity/audit.jsonl
+    MODSEC_AUDIT_LOG_PARTS: ABFHZ
+    BLOCKING_PARANOIA: "1"
+    DETECTION_PARANOIA: "1"
+    ANOMALY_INBOUND: "5"
+    ANOMALY_OUTBOUND: "4"
+    PROXY_PRESERVE_HOST: "On"
+    REMOTEIP_HEADER: X-Real-IP
+
 services:
-
-  elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:8.5.0
-    environment:
-      - discovery.type=single-node
-      - xpack.security.enabled=true
-      - ES_JAVA_OPTS=-Xms1g -Xmx1g
-      - ELASTIC_PASSWORD=vEo4PSW2yMiHIMMTxAHk
-    ports:
-      - "9200:9200"
-    volumes:
-      - esdata:/usr/share/elasticsearch/data
-    healthcheck:
-      test: ["CMD-SHELL", "curl -sf -u elastic:vEo4PSW2yMiHIMMTxAHk http://localhost:9200/_cluster/health"]
-      interval: 20s
-      timeout: 10s
-      retries: 15
-      start_period: 60s
-
-  logstash:
-    image: docker.elastic.co/logstash/logstash:8.5.0
-    volumes:
-      - ./logstash.conf:/usr/share/logstash/pipeline/logstash.conf
-    ports:
-      - "5044:5044"
-    environment:
-      - "xpack.monitoring.enabled=false"
-    depends_on:
-      elasticsearch:
-        condition: service_healthy
-    restart: on-failure
-
-  kibana:
-    image: docker.elastic.co/kibana/kibana:8.5.0
-    volumes:
-      - ./kibana.yml:/usr/share/kibana/config/kibana.yml
-    ports:
-      - "5601:5601"
-    depends_on:
-      elasticsearch:
-        condition: service_healthy
-
   apache:
     image: httpd:2.4
-    ports:
-      - "80:80"
+    expose: ["80"]
     volumes:
-      - ./htdocs:/usr/local/apache2/htdocs
+      - ./htdocs:/usr/local/apache2/htdocs:ro
       - ./apache-logs:/usr/local/apache2/logs
-    # Switch log format from 'common' to 'combined' and write to a file
-    # (combined = includes Referer + User-Agent, which the ML regex expects)
     command: >
       /bin/sh -c "
       sed -i 's|CustomLog /proc/self/fd/1 common|CustomLog /usr/local/apache2/logs/access.log realip|g' /usr/local/apache2/conf/httpd.conf &&
       sed -i 's|#LoadModule rewrite_module|LoadModule rewrite_module|g' /usr/local/apache2/conf/httpd.conf &&
       sed -i 's|#LoadModule remoteip_module|LoadModule remoteip_module|g' /usr/local/apache2/conf/httpd.conf &&
       sed -i 's|AllowOverride None|AllowOverride All|g' /usr/local/apache2/conf/httpd.conf &&
-      echo 'RemoteIPHeader X-Real-IP' >> /usr/local/apache2/conf/httpd.conf &&
-      echo 'RemoteIPTrustedProxy 172.18.0.1' >> /usr/local/apache2/conf/httpd.conf &&
+      echo 'RemoteIPHeader X-Demo-Source-IP' >> /usr/local/apache2/conf/httpd.conf &&
+      echo 'RemoteIPTrustedProxy 172.16.0.0/12' >> /usr/local/apache2/conf/httpd.conf &&
       echo 'LogFormat \"%a %l %u %t \\\"%r\\\" %>s %b \\\"%{Referer}i\\\" \\\"%{User-Agent}i\\\"\" realip' >> /usr/local/apache2/conf/httpd.conf &&
-      httpd-foreground
-      "
+      httpd-foreground"
 
-  rag:
-    build: ./RAG
-    ports:
-      - "8001:8000"
+  flask-target:
+    image: python:3.12-slim
+    working_dir: /app
+    command: sh -c "pip install --no-cache-dir -r requirements.txt && python app.py"
+    expose: ["8081"]
     volumes:
-      - ./RAG/knowledge:/app/knowledge
-      - ./RAG/db:/app/db
-    environment:
-      - OLLAMA_BASE_URL=http://host.docker.internal:11434
-      - OLLAMA_LLM_MODEL=llama3.1
-    depends_on:
-      elasticsearch:
-        condition: service_healthy
-    restart: on-failure
+      - ./protected_services/flask_target:/app:ro
+      - ./protected_services/logs/flask:/logs
 
-volumes:
-  esdata:
+  django-target:
+    image: python:3.12-slim
+    working_dir: /app
+    environment:
+      DJANGO_SETTINGS_MODULE: demo_site.settings
+    command: sh -c "pip install --no-cache-dir -r requirements.txt && python -m django runserver 0.0.0.0:8082"
+    expose: ["8082"]
+    volumes:
+      - ./protected_services/django_target:/app:ro
+      - ./protected_services/logs/django:/logs
+
+  waf-apache:
+    <<: *waf-common
+    depends_on: [apache]
+    ports: ["80:8080"]
+    environment:
+      <<: *waf-environment
+      SERVER_NAME: apache.local
+      BACKEND: http://apache:80
+    volumes:
+      - ./protected_services/logs/waf/apache:/var/log/modsecurity
+      - ./protected_services/waf/RESPONSE-999-EXCLUSION-RULES-AFTER-CRS.conf:/etc/modsecurity.d/owasp-crs/rules/RESPONSE-999-EXCLUSION-RULES-AFTER-CRS.conf:ro
+
+  waf-flask:
+    <<: *waf-common
+    depends_on: [flask-target]
+    ports: ["8081:8080"]
+    environment:
+      <<: *waf-environment
+      SERVER_NAME: flask.local
+      BACKEND: http://flask-target:8081
+    volumes:
+      - ./protected_services/logs/waf/flask:/var/log/modsecurity
+      - ./protected_services/waf/RESPONSE-999-EXCLUSION-RULES-AFTER-CRS.conf:/etc/modsecurity.d/owasp-crs/rules/RESPONSE-999-EXCLUSION-RULES-AFTER-CRS.conf:ro
+
+  waf-django:
+    <<: *waf-common
+    depends_on: [django-target]
+    ports: ["8082:8080"]
+    environment:
+      <<: *waf-environment
+      SERVER_NAME: django.local
+      BACKEND: http://django-target:8082
+    volumes:
+      - ./protected_services/logs/waf/django:/var/log/modsecurity
+      - ./protected_services/waf/RESPONSE-999-EXCLUSION-RULES-AFTER-CRS.conf:/etc/modsecurity.d/owasp-crs/rules/RESPONSE-999-EXCLUSION-RULES-AFTER-CRS.conf:ro

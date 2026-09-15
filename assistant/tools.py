@@ -9,7 +9,6 @@ import re
 import requests
 from langchain_core.tools import tool
 
-from config import RAG_API_URL
 
 IP_RE = re.compile(r"^\d{1,3}(\.\d{1,3}){3}$")
 
@@ -42,8 +41,12 @@ def ban_ip_address(ip: str) -> str:
     ip = ip.strip()
     if not _valid_ip(ip):
         return f"Invalid IP address: {ip}"
-    from assistant.command_handler import _cmd_ban
-    return _cmd_ban(ip)
+    from assistant.enforcer import change_ban
+    try:
+        change_ban(ip, True, 'Agent tool ban', 'agent')
+        return f'IP {ip} blocked. Apache rules updated.'
+    except Exception as exc:
+        return f'Ban failed: {exc}'
 
 
 @tool
@@ -55,8 +58,12 @@ def unban_ip_address(ip: str) -> str:
     ip = ip.strip()
     if not _valid_ip(ip):
         return f"Invalid IP address: {ip}"
-    from assistant.command_handler import _cmd_unban
-    return _cmd_unban(ip)
+    from assistant.enforcer import change_ban
+    try:
+        change_ban(ip, False, 'Agent tool unban', 'agent')
+        return f'IP {ip} unblocked. Apache rules updated.'
+    except Exception as exc:
+        return f'Unban failed: {exc}'
 
 
 @tool
@@ -72,7 +79,7 @@ def list_blocked_ips() -> str:
 @tool
 def get_recent_attack_logs() -> str:
     """
-    Retrieve the 5 most recent attack detections from Elasticsearch.
+    Retrieve the 5 most recent attack detections from the local SIEM event store.
     Shows attack type, timestamp, source IP, and payload URL for each event.
     Use when the user asks about recent attacks, latest logs, or recent detections.
     """
@@ -83,7 +90,7 @@ def get_recent_attack_logs() -> str:
 @tool
 def get_system_status() -> str:
     """
-    Get the current NIDS platform status: Elasticsearch cluster health,
+    Get the current NIDS platform status: local SIEM storage health,
     total log records, attack event count, blacklist size, and log file size.
     Use when the user asks about system health, status, or platform statistics.
     """
@@ -99,15 +106,7 @@ def search_security_knowledge(query: str) -> str:
     and incident response procedures.
     Use to answer general cybersecurity questions with grounded knowledge.
     """
-    try:
-        resp = requests.post(RAG_API_URL, json={"text": query}, timeout=60)
-        if resp.status_code == 200:
-            result = resp.json().get("summary", "").strip()
-            if result and "don't know" not in result.lower():
-                return result
-        return "No relevant information found in knowledge base."
-    except Exception as e:
-        return f"Knowledge base unavailable: {e}"
+    return "本機 RAG/Ollama 已移除；請先在 AI 設定中配置外部 AI Provider。"
 
 
 NIDS_TOOLS = [
@@ -148,12 +147,12 @@ HELP_TEXT = "\n".join([
     "        \"show blacklist\"",
     "",
     "[5] get_recent_attack_logs",
-    "    查詢最近 5 筆攻擊紀錄（ES）",
+    "    查詢最近 5 筆攻擊紀錄（本機 SIEM）",
     "    例：「最近的攻擊紀錄」",
     "        \"recent attacks\"",
     "",
     "[6] get_system_status",
-    "    查詢系統狀態（ES 健康、封鎖數、日誌大小）",
+    "    查詢系統狀態（收集器狀態、封鎖數、日誌大小）",
     "    例：「系統狀態」",
     "        \"system status\"",
     "",

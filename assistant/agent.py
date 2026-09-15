@@ -9,12 +9,7 @@ The LLM (Ollama llama3) acts as orchestrator:
   4. Synthesises a plain-text reply for LINE
 """
 
-from langchain_core.messages import HumanMessage
-from langchain_ollama import ChatOllama
-from langgraph.prebuilt import create_react_agent
-
 from assistant.tools import NIDS_TOOLS
-from config import OLLAMA_BASE_URL, OLLAMA_MODEL
 
 SYSTEM_PROMPT = """\
 You are a cybersecurity assistant for a Network Intrusion Detection System (NIDS) platform.
@@ -25,7 +20,7 @@ You have tools for:
 - Banning / unbanning IP addresses (Apache .htaccess enforcement)
 - Listing currently blocked IPs
 - Querying recent attack detections
-- Checking system / Elasticsearch status
+- Checking system / local SIEM status
 - Searching the local security knowledge base
 
 CRITICAL LANGUAGE RULE:
@@ -50,16 +45,7 @@ _agent_instance = None
 
 
 def _build_agent():
-    llm = ChatOllama(
-        model=OLLAMA_MODEL,
-        base_url=OLLAMA_BASE_URL,
-        temperature=0,
-    )
-    return create_react_agent(
-        model=llm,
-        tools=NIDS_TOOLS,
-        prompt=SYSTEM_PROMPT,
-    )
+    raise RuntimeError('外部 AI Provider 尚未設定。請到儀表板的 AI 設定頁設定 Gemini 或 OpenAI API key。')
 
 
 def _clean_response(text: str) -> str:
@@ -103,27 +89,19 @@ def run_agent(user_message: str) -> str:
     Invoke the NIDS agent with a user message.
     Returns a plain-text response suitable for LINE.
     """
-    global _agent_instance
-    if _agent_instance is None:
-        try:
-            _agent_instance = _build_agent()
-        except Exception as e:
-            return f"Agent init failed — is Ollama running? ({e})"
-
     try:
-        result = _agent_instance.invoke({
-            "messages": [HumanMessage(content=user_message)]
-        })
-        raw = result["messages"][-1].content
-        return _clean_response(raw)
+        from ai_gateway import run
+        return _clean_response(run(user_message, []))
     except Exception as e:
         # Ollama model runner crash (status 500 / process terminated):
         # reset the instance so the next message triggers a clean rebuild.
         _agent_instance = None
         err = str(e)
+        if "10061" in err or "Connection refused" in err or "拒絕連線" in err:
+            return "外部 AI Provider 無法連線，請到儀表板 AI 設定檢查 Provider 與 API key。"
         if "500" in err or "terminated" in err or "runner" in err:
             return (
-                "Ollama 模型發生錯誤，已自動重置。\n"
+                "AI Provider 發生錯誤，已自動重置。\n"
                 "請再傳一次您的問題。\n"
                 f"(原因：{err[:120]})"
             )

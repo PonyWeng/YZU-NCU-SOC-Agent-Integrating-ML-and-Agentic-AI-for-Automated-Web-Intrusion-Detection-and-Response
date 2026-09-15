@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>NCU-PDCLAB mini SIEM · 安全監控中心</title><link rel="stylesheet" href="/static/style.css?v=20260915-14"><script src="/static/app.js?v=20260915-14" defer></script></head>
+<body>
+<aside class="sidebar"><a class="brand" href="#overview"><span class="brandmark">N</span><span>NCU-PDCLAB<small>mini SIEM · 安全監控中心</small></span></a>
+<div class="nav-label">工作空間</div><nav aria-label="主選單">
+<a href="#overview" data-page="overview"><span>◫</span>安全總覽</a>
+<a href="#logs" data-page="logs"><span>≡</span>日誌中心</a>
+<a href="#incidents" data-page="incidents"><span>⚑</span>告警與事件</a>
+<a href="#topology" data-page="topology"><span>⌘</span>關聯拓樸</a>
+<a href="#services" data-page="services"><span>▣</span>受保護服務</a>
+<a href="#blacklist" data-page="blacklist"><span>⊘</span>封鎖管理</a>
+<a href="#rules" data-page="rules"><span>⚙</span>偵測規則</a>
+<a href="#audit" data-page="audit"><span>◷</span>操作紀錄</a></nav><div class="nav-label extra-label">調查工具</div><nav aria-label="調查工具"><a href="#intel" data-page="intel"><span>◈</span>情資管理</a><a href="#assistant" data-page="assistant"><span>✦</span>AI 資安助理</a></nav>
+<div class="sidebar-bottom"><span class="local-dot"></span>本機工作空間<p>Apache 日誌 · ML 偵測</p></div></aside>
+<main><header class="topbar"><div><span class="breadcrumb">安全營運 / <span id="crumb">安全總覽</span></span><h1 id="title">安全總覽</h1></div><div class="toolbar"><label class="range-label">資料範圍<select id="range"><option value="0.083333">最近 5 分鐘</option><option value="0.25">最近 15 分鐘</option><option value="1">最近 1 小時</option><option value="3">最近 3 小時</option><option value="6">最近 6 小時</option><option value="12">最近 12 小時</option><option value="24" selected>最近 1 日</option><option value="72">最近 3 日</option><option value="168">最近 7 日</option><option value="720">最近 30 日</option></select></label><button id="refresh" class="secondary">↻ 更新</button></div></header>
+<div id="error" class="error" role="alert" hidden></div>
+<div class="status-strip"><span id="health">正在連線…</span><span id="updated">每 15 秒更新</span></div>
+<section id="content" aria-live="polite"></section>
+<footer>NCU-PDCLAB mini SIEM <span>以日誌建立事件脈絡</span></footer></main>
+<dialog id="detail"><div class="dialog-head"><h2 id="detail-title">日誌詳情</h2><button id="close-detail" class="icon-button" aria-label="關閉詳情">×</button></div><div id="detail-body"></div></dialog>
+<div id="toast" role="status" hidden></div>
+</body></html>
+

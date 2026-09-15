@@ -43,7 +43,7 @@ def _load_blacklist() -> dict:
             data = json.load(f)
         # Handle both formats: {"ips": [...]} and legacy [...]
         if isinstance(data, list):
-            return {"ips": data}
+            return {"ips": [{"ip": e, "reason": "Legacy entry"} if isinstance(e, str) else e for e in data]}
         return data
     return {"ips": []}
 
@@ -100,71 +100,34 @@ def handle_command(text: str) -> str:
 
 
 def _cmd_status() -> str:
-    from config import ES_HOST, ES_USER, ES_PASSWORD
-    from elasticsearch import Elasticsearch
-
-    lines = ["System Status", "-" * 24]
-
-    # Elasticsearch
-    try:
-        es = Elasticsearch(ES_HOST, basic_auth=(ES_USER, ES_PASSWORD))
-        health = es.cluster.health()
-        lines.append(f"Elasticsearch : {health['status'].upper()}")
-
-        total = es.count(index="prediction-logs-*")["count"]
-        attacks = es.count(
-            index="prediction-logs-*",
-            query={"range": {"attack_prediction": {"gt": 0}}},
-        )["count"]
-        lines.append(f"Total records : {total}")
-        lines.append(f"Attack records: {attacks}")
-    except Exception:
-        lines.append("Elasticsearch : OFFLINE")
-
-    # Blacklist
-    bl = _load_blacklist()
-    lines.append(f"Blacklisted   : {len(bl['ips'])} IP(s)")
-
-    # Apache log size
-    log_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "apache-logs", "access.log")
-    if os.path.exists(log_path):
-        size_kb = os.path.getsize(log_path) // 1024
-        lines.append(f"Access log    : {size_kb} KB")
-
-    lines.append(f"Time (TW)     : {_tw_now()}")
-    return "\n".join(lines)
+    from siem import store
+    store.init_db()
+    data = store.overview(hours=0)
+    collector = store.get_state('collector', {'status': 'not_started'})
+    return (f"SIEM Status\nStorage: SQLite\nCollector: {collector['status']}"
+            f"\nTotal records: {data['counts']['total']}\nAttack records: {data['counts']['attacks']}"
+            f"\nOpen incidents: {data['counts']['open_incidents']}"
+            f"\nBlocked IPs: {len(get_blacklisted_ips())}")
 
 
 def _cmd_logs_recent() -> str:
-    from config import ES_HOST, ES_USER, ES_PASSWORD
-    from elasticsearch import Elasticsearch
-
-    LABELS = {1: "SQLi", 2: "XSS", 3: "DirTraversal"}
-
-    try:
-        es = Elasticsearch(ES_HOST, basic_auth=(ES_USER, ES_PASSWORD))
-        result = es.search(
-            index="prediction-logs-*",
-            query={"range": {"attack_prediction": {"gt": 0}}},
-            size=5,
-            sort=[{"@timestamp": {"order": "desc"}}],
-        )
-        hits = result["hits"]["hits"]
-        if not hits:
-            return "No attack records found."
-
-        lines = ["Recent Attacks (last 5)", "-" * 24]
-        for i, hit in enumerate(hits, 1):
-            src = hit["_source"]
-            ts = str(src.get("@timestamp", "?"))[:19].replace("T", " ")
-            attack = LABELS.get(int(src.get("attack_prediction", 0)), "Unknown")
-            url = str(src.get("URL", "?"))[:55]
-            lines.append(f"{i}. [{attack}] {ts}")
-            lines.append(f"   {url}")
-        return "\n".join(lines)
-
-    except Exception as e:
-        return f"Error fetching logs: {e}"
+    from siem import store
+    store.init_db()
+    with store.connection() as db:
+        rows = db.execute('SELECT * FROM events WHERE attack>0 ORDER BY timestamp DESC LIMIT 5').fetchall()
+    if not rows:
+        return '目前資料庫沒有攻擊偵測紀錄。收到新的 Web 請求後，系統會持續進行分類。'
+    from collections import Counter
+    counts=Counter(store.LABELS.get(r['attack'],'未知') for r in rows)
+    summary='、'.join(f'{name} {count} 筆' for name,count in counts.items())
+    lines=[f'查到最近 {len(rows)} 筆攻擊偵測，包含{summary}。',
+           f'以下是全部歷史資料中最新的紀錄，時間範圍：{rows[-1]["timestamp"]} 至 {rows[0]["timestamp"]}。','']
+    for i,r in enumerate(rows,1):
+        lines.extend([f'{i}. {store.LABELS.get(r["attack"])}｜來源 {r["src_ip"]}',
+                      f'目標：{r["service_name"]} ({r["service_host"]}:{r["service_port"]})',
+                      f'時間：{r["timestamp"]}｜HTTP {r["status"]}', f'請求：{r["method"]} {r["url"]}',''])
+    lines.append('這些是模型偵測結果，不代表攻擊已成功。建議先核對原始日誌與目標服務回應，再決定是否封鎖來源。')
+    return '\n'.join(lines)
 
 
 def _cmd_check(ip: str) -> str:
@@ -194,69 +157,32 @@ def _cmd_check(ip: str) -> str:
 def _cmd_blacklist_list() -> str:
     bl = _load_blacklist()
     if not bl["ips"]:
-        return "Blacklist is currently empty.\nUse /ban <IP> to add an IP."
-    lines = [f"Blacklisted IPs ({len(bl['ips'])} total)", "-" * 28]
+        return '目前封鎖清單是空的，沒有已列入的 IP。可使用 /ban IP 新增封鎖。'
+    lines = [f"目前封鎖清單共有 {len(bl['ips'])} 個 IP，以下是實際儲存的清單：", "目前封鎖執行範圍是 Apache；Flask、Django 尚未接上封鎖執行器。", ""]
     for i, entry in enumerate(bl["ips"], 1):
         added = str(entry.get("added_at", "?"))[:10]
         reason = entry.get("reason", "Manual ban")
         lines.append(f"{i}. {entry['ip']}")
-        lines.append(f"   Added: {added}  Reason: {reason}")
+        lines.append(f"   加入時間：{added}｜原因：{reason}")
     return "\n".join(lines)
 
 
 def _cmd_ban(ip: str) -> str:
-    if not IP_RE.match(ip):
-        return f"Invalid IP address: {ip}\nUsage: /ban <IP>  (e.g. /ban 192.168.1.1)"
-
-    bl = _load_blacklist()
-    if any(e["ip"] == ip for e in bl["ips"]):
-        return f"IP {ip} is already in the blacklist."
-
-    bl["ips"].append({
-        "ip": ip,
-        "added_at": datetime.now(timezone.utc).isoformat(),
-        "reason": "Manual ban via LINE",
-    })
-    _save_blacklist(bl)
-    total = len(bl["ips"])
-
-    # Sync .htaccess so Apache enforces the ban immediately
+    from assistant.enforcer import change_ban
     try:
-        from assistant.enforcer import apply_blacklist
-        apply_blacklist()
-        enforce_msg = "Apache enforcement: active (403 Forbidden)"
-    except Exception as e:
-        enforce_msg = f"Apache enforcement: failed ({e})"
-
-    return (
-        f"IP {ip} has been added to the blacklist.\n"
-        f"Total blacklisted IPs: {total}\n"
-        f"{enforce_msg}"
-    )
+        change_ban(ip, True, 'Manual ban via LINE', 'line')
+        return f'IP {ip} blocked. Apache rules updated.'
+    except Exception as exc:
+        return f'Ban failed: {exc}'
 
 
 def _cmd_unban(ip: str) -> str:
-    bl = _load_blacklist()
-    before = len(bl["ips"])
-    bl["ips"] = [e for e in bl["ips"] if e["ip"] != ip]
-    if len(bl["ips"]) == before:
-        return f"IP {ip} was not found in the blacklist."
-    _save_blacklist(bl)
-    remaining = len(bl["ips"])
-
-    # Sync .htaccess to remove the ban
+    from assistant.enforcer import change_ban
     try:
-        from assistant.enforcer import apply_blacklist
-        apply_blacklist()
-        enforce_msg = "Apache enforcement: updated"
-    except Exception as e:
-        enforce_msg = f"Apache enforcement: failed ({e})"
-
-    return (
-        f"IP {ip} has been removed from the blacklist.\n"
-        f"Total blacklisted IPs: {remaining}\n"
-        f"{enforce_msg}"
-    )
+        change_ban(ip, False, 'Manual unban via LINE', 'line')
+        return f'IP {ip} unblocked. Apache rules updated.'
+    except Exception as exc:
+        return f'Unban failed: {exc}'
 
 
 def _tw_now() -> str:

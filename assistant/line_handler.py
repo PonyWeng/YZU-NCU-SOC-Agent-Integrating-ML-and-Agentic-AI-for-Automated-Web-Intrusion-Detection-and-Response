@@ -47,6 +47,10 @@ def handle_events(events: list) -> None:
     from assistant.tools import HELP_TEXT
 
     for event in events:
+        from config import LINE_USER_IDS
+        # LINE signature authenticates delivery, not permission to administer SIEM.
+        if event.get('source', {}).get('userId') not in LINE_USER_IDS:
+            continue
         if event.get("type") != "message":
             continue
         if event.get("message", {}).get("type") != "text":
