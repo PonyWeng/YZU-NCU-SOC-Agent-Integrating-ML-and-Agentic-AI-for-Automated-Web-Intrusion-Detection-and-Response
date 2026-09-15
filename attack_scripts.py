@@ -28,9 +28,9 @@ DELAY  = 0.3   # seconds between requests
 # Simulated attacker IPs — injected as X-Real-IP so Apache logs the real source
 # (Docker NATs all host traffic to 172.18.0.1; X-Real-IP is trusted by Apache)
 ATTACKER_IPS = {
-    "sqli":    "185.220.101.47",   # Known Tor exit / SQLi source
-    "xss":     "45.142.212.100",   # Common XSS scanner IP range
-    "dir":     "194.165.16.11",    # Dir traversal scanner
+    "sqli":    "198.51.100.21",    # RFC 5737 demo source; mapped to an external location by SIEM
+    "xss":     "203.0.113.34",     # RFC 5737 demo source; never attributed to a real owner
+    "dir":     "192.0.2.57",       # RFC 5737 demo source; safe for competition traffic
     "normal":  None,               # Normal traffic: no spoofing, log real host IP
 }
 

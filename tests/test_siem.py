@@ -10,6 +10,7 @@ from unittest.mock import patch
 from siem import store
 from siem.collector import normalize,collect_once,import_legacy
 from siem.parsers import parse
+from siem.geo import enrich
 
 
 def sample(event_id='e1', ip='192.0.2.1', code=1):
@@ -19,6 +20,12 @@ def sample(event_id='e1', ip='192.0.2.1', code=1):
 
 
 class SIEMTests(unittest.TestCase):
+    def test_documentation_ip_gets_stable_external_demo_location(self):
+        location=enrich('198.51.100.121')
+        self.assertEqual(location['status'],'demo')
+        self.assertNotEqual(location['country_code'],'LAN')
+        self.assertIsInstance(location['latitude'],float)
+
     def setUp(self):
         self.temp=tempfile.TemporaryDirectory()
         self.root=Path(self.temp.name)
