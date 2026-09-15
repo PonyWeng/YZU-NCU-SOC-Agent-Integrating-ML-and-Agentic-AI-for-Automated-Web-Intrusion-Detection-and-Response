@@ -26,6 +26,14 @@ class SIEMTests(unittest.TestCase):
         self.assertNotEqual(location['country_code'],'LAN')
         self.assertIsInstance(location['latitude'],float)
 
+    def test_modsecurity_rule_family_selects_primary_attack_class(self):
+        base={'transaction':{'time':'15/Sep/2026:12:00:00 +0000','remote_address':'192.0.2.1'},
+              'request':{'request_line':'GET /search?q=test HTTP/1.1'},'response':{'status':200}}
+        xss={**base,'audit_data':{'messages':[{'details':{'ruleId':'941100','tags':['attack-xss']},'message':'XSS Attack Detected'}]}}
+        traversal={**base,'audit_data':{'messages':[{'details':{'ruleId':'930100','tags':['attack-lfi']},'message':'Path Traversal Attack'}]}}
+        self.assertEqual(parse(json.dumps(xss),'modsecurity_json')['attack'],2)
+        self.assertEqual(parse(json.dumps(traversal),'modsecurity_json')['attack'],3)
+
     def setUp(self):
         self.temp=tempfile.TemporaryDirectory()
         self.root=Path(self.temp.name)

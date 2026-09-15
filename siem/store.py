@@ -276,7 +276,8 @@ def evaluate_rules(db, event):
         # Queue per recipient; retry does not resend to successful recipients.
         from config import LINE_USER_IDS
         for recipient in LINE_USER_IDS:
-            db.execute('INSERT INTO notifications(incident_id,recipient,retry_at) VALUES (?,?,?)', (result.lastrowid, recipient, now()))
+            db.execute('INSERT OR REPLACE INTO notifications(incident_id,recipient,retry_at) VALUES (?,?,?)',
+                       (result.lastrowid, recipient, now()))
 
 
 def filters(hours=24, q='', src_ip='', attack=None, status=None, since='', until=''):

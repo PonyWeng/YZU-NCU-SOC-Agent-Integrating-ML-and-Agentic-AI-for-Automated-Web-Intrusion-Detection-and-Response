@@ -186,9 +186,10 @@ def main():
             for service in services:
                 path=Path(service['path'])
                 if not path.is_absolute(): path=store.ROOT/path
-                key=str(path.resolve())
                 if not path.exists():
-                    continue
+                    path.parent.mkdir(parents=True,exist_ok=True)
+                    path.touch()
+                key=str(path.resolve())
                 if key not in initialized:
                     start_at_end(path);initialized.add(key)
                 collect_once(path,classifier,service)

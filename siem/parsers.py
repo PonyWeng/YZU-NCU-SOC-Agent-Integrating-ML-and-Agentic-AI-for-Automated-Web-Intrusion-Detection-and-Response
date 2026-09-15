@@ -31,7 +31,16 @@ def parse(raw, fmt='apache_combined', service_name='apache', host='127.0.0.1', p
                 rendered.append({'id':details.get('ruleId') or details.get('rule_id') or 'CRS',
                                  'message':message.get('message','WAF rule matched'),'tags':details.get('tags') or []})
         text=' '.join(x['message'] for x in rendered).lower()+' '+' '.join(str(tag).lower() for x in rendered for tag in x['tags'])
-        attack=1 if 'sqli' in text or 'sql injection' in text else 2 if 'xss' in text or 'cross-site scripting' in text else 3 if any(x in text for x in ('lfi','rfi','path traversal','directory traversal')) else 4
+        rule_ids=[str(x['id']) for x in rendered]
+        # CRS rule families are more reliable than broad tags. A transaction
+        # can include generic injection/RCE tags alongside its primary class.
+        if any(rid.startswith('941') for rid in rule_ids): attack=2
+        elif any(rid.startswith('930') for rid in rule_ids): attack=3
+        elif any(rid.startswith('942') for rid in rule_ids): attack=1
+        elif 'xss' in text or 'cross-site scripting' in text: attack=2
+        elif any(x in text for x in ('lfi','rfi','path traversal','directory traversal')): attack=3
+        elif 'sqli' in text or 'sql injection' in text: attack=1
+        else: attack=4
         summaries=[f"{x['id']}: {x['message']}" for x in rendered if x['id'] != '980170']
         if not summaries:
             return None
