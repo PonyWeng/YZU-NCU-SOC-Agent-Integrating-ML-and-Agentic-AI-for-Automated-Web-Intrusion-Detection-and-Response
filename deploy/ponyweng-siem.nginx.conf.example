@@ -1,0 +1,74 @@
+# /etc/nginx/sites-available/ponyweng-siem
+# Replace the certificate paths after creating a Cloudflare Origin CA cert
+# covering *.ponyweng.tw. Keep the private key readable only by root.
+
+server {
+    listen 80;
+    server_name siem.ponyweng.tw shop.ponyweng.tw staff.ponyweng.tw city.ponyweng.tw;
+    return 301 https://$host$request_uri;
+}
+
+# Trust CF-Connecting-IP only from Cloudflare ranges. Keep this include updated
+# from https://www.cloudflare.com/ips/ (both IPv4 and IPv6).
+# /etc/nginx/conf.d/cloudflare-realip.conf should contain set_real_ip_from lines
+# and: real_ip_header CF-Connecting-IP;
+
+server {
+    listen 443 ssl;
+    server_name siem.ponyweng.tw;
+    ssl_certificate /etc/ssl/cloudflare/ponyweng-origin.pem;
+    ssl_certificate_key /etc/ssl/cloudflare/ponyweng-origin.key;
+    location / {
+        proxy_pass http://127.0.0.1:8000;
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-Proto https;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $remote_addr;
+        proxy_set_header X-Demo-Source-IP "";
+    }
+}
+
+server {
+    listen 443 ssl;
+    server_name shop.ponyweng.tw;
+    ssl_certificate /etc/ssl/cloudflare/ponyweng-origin.pem;
+    ssl_certificate_key /etc/ssl/cloudflare/ponyweng-origin.key;
+    location / {
+        proxy_pass http://127.0.0.1:18080;
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-Proto https;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $remote_addr;
+        proxy_set_header X-Demo-Source-IP "";
+    }
+}
+
+server {
+    listen 443 ssl;
+    server_name staff.ponyweng.tw;
+    ssl_certificate /etc/ssl/cloudflare/ponyweng-origin.pem;
+    ssl_certificate_key /etc/ssl/cloudflare/ponyweng-origin.key;
+    location / {
+        proxy_pass http://127.0.0.1:18081;
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-Proto https;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $remote_addr;
+        proxy_set_header X-Demo-Source-IP "";
+    }
+}
+
+server {
+    listen 443 ssl;
+    server_name city.ponyweng.tw;
+    ssl_certificate /etc/ssl/cloudflare/ponyweng-origin.pem;
+    ssl_certificate_key /etc/ssl/cloudflare/ponyweng-origin.key;
+    location / {
+        proxy_pass http://127.0.0.1:18082;
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-Proto https;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $remote_addr;
+        proxy_set_header X-Demo-Source-IP "";
+    }
+}

@@ -37,6 +37,8 @@ LINE → ngrok（選用）→ LINE 專用 webhook（127.0.0.1:8002）
 
 ### Docker Compose（建議用於搬移與比賽 Demo）
 
+若要使用 `ponyweng.tw` 將 SIEM 與三個靶機經 Cloudflare、Nginx 對外提供，參考 [Ubuntu/Cloudflare 部署指南](deploy/UBUNTU_CLOUDFLARE.md) 與 [Nginx 範例](deploy/ponyweng-siem.nginx.conf.example)。
+
 新設備只需安裝 Docker Desktop，將專案與私下保存的 `secrets.env` 放在同一目錄後執行：
 
 ```bash

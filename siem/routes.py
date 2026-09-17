@@ -1,6 +1,7 @@
 import csv
 import io
 import json
+import os
 import uuid
 from datetime import datetime, timezone
 from fastapi import APIRouter, HTTPException, Query, Request, Response
@@ -60,7 +61,8 @@ class LoginBody(BaseModel):
 def auth_login(body: LoginBody, request: Request, response: Response):
     from siem.auth import SESSION_COOKIE, SESSION_HOURS, login
     token,user=login(body.username,body.password,request.headers.get('user-agent',''))
-    response.set_cookie(SESSION_COOKIE,token,max_age=SESSION_HOURS*3600,httponly=True,samesite='strict',secure=False,path='/')
+    secure_cookie=os.getenv('SIEM_PUBLIC_ORIGIN','').startswith('https://')
+    response.set_cookie(SESSION_COOKIE,token,max_age=SESSION_HOURS*3600,httponly=True,samesite='strict',secure=secure_cookie,path='/')
     return user
 
 @router.post('/auth/logout')

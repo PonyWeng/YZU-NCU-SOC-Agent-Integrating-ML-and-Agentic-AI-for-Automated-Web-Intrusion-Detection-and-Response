@@ -28,7 +28,9 @@ async def local_access(request: Request,call_next):
         return JSONResponse({'detail':'Open the dashboard locally'},status_code=403)
     if request.method not in ('GET','HEAD','OPTIONS'):
         origin = request.headers.get('origin')
-        if origin and origin != str(request.base_url).rstrip('/'):
+        public_origin=os.getenv('SIEM_PUBLIC_ORIGIN','').rstrip('/')
+        expected_origin=public_origin or str(request.base_url).rstrip('/')
+        if origin and origin != expected_origin:
             return JSONResponse({'detail':'Cross-origin operation rejected'},status_code=403)
         if request.headers.get('x-siem-request') != 'dashboard':
             return JSONResponse({'detail':'Missing operation header'},status_code=403)
