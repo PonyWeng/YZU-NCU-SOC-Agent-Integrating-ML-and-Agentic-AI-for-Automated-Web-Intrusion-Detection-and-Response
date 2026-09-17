@@ -36,7 +36,7 @@ def bootstrap_admin(db):
     if db.execute('SELECT 1 FROM users LIMIT 1').fetchone():
         return
     username = os.getenv('SIEM_ADMIN_USERNAME', 'admin').strip() or 'admin'
-    password = os.getenv('SIEM_ADMIN_PASSWORD', 'Admin@12345')
+    password = os.getenv('SIEM_ADMIN_PASSWORD', 'admin@ncu-siem')
     db.execute('''INSERT INTO users(username,display_name,password_hash,role,enabled,created_at,updated_at)
                   VALUES (?,?,?,?,1,?,?)''',
                (username, '系統管理員', _password_hash(password), 'admin', store.now(), store.now()))

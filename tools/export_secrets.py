@@ -22,7 +22,7 @@ def main():
     source={**dotenv_values(ROOT/'.env'),**os.environ}
     values={key:source.get(key,'') for key in KEYS}
     values['SIEM_ADMIN_USERNAME']=values['SIEM_ADMIN_USERNAME'] or 'admin'
-    values['SIEM_ADMIN_PASSWORD']=values['SIEM_ADMIN_PASSWORD'] or 'Admin@12345'
+    values['SIEM_ADMIN_PASSWORD']=values['SIEM_ADMIN_PASSWORD'] or 'admin@ncu-siem'
     try:
         from siem import store
         store.init_db()
