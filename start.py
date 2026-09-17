@@ -92,7 +92,10 @@ def main():
                 if not (path/'audit.jsonl').exists():
                     raise
         print('Starting Apache, Flask and Django behind OWASP CRS (Detection Only)...',flush=True)
-        result=subprocess.run(['docker','compose','up','-d'],cwd=ROOT)
+        # Compose also contains a containerized SIEM. The local launcher owns
+        # the Python SIEM processes, so bring up only demo targets and WAFs.
+        demo_services=['apache','flask-target','django-target','waf-apache','waf-flask','waf-django']
+        result=subprocess.run(['docker','compose','up','-d',*demo_services],cwd=ROOT)
         if result.returncode:
             parser.error('Docker WAF startup failed. Check Docker Desktop and runtime logs.')
     from siem import store
