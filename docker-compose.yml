@@ -18,6 +18,17 @@ x-waf-common: &waf-common
     REMOTEIP_HEADER: X-Real-IP
 
 services:
+  waf-log-init:
+    image: busybox:1.36
+    restart: "no"
+    command: >
+      sh -c 'touch /logs/apache/audit.jsonl /logs/flask/audit.jsonl /logs/django/audit.jsonl &&
+      chmod 0666 /logs/apache/audit.jsonl /logs/flask/audit.jsonl /logs/django/audit.jsonl'
+    volumes:
+      - waf-apache-logs:/logs/apache
+      - waf-flask-logs:/logs/flask
+      - waf-django-logs:/logs/django
+
   siem:
     build: .
     image: ncu-pdclab-mini-siem:local
@@ -89,7 +100,11 @@ services:
 
   waf-apache:
     <<: *waf-common
-    depends_on: [apache]
+    depends_on:
+      apache:
+        condition: service_started
+      waf-log-init:
+        condition: service_completed_successfully
     ports: ["${WAF_BIND_IP:-0.0.0.0}:${APACHE_WAF_PORT:-80}:8080"]
     environment:
       <<: *waf-environment
@@ -101,7 +116,11 @@ services:
 
   waf-flask:
     <<: *waf-common
-    depends_on: [flask-target]
+    depends_on:
+      flask-target:
+        condition: service_started
+      waf-log-init:
+        condition: service_completed_successfully
     ports: ["${WAF_BIND_IP:-0.0.0.0}:${FLASK_WAF_PORT:-8081}:8080"]
     environment:
       <<: *waf-environment
@@ -113,7 +132,11 @@ services:
 
   waf-django:
     <<: *waf-common
-    depends_on: [django-target]
+    depends_on:
+      django-target:
+        condition: service_started
+      waf-log-init:
+        condition: service_completed_successfully
     ports: ["${WAF_BIND_IP:-0.0.0.0}:${DJANGO_WAF_PORT:-8082}:8080"]
     environment:
       <<: *waf-environment
