@@ -10,7 +10,9 @@ from fastapi import HTTPException, Request
 from siem import store
 
 SESSION_COOKIE = 'siem_session'
-SESSION_HOURS = 12
+SESSION_HOURS = max(1, int(os.getenv('SIEM_SESSION_HOURS','12')))
+IDLE_TIMEOUT_MINUTES = max(1, int(os.getenv('SIEM_IDLE_TIMEOUT_MINUTES','30')))
+IDLE_WARNING_MINUTES = max(1, min(IDLE_TIMEOUT_MINUTES, int(os.getenv('SIEM_IDLE_WARNING_MINUTES','5'))))
 
 
 def _password_hash(password, salt=None):
@@ -50,8 +52,9 @@ def login(username, password, user_agent=''):
         token = secrets.token_urlsafe(32)
         expires = (datetime.now(timezone.utc) + timedelta(hours=SESSION_HOURS)).isoformat(timespec='seconds')
         db.execute('DELETE FROM user_sessions WHERE expires_at<=?', (store.now(),))
-        db.execute('INSERT INTO user_sessions(token_hash,user_id,created_at,expires_at,user_agent) VALUES (?,?,?,?,?)',
-                   (_token_hash(token), row['id'], store.now(), expires, user_agent[:300]))
+        created=store.now()
+        db.execute('INSERT INTO user_sessions(token_hash,user_id,created_at,expires_at,user_agent,last_activity_at) VALUES (?,?,?,?,?,?)',
+                   (_token_hash(token), row['id'], created, expires, user_agent[:300], created))
         store.audit('auth.login', '登入成功', actor=row['username'], db=db)
         return token, public_user(row)
 
@@ -63,14 +66,45 @@ def logout(token):
         db.execute('DELETE FROM user_sessions WHERE token_hash=?', (_token_hash(token),))
 
 
-def user_from_token(token):
+def session_from_token(token):
     if not token:
-        return None
+        return None, 'missing'
     with store.connection() as db:
-        row = db.execute('''SELECT u.* FROM user_sessions s JOIN users u ON u.id=s.user_id
-                            WHERE s.token_hash=? AND s.expires_at>? AND u.enabled=1''',
-                         (_token_hash(token), store.now())).fetchone()
-        return dict(row) if row else None
+        row = db.execute('''SELECT u.*,s.created_at session_created_at,s.expires_at session_expires_at,
+                            s.last_activity_at session_last_activity_at FROM user_sessions s
+                            JOIN users u ON u.id=s.user_id WHERE s.token_hash=? AND u.enabled=1''',
+                         (_token_hash(token),)).fetchone()
+        if not row: return None, 'invalid'
+        now=datetime.now(timezone.utc)
+        absolute=datetime.fromisoformat(row['session_expires_at'])
+        last=datetime.fromisoformat(row['session_last_activity_at'] or row['session_created_at'])
+        reason='absolute' if now >= absolute else 'idle' if now-last >= timedelta(minutes=IDLE_TIMEOUT_MINUTES) else ''
+        if reason:
+            db.execute('DELETE FROM user_sessions WHERE token_hash=?',(_token_hash(token),))
+            store.audit('auth.timeout','登入時效到期' if reason=='absolute' else '閒置逾期登出',actor=row['username'],db=db)
+            return None, reason
+        return dict(row), ''
+
+
+def user_from_token(token):
+    return session_from_token(token)[0]
+
+
+def session_info(row):
+    return {'last_activity_at':row['session_last_activity_at'],
+            'absolute_expires_at':row['session_expires_at'],
+            'idle_timeout_seconds':IDLE_TIMEOUT_MINUTES*60,
+            'warning_seconds':IDLE_WARNING_MINUTES*60}
+
+
+def touch_session(token):
+    user,reason=session_from_token(token)
+    if not user: raise HTTPException(401,'登入已逾期' if reason in ('idle','absolute') else '請先登入')
+    stamp=store.now()
+    with store.connection() as db:
+        db.execute('UPDATE user_sessions SET last_activity_at=? WHERE token_hash=?',(stamp,_token_hash(token)))
+    user['session_last_activity_at']=stamp
+    return session_info(user)
 
 
 def current_user(request: Request):

@@ -74,8 +74,15 @@ def auth_logout(request: Request, response: Response):
 
 @router.get('/auth/me')
 def auth_me(request: Request):
-    from siem.auth import current_user, public_user
-    return public_user(current_user(request))
+    from siem.auth import current_user, public_user, session_info
+    user=current_user(request)
+    return dict(public_user(user),session=session_info(user))
+
+
+@router.post('/auth/activity')
+def auth_activity(request: Request):
+    from siem.auth import SESSION_COOKIE, touch_session
+    return touch_session(request.cookies.get(SESSION_COOKIE))
 
 class OwnAccountUpdate(BaseModel):
     display_name: str=Field(min_length=1,max_length=100)

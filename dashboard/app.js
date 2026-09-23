@@ -15,6 +15,7 @@ let logFilters = {q:'',src_ip:'',attack:'',status:'',since:'',until:''}, inciden
 let intelFilters={q:'',kind:'',verdict:'',page:1,sort:'last_seen'}, intelNewsPage=1;
 let worldMapPromise;
 let currentUser=null;
+let sessionDeadline=0,sessionAbsoluteDeadline=0,sessionWarningSeconds=300,lastActivityReport=0,sessionExpired=false;
 const esc = v => String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function markdown(value){
   const inline=text=>esc(text)
@@ -50,9 +51,10 @@ const empty = (title,text) => `<div class="empty"><strong>${esc(title)}</strong>
 const panel = (title,subtitle,body,extra='') => `<div class="panel"><div class="panel-head"><div><h2>${title}</h2><small>${subtitle}</small></div>${extra}</div>${body}</div>`;
 async function api(path, options={}) {
   const response = await fetch('/api'+path,{...options,headers:{'Content-Type':'application/json','X-SIEM-Request':'dashboard',...options.headers}});
-  if(response.status===401&&path!=='/auth/login')showLogin();
-  if(!response.ok){let data;try{data=await response.json();}catch{}throw new Error(typeof data?.detail==='string'?data.detail:`操作失敗（${response.status}），請檢查輸入與服務狀態。`);}
-  return response.json();
+  let data;try{data=await response.json();}catch{}
+  if(response.status===401&&path!=='/auth/login')showLogin(typeof data?.detail==='string'?data.detail:'登入已逾期，請重新登入');
+  if(!response.ok)throw new Error(typeof data?.detail==='string'?data.detail:`操作失敗（${response.status}），請檢查輸入與服務狀態。`);
+  return data;
 }
 function fail(error){$('#error').textContent=error.message;$('#error').hidden=false;}
 function toast(text){$('#toast').textContent=text;$('#toast').hidden=false;setTimeout(()=>$('#toast').hidden=true,3500);}
@@ -282,9 +284,32 @@ $('#ai-drawer-close').onclick=()=>{$('#ai-drawer').hidden=true;};
 document.addEventListener('click',e=>{const b=e.target.closest('[data-mini-suggestion]');if(b){const form=$('#ai-mini-form'),box=form?.elements.message;if(box){box.value=b.dataset.miniSuggestion;box.focus();}}});
 $('#ai-mini-form').addEventListener('submit',async e=>{e.preventDefault();const form=e.target,message=form.elements.message.value.trim();if(!message)return;form.elements.message.value='';const button=form.querySelector('button');button.disabled=true;try{await sendMiniChat(message);}catch(error){toast(error.message);}finally{button.disabled=false;}});
 document.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey&&e.target.matches('#chat-form textarea')){e.preventDefault();e.target.form.requestSubmit();}});
-function showLogin(){currentUser=null;$('#login-screen').hidden=false;}
+function configureSession(info){
+  if(!info)return;
+  const last=Date.parse(info.last_activity_at),idle=Number(info.idle_timeout_seconds||1800)*1000;
+  sessionDeadline=last+idle;sessionAbsoluteDeadline=Date.parse(info.absolute_expires_at);
+  sessionWarningSeconds=Number(info.warning_seconds||300);lastActivityReport=last;sessionExpired=false;updateSessionCountdown();
+}
+function updateSessionCountdown(){
+  const box=$('#session-countdown');if(!box)return;
+  if(!currentUser||!sessionDeadline){box.querySelector('strong').textContent='--:--';box.classList.remove('warning','critical');return;}
+  const remaining=Math.max(0,Math.min(sessionDeadline,sessionAbsoluteDeadline)-Date.now()),seconds=Math.ceil(remaining/1000);
+  box.querySelector('strong').textContent=`${String(Math.floor(seconds/60)).padStart(2,'0')}:${String(seconds%60).padStart(2,'0')}`;
+  box.classList.toggle('warning',seconds>60&&seconds<=sessionWarningSeconds);box.classList.toggle('critical',seconds<=60);
+  if(seconds<=0&&!sessionExpired){sessionExpired=true;showLogin('登入已因閒置逾期，請重新登入');}
+}
+async function reportActivity(){
+  if(!currentUser||sessionExpired)return;
+  const now=Date.now(),idleMs=Number(currentUser.session?.idle_timeout_seconds||1800)*1000;
+  sessionDeadline=Math.min(now+idleMs,sessionAbsoluteDeadline);updateSessionCountdown();
+  if(now-lastActivityReport<60000)return;
+  lastActivityReport=now;
+  try{const info=await api('/auth/activity',{method:'POST'});currentUser.session=info;configureSession(info);}
+  catch(error){if(currentUser)toast(error.message);}
+}
+function showLogin(message=''){currentUser=null;sessionDeadline=0;sessionAbsoluteDeadline=0;$('#login-screen').hidden=false;$('#session-countdown')?.classList.remove('warning','critical');if(message)$('#login-error').textContent=message;updateSessionCountdown();}
 async function startSession(){
-  try{currentUser=await api('/auth/me');$('#login-screen').hidden=true;const role=currentUser.role==='admin'?'管理員':'Analyst';$('#signed-user').textContent=currentUser.display_name;$('#signed-role').textContent=role;$('#top-user').textContent=currentUser.display_name;$('#top-role').textContent='@'+currentUser.username+' · '+role;document.querySelectorAll('[data-admin]').forEach(el=>el.hidden=currentUser.role!=='admin');const toolsNav=document.querySelector('nav[aria-label="調查工具"]');if(toolsNav&&!toolsNav.querySelector('[data-page="intel-news"]'))toolsNav.insertAdjacentHTML('beforeend','<a href="#intel-news" data-page="intel-news"><span>▤</span>資安動態</a>');navigate();}
+  try{currentUser=await api('/auth/me');configureSession(currentUser.session);$('#login-screen').hidden=true;const role=currentUser.role==='admin'?'管理員':'Analyst';$('#signed-user').textContent=currentUser.display_name;$('#signed-role').textContent=role;$('#top-user').textContent=currentUser.display_name;$('#top-role').textContent='@'+currentUser.username+' · '+role;document.querySelectorAll('[data-admin]').forEach(el=>el.hidden=currentUser.role!=='admin');const toolsNav=document.querySelector('nav[aria-label="調查工具"]');if(toolsNav&&!toolsNav.querySelector('[data-page="intel-news"]'))toolsNav.insertAdjacentHTML('beforeend','<a href="#intel-news" data-page="intel-news"><span>▤</span>資安動態</a>');navigate();}
   catch{showLogin();}
 }
 $('#login-form').addEventListener('submit',async e=>{e.preventDefault();const form=e.target,button=form.querySelector('button');button.disabled=true;$('#login-error').textContent='';try{currentUser=await api('/auth/login',{method:'POST',body:JSON.stringify(Object.fromEntries(new FormData(form)))});form.reset();await startSession();}catch(error){$('#login-error').textContent=error.message;}finally{button.disabled=false;}});
@@ -292,4 +317,6 @@ $('#logout').onclick=async()=>{try{await api('/auth/logout',{method:'POST'});}fi
 $('#top-logout').onclick=async()=>{try{await api('/auth/logout',{method:'POST'});}finally{showLogin();}};
 $('#close-detail').onclick=()=>$('#detail').close();$('#refresh').onclick=()=>render();$('#range').onchange=()=>{logPage=1;render();};window.addEventListener('hashchange',navigate);
 setInterval(()=>{if(['overview','topology'].includes(page)&&!$('#detail').open&&!document.hidden)render();},15000);
+setInterval(updateSessionCountdown,1000);
+['pointerdown','keydown','touchstart','scroll'].forEach(name=>window.addEventListener(name,reportActivity,{passive:true}));
 startSession();

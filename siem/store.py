@@ -99,7 +99,7 @@ def init_db():
           created_at TEXT NOT NULL, updated_at TEXT NOT NULL);
         CREATE TABLE IF NOT EXISTS user_sessions (
           token_hash TEXT PRIMARY KEY, user_id INTEGER NOT NULL, created_at TEXT NOT NULL,
-          expires_at TEXT NOT NULL, user_agent TEXT NOT NULL DEFAULT '',
+          expires_at TEXT NOT NULL, user_agent TEXT NOT NULL DEFAULT '', last_activity_at TEXT NOT NULL DEFAULT '',
           FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE);
         CREATE INDEX IF NOT EXISTS session_expiry ON user_sessions(expires_at);
         CREATE TABLE IF NOT EXISTS system_settings (
@@ -125,6 +125,9 @@ def init_db():
             try: db.execute(f'ALTER TABLE incidents ADD COLUMN {col} {definition}')
             except sqlite3.OperationalError:
                 pass
+        try: db.execute("ALTER TABLE user_sessions ADD COLUMN last_activity_at TEXT NOT NULL DEFAULT ''")
+        except sqlite3.OperationalError: pass
+        db.execute("UPDATE user_sessions SET last_activity_at=created_at WHERE last_activity_at='' OR last_activity_at IS NULL")
         for code, name, severity in [(1, '重複 SQLi 偵測', 'high'), (2, '重複 XSS 偵測', 'medium'), (3, '重複路徑穿越偵測', 'medium')]:
             db.execute('''INSERT OR IGNORE INTO rules
                 (id,name,attack,threshold,window_sec,cooldown_sec,severity,enabled,rule_uid,rule_type,description,metric)
