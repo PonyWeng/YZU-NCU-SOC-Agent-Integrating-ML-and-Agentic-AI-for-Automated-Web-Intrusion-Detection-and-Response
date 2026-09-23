@@ -51,7 +51,7 @@ def _rules(data):
         text += '</RequireAll>\n'
     return text
 
-def _atomic(path, text):
+def _atomic(path, text, mode=0o600):
     path.parent.mkdir(parents=True,exist_ok=True)
     fd, temp = tempfile.mkstemp(dir=path.parent,suffix='.tmp')
     try:
@@ -59,6 +59,7 @@ def _atomic(path, text):
             f.write(text)
             f.flush()
             os.fsync(f.fileno())
+        os.chmod(temp,mode)
         os.replace(temp,path)
     finally:
         if os.path.exists(temp):
@@ -67,7 +68,7 @@ def _atomic(path, text):
 def apply_blacklist():
     with FileLock(str(BLACKLIST_FILE)+'.lock'):
         data = _load()
-        _atomic(HTACCESS_PATH,_rules(data))
+        _atomic(HTACCESS_PATH,_rules(data),0o644)
         return [e['ip'] for e in data['ips']]
 
 def change_ban(ip, blocked, reason, actor='line', scope='all'):
@@ -83,12 +84,12 @@ def change_ban(ip, blocked, reason, actor='line', scope='all'):
         elif not blocked:
             data['ips'] = [e for e in data['ips'] if not (e['ip']==ip and e.get('scope','all')==scope)]
         original = HTACCESS_PATH.read_text(encoding='utf-8') if HTACCESS_PATH.exists() else None
-        _atomic(HTACCESS_PATH,_rules(data))
+        _atomic(HTACCESS_PATH,_rules(data),0o644)
         try:
-            _atomic(BLACKLIST_FILE,json.dumps(data,ensure_ascii=False,indent=2))
+            _atomic(BLACKLIST_FILE,json.dumps(data,ensure_ascii=False,indent=2),0o644)
         except Exception:
             if original is not None:
-                _atomic(HTACCESS_PATH,original)
+                _atomic(HTACCESS_PATH,original,0o644)
             else:
                 HTACCESS_PATH.unlink(missing_ok=True)
             raise
