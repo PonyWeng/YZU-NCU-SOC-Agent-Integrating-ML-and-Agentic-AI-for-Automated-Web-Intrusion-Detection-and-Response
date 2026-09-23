@@ -29,7 +29,7 @@ def format_alert(row):
     service_desc=f'{target}（{kind_names.get(service["kind"],service["kind"])}）' if service else target
     risk={'critical':'🔴 Critical','high':'🟠 High','medium':'🟡 Medium','low':'🟢 Low'}.get(row['severity'],row['severity'])
     detail=' + '.join(f'{k} ({v})' for k,v in breakdown.items()) or row['rule_name']
-    lines=['🛡️ NCU-PDCLAB mini SIEM 安全警報','建立 by Pony Weng / 翁浩宇','', '────────────────────────────────',
+    lines=['🛡️ NCU-PDCLAB mini SIEM 安全警報','', '────────────────────────────────',
            f'[Event Name]     : {row["rule_name"]}',f'                   ({row["count"]} total: {detail})',
            f'[Risk Level]     : {risk}',f'[Timestamp]      : {ts}',f'[Source IP]      : {row["src_ip"]}',
            f'[Destination]    : {destination}',f'[Service]        : {service_desc}',f'[Attack Payload] : {payload}',
