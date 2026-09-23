@@ -199,8 +199,13 @@ def geo_map(hours: float=Query(24,gt=0,le=8760)):
 
 
 @router.get('/incidents')
-def incidents(status: str='',page: int=Query(1,ge=1)):
-    where,params = ('status=?',[status]) if status else ('1=1',[])
+def incidents(status: str='',page: int=Query(1,ge=1),hours: float=Query(24,gt=0,le=8760)):
+    time_where,time_params=store.filters(hours=hours)
+    clauses=[time_where.replace('timestamp','last_seen')]
+    params=list(time_params)
+    if status:
+        clauses.append('status=?');params.append(status)
+    where=' AND '.join(clauses)
     with store.connection() as db:
         total = db.execute('SELECT count(*) FROM incidents WHERE '+where,params).fetchone()[0]
         rows = db.execute('SELECT * FROM incidents WHERE '+where+' ORDER BY id DESC LIMIT 50 OFFSET ?',params+[(page-1)*50]).fetchall()
