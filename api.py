@@ -13,6 +13,12 @@ from siem.routes import router
 @asynccontextmanager
 async def lifespan(app):
     store.init_db()
+    # The runtime blacklist volume and the host-mounted Apache rules can have
+    # different lifetimes. Rebuild .htaccess from the canonical JSON state on
+    # every start so a stale rule cannot keep an IP blocked after it vanished
+    # from the dashboard list.
+    from assistant.enforcer import apply_blacklist
+    apply_blacklist()
     yield
 
 app = FastAPI(title='NCU-PDCLAB mini SIEM',lifespan=lifespan)
