@@ -81,11 +81,13 @@ services:
     image: python:3.12-slim
     restart: unless-stopped
     working_dir: /app
+    environment:
+      PYTHONPATH: /siem-protected
     command: sh -c "pip install --no-cache-dir -r requirements.txt && python app.py"
     expose: ["8081"]
     volumes:
       - ./protected_services/flask_target:/app:ro
-      - ./protected_services/blocking.py:/app/blocking.py:ro
+      - ./protected_services:/siem-protected:ro
       - flask-logs:/logs
       - siem-runtime:/runtime:ro
 
@@ -93,12 +95,14 @@ services:
     image: python:3.12-slim
     restart: unless-stopped
     working_dir: /app
-    environment: {DJANGO_SETTINGS_MODULE: demo_site.settings}
+    environment:
+      DJANGO_SETTINGS_MODULE: demo_site.settings
+      PYTHONPATH: /siem-protected
     command: sh -c "pip install --no-cache-dir -r requirements.txt && python -m django runserver 0.0.0.0:8082"
     expose: ["8082"]
     volumes:
       - ./protected_services/django_target:/app:ro
-      - ./protected_services/blocking.py:/app/blocking.py:ro
+      - ./protected_services:/siem-protected:ro
       - django-logs:/logs
       - siem-runtime:/runtime:ro
 
