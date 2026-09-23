@@ -2,6 +2,7 @@ import csv
 import io
 import json
 import os
+import re
 import uuid
 from datetime import datetime, timezone
 from fastapi import APIRouter, HTTPException, Query, Request, Response
@@ -252,6 +253,47 @@ def rules():
         for row in db.execute('SELECT * FROM rules ORDER BY id'):
             item=dict(row);item['display_name']=store.rule_display_name(row);result.append(item)
         return result
+
+
+WAF_RULE_FAMILIES = [
+    ('920xxx','920','HTTP 協定檢查','Protocol Enforcement','檢查 HTTP 方法、編碼、標頭與協定是否符合規範。'),
+    ('921xxx','921','HTTP 協定攻擊','Protocol Attack','偵測請求走私、回應拆分及標頭注入。'),
+    ('930xxx','930','路徑穿越／本機檔案包含','LFI','偵測目錄穿越與本機檔案包含攻擊。'),
+    ('931xxx','931','遠端檔案包含','RFI','偵測遠端資源包含與相關 URL payload。'),
+    ('932xxx','932','遠端命令執行','RCE','偵測 Unix、Windows 與 shell 命令注入。'),
+    ('933xxx','933','PHP 注入','PHP Injection','偵測 PHP 函式呼叫及程式碼注入。'),
+    ('934xxx','934','一般應用程式攻擊','Generic Attack','偵測 Node.js 等通用應用程式攻擊特徵。'),
+    ('941xxx','941','跨站腳本攻擊','XSS','偵測 HTML、JavaScript 與事件處理器型 XSS。'),
+    ('942xxx','942','SQL Injection','SQLi','偵測 SQL 語法、運算子與資料庫攻擊特徵。'),
+    ('943xxx','943','Session Fixation','Session Fixation','偵測工作階段固定攻擊特徵。'),
+    ('944xxx','944','Java 攻擊','Java Attack','偵測 Java、序列化與相關程式碼執行特徵。'),
+    ('949xxx','949','入站異常評分','Inbound Blocking Evaluation','彙整入站規則分數並判斷是否超過門檻。'),
+    ('959xxx','959','出站異常評分','Outbound Blocking Evaluation','彙整回應端規則分數並判斷是否超過門檻。'),
+    ('980xxx','980','關聯與記錄','Correlation','記錄異常評分與規則關聯結果。'),
+]
+
+
+@router.get('/waf-rules')
+def waf_rules():
+    observed={}
+    with store.connection() as db:
+        rows=db.execute("SELECT description,timestamp FROM events WHERE origin='modsecurity-crs' ORDER BY timestamp DESC LIMIT 10000").fetchall()
+    for row in rows:
+        for rule_id in set(re.findall(r'(?<!\d)(9\d{5})(?=\s*:)',row['description'] or '')):
+            item=observed.setdefault(rule_id,{'count':0,'last_seen':''})
+            item['count']+=1
+            if row['timestamp'] > item['last_seen']: item['last_seen']=row['timestamp']
+    families=[]
+    for rule_range,prefix,name,category,description in WAF_RULE_FAMILIES:
+        matches=[dict(rule_id=rule_id,**meta) for rule_id,meta in observed.items() if rule_id.startswith(prefix)]
+        matches.sort(key=lambda item:(-item['count'],item['rule_id']))
+        families.append({'rule_range':rule_range,'prefix':prefix,'name':name,'category':category,
+                         'description':description,'hits':sum(item['count'] for item in matches),
+                         'observed_rules':matches,'enabled':True})
+    known={item['rule_id'] for family in families for item in family['observed_rules']}
+    other=[dict(rule_id=rule_id,**meta) for rule_id,meta in observed.items() if rule_id not in known]
+    return {'engine':'OWASP Core Rule Set','version':'4.25','paranoia_level':1,
+            'mode':'Detection Only','sample_limit':10000,'families':families,'other_observed':other}
 
 
 RuleMetric = Literal['request_count','distinct_services','distinct_paths','status_404_ratio',
