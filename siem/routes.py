@@ -177,8 +177,8 @@ def event(event_id: str):
 @router.get('/overview')
 def overview(hours: float=Query(24,gt=0,le=8760)):
     data = store.overview(hours)
-    from assistant.command_handler import _load_blacklist
-    data['blocked'] = _load_blacklist()['ips']
+    from assistant.enforcer import load_blacklist
+    data['blocked'] = load_blacklist()['ips']
     data['collector'] = store.get_state('collector',{'status':'not_started'})
     return data
 
@@ -386,13 +386,14 @@ def delete_protected_service(service_id: int,request: Request):
 
 @router.get('/blacklist')
 def blacklist():
-    from assistant.command_handler import _load_blacklist
-    return _load_blacklist()['ips']
+    from assistant.enforcer import load_blacklist
+    return load_blacklist()['ips']
 
 
 class BanRequest(BaseModel):
     ip: str
     reason: str=Field('儀表板手動封鎖',min_length=1,max_length=500)
+    scope: Literal['all','apache','flask','django']='all'
 
 
 @router.post('/blacklist')
@@ -401,18 +402,18 @@ def ban(body: BanRequest,request: Request):
     actor=current_user(request)
     from assistant.enforcer import change_ban
     try:
-        return change_ban(body.ip,True,body.reason,actor['username'])
+        return change_ban(body.ip,True,body.reason,actor['username'],body.scope)
     except ValueError as exc:
         raise HTTPException(422,str(exc))
 
 
 @router.delete('/blacklist/{ip}')
-def unban(ip: str,request: Request):
+def unban(ip: str,request: Request,scope: Literal['all','apache','flask','django']='all'):
     from siem.auth import current_user
     actor=current_user(request)
     from assistant.enforcer import change_ban
     try:
-        return change_ban(ip,False,'儀表板解除封鎖',actor['username'])
+        return change_ban(ip,False,'儀表板解除封鎖',actor['username'],scope)
     except ValueError as exc:
         raise HTTPException(422,str(exc))
 

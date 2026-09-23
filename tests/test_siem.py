@@ -238,6 +238,11 @@ class SIEMTests(unittest.TestCase):
                 enforcer.change_ban('127.0.0.1',True,'test')
             enforcer.change_ban('192.0.2.1',True,'test')
             self.assertIn('Require not ip 192.0.2.1',htaccess.read_text())
+            enforcer.change_ban('192.0.2.2',True,'flask only',scope='flask')
+            self.assertNotIn('Require not ip 192.0.2.2',htaccess.read_text())
+            entries=enforcer.load_blacklist()['ips']
+            self.assertTrue(any(e['ip']=='192.0.2.2' and e['scope']=='flask' for e in entries))
+            enforcer.change_ban('192.0.2.2',False,'test',scope='flask')
             enforcer.change_ban('192.0.2.1',False,'test')
             self.assertNotIn('Require not ip',htaccess.read_text())
             original=htaccess.read_text()

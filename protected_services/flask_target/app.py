@@ -2,9 +2,16 @@ from flask import Flask, request, jsonify, render_template
 from datetime import datetime, timezone
 import json
 import os
+from blocking import client_ip, is_blocked
 
 app = Flask(__name__)
 LOG = os.environ.get('ACCESS_LOG', '/logs/access.jsonl')
+
+@app.before_request
+def enforce_blacklist():
+    ip=client_ip(request.headers,request.remote_addr)
+    if is_blocked(ip,'flask'):
+        return jsonify(error='Forbidden',detail='來源 IP 已被此服務封鎖'),403
 
 def log_request(response):
     os.makedirs(os.path.dirname(LOG), exist_ok=True)

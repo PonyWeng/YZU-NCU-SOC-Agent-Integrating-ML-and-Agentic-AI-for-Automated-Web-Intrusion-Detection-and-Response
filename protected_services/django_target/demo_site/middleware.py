@@ -1,9 +1,14 @@
 from datetime import datetime, timezone
+from django.http import JsonResponse
+from blocking import client_ip, is_blocked
 import json, os
 
 class AccessLogMiddleware:
     def __init__(self, get_response): self.get_response=get_response
     def __call__(self, request):
+        ip=client_ip(request.headers,request.META.get('REMOTE_ADDR',''))
+        if is_blocked(ip,'django'):
+            return JsonResponse({'error':'Forbidden','detail':'來源 IP 已被此服務封鎖'},status=403)
         response=self.get_response(request)
         # Lab-only simulated source; this demo is not a production proxy policy.
         record={'timestamp':datetime.now(timezone.utc).isoformat(),'src_ip':request.META.get('HTTP_X_DEMO_SOURCE_IP') or request.META.get('HTTP_X_FORWARDED_FOR',request.META.get('REMOTE_ADDR')),

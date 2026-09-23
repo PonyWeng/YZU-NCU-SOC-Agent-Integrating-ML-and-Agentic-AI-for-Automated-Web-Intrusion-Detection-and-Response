@@ -12,12 +12,9 @@ Supported commands:
   /unban <IP>
 """
 
-import json
-import os
 import re
 from datetime import datetime, timezone
 
-BLACKLIST_FILE = os.path.join(os.path.dirname(os.path.dirname(__file__)), "blacklist.json")
 IP_RE = re.compile(r"^\d{1,3}(\.\d{1,3}){3}$")
 
 HELP_TEXT = (
@@ -38,24 +35,13 @@ HELP_TEXT = (
 # ── Blacklist helpers ──────────────────────────────────────────
 
 def _load_blacklist() -> dict:
-    if os.path.exists(BLACKLIST_FILE):
-        with open(BLACKLIST_FILE, "r", encoding="utf-8") as f:
-            data = json.load(f)
-        # Handle both formats: {"ips": [...]} and legacy [...]
-        if isinstance(data, list):
-            return {"ips": [{"ip": e, "reason": "Legacy entry"} if isinstance(e, str) else e for e in data]}
-        return data
-    return {"ips": []}
-
-
-def _save_blacklist(data: dict) -> None:
-    with open(BLACKLIST_FILE, "w", encoding="utf-8") as f:
-        json.dump(data, f, indent=2)
+    from assistant.enforcer import load_blacklist
+    return load_blacklist()
 
 
 def get_blacklisted_ips() -> list[str]:
     """Public interface for other modules (e.g., firewall integration)."""
-    return [e["ip"] for e in _load_blacklist().get("ips", [])]
+    return sorted({e["ip"] for e in _load_blacklist().get("ips", [])})
 
 
 # ── Commands ───────────────────────────────────────────────────
@@ -158,12 +144,13 @@ def _cmd_blacklist_list() -> str:
     bl = _load_blacklist()
     if not bl["ips"]:
         return '目前封鎖清單是空的，沒有已列入的 IP。可使用 /ban IP 新增封鎖。'
-    lines = [f"目前封鎖清單共有 {len(bl['ips'])} 個 IP，以下是實際儲存的清單：", "目前封鎖執行範圍是 Apache；Flask、Django 尚未接上封鎖執行器。", ""]
+    scope_names={'all':'全部服務','apache':'購物網站','flask':'員工入口','django':'市民服務'}
+    lines = [f"目前封鎖清單共有 {len(bl['ips'])} 條規則：", ""]
     for i, entry in enumerate(bl["ips"], 1):
         added = str(entry.get("added_at", "?"))[:10]
         reason = entry.get("reason", "Manual ban")
         lines.append(f"{i}. {entry['ip']}")
-        lines.append(f"   加入時間：{added}｜原因：{reason}")
+        lines.append(f"   範圍：{scope_names.get(entry.get('scope','all'),entry.get('scope'))}｜加入時間：{added}｜原因：{reason}")
     return "\n".join(lines)
 
 

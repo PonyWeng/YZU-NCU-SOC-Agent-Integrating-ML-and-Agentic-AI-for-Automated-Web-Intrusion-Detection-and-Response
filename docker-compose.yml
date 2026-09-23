@@ -72,7 +72,7 @@ services:
       sed -i 's|#LoadModule rewrite_module|LoadModule rewrite_module|g' /usr/local/apache2/conf/httpd.conf &&
       sed -i 's|#LoadModule remoteip_module|LoadModule remoteip_module|g' /usr/local/apache2/conf/httpd.conf &&
       sed -i 's|AllowOverride None|AllowOverride All|g' /usr/local/apache2/conf/httpd.conf &&
-      echo 'RemoteIPHeader X-Demo-Source-IP' >> /usr/local/apache2/conf/httpd.conf &&
+      echo 'RemoteIPHeader X-Forwarded-For' >> /usr/local/apache2/conf/httpd.conf &&
       echo 'RemoteIPTrustedProxy 172.16.0.0/12' >> /usr/local/apache2/conf/httpd.conf &&
       echo 'LogFormat \"%a %l %u %t \\\"%r\\\" %>s %b \\\"%{Referer}i\\\" \\\"%{User-Agent}i\\\"\" realip' >> /usr/local/apache2/conf/httpd.conf &&
       httpd-foreground"
@@ -85,7 +85,9 @@ services:
     expose: ["8081"]
     volumes:
       - ./protected_services/flask_target:/app:ro
+      - ./protected_services/blocking.py:/app/blocking.py:ro
       - flask-logs:/logs
+      - siem-runtime:/runtime:ro
 
   django-target:
     image: python:3.12-slim
@@ -96,7 +98,9 @@ services:
     expose: ["8082"]
     volumes:
       - ./protected_services/django_target:/app:ro
+      - ./protected_services/blocking.py:/app/blocking.py:ro
       - django-logs:/logs
+      - siem-runtime:/runtime:ro
 
   waf-apache:
     <<: *waf-common
