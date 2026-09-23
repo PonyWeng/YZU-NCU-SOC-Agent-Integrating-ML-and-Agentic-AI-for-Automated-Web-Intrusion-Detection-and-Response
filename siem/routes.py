@@ -197,11 +197,11 @@ def geo_map(hours: float=Query(24,gt=0,le=8760)):
         points=[dict(r) for r in db.execute(
             'SELECT e.src_ip,g.country,g.country_code,g.city,g.latitude,g.longitude,count(*) total,coalesce(sum(e.attack>0),0) attacks '
             'FROM events e JOIN geo_ip_cache g ON g.ip=e.src_ip WHERE '+where.replace('timestamp','e.timestamp')+
-            " AND g.status='ok' AND g.latitude IS NOT NULL GROUP BY e.src_ip ORDER BY attacks DESC,total DESC LIMIT 100",params)]
+            " AND g.status IN ('ok','demo') AND g.latitude IS NOT NULL GROUP BY e.src_ip ORDER BY attacks DESC,total DESC LIMIT 100",params)]
         countries=[dict(r) for r in db.execute(
             'SELECT g.country_code,g.country,count(*) total,coalesce(sum(e.attack>0),0) attacks '
             'FROM events e JOIN geo_ip_cache g ON g.ip=e.src_ip WHERE '+where.replace('timestamp','e.timestamp')+
-            " GROUP BY g.country_code,g.country ORDER BY attacks DESC,total DESC",params)]
+            " AND g.status IN ('ok','demo') GROUP BY g.country_code,g.country ORDER BY attacks DESC,total DESC",params)]
         pending=db.execute('SELECT count(DISTINCT e.src_ip) FROM events e LEFT JOIN geo_ip_cache g ON g.ip=e.src_ip WHERE '+where.replace('timestamp','e.timestamp')+' AND g.ip IS NULL',params).fetchone()[0]
     return {'points':points,'countries':countries,'pending':pending}
 

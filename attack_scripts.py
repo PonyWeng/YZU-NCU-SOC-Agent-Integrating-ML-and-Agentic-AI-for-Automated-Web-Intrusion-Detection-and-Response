@@ -28,10 +28,12 @@ DELAY  = 0.3   # seconds between requests
 # Simulated attacker IPs — injected as X-Real-IP so Apache logs the real source
 # (Docker NATs all host traffic to 172.18.0.1; X-Real-IP is trusted by Apache)
 ATTACKER_IPS = {
-    "sqli":    "198.51.100.21",    # RFC 5737 demo source; mapped to an external location by SIEM
-    "xss":     "203.0.113.34",     # RFC 5737 demo source; never attributed to a real owner
-    "dir":     "192.0.2.57",       # RFC 5737 demo source; safe for competition traffic
-    "normal":  None,               # Normal traffic: no spoofing, log real host IP
+    # RFC 5737 documentation addresses are mapped by siem/geo.py to stable
+    # worldwide demo locations. They never impersonate a real public owner.
+    "sqli":   ["198.51.100.21", "198.51.100.26", "198.51.100.31"],
+    "xss":    ["203.0.113.34", "203.0.113.39", "203.0.113.44"],
+    "dir":    ["192.0.2.57", "192.0.2.62", "192.0.2.67"],
+    "normal": ["192.0.2.80", "198.51.100.81", "203.0.113.82", "192.0.2.83"],
 }
 
 # -- ANSI colours ----------------------------------------------
@@ -195,29 +197,29 @@ def phase_normal(n: int = 5) -> None:
     print(f"\n{G}{BOLD}--- Normal traffic ({n} requests) ---{W}")
     for _ in range(n):
         path = random.choice(NORMAL_TRAFFIC)
-        send("normal", f"{TARGET}{path}", G, ATTACKER_IPS["normal"])
+        send("normal", f"{TARGET}{path}", G, random.choice(ATTACKER_IPS["normal"]))
 
 def phase_sqli(n: int = ATTACK_COUNT) -> None:
-    ip = ATTACKER_IPS["sqli"]
     selected=random.sample(SQLI_PAYLOADS,k=min(n,len(SQLI_PAYLOADS)))
-    print(f"\n{R}{BOLD}--- SQL Injection ({len(selected)} requests) [src: {ip}] ---{W}")
+    print(f"\n{R}{BOLD}--- SQL Injection ({len(selected)} requests) [worldwide demo sources] ---{W}")
     for payload, path in selected:
+        ip = random.choice(ATTACKER_IPS["sqli"])
         url = f"{TARGET}{path}{quote(payload, safe='')}"
         send("SQLi", url, R, ip)
 
 def phase_xss(n: int = ATTACK_COUNT) -> None:
-    ip = ATTACKER_IPS["xss"]
     selected=random.sample(XSS_PAYLOADS,k=min(n,len(XSS_PAYLOADS)))
-    print(f"\n{Y}{BOLD}--- XSS ({len(selected)} requests) [src: {ip}] ---{W}")
+    print(f"\n{Y}{BOLD}--- XSS ({len(selected)} requests) [worldwide demo sources] ---{W}")
     for payload, path in selected:
+        ip = random.choice(ATTACKER_IPS["xss"])
         url = f"{TARGET}{path}{quote(payload, safe='')}"
         send("XSS", url, Y, ip)
 
 def phase_dir_traversal(n: int = ATTACK_COUNT) -> None:
-    ip = ATTACKER_IPS["dir"]
     selected=random.sample(DIR_TRAVERSAL_PAYLOADS,k=min(n,len(DIR_TRAVERSAL_PAYLOADS)))
-    print(f"\n{C}{BOLD}--- Directory Traversal ({len(selected)} requests) [src: {ip}] ---{W}")
+    print(f"\n{C}{BOLD}--- Directory Traversal ({len(selected)} requests) [worldwide demo sources] ---{W}")
     for payload, path in selected:
+        ip = random.choice(ATTACKER_IPS["dir"])
         url = f"{TARGET}{path}{quote(payload, safe='')}"
         send("DirTrav", url, C, ip)
 
