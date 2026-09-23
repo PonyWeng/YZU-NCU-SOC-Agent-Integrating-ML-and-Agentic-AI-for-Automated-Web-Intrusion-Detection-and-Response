@@ -317,10 +317,8 @@ def overview(hours=24):
         def rows(sql):
             return [dict(r) for r in db.execute(sql, params).fetchall()]
         counts = rows('SELECT count(*) total,coalesce(sum(attack>0),0) attacks,count(DISTINCT src_ip) sources,coalesce(sum(attack=-1),0) errors FROM events WHERE '+where)[0]
-        incident_where=where.replace('timestamp','last_seen')
         counts['open_incidents'] = db.execute(
-            "SELECT count(*) FROM incidents WHERE status IN ('new','investigating') AND "+incident_where,
-            params).fetchone()[0]
+            "SELECT count(*) FROM incidents WHERE status IN ('new','investigating')").fetchone()[0]
         bucket_len = 16 if hours <= 6 else 13 if hours <= 72 else 10
         timeline = rows(f"SELECT substr(timestamp,1,{bucket_len}) bucket,count(*) total,coalesce(sum(attack>0),0) attacks,coalesce(sum(attack=0),0) normal,count(DISTINCT src_ip) sources FROM events WHERE "+where+' GROUP BY bucket ORDER BY bucket')
         top_source = rows('SELECT src_ip,count(*) total,coalesce(sum(attack>0),0) attacks FROM events WHERE '+where+' GROUP BY src_ip ORDER BY total DESC LIMIT 1')
