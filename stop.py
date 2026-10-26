@@ -53,7 +53,7 @@ def stop_pid(pid):
 
 
 def main():
-    parser = argparse.ArgumentParser(description='Stop the local NCU-PDCLAB mini SIEM services')
+    parser = argparse.ArgumentParser(description='Stop the local 智慧守網精靈 - SIEM 儀表板 services')
     parser.add_argument('--docker', action='store_true', help='also stop the WAF gateways and protected service containers')
     args = parser.parse_args()
 

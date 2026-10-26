@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# One-click launcher for the complete local NCU-PDCLAB mini SIEM stack.
+# One-click launcher for the complete local 智慧守網精靈 SIEM stack.
 # Run from Git Bash / WSL: ./start.sh
 set -Eeuo pipefail
 

@@ -20,7 +20,7 @@ OPENPHISH_FEED = 'https://openphish.com/feed.txt'
 
 
 def _fetch(url, timeout=20):
-    request=urllib.request.Request(url,headers={'User-Agent':'NCU-PDCLAB-mini-SIEM/1.0'})
+    request=urllib.request.Request(url,headers={'User-Agent':'Smart-Web-Guardian-SIEM/1.0'})
     with urllib.request.urlopen(request,timeout=timeout) as response:
         return response.read()
 

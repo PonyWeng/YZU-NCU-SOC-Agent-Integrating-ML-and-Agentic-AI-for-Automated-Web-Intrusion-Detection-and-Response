@@ -1,4 +1,4 @@
-# NCU-PDCLAB mini SIEM — 自建安全監控與應變平台
+# 智慧守網精靈 - SIEM 儀表板 — 自建安全監控與應變平台
 
 以多服務日誌、機器學習、OWASP CRS WAF 與 LINE 資安助理為核心的本機 SIEM。
 目前已移除 Elasticsearch、Logstash、Kibana 的程式與啟動依賴，改由 SQLite 與 FastAPI 提供儲存、查詢、告警與自建儀表板。

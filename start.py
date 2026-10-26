@@ -69,7 +69,7 @@ def check_port(port, allow_existing_dashboard=False):
     return True
 
 def main():
-    parser=argparse.ArgumentParser(description='NCU-PDCLAB mini SIEM')
+    parser=argparse.ArgumentParser(description='智慧守網精靈 - SIEM 儀表板')
     parser.add_argument('--port',type=int,default=8000)
     parser.add_argument('--dashboard-only',action='store_true',help='Run dashboard without collector')
     parser.add_argument('--import-legacy',type=Path,help='Import prediction_output.json once; no notifications')
@@ -152,7 +152,7 @@ def main():
                 print(f'LINE webhook URL: {webhook}', flush=True)
             update_line_webhook(webhook)
             store.set_state('line_webhook',{'url':webhook,'status':'registered','updated_at':store.now()})
-        print(f'NCU-PDCLAB mini SIEM: http://127.0.0.1:{args.port}',flush=True)
+        print(f'智慧守網精靈 - SIEM 儀表板: http://127.0.0.1:{args.port}',flush=True)
         if args.demo:
             print('WAF targets: Apache http://127.0.0.1:80 | Flask :8081 | Django :8082',flush=True)
             print('OWASP CRS: PL1 / Detection Only (records attacks without blocking)',flush=True)

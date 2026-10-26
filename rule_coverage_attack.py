@@ -19,7 +19,7 @@ CASES={
   'SENSITIVE':'198.51.100.130','TOOL_UA':'198.51.100.131','MULTI_ATTACK':'198.51.100.132',
   'INTEL':'198.51.100.133','DUAL_DETECTOR':'198.51.100.134'}
 
-def request(base,path='/',ip=None,method='GET',ua='Mozilla/5.0 NCU-PDCLAB rule coverage'):
+def request(base,path='/',ip=None,method='GET',ua='Mozilla/5.0 Smart-Web-Guardian rule coverage'):
     headers={'User-Agent':ua}
     if ip: headers.update({'X-Real-IP':ip,'X-Demo-Source-IP':ip})
     try:
@@ -53,7 +53,7 @@ def main():
         login=session.post(siem+'/auth/login',json={'username':opts.username,'password':opts.password},timeout=8)
         login.raise_for_status()
     started=datetime.now(timezone.utc).isoformat(timespec='seconds')
-    print('NCU-PDCLAB mini SIEM — rule coverage test')
+    print('智慧守網精靈 - SIEM 儀表板 — rule coverage test')
     for base in services:
         if request(base,'/health') == 0: raise SystemExit(f'Service unavailable: {base}')
 

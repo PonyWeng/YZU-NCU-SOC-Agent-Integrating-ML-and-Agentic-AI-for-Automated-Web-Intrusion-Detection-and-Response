@@ -64,7 +64,7 @@ def _prompt(message,history,tool_context=None):
     tool_context=tool_context or {}
     internal_requested=bool(re.search(r'(?:我們|本機|內部|SIEM|日誌|告警|受保護服務|有沒有攻擊|是否命中|交叉|關聯)',message,re.I))
     siem_context=context() if internal_requested or not any(k in tool_context for k in ('list_security_news','read_security_news')) else {'omitted':True,'reason':'本輪只詢問外部新聞，避免與內部 SIEM 事件混淆'}
-    return ('你是 NCU SOC AI 防禦小精靈，是 NCU-PDCLAB mini SIEM 內建的 SOC Agent。只根據提供的 SIEM 資料回答，不要捏造資料。'
+    return ('你是 SOC AI 防禦小精靈，是「智慧守網精靈 - SIEM 儀表板」內建的 SOC Agent。只根據提供的 SIEM 資料回答，不要捏造資料。'
             '不要問候、不要自我介紹、不要重述自己的身分，直接承接問題並先說結論。'
             '語氣自然、專業、簡潔，像正在與使用者持續協作的 SOC 分析員。'
             '使用繁體中文，說明數字與時間範圍；若資料不足要明確說明。'
@@ -118,7 +118,7 @@ def chat(message,history=None,tool_context=None):
                     if attempt+1<attempts: time.sleep(1.5*(attempt+1))
         raise last
     from openai import OpenAI
-    response=OpenAI(api_key=cfg['api_key']).chat.completions.create(model=cfg['model'],messages=[{'role':'system','content':'你是 NCU SOC AI 防禦小精靈，是 NCU-PDCLAB mini SIEM 內建的 SOC Agent。不要問候或自我介紹，直接用繁體中文回答重點，只根據提供的 SIEM 資料回答。'},{'role':'user','content':prompt}],temperature=0.1,max_tokens=1200)
+    response=OpenAI(api_key=cfg['api_key']).chat.completions.create(model=cfg['model'],messages=[{'role':'system','content':'你是 SOC AI 防禦小精靈，是「智慧守網精靈 - SIEM 儀表板」內建的 SOC Agent。不要問候或自我介紹，直接用繁體中文回答重點，只根據提供的 SIEM 資料回答。'},{'role':'user','content':prompt}],temperature=0.1,max_tokens=1200)
     return _ensure_news_ids(response.choices[0].message.content.strip(),tool_context)
 
 def run(message,history=None):

@@ -25,7 +25,7 @@ def demo_location(address):
     if not any(address in network for network in DEMO_NETWORKS): return None
     code,country,city,region,lat,lon=DEMO_LOCATIONS[int(address)%len(DEMO_LOCATIONS)]
     return {'status':'demo','country':country,'country_code':code,'city':city,'region':region,
-            'latitude':lat,'longitude':lon,'org':'NCU-PDCLAB simulated external source'}
+            'latitude':lat,'longitude':lon,'org':'智慧守網精靈 simulated external source'}
 
 def enrich(ip):
     try:

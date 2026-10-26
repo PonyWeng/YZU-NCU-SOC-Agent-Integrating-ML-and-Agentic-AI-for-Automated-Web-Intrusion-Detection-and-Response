@@ -44,7 +44,7 @@ def _validate(ip):
 
 def _rules(data):
     ips = [_validate(e['ip']) for e in data['ips'] if e.get('scope','all') in ('all','apache')]
-    text = '# Managed by NCU-PDCLAB mini SIEM - DO NOT EDIT MANUALLY\n\nRewriteEngine On\nRewriteRule ^search$ /search.html [QSA,L]\n\n'
+    text = '# Managed by 智慧守網精靈 - SIEM 儀表板 - DO NOT EDIT MANUALLY\n\nRewriteEngine On\nRewriteRule ^search$ /search.html [QSA,L]\n\n'
     if ips:
         text += '<RequireAll>\n    Require all granted\n'
         text += ''.join(f'    Require not ip {ip}\n' for ip in ips)

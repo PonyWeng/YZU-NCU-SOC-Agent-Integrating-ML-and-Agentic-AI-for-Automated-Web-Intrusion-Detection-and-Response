@@ -1,4 +1,4 @@
-# Managed by NCU-PDCLAB mini SIEM - DO NOT EDIT MANUALLY
+# Managed by 智慧守網精靈 - SIEM 儀表板 - DO NOT EDIT MANUALLY
 
 RewriteEngine On
 RewriteRule ^search$ /search.html [QSA,L]

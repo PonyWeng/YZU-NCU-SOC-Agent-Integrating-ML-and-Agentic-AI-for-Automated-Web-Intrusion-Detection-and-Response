@@ -1,9 +1,9 @@
 <!doctype html>
 <html lang="zh-Hant">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>NCU-PDCLAB mini SIEM · 安全監控中心</title><link rel="icon" type="image/png" href="/static/assets/ncu-soc-ai-guardian-logo-256.png"><link rel="stylesheet" href="/static/style.css?v=20260923-35"><script src="/static/app.js?v=20260923-38" defer></script></head>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>智慧守網精靈 - SIEM 儀表板</title><link rel="icon" type="image/png" href="/static/assets/ncu-soc-ai-guardian-logo-256.png"><link rel="stylesheet" href="/static/style.css?v=20260923-35"><script src="/static/app.js?v=20261026-39" defer></script></head>
 <body>
-<div id="login-screen" class="login-screen"><form id="login-form" class="login-card"><img class="login-logo" src="/static/assets/ncu-soc-ai-guardian-logo-256.png" alt="NCU SOC AI 防禦小精靈"><h1>NCU-PDCLAB mini SIEM</h1><p>登入安全營運工作空間</p><label>帳號<input name="username" autocomplete="username" required autofocus></label><label>密碼<input name="password" type="password" autocomplete="current-password" required></label><button>登入</button><div id="login-error" class="login-error" role="alert"></div></form></div>
-<aside class="sidebar"><a class="brand" href="#overview"><img class="brand-logo" src="/static/assets/ncu-soc-ai-guardian-logo-256.png" alt=""><span>NCU-PDCLAB<small>mini SIEM · 安全監控中心</small></span></a>
+<div id="login-screen" class="login-screen"><form id="login-form" class="login-card"><img class="login-logo" src="/static/assets/ncu-soc-ai-guardian-logo-256.png" alt="智慧守網精靈"><h1>智慧守網精靈 - SIEM 儀表板</h1><p>登入安全營運工作空間</p><label>帳號<input name="username" autocomplete="username" required autofocus></label><label>密碼<input name="password" type="password" autocomplete="current-password" required></label><button>登入</button><div id="login-error" class="login-error" role="alert"></div></form></div>
+<aside class="sidebar"><a class="brand" href="#overview"><img class="brand-logo" src="/static/assets/ncu-soc-ai-guardian-logo-256.png" alt=""><span>智慧守網精靈<small>SIEM 儀表板</small></span></a>
 <div class="nav-label">工作空間</div><nav aria-label="主選單">
 <a href="#overview" data-page="overview"><span>◫</span>安全總覽</a>
 <a href="#logs" data-page="logs"><span>≡</span>日誌中心</a>
@@ -18,7 +18,7 @@
 <div id="error" class="error" role="alert" hidden></div>
 <div class="status-strip"><span id="health">正在連線…</span><span id="updated">每 15 秒更新</span></div>
 <section id="content" aria-live="polite"></section>
-<footer>NCU-PDCLAB mini SIEM <span>以日誌建立事件脈絡</span></footer></main>
+<footer>智慧守網精靈 - SIEM 儀表板 <span>以日誌建立事件脈絡</span></footer></main>
 <dialog id="detail"><div class="dialog-head"><h2 id="detail-title">日誌詳情</h2><button id="close-detail" class="icon-button" aria-label="關閉詳情">×</button></div><div id="detail-body"></div></dialog>
 <div id="toast" role="status" hidden></div>
 <button id="ai-fab" class="ai-fab" aria-label="開啟 NCU SOC AI 防禦小精靈" title="NCU SOC AI 防禦小精靈">✦</button>

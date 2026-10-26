@@ -137,7 +137,7 @@ def read_security_news(news_id: int) -> str:
     host=(urlparse(item.get('url','')).hostname or '').lower()
     if host and host!='news.google.com':
         try:
-            response=requests.get(item.get('url',''),headers={'User-Agent':'NCU-PDCLAB-mini-SIEM/1.0'},timeout=12,allow_redirects=True)
+            response=requests.get(item.get('url',''),headers={'User-Agent':'Smart-Web-Guardian-SIEM/1.0'},timeout=12,allow_redirects=True)
             response.raise_for_status(); text=re.sub(r'(?is)<(script|style|svg).*?>.*?</\1>',' ',response.text[:250000]); text=re.sub(r'(?s)<[^>]+>',' ',text); text=re.sub(r'\s+',' ',text).strip()
             if text and not re.search(r'body\s*\{|font-family|--[a-z-]+:',text[:500],re.I): result['excerpt']=text[:2500]
         except Exception:

@@ -21,7 +21,7 @@ async def lifespan(app):
     apply_blacklist()
     yield
 
-app = FastAPI(title='NCU-PDCLAB mini SIEM',lifespan=lifespan)
+app = FastAPI(title='智慧守網精靈 - SIEM 儀表板',lifespan=lifespan)
 allow_remote = os.getenv('SIEM_ALLOW_REMOTE','').lower() in ('1','true','yes')
 allowed_hosts = [h.strip() for h in os.getenv('SIEM_ALLOWED_HOSTS','localhost,127.0.0.1,[::1],testserver').split(',') if h.strip()]
 app.add_middleware(TrustedHostMiddleware,allowed_hosts=allowed_hosts)
@@ -66,7 +66,7 @@ def index():
 def health():
     return {'status':'ok','storage':'sqlite'}
 
-webhook_app = FastAPI(title='NCU-PDCLAB mini SIEM LINE webhook',docs_url=None,redoc_url=None,openapi_url=None,lifespan=lifespan)
+webhook_app = FastAPI(title='智慧守網精靈 - SIEM 儀表板 LINE webhook',docs_url=None,redoc_url=None,openapi_url=None,lifespan=lifespan)
 
 @webhook_app.post('/webhook')
 async def webhook(request: Request,x_line_signature: str=Header(default='')):
