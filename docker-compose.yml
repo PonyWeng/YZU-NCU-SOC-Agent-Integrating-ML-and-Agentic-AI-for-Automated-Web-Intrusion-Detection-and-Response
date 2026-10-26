@@ -1,4 +1,4 @@
-name: ncu-pdclab-mini-siem
+name: ${COMPOSE_PROJECT_NAME:-smart-web-guardian-siem}
 
 x-waf-common: &waf-common
   image: ghcr.io/coreruleset/modsecurity-crs:4.25-apache-lts
@@ -31,7 +31,7 @@ services:
 
   siem:
     build: .
-    image: ncu-pdclab-mini-siem:local
+    image: smart-web-guardian-siem:local
     restart: unless-stopped
     env_file:
       - path: secrets.env

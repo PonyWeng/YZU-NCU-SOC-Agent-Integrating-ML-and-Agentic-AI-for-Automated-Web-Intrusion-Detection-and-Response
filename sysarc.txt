@@ -1,4 +1,4 @@
-@startuml YZU-NCU-SOC-Agent
+@startuml Smart-Web-Guardian-SOC-Agent
 
 !theme plain
 skinparam backgroundColor #FEFEFE
@@ -10,7 +10,7 @@ skinparam PackageBackgroundColor #F7F7F7
 skinparam ComponentBackgroundColor #D6EAF8
 skinparam DatabaseBackgroundColor #FAE5D3
 
-title YZU-NCU-SOC Agent\n<size:10>ML-based NIDS with Agentic LLM for Automated Web Intrusion Detection and Response</size>
+title Smart Web Guardian SOC Agent\n<size:10>ML-based NIDS with Agentic LLM for Automated Web Intrusion Detection and Response</size>
 
 ' ── Actors ──
 actor "Attacker" as atk #FADBD8

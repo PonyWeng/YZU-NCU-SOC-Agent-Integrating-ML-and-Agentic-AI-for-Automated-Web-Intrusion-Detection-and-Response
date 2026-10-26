@@ -46,7 +46,7 @@
 @media(max-width:650px){.create-panel>summary{padding:14px 16px}.create-panel>summary small{display:none}.create-form,.service-create{grid-template-columns:1fr;padding:16px}.rule-create-form label:nth-child(n),.rule-create-form>button,.service-create label:nth-child(n),.service-create>button{grid-column:1}}
 @media(max-width:900px){.context-head{align-items:flex-start;flex-direction:column}.context-metrics{width:100%}.ai-suggestions{grid-template-columns:1fr}.suggestion-card{min-height:0}}
 
-/* NCU SOC AI 防禦小精靈 */
+/* SOC AI 防禦小精靈 */
 .assistant-layout{grid-template-columns:minmax(0,1fr) 260px}
 .assistant-layout .chat-shell{max-width:none}
 .chat-msg .message-body{margin:0;padding:12px 15px;background:#fff;border:1px solid var(--line);border-radius:3px;line-height:1.72;font-size:14px;overflow-wrap:anywhere;min-width:0}

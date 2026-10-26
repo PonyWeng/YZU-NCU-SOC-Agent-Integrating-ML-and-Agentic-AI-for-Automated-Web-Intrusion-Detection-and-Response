@@ -185,7 +185,7 @@ class SIEMTests(unittest.TestCase):
         with TestClient(app) as client:
             self.assertEqual(client.get('/').status_code,200)
             self.assertEqual(client.get('/api/events?hours=1').status_code,401)
-            login=client.post('/api/auth/login',json={'username':'admin','password':'admin@ncu-siem'},headers={'X-SIEM-Request':'dashboard'})
+            login=client.post('/api/auth/login',json={'username':'admin','password':'admin@guardian-siem'},headers={'X-SIEM-Request':'dashboard'})
             self.assertEqual(login.status_code,200)
             self.assertEqual(login.json()['role'],'admin')
             waf_rules=client.get('/api/waf-rules').json()
