@@ -88,6 +88,18 @@ class SIEMTests(unittest.TestCase):
             self.assertEqual(db.execute('SELECT count(*) FROM notifications').fetchone()[0],1)
         self.assertEqual(store.overview(0)['counts']['total'],4)
 
+    def test_existing_incident_queues_new_line_recipient_without_resending_existing_one(self):
+        with store.connection() as db:
+            db.execute('UPDATE rules SET enabled=1,threshold=1 WHERE id=1')
+        with patch('config.LINE_USER_IDS',['existing-recipient']):
+            store.insert_events([sample('recipient-1','192.0.2.10')],evaluate=True)
+        with patch('config.LINE_USER_IDS',['existing-recipient','new-recipient']):
+            store.insert_events([sample('recipient-2','192.0.2.10')],evaluate=True)
+        with store.connection() as db:
+            rows=db.execute('SELECT recipient,status FROM notifications ORDER BY recipient').fetchall()
+            self.assertEqual([r['recipient'] for r in rows],['existing-recipient','new-recipient'])
+            self.assertTrue(all(r['status']=='pending' for r in rows))
+
     def test_old_event_does_not_trigger_rule(self):
         with store.connection() as db:
             db.execute('UPDATE rules SET enabled=1,threshold=1')

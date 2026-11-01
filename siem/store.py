@@ -236,6 +236,16 @@ def rule_display_name(rule):
     return f"{rule['name']}（{detail}）"
 
 
+def _queue_incident_notifications(db, incident_id):
+    """Add any newly configured LINE recipients without resending successful rows."""
+    from config import LINE_USER_IDS
+    for recipient in LINE_USER_IDS:
+        db.execute(
+            'INSERT OR IGNORE INTO notifications(incident_id,recipient,retry_at) VALUES (?,?,?)',
+            (incident_id, recipient, now()),
+        )
+
+
 def evaluate_rules(db, event):
     for rule in db.execute("SELECT * FROM rules WHERE enabled=1 AND (rule_type='behavior' OR attack=?)", (event['attack'],)).fetchall():
         end = datetime.fromisoformat(event['timestamp'])
@@ -273,14 +283,12 @@ def evaluate_rules(db, event):
         if existing:
             db.execute('UPDATE incidents SET count=?,last_seen=?,evidence=? WHERE id=?',
                        (len(hits),hits[-1]['timestamp'] if hits else event['timestamp'],json.dumps([h['id'] for h in hits]),existing['id']))
+            _queue_incident_notifications(db, existing['id'])
             continue
         result = db.execute('''INSERT INTO incidents(rule_id,rule_name,src_ip,attack,severity,count,created_at,first_seen,last_seen,evidence)
             VALUES (?,?,?,?,?,?,?,?,?,?)''', (rule['id'],rule_display_name(rule),event['src_ip'],event['attack'],rule['severity'],len(hits),now(),hits[0]['timestamp'] if hits else event['timestamp'],hits[-1]['timestamp'] if hits else event['timestamp'],json.dumps([h['id'] for h in hits])))
         # Queue per recipient; retry does not resend to successful recipients.
-        from config import LINE_USER_IDS
-        for recipient in LINE_USER_IDS:
-            db.execute('INSERT OR REPLACE INTO notifications(incident_id,recipient,retry_at) VALUES (?,?,?)',
-                       (result.lastrowid, recipient, now()))
+        _queue_incident_notifications(db, result.lastrowid)
 
 
 def filters(hours=24, q='', src_ip='', attack=None, status=None, since='', until=''):
