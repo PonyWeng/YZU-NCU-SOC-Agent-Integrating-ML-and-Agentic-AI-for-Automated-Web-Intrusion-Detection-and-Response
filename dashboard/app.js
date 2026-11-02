@@ -16,6 +16,7 @@ let intelFilters={q:'',kind:'',verdict:'',page:1,sort:'last_seen'}, intelNewsPag
 let worldMapPromise;
 let currentUser=null;
 let sessionDeadline=0,sessionAbsoluteDeadline=0,sessionWarningSeconds=300,lastActivityReport=0,sessionExpired=false;
+const eventViewCache=new Map();
 const esc = v => String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function markdown(value){
   const inline=text=>esc(text)
@@ -59,9 +60,51 @@ async function api(path, options={}) {
 function fail(error){$('#error').textContent=error.message;$('#error').hidden=false;}
 function toast(text){$('#toast').textContent=text;$('#toast').hidden=false;setTimeout(()=>$('#toast').hidden=true,3500);}
 function query(){const p=new URLSearchParams({hours:$('#range').value});for(const [k,v] of Object.entries(logFilters)){if(v!=='')p.set(k,(k==='since'||k==='until')?new Date(v).toISOString():v);}return p;}
+const detectorKind=r=>r.origin==='modsecurity-crs'?'waf':'ml';
+function internalIp(value){
+  const ip=String(value||'').split(':')[0];
+  if(ip==='localhost'||ip==='::1'||ip.startsWith('127.')||ip.startsWith('10.')||ip.startsWith('192.168.'))return true;
+  const m=ip.match(/^172\.(\d+)\./);return Boolean(m&&Number(m[1])>=16&&Number(m[1])<=31);
+}
+function rawRequestHost(row){
+  if(!row?.raw)return '';
+  try{
+    const data=JSON.parse(row.raw),headers=data?.transaction?.request?.headers||data?.request?.headers||{};
+    if(Array.isArray(headers)){const h=headers.find(x=>String(x?.name||'').toLowerCase()==='host');return String(h?.value||'').trim();}
+    const key=Object.keys(headers).find(k=>k.toLowerCase()==='host');return String(key?headers[key]:'').trim();
+  }catch{return '';}
+}
+function publicDestination(rows){
+  for(const r of rows){const host=rawRequestHost(r);if(host&&!/^localhost(?::|$)/i.test(host)&&!/^127\./.test(host))return `https://${host.replace(/:\d+$/,'')}/`;}
+  for(const r of rows){const host=String(r.service_host||'');if(host&&/[a-z]/i.test(host)&&!internalIp(host))return `https://${host.replace(/:\d+$/,'')}/`;}
+  const r=rows[0]||{};return String(r.service_name||r.target||'受保護服務');
+}
+function sameRequest(a,b){
+  if(detectorKind(a)===detectorKind(b))return false;
+  const ta=Date.parse(a.timestamp),tb=Date.parse(b.timestamp);
+  return Number.isFinite(ta)&&Number.isFinite(tb)&&Math.abs(ta-tb)<=3000&&
+    String(a.service_name||a.target)===String(b.service_name||b.target)&&
+    String(a.method||'GET')===String(b.method||'GET')&&String(a.url||'')===String(b.url||'')&&
+    Number(a.status||0)===Number(b.status||0);
+}
+function mergeEventRows(rows){
+  const used=new Set(),result=[];
+  eventViewCache.clear();
+  rows.forEach((row,i)=>{
+    if(used.has(i))return;
+    let match=-1,best=Infinity;
+    rows.forEach((candidate,j)=>{if(j===i||used.has(j)||!sameRequest(row,candidate))return;const d=Math.abs(Date.parse(row.timestamp)-Date.parse(candidate.timestamp));if(d<best){best=d;match=j;}});
+    const evidence=match>=0?[row,rows[match]]:[row];if(match>=0)used.add(match);used.add(i);
+    const waf=evidence.find(r=>detectorKind(r)==='waf'),external=evidence.find(r=>!internalIp(r.src_ip)),primary=waf||external||row;
+    const merged={...primary,src_ip:(external||waf||row).src_ip,src_port:null,display_destination:publicDestination(evidence),detector_sources:[...new Set(evidence.map(detectorKind))],evidence_ids:evidence.map(r=>r.id),evidence};
+    eventViewCache.set(String(merged.id),merged);result.push(merged);
+  });
+  return result.sort((a,b)=>Date.parse(b.timestamp)-Date.parse(a.timestamp));
+}
 function tableEvents(rows){
   if(!rows.length)return empty('沒有符合條件的日誌','調整時間或篩選條件，或啟動日誌收集器。');
-  return `<div class="table-wrap"><table><thead><tr><th>時間</th><th>來源 IP</th><th>目的地</th><th>受保護服務</th><th>偵測來源</th><th>偵測分類</th><th>請求路徑</th><th>HTTP</th><th></th></tr></thead><tbody>${rows.map(r=>`<tr><td>${time(r.timestamp)}</td><td class="mono">${esc(r.src_ip)}${r.src_port?':'+esc(r.src_port):''}</td><td class="mono">${esc(r.dst_ip||r.service_host||'127.0.0.1')}:${esc(r.service_port||80)}</td><td>${esc(r.service_name||r.target)}</td><td>${detector(r)}</td><td>${badge(r.attack)}</td><td class="url-cell" title="${esc(r.url)}"><span class="muted">${esc(r.method)}</span> ${esc(r.url)}</td><td>${r.status||'—'}</td><td><button class="secondary" data-event="${esc(r.id)}">詳情</button></td></tr>`).join('')}</tbody></table></div>`;
+  const flows=mergeEventRows(rows);
+  return `<div class="table-wrap"><table><thead><tr><th>時間</th><th>來源 IP</th><th>連線目的地</th><th>受保護服務</th><th>偵測來源</th><th>偵測分類</th><th>請求路徑</th><th>HTTP</th><th></th></tr></thead><tbody>${flows.map(r=>`<tr><td>${time(r.timestamp)}</td><td class="mono">${esc(r.src_ip)}</td><td class="mono">${esc(r.display_destination)}</td><td>${esc(r.service_name||r.target)}</td><td>${detector(r)}</td><td>${badge(r.attack)}</td><td class="url-cell" title="${esc(r.url)}"><span class="muted">${esc(r.method)}</span> ${esc(r.url)}</td><td>${r.status||'—'}</td><td><button class="secondary" data-event="${esc(r.id)}">詳情</button></td></tr>`).join('')}</tbody></table></div>`;
 }
 function chart(rows,unit='hour',mode='total'){
   if(!rows.length)return empty('等待日誌資料','收到日誌後，這裡會顯示每小時請求與攻擊趨勢。');
@@ -136,11 +179,11 @@ async function render(){
       html+=panel('WAF 防護狀態','OWASP CRS Gateway · Detection Only',`<div class="waf-status"><div><span class="waf-dot"></span><strong>運作中</strong><small>CRS PL1 · 異常分數記錄</small></div><div><b>Apache</b><small>入口 :80</small></div><div><b>Flask</b><small>入口 :8081</small></div><div><b>Django</b><small>入口 :8082</small></div><p>WAF 規則命中會與應用程式日誌合併，並保留 CRS rule ID 作為調查證據。</p></div>`);
       html+=`<div class="grid">${panel('流量時間軸',`${unitName}彙整 · 可切換人工檢視`, `<div class="panel-body">${trafficControls}${chart(data.timeline,data.timeline_unit,trafficMode)}</div>`)}${panel('偵測分類','機器學習辨識結果',distribution(data))}</div>`;
       html+=panel('全球來源分布',`${mapPoints.length} 個符合篩選的已定位來源 · ${geo.pending} 個等待比對`,`${mapControls}<div class="geo-layout"><div>${worldMap(geo,mapData,mapMode)}</div><div class="country-list">${mapCountries.length?mapCountries.slice(0,8).map(c=>{const unavailable=c.country_code==='??'||c.country==='Unknown',normal=Math.max(0,c.total-c.attacks);return `<div><strong>${esc(unavailable?'—':c.country_code)}</strong><span>${esc(unavailable?'無法定位':c.country)}<small><b class="normal-text">${num(normal)} 正常</b> / <b class="attack-text">${num(c.attacks)} 攻擊</b></small></span></div>`;}).join(''):empty('此篩選沒有流量','切換上方條件查看其他已定位來源。')}</div></div>`);
-      html+=panel('最新日誌','追蹤請求，查看原始證據',tableEvents(recent.items),'<a href="#logs">查看全部</a>');
+      html+=panel('最新日誌','同一請求會合併 WAF 與 ML 偵測證據',tableEvents(recent.items),'<a href="#logs">查看全部</a>');
     }else if(page==='logs'){
       const p=query();p.set('page',logPage);const result=await api('/events?'+p);
       const opts=(obj,selected)=>Object.entries(obj).map(([k,v])=>`<option value="${k}" ${String(selected)===k?'selected':''}>${v}</option>`).join('');
-      html=panel('日誌搜尋','查詢原始請求與模型判斷',`<form id="log-search" class="filters"><label class="search">關鍵字<input name="q" value="${esc(logFilters.q)}" placeholder="搜尋路徑、payload 或原始日誌"></label><label>來源 IP<input name="src_ip" value="${esc(logFilters.src_ip)}" placeholder="例如 192.0.2.10"></label><label>偵測分類<select name="attack"><option value="">全部分類</option>${opts(labels,logFilters.attack)}</select></label><label>HTTP 狀態<input name="status" type="number" min="100" max="599" value="${esc(logFilters.status)}" placeholder="全部"></label><label>開始時間<input name="since" type="datetime-local" value="${esc(logFilters.since)}"></label><label>結束時間<input name="until" type="datetime-local" value="${esc(logFilters.until)}"></label><button>搜尋</button><button type="button" class="secondary" id="clear-filters">清除</button></form>${tableEvents(result.items)}<div class="pagination"><span>共 ${num(result.total)} 筆</span><div><button class="secondary" data-log-page="${logPage-1}" ${logPage<=1?'disabled':''}>上一頁</button><span>${logPage} / ${Math.max(1,Math.ceil(result.total/50))}</span><button class="secondary" data-log-page="${logPage+1}" ${logPage*50>=result.total?'disabled':''}>下一頁</button></div></div>`,`<a href="/api/events/export?${esc(query())}">匯出 CSV</a>`);
+      html=panel('日誌搜尋','主列表顯示對外連線；容器 IP、內部 Port 與原始偵測證據收在詳情',`<form id="log-search" class="filters"><label class="search">關鍵字<input name="q" value="${esc(logFilters.q)}" placeholder="搜尋路徑、payload 或原始日誌"></label><label>來源 IP<input name="src_ip" value="${esc(logFilters.src_ip)}" placeholder="例如 192.0.2.10"></label><label>偵測分類<select name="attack"><option value="">全部分類</option>${opts(labels,logFilters.attack)}</select></label><label>HTTP 狀態<input name="status" type="number" min="100" max="599" value="${esc(logFilters.status)}" placeholder="全部"></label><label>開始時間<input name="since" type="datetime-local" value="${esc(logFilters.since)}"></label><label>結束時間<input name="until" type="datetime-local" value="${esc(logFilters.until)}"></label><button>搜尋</button><button type="button" class="secondary" id="clear-filters">清除</button></form>${tableEvents(result.items)}<div class="pagination"><span>共 ${num(result.total)} 筆偵測證據（同一請求於本頁合併）</span><div><button class="secondary" data-log-page="${logPage-1}" ${logPage<=1?'disabled':''}>上一頁</button><span>${logPage} / ${Math.max(1,Math.ceil(result.total/50))}</span><button class="secondary" data-log-page="${logPage+1}" ${logPage*50>=result.total?'disabled':''}>下一頁</button></div></div>`,`<a href="/api/events/export?${esc(query())}">匯出 CSV</a>`);
     }else if(page==='topology'){
       const topologyTabs=`<div class="view-tabs" role="tablist" aria-label="拓樸圖顯示模式"><button role="tab" aria-selected="${topologyMode==='links'}" class="${topologyMode==='links'?'active':''}" data-topology-mode="links">關聯拓樸</button><button role="tab" aria-selected="${topologyMode==='nebula'}" class="${topologyMode==='nebula'?'active':''}" data-topology-mode="nebula">星雲圖</button></div>`;
       html='<div class="notice">節點與連線使用相同的即時日誌資料；點選來源 IP 可直接前往該來源的日誌。</div>';
@@ -236,7 +279,13 @@ async function refreshSuggestions(message='',answer=''){
   const stamp=$('#suggestion-updated');if(stamp)stamp.textContent='已依快照 '+result.snapshot.context_version+' 更新 · '+time(result.snapshot.generated_at);
 }
 function openDialog(title,html){$('#detail-title').textContent=title;$('#detail-body').innerHTML=html;if(!$('#detail').open)$('#detail').showModal();}
-async function showEvent(id){const r=await api('/events/'+encodeURIComponent(id));openDialog('日誌詳情',`${detector(r)} ${badge(r.attack)}<dl class="detail-grid">${[['發生時間',time(r.timestamp)],['接收時間',time(r.received_at)],['來源 IP',r.src_ip+(r.src_port?':'+r.src_port:'')],['目的地 IP',`${r.dst_ip||r.service_host||'127.0.0.1'}:${r.service_port||80}`],['受保護服務',r.service_name||r.target],['偵測來源',r.origin==='modsecurity-crs'?'WAF / OWASP CRS':'ML 分類器'],['網路協定',`${(r.transport||'tcp').toUpperCase()} / ${(r.protocol||'http').toUpperCase()} ${r.http_version||''}`],['HTTP 狀態',r.status],['回應大小',`${r.response_bytes||0} bytes`],['Parser',r.parser_name||r.origin],['事件 ID',r.id]].map(([k,v])=>`<dt>${k}</dt><dd>${esc(v)}</dd>`).join('')}</dl><h3>請求路徑</h3><pre>${esc(r.method+' '+r.url)}</pre><h3>User-Agent</h3><pre>${esc(r.user_agent||'—')}</pre><h3>Referer</h3><pre>${esc(r.referer||'—')}</pre><h3>原始日誌</h3><pre>${esc(r.raw)}</pre><div class="detail-actions"><button data-ip="${esc(r.src_ip)}">查看此來源日誌</button><button class="secondary" data-ban-prefill="${esc(r.src_ip)}">封鎖此來源</button></div>`);}
+function evidenceDetail(r,index){return `<details class="event-evidence" ${index===0?'open':''}><summary>${r.origin==='modsecurity-crs'?'WAF / OWASP CRS':'ML／應用程式日誌'} · 證據 #${esc(r.id)}</summary><dl class="detail-grid">${[['來源端點',r.src_ip+(r.src_port?':'+r.src_port:'')],['內部目的地',`${r.dst_ip||r.service_host||'127.0.0.1'}:${r.service_port||80}`],['接收時間',time(r.received_at)],['Parser',r.parser_name||r.origin]].map(([k,v])=>`<dt>${k}</dt><dd>${esc(v)}</dd>`).join('')}</dl><h3>原始日誌</h3><pre>${esc(r.raw)}</pre></details>`;}
+async function showEvent(id){
+  const cached=eventViewCache.get(String(id)),evidence=cached?.evidence?.length?cached.evidence:[await api('/events/'+encodeURIComponent(id))];
+  const r=cached||evidence[0],destination=cached?.display_destination||publicDestination(evidence),source=r.src_ip;
+  const routed=evidence.find(x=>x.deployment_host)||r,hostRoute=routed.deployment_host&&routed.gateway_port?`${routed.deployment_host}:${routed.gateway_port}`:'尚未設定 SIEM_DEPLOYMENT_HOST';
+  openDialog('連線與偵測證據',`${detector(r)} ${badge(r.attack)}${evidence.length>1?'<p class="notice">此列是同一 HTTP 請求的 WAF 與 ML 證據合併結果；下方仍完整保留兩筆原始紀錄。</p>':''}<dl class="detail-grid">${[['發生時間',time(r.timestamp)],['Windows／外部來源',source],['公開站台',destination],['Ubuntu／WAF 入口',hostRoute],['受保護服務',r.service_name||r.target],['偵測證據',evidence.length>1?'WAF / OWASP CRS + ML 分類器':(r.origin==='modsecurity-crs'?'WAF / OWASP CRS':'ML 分類器')],['網路協定',`${(r.transport||'tcp').toUpperCase()} / ${(r.protocol||'http').toUpperCase()} ${r.http_version||''}`],['HTTP 狀態',r.status],['證據數量',evidence.length]].map(([k,v])=>`<dt>${k}</dt><dd>${esc(v)}</dd>`).join('')}</dl><h3>連線路徑</h3><pre>${esc(source+' → '+destination+' → '+hostRoute)}</pre><h3>請求路徑</h3><pre>${esc(r.method+' '+r.url)}</pre><h3>偵測原始證據</h3>${evidence.map(evidenceDetail).join('')}<div class="detail-actions"><button data-ip="${esc(source)}">查看此來源日誌</button><button class="secondary" data-ban-prefill="${esc(source)}">封鎖此來源</button></div>`);
+}
 async function showIncident(id){const r=await api('/incidents/'+id);openDialog('事件 #'+r.id,`<h3>${esc(r.rule_name)}</h3><dl class="detail-grid"><dt>來源</dt><dd>${esc(r.src_ip)}</dd><dt>命中筆數</dt><dd>${r.count}</dd><dt>首次偵測</dt><dd>${time(r.first_seen)}</dd><dt>最後偵測</dt><dd>${time(r.last_seen)}</dd><dt>目前狀態</dt><dd>${esc(statusNames[r.status]||r.status)}</dd><dt>最後處理者</dt><dd>${esc(r.handled_by||'未記錄（舊資料）')}</dd><dt>處理時間</dt><dd>${r.handled_at?time(r.handled_at):'—'}</dd><dt>通知</dt><dd>${r.notifications.length?r.notifications.map(n=>`${esc(n.status)}（嘗試 ${n.attempts} 次）`).join('<br>'):'未配置通知對象'}</dd></dl><form id="incident-edit" data-id="${r.id}"><label class="note-label">處理狀態</label><select name="status">${Object.entries(statusNames).map(([k,v])=>`<option value="${k}" ${r.status===k?'selected':''}>${v}</option>`).join('')}</select><label class="note-label">調查註記</label><textarea name="note" maxlength="4000">${esc(r.note)}</textarea><div class="detail-actions"><button>儲存處理結果</button><button type="button" class="secondary" data-ban-prefill="${esc(r.src_ip)}">封鎖來源</button></div></form><h3>關聯證據（最多顯示 200 筆）</h3>${tableEvents(r.events)}`);}
 document.addEventListener('click',async e=>{const b=e.target.closest('button,a,[data-ip]');if(!b)return;try{
   if(b.dataset.topologyMode){topologyMode=b.dataset.topologyMode;await render();return;}

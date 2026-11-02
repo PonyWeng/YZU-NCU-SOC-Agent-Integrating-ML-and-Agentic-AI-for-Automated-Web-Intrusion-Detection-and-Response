@@ -141,6 +141,20 @@ def date_value(value):
         raise HTTPException(422,'時間須包含時區')
 
 
+def event_route_data(row):
+    """Attach the public-host to host/WAF route without changing stored evidence."""
+    item = dict(row)
+    service_port = int(item.get('service_port') or 0)
+    gateway_ports = {
+        80: int(os.getenv('APACHE_WAF_PORT','80')),
+        8081: int(os.getenv('FLASK_WAF_PORT','8081')),
+        8082: int(os.getenv('DJANGO_WAF_PORT','8082')),
+    }
+    item['deployment_host'] = os.getenv('SIEM_DEPLOYMENT_HOST','').strip()
+    item['gateway_port'] = gateway_ports.get(service_port,service_port or None)
+    return item
+
+
 @router.get('/events')
 def events(page: int=Query(1,ge=1), page_size: int=Query(50,ge=1,le=200),
            hours: float=Query(24,gt=0,le=8760), q: str=Query('',max_length=500),
@@ -149,7 +163,9 @@ def events(page: int=Query(1,ge=1), page_size: int=Query(50,ge=1,le=200),
     since,until = date_value(since),date_value(until)
     if since and until and since > until:
         raise HTTPException(422,'開始時間必須早於結束時間')
-    return store.list_events(page,page_size,hours=hours,q=q,src_ip=src_ip,attack=attack,status=status,since=since,until=until)
+    result=store.list_events(page,page_size,hours=hours,q=q,src_ip=src_ip,attack=attack,status=status,since=since,until=until)
+    result['items']=[event_route_data(row) for row in result['items']]
+    return result
 
 
 @router.get('/events/export')
@@ -179,7 +195,7 @@ def event(event_id: str):
         row = db.execute('SELECT * FROM events WHERE id=?',(event_id,)).fetchone()
         if not row:
             raise HTTPException(404,'找不到日誌')
-        return dict(row)
+        return event_route_data(row)
 
 
 @router.get('/overview')
