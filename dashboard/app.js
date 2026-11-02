@@ -96,7 +96,7 @@ function mergeEventRows(rows){
     rows.forEach((candidate,j)=>{if(j===i||used.has(j)||!sameRequest(row,candidate))return;const d=Math.abs(Date.parse(row.timestamp)-Date.parse(candidate.timestamp));if(d<best){best=d;match=j;}});
     const evidence=match>=0?[row,rows[match]]:[row];if(match>=0)used.add(match);used.add(i);
     const waf=evidence.find(r=>detectorKind(r)==='waf'),external=evidence.find(r=>!internalIp(r.src_ip)),primary=waf||external||row;
-    const merged={...primary,src_ip:(external||waf||row).src_ip,src_port:null,display_destination:publicDestination(evidence),detector_sources:[...new Set(evidence.map(detectorKind))],evidence_ids:evidence.map(r=>r.id),evidence};
+    const merged={...primary,src_ip:(waf||external||row).src_ip,src_port:null,display_destination:publicDestination(evidence),detector_sources:[...new Set(evidence.map(detectorKind))],evidence_ids:evidence.map(r=>r.id),evidence};
     eventViewCache.set(String(merged.id),merged);result.push(merged);
   });
   return result.sort((a,b)=>Date.parse(b.timestamp)-Date.parse(a.timestamp));
