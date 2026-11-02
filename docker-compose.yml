@@ -15,7 +15,8 @@ x-waf-common: &waf-common
     ANOMALY_INBOUND: "5"
     ANOMALY_OUTBOUND: "4"
     PROXY_PRESERVE_HOST: "On"
-    REMOTEIP_HEADER: X-Real-IP
+    # cloudflared supplies the actual public visitor address on normal traffic.
+    REMOTEIP_HEADER: CF-Connecting-IP
 
 services:
   waf-log-init:
@@ -79,7 +80,7 @@ services:
       sed -i 's|#LoadModule rewrite_module|LoadModule rewrite_module|g' /usr/local/apache2/conf/httpd.conf &&
       sed -i 's|#LoadModule remoteip_module|LoadModule remoteip_module|g' /usr/local/apache2/conf/httpd.conf &&
       sed -i 's|AllowOverride None|AllowOverride All|g' /usr/local/apache2/conf/httpd.conf &&
-      echo 'RemoteIPHeader X-Forwarded-For' >> /usr/local/apache2/conf/httpd.conf &&
+      echo 'RemoteIPHeader CF-Connecting-IP' >> /usr/local/apache2/conf/httpd.conf &&
       echo 'RemoteIPTrustedProxy 172.16.0.0/12' >> /usr/local/apache2/conf/httpd.conf &&
       echo 'LogFormat \"%a %l %u %t \\\"%r\\\" %>s %b \\\"%{Referer}i\\\" \\\"%{User-Agent}i\\\"\" realip' >> /usr/local/apache2/conf/httpd.conf &&
       httpd-foreground"

@@ -25,8 +25,8 @@ TARGET = args.target.rstrip('/')
 ATTACK_COUNT = args.count
 DELAY  = 0.3   # seconds between requests
 
-# Simulated attacker IPs — injected as X-Real-IP so Apache logs the real source
-# (Docker NATs all host traffic to 172.18.0.1; X-Real-IP is trusted by Apache)
+# Simulated attacker IPs use a dedicated demo-only header. Real browsers do not
+# send this header and are attributed through Cloudflare's CF-Connecting-IP.
 ATTACKER_IPS = {
     # RFC 5737 documentation addresses are mapped by siem/geo.py to stable
     # worldwide demo locations. They never impersonate a real public owner.
@@ -176,7 +176,7 @@ def send(label: str, url: str, color: str = W, attacker_ip: str | None = None) -
     ua = random.choice(FAKE_USER_AGENTS)
     headers = {"User-Agent": ua}
     if attacker_ip:
-        headers["X-Real-IP"] = attacker_ip
+        headers["X-Demo-Source-IP"] = attacker_ip
     try:
         r = requests.get(url, headers=headers, timeout=5, allow_redirects=True)
         status = r.status_code

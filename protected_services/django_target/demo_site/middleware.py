@@ -10,8 +10,7 @@ class AccessLogMiddleware:
         if is_blocked(ip,'django'):
             return JsonResponse({'error':'Forbidden','detail':'來源 IP 已被此服務封鎖'},status=403)
         response=self.get_response(request)
-        # Lab-only simulated source; this demo is not a production proxy policy.
-        record={'timestamp':datetime.now(timezone.utc).isoformat(),'src_ip':request.META.get('HTTP_X_DEMO_SOURCE_IP') or request.META.get('HTTP_X_FORWARDED_FOR',request.META.get('REMOTE_ADDR')),
+        record={'timestamp':datetime.now(timezone.utc).isoformat(),'src_ip':ip,
                 'method':request.method,'path':request.get_full_path(),'status':response.status_code,
                 'dst_ip':request.get_host().split(':')[0], 'service':'django-target','port':8082,
                 'http_version':request.META.get('SERVER_PROTOCOL','HTTP/1.1'),

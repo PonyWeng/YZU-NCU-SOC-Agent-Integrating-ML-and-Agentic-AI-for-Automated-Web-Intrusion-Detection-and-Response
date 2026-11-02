@@ -9,10 +9,12 @@ BLACKLIST_FILE = Path(os.getenv('SIEM_BLACKLIST_PATH', '/runtime/blacklist.json'
 
 def client_ip(headers, remote_addr=''):
     values = (
+        # Explicit lab traffic takes precedence; ordinary public clients are
+        # attributed by Cloudflare and never need this header.
+        headers.get('X-Demo-Source-IP'),
         headers.get('CF-Connecting-IP'),
         headers.get('X-Real-IP'),
         (headers.get('X-Forwarded-For') or '').split(',')[0].strip(),
-        headers.get('X-Demo-Source-IP'),
         remote_addr,
     )
     for value in values:

@@ -15,9 +15,8 @@ def enforce_blacklist():
 
 def log_request(response):
     os.makedirs(os.path.dirname(LOG), exist_ok=True)
-    forwarded = request.headers.get('X-Forwarded-For', '').split(',')[0].strip()
     record = {'timestamp': datetime.now(timezone.utc).isoformat(),
-              'src_ip': request.headers.get('X-Demo-Source-IP') or request.headers.get('X-Real-IP') or forwarded or request.remote_addr,
+              'src_ip': client_ip(request.headers,request.remote_addr),
               'dst_ip': request.host.split(':')[0], 'method': request.method, 'path': request.full_path,
               'status': response.status_code, 'service': 'flask-target', 'port': 8081,
               'http_version': request.environ.get('SERVER_PROTOCOL', 'HTTP/1.1'),
