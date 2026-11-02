@@ -1,8 +1,29 @@
 """Access-log parsers which normalize web server records before ML inference."""
+import ipaddress
 import json, re
 from datetime import datetime, timezone
 
 APACHE = re.compile(r'^(\S+) \S+ \S+ \[([^]]+)\] "(.*?)" (\d{3}) (\S+)(?: "(.*?)" "(.*?)")?')
+
+
+def _client_ip(headers, transaction):
+    """Resolve the trusted proxy address recorded in a ModSecurity transaction."""
+    normalized={str(key).lower():value for key,value in (headers or {}).items()}
+    candidates=(
+        normalized.get('x-demo-source-ip'),
+        normalized.get('x-real-ip'),
+        normalized.get('x-forwarded-for'),
+        normalized.get('cf-connecting-ip'),
+        transaction.get('remote_address'),
+        transaction.get('client_ip'),
+    )
+    for value in candidates:
+        candidate=str(value or '').split(',',1)[0].strip()
+        try:
+            return str(ipaddress.ip_address(candidate))
+        except ValueError:
+            continue
+    return 'unknown'
 
 def _ts(value):
     if not value: return datetime.now(timezone.utc).isoformat(timespec='seconds')
@@ -45,8 +66,9 @@ def parse(raw, fmt='apache_combined', service_name='apache', host='127.0.0.1', p
         if not summaries:
             return None
         headers=request.get('headers') or {}
+        normalized_headers={str(key).lower():value for key,value in headers.items()}
         request_line=request.get('request_line','').split(' ',2)
-        return {'timestamp':_ts(tx.get('time') or tx.get('time_stamp')), 'src_ip':headers.get('X-Demo-Source-IP') or headers.get('X-Real-IP') or tx.get('remote_address') or tx.get('client_ip','unknown'),
+        return {'timestamp':_ts(tx.get('time') or tx.get('time_stamp')), 'src_ip':_client_ip(headers,tx),
                 'src_port':tx.get('remote_port') or tx.get('client_port'), 'dst_ip':host,
                 'method':request.get('method') or (request_line[0] if request_line else ''),
                 'url':request.get('uri') or (request_line[1] if len(request_line)>1 else '/'),
@@ -54,7 +76,7 @@ def parse(raw, fmt='apache_combined', service_name='apache', host='127.0.0.1', p
                 'port':int(port), 'transport':'tcp', 'protocol':'http',
                 'http_version':str(request.get('http_version') or response.get('protocol') or (request_line[2] if len(request_line)>2 else '')),
                 'response_bytes':int(response.get('body_length') or response.get('headers',{}).get('Content-Length') or 0),
-                'referer':headers.get('Referer',''), 'user_agent':headers.get('User-Agent',''),
+                'referer':normalized_headers.get('referer',''), 'user_agent':normalized_headers.get('user-agent',''),
                 'parser_name':fmt, 'raw':raw, 'attack':attack,
                 'description':' | '.join(summaries) or 'OWASP CRS rule matched'}
     if fmt in ('json','flask_json','django_json'):

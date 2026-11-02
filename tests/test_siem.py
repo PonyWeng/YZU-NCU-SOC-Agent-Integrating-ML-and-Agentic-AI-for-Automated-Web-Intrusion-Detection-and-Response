@@ -65,6 +65,24 @@ class SIEMTests(unittest.TestCase):
         self.assertEqual(row['attack'],1)
         self.assertIn('942100',row['description'])
 
+    def test_modsecurity_proxy_headers_are_case_insensitive_and_precede_docker_ip(self):
+        raw=json.dumps({'transaction':{'time':'10/Sep/2026:01:02:03 +0000','remote_address':'172.22.0.7'},
+            'request':{'request_line':'GET /search?q=test HTTP/1.1',
+                       'headers':{'x-forwarded-for':'140.138.172.215, 172.22.0.1','user-agent':'scanner'}},
+            'response':{'status':403},
+            'audit_data':{'messages':['Warning [id "942100"] [msg "SQL Injection Attack Detected"]']}})
+        row=parse(raw,'modsecurity_json','Apache WAF','127.0.0.1',80)
+        self.assertEqual(row['src_ip'],'140.138.172.215')
+        self.assertEqual(row['user_agent'],'scanner')
+
+    def test_modsecurity_real_ip_precedes_forwarded_chain(self):
+        raw=json.dumps({'transaction':{'time':'10/Sep/2026:01:02:03 +0000','remote_address':'172.22.0.7'},
+            'request':{'request_line':'GET /search?q=test HTTP/1.1',
+                       'headers':{'X-Real-IP':'203.0.113.20','X-Forwarded-For':'198.51.100.1'}},
+            'response':{'status':403},
+            'audit_data':{'messages':['Warning [id "941100"] [msg "XSS Attack Detected"]']}})
+        self.assertEqual(parse(raw,'modsecurity_json')['src_ip'],'203.0.113.20')
+
     def test_modsecurity_transaction_without_rule_match_is_skipped(self):
         from siem.collector import Classifier
         raw=json.dumps({'transaction':{'time':'10/Sep/2026:01:02:03 +0000','remote_address':'172.19.0.1'},
