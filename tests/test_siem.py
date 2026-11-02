@@ -83,6 +83,14 @@ class SIEMTests(unittest.TestCase):
             'audit_data':{'messages':['Warning [id "941100"] [msg "XSS Attack Detected"]']}})
         self.assertEqual(parse(raw,'modsecurity_json')['src_ip'],'203.0.113.20')
 
+    def test_cloudflare_client_ip_precedes_internal_proxy_address(self):
+        raw=json.dumps({'transaction':{'time':'10/Sep/2026:01:02:03 +0000','remote_address':'172.22.0.7'},
+            'request':{'request_line':'GET /search?q=test HTTP/1.1',
+                       'headers':{'CF-Connecting-IP':'140.138.172.215','X-Real-IP':'172.22.0.1'}},
+            'response':{'status':403},
+            'audit_data':{'messages':['Warning [id "942100"] [msg "SQL Injection Attack Detected"]']}})
+        self.assertEqual(parse(raw,'modsecurity_json')['src_ip'],'140.138.172.215')
+
     def test_modsecurity_transaction_without_rule_match_is_skipped(self):
         from siem.collector import Classifier
         raw=json.dumps({'transaction':{'time':'10/Sep/2026:01:02:03 +0000','remote_address':'172.19.0.1'},

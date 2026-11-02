@@ -11,9 +11,12 @@ def _client_ip(headers, transaction):
     normalized={str(key).lower():value for key,value in (headers or {}).items()}
     candidates=(
         normalized.get('x-demo-source-ip'),
+        # Cloudflare is the public ingress and its client header is authoritative.
+        # Public WAF ports bind to loopback, so arbitrary internet clients cannot
+        # bypass Cloudflare and inject this header directly at the origin.
+        normalized.get('cf-connecting-ip'),
         normalized.get('x-real-ip'),
         normalized.get('x-forwarded-for'),
-        normalized.get('cf-connecting-ip'),
         transaction.get('remote_address'),
         transaction.get('client_ip'),
     )
