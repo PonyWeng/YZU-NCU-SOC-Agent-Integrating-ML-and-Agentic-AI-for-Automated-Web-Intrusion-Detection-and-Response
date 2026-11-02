@@ -150,8 +150,14 @@ def event_route_data(row):
         8081: int(os.getenv('FLASK_WAF_PORT','8081')),
         8082: int(os.getenv('DJANGO_WAF_PORT','8082')),
     }
+    public_urls = {
+        80: os.getenv('APACHE_PUBLIC_URL','').strip(),
+        8081: os.getenv('FLASK_PUBLIC_URL','').strip(),
+        8082: os.getenv('DJANGO_PUBLIC_URL','').strip(),
+    }
     item['deployment_host'] = os.getenv('SIEM_DEPLOYMENT_HOST','').strip()
     item['gateway_port'] = gateway_ports.get(service_port,service_port or None)
+    item['public_url'] = public_urls.get(service_port,'')
     return item
 
 

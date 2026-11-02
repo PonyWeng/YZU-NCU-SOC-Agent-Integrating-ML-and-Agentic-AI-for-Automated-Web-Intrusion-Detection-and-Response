@@ -75,9 +75,13 @@ function rawRequestHost(row){
   }catch{return '';}
 }
 function publicDestination(rows){
+  for(const r of rows){if(r.public_url)return String(r.public_url);}
   for(const r of rows){const host=rawRequestHost(r);if(host&&!/^localhost(?::|$)/i.test(host)&&!/^127\./.test(host))return `https://${host.replace(/:\d+$/,'')}/`;}
   for(const r of rows){const host=String(r.service_host||'');if(host&&/[a-z]/i.test(host)&&!internalIp(host))return `https://${host.replace(/:\d+$/,'')}/`;}
-  const r=rows[0]||{};return String(r.service_name||r.target||'受保護服務');
+  for(const r of rows){const host=String(r.dst_ip||'');if(host&&!internalIp(host))return /[a-z]/i.test(host)?`https://${host.replace(/:\d+$/,'')}/`:host;}
+  const r=rows[0]||{};
+  if(r.deployment_host&&r.gateway_port)return `${r.deployment_host}:${r.gateway_port}`;
+  return String(r.dst_ip||r.service_host||'—');
 }
 function sameRequest(a,b){
   if(detectorKind(a)===detectorKind(b))return false;
